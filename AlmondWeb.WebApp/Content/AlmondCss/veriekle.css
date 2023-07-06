@@ -1,0 +1,69 @@
+.verieklebtn {
+    width: 100%;
+}
+
+.saga-yasla {
+    float: right;
+}
+
+form {
+    text-align: center;
+}
+
+@media(max-width:767px) {
+
+    /* küçük ekranlarda css*/
+    .liste-dropdown {
+        width: 80%;
+        height: 40px;
+        float: inherit;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+}
+
+@media (min-width:768px) {
+
+    /* büyük ekranlarda css */
+    .liste-dropdown {
+        width: 80%;
+        height: 40px;
+        float: inherit;
+        text-align: center;
+        border-radius: 3px;
+    }
+}
+
+.bloklar {
+    border-radius: 5px;
+
+}
+
+.butonlar {
+    margin-bottom: 20px;
+}
+
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 400;
+}
+
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+    width: 80%;
+    height: 225px;
+    resize: none;
+    place-items: center;
+    display: inline-block;
+    border: solid 1px gray;
+}
+.AlmondWebtext{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.input-group-text  {
+    margin: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,102 @@
+.ana-ekran {
+    height: 500px;
+}
+
+.puanlar {
+    width: 19%;
+}
+
+.sonrakisoru {
+    width: 100%;
+}
+
+.butonlar {
+    text-align: center;
+}
+textarea{
+    resize:none;
+}
+
+.soru {
+    place-items: center;
+    display: grid;
+    height: 220px;
+    border-radius: 10px;
+    background-color: #dfd3c3;
+}
+
+.cevap {
+    height: 220px;
+    border-radius: 10px;
+    place-items: center;
+    display: grid;
+    background-color: #a7bcb9;
+}
+
+.cevabigoster-grid {
+    height: 60px;
+    text-align: center;
+}
+
+.saga-yasla {
+    float: right;
+}
+
+.cevap-butonu {
+    padding-top: 9px;
+    width: 280px;
+    text-align: center;
+}
+
+.darkmode--activated #language {
+    isolation: isolate;
+    background-color: #2C3A47;
+    font-weight: 300;
+    font-family: ui-rounded;
+    color: white;
+}
+
+.darkmode--activated .butonlar {
+    isolation: isolate;
+}
+
+.darkmode--activated .puanlar {
+    color: aliceblue;
+}
+
+.darkmode--activated .soru {
+    background-color: #9BABB8;
+}
+
+.darkmode--activated .btn-outline-success {
+    --bs-btn-color: #2C3333;
+    --bs-btn-border-color: cadetblue;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #2C3333;
+    --bs-btn-hover-border-color: ##2C3333;
+    --bs-btn-focus-shadow-rgb: 25,135,84;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #2C3333;
+    --bs-btn-active-border-color: #198754;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #198754;
+    --bs-btn-disabled-bg: #2C3333;
+    --bs-btn-disabled-border-color: #198754;
+    --bs-gradient: none;
+}
+
+@media(max-width:767px) {
+
+    /* küçük ekranlarda css*/
+    .liste-dropdown {
+        width: 100%;
+    }
+}
+
+@media (min-width:768px) {
+
+    /* büyük ekranlarda css */
+    .liste-dropdown {
+        width: 20% !important;
+    }
+}

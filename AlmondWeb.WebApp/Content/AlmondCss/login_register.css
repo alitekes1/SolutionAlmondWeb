@@ -1,0 +1,112 @@
+/*!normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    place-items: center;
+    display: flex;
+
+
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 25px;
+    align-items: center;
+    border-radius: 1%;
+    height: 485px;
+
+}
+
+form input {
+    padding-bottom: 5px;
+    background: none;
+    text-align: left;
+}
+
+form input[type="email"],
+form input[type="password"],
+form input[type="text"] {
+    border: solid 0.5px black;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.girisbutonu {
+    height: 40px;
+}
+
+main {
+    display: block
+}
+
+.girisyapyazi {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: left !important;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700 !important;
+    margin-top: -10px;
+}
+
+a {
+    color: #230820 !important;
+}
+
+.inputlar {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.sifremiunuttum {
+    float: right;
+    font-size: small;
+    font-family: 'Titillium Web', sans-serif;
+
+}
+
+.carousel-item {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-image {
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+@media(max-width:1499px) {
+
+    /* küçük ekranlarda css*/
+    .sumbitbutonudiv {
+        margin-top: 5px;
+    }
+}
+
+@media (min-width:1500px) {
+
+    /* büyük ekranlarda css */
+    .sumbitbutonudiv {
+        margin-top: 20px;
+    }
+}

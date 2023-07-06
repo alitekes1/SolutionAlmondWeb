@@ -1,0 +1,58 @@
+﻿@model AlmondWeb.Entities.AlmondDataTable
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/BaseLayout.cshtml";
+}
+<link href="~/AlmondInterface/css/index.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $("#drop option:first").prop("disabled", true);
+    });
+</script>
+<main>
+    <div class="container mt-2">
+        <div class="row justify-content-end gx-0">
+            <div class="col-sm-5 liste-dropdown float-end">
+                @Html.DropDownList("listedropdown", ViewData["list"] as SelectList, "Liste Seçiniz", new { @class = "form-select bg-white", autofocus = "autofocus", required = "required", id = "drop" })
+            </div>
+            <div class="col-sm-12 mt-2">
+                <div class="row gx-0">
+                    <div class=" col-sm-8 offset-md-2 text-center pl-5">
+                        <div class="ana-ekran">
+                            <div class="row gx-0 gy-1">
+                                <div class="row-sm-5  soru">
+                                    @Model.question
+                                </div>
+                                <div class="row-sm-5 cevap">
+                                    @Model.answer
+                                </div>
+                                <div class="row-sm-2 cevabigoster-grid">
+                                    @Html.ActionLink("Cevabı Göster", "MainPage", "Home", null, new { @class = "btn btn-secondary cevap-butonu my-2", role = "button" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 gy-0 mt-2 mb-5">
+            <!-- start Puanlama Kısımları-->
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12 butonlar">
+                        <div class="col gx-0 text-center">
+                            <button class="btn btn-outline-success puanlar">1</button>
+                            <button class="btn btn-outline-success puanlar">2</button>
+                            <button class="btn btn-outline-success puanlar">3</button>
+                            <button class="btn btn-outline-success puanlar">4</button>
+                            <button class="btn btn-outline-success puanlar">5</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end Puanlama Kısımları-->
+    </div>
+</main>
+
+

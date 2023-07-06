@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Kayıt Ol";
+    Layout = "~/Views/Shared/LoginRegisterLayout.cshtml";
+}
+
+
+<form>
+    <div class="row-sm-3 mb-5">
+        <div class="col-sm-12">
+            <h2 class="girisyapyazi">Kayıt Ol</h2>
+        </div>
+        <div class="pb-2">
+            <h6 style="float: left;color: gray;">
+                Hesabın Var mı? @Html.ActionLink("Giriş Yap", "Login");
+            </h6>
+        </div>
+    </div>
+    <div class="form-floating row-sm-2 mt-3">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Ad"
+               required autofocus>
+        <label for="floatingPassword">Ad</label>
+
+    </div>
+    <div class="form-floating row-sm-2 mt-2">
+        <input type="text" class="form-control" id="formGroupExampleInput"
+               placeholder="Soyad" required>
+        <label for="floatingPassword">Soyad</label>
+
+    </div>
+    <div class="form-floating row-sm-2">
+        <input type="email" class="form-control" id="formGroupExampleInput"
+               placeholder="E-mail" required>
+        <label for="floatingPassword">E-mail</label>
+
+    </div>
+    <div class="form-floating row-sm-2">
+
+        <input type="password" class="form-control" id="formGroupExampleInput"
+               placeholder="Şifre" required>
+        <label for="floatingPassword">Şifre </label>
+    </div>
+    <div class="form-floating row-sm-2">
+        <input type="password" class="form-control" id="formGroupExampleInput"
+               placeholder="Şifre (Tekrar)" required>
+        <label for="floatingPassword">Şifre (Tekrar)</label>
+
+    </div>
+    <div id="passwordHelpBlock" class="form-text ">
+        *Şifreniz 8-16 karakterden oluşmalı ve numara içermelidir.
+    </div>
+    <div class="row-sm-3 sumbitbutonudiv">
+        <button type="submit" class="btn btn-success form-control girisbutonu">
+            Kayıt
+            Ol
+        </button>
+    </div>
+</form>
