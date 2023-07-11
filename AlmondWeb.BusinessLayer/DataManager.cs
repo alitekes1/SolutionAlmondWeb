@@ -16,7 +16,7 @@ namespace AlmondWeb.BusinessLayer
 
         public AlmondDataTable getSingleData(Expression<Func<AlmondDataTable, bool>> expression)
         {
-            return repo_data.List(expression);
+            return repo_data.Find(expression);
         }
         //veri ekleme ve çekme işlemlerinin hepsi burada yapılır.kullanıcı db
         //ye direkt erişememesi için web katmanından alınanları data katmanına

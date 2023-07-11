@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    AlmondWeb.Entities.AlmondUserTable user = Session["user"] as AlmondWeb.Entities.AlmondUserTable;
 }
 
 <!DOCTYPE html>
@@ -10,16 +11,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title | AlmondWeb</title>
+
+    @* css *@
     <link href="~/Content/AlmondCss/index.css" rel="stylesheet" />
     <link href="~/Content/AlmondCss/navbar.css" rel="stylesheet" />
     <link href="~/Content/AlmondCss/footer.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Scripts/AlmondJs/index.js"></script>
     <link href="~/Content/bootstrap-grid.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    @* js *@
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
+
+
 </head>
 
 <body>
@@ -31,7 +38,7 @@
                     <div class="col-sm-8">
                         <div class="row gx-0">
                             <div class="col-sm-8 gx-0">
-                                <a class="navbar-brand " href="MainPage">
+                                <a class="navbar-brand float-start" href="MainPage">
                                     <img src="~/Images/logo/almondLogo1rmvbg.png" style="margin-left: 1px;" height="100%"
                                          width="180px" alt="">
                                 </a>
@@ -73,7 +80,7 @@
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="ListOperations"
+                                            <a class="nav-link active" title="Liste oluşturma,guncelleme ve silme işlemleri" aria-current="page" href="ListOperations"
                                                target="_blank">
                                                 Liste İşlemleri
                                             </a>
@@ -89,23 +96,37 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <!-- Giriş Yap- Kayıt ol  Buton -->
-                                    <div class="dropdown-center">
-                                        <div class="btn-group  btn-sm" style="width: 100%;">
-                                            @Html.ActionLink("Giriş Yap", "Login", null, new
-                                       {
-                                           @class = "btn btn-outline-success",
-                                               style = "width: 80%;"
-                                       })
+                                    <div class="dropdown-center ">
+                                        <div class="btn-group btn-sm" style="width: 100%;">
+                                            <a href="/Home/Login" title="giriş yap:)" class="btn btn-outline-success" style="width:80%">Giriş Yap</a>
 
                                             <button type="button"
                                                     class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                                                 <span class="visually-hidden">Toggle Dropdown</span>
                                             </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="Register">Kayıt Ol</a></li>
-                                                <li><a class="dropdown-item" href="Contact">İletişim</a></li>
-                                                <li><a class="dropdown-item" href="#">Yeni bir özellik öner?</a></li>
+                                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                                <li>
+                                                    <a class="dropdown-item" href="Register">
+                                                        <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                                                                <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z" />
+                                                                <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z" />
+                                                            </svg>
+                                                        </span>Kayıt Ol
+                                                    </a>
+                                                </li>
+                                                <li><a class="dropdown-item " href="#"><span class="chakra-menu__icon-wrapper css-7halv9"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chakra-menu__icon" focusable="false" aria-hidden="true"><path d="M16 16h6"></path><path d="M19 13v6"></path><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"></path><path d="M16.5 9.4 7.55 4.24"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line></svg></span>  Yeni Özellik Öner?</a></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="Contact">
+                                                        <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                                                            </svg>
+                                                        </span>İletişim
+                                                    </a>
+                                                </li>
+                                                <li><a class="dropdown-item " href="#"> <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chakra-menu__icon" focusable="false" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg></span>  Çıkış Yap</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -118,16 +139,16 @@
         </div>
     </div><!--end Navbar-->
 
-    <main class="container-fluid mb-2">
+    <main class="container-fluid">
         @RenderBody()
     </main>
 
     <div>
         <footer>
             <!--start Footer-->
-            <div class="footer bg-dark text-align" style="margin-top:40px">
+            <div class="footer bg-dark text-align">
                 <div class="row text-align gx-0">
-                    <div class="col-sm-12 text-center" style="margin-top:-22px;margin-bottom:20px">
+                    <div class="col-sm-12 text-center" style="margin-top:-23px;margin-bottom:20px">
                         <a href="https://www.linkedin.com/in/ali-teke%C5%9F-b23aba247/" title="Linkedin" target="_blank ">
                             <i class="fa fa-linkedin height=10px mx-3" style="color: blanchedalmond;"></i>
                         </a>
@@ -141,7 +162,7 @@
                     <div class="col-sm-3">
 
                     </div>
-                    <div class="col-sm-6 text-align">
+                    <div class="col-sm-6  text-align">
                         <ul>
                             <div class="row gx-0 text-align">
                                 <div class="col-sm-3">

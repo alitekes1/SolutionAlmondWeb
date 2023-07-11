@@ -3,11 +3,10 @@
     ViewBag.Title = "Veri Sil";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 }
-
-<div class="container-fluid">
-    @Html.Partial("Partials/_UpdateDeleteTablePartial", new ViewDataDictionary
-    {
-    {"islemturu","Sil" },
-    {"islemturuLogosu","guncelle"}
-    })
+<div class="mb-lg-5">
+@Html.Partial("Partials/_UpdateDeleteTablePartial", new ViewDataDictionary
+{
+{"islemturu","Sil" },
+{"islemturuLogosu","guncelle"}
+})
 </div>

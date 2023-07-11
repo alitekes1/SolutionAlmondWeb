@@ -1,0 +1,37 @@
+﻿@{
+    AlmondWeb.BusinessLayer.RepositoryPattern.Repository<AlmondWeb.Entities.ListTable> repo_list = new AlmondWeb.BusinessLayer.RepositoryPattern.Repository<AlmondWeb.Entities.ListTable>();
+    SelectList listItems2 = new SelectList(repo_list.List(), "id", "listName");//value ve text in ne olduğunu belirliyoruz.
+    ViewData["list"] = listItems2;//liste listesini viewdata ile gönderiyoruz.
+
+    string placeholder1 = "null";
+    string placeholder2 = "null";
+    string isAddDataPage = ViewData["addDataPage"] as string;
+    if (isAddDataPage == "1")
+    {
+        placeholder1 = ViewData["addDataQuestionPlacholder"] as string;
+        placeholder2 = ViewData["addDataAnswerPlacholder"] as string;
+    }
+    else
+    {
+        placeholder1 = ViewData["updateQuestionPlacholder"] as string;
+        placeholder2 = ViewData["updateAnswerPlacholder"] as string;
+    }
+}
+
+<div class="row-sm-3 form-group shadow-textarea textareas ">
+    <textarea class="form-control z-depth-1" required placeholder="@placeholder1" id="exampleFormControlTextarea17" cols="20"
+              rows="10"></textarea>
+    <br>
+</div>
+<div class="row-sm-3 form-group shadow-textarea textareas ">
+    <textarea class="form-control z-depth-1" required id="exampleFormControlTextarea16" cols="20"
+              rows="10" placeholder="@placeholder2"></textarea>
+    <br>
+</div>
+<div class="row-sm-3">
+    <div class="col-sm-3 " style=" display: inline-block;width:80%">
+        @Html.DropDownList("liste-dropdown", ViewData["list"] as SelectList, "Liste Seçiniz", new { @class = "form-select bg-white ", required = "required", id = "liste-dropdown" })
+    </div>
+</div>
+
+

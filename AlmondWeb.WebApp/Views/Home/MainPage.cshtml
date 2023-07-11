@@ -1,58 +1,165 @@
-﻿@model AlmondWeb.Entities.AlmondDataTable
-@{
+﻿@{
     ViewBag.Title = "Anasayfa";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
+    AlmondWeb.BusinessLayer.RepositoryPattern.Repository<AlmondWeb.Entities.ListTable> repo_list = new AlmondWeb.BusinessLayer.RepositoryPattern.Repository<AlmondWeb.Entities.ListTable>();
+    SelectList listItems = new SelectList(repo_list.List(), "id", "listName");//value ve text in ne olduğunu belirliyoruz.
+    ViewData["list"] = listItems;//liste listesini viewdata ile gönderiyoruz.
+
 }
+<script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
 <link href="~/AlmondInterface/css/index.css" rel="stylesheet" />
-<script>
-    $(document).ready(function () {
-        $("#drop option:first").prop("disabled", true);
-    });
-</script>
-<main>
-    <div class="container mt-2">
-        <div class="row justify-content-end gx-0">
-            <div class="col-sm-5 liste-dropdown float-end">
-                @Html.DropDownList("listedropdown", ViewData["list"] as SelectList, "Liste Seçiniz", new { @class = "form-select bg-white", autofocus = "autofocus", required = "required", id = "drop" })
-            </div>
-            <div class="col-sm-12 mt-2">
-                <div class="row gx-0">
-                    <div class=" col-sm-8 offset-md-2 text-center pl-5">
-                        <div class="ana-ekran">
-                            <div class="row gx-0 gy-1">
-                                <div class="row-sm-5  soru">
-                                    @Model.question
+<style>
+    .button {
+        padding: 7px 10px;
+        border-radius: 5px;
+        border: 0;
+        background-color: whitesmoke;
+        box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-size: 15px;
+        transition: all .5s ease;
+        width: 100%;
+    }
+
+        .button:hover {
+            letter-spacing: 3px;
+            background-color: hsl(261deg 80% 48%);
+            color: hsl(0, 0%, 100%);
+            box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+            border: none !important;
+        }
+
+        .button:active {
+            letter-spacing: 3px;
+            background-color: hsl(261deg 80% 48%);
+            color: hsl(0, 0%, 100%);
+            box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+            transform: translateY(10px);
+            transition: 100ms;
+            border: none !important;
+        }
+
+    .stars {
+        position: absolute;
+        opacity: 0;
+        top: -.3em;
+        right: -.3em;
+        height: 100%;
+        transition: transform 300ms,opacity 150ms;
+    }
+
+        .stars :nth-child(n) {
+            fill: #999;
+        }
+
+    .button2 {
+        position: relative;
+        cursor: pointer;
+        padding: 8px;
+        border: 0;
+        border-radius: .5em;
+        font-weight: bolder;
+        transition: transform 150ms, box-shadow 150ms;
+        box-shadow: 0 0 #999;
+        background-color: #c8d6e5;
+        color: #333;
+    }
+
+        .button2:hover {
+            transform: translate(.3em,-.3em);
+            box-shadow: -.3em .3em #999;
+        }
+
+            .button2:hover > .stars {
+                opacity: 1;
+                transform: translate(.2em,-.2em);
+            }
+
+        .button2:active > .stars :nth-child(n) {
+            fill: #ccc;
+        }
+</style>
+
+<div class=" mt-2">
+    <div class="row justify-content-end gx-0">
+        <div class="col-sm-3 offset-7">
+            @Html.DropDownList("liste-dropdown", ViewData["list"] as SelectList, "Liste Seçiniz", new { @class = "form-select bg-white mainliste-dropdown", autofocus = "autofocus", required = "required", id = "liste-dropdown" })
+        </div>
+        <div class="col-sm-12 mt-2">
+            <div class="row gx-0">
+                <div class=" col-sm-8 offset-md-2 text-center pl-5">
+                    <div class="ana-ekran">
+                        <div class="row gx-0 gy-1">
+                            <div id="data" class="gy-1">
+                                <div class="row-sm-5 soru" id="question">
+
                                 </div>
-                                <div class="row-sm-5 cevap">
-                                    @Model.answer
+                                <div class="row-sm-5 cevap" id="answer">
+
                                 </div>
-                                <div class="row-sm-2 cevabigoster-grid">
-                                    @Html.ActionLink("Cevabı Göster", "MainPage", "Home", null, new { @class = "btn btn-secondary cevap-butonu my-2", role = "button" })
-                                </div>
+                            </div>
+                            <div class="row-sm-2 cevabigoster-grid mt-1">
+                                <button id="showAnswer" class="button2 cevap-butonu my-2" type="button">
+                                    Cevabı Göster  <svg class="stars" viewBox="0 0 353 178" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M271 37.9914C289.244 33.3118 295.91 27.0769 299.991 9C305.137 29.7552 312.313 36.1206 331.104 40.1127C312.194 43.8462 305.081 49.4282 302.113 69.1041C296.925 50.845 289.057 44.9589 271 37.9914Z"></path>
+                                        <path d="M254.852 83.012C245.919 73.8857 239.998 72.0853 228 75.817C238.443 65.759 239.748 59.3874 235.721 47C244.325 56.8385 250.014 59.1225 262.574 54.195C253.611 63.4315 252.822 70.0469 254.852 83.012Z"></path>
+                                        <path d="M275.626 97.3875C278.179 88.2512 277.138 83.7734 270.281 77.4407C280.63 80.423 285.214 78.8959 291.687 71.7049C288.553 80.8937 289.197 85.4019 297.032 91.6517C287.761 89.3164 283.212 91.2658 275.626 97.3875Z"></path>
+                                    </svg>
+                                </button>
+                                @*@Html.ActionLink("Cevabı Göster", "MainPage", "Home", null, new { @class = "btn btn-secondary cevap-butonu my-2", id = "cevabiGoster", type = "button" })*@
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row mt-2 gy-0 mt-2 mb-5">
-            <!-- start Puanlama Kısımları-->
-            <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-sm-12 butonlar">
-                        <div class="col gx-0 text-center">
-                            <button class="btn btn-outline-success puanlar">1</button>
-                            <button class="btn btn-outline-success puanlar">2</button>
-                            <button class="btn btn-outline-success puanlar">3</button>
-                            <button class="btn btn-outline-success puanlar">4</button>
-                            <button class="btn btn-outline-success puanlar">5</button>
-                        </div>
+    <div class="row gy-0 mt-2 mb-4" style="padding-top:11px;padding-bottom:3px">
+        <!-- start Puanlama Kısımları-->
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-10 offset-lg-1 butonlar">
+                    <div class="col gx-0 text-center">
+                        <button id="puan1" class="button border border-0 puanlar">1</button>
+                        <button id="puan2" class="button border border-0 puanlar">2</button>
+                        <button id="puan3" class="button border border-0 puanlar">3</button>
+                        <button id="puan4" class="button border border-0 puanlar">4</button>
+                        <button id="puan5" class="button border border-0 puanlar">5</button>
                     </div>
                 </div>
             </div>
-        </div> <!-- end Puanlama Kısımları-->
-    </div>
-</main>
+        </div>
+    </div> <!-- end Puanlama Kısımları-->
+</div>
 
+<script>
+    $("#liste-dropdown").change(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetQuestionAnswer",
+            dataType: "html",
+            success: function (almondData) {
+                if (almondData != null) {
+                    $("#data").html(almondData);
+                    //
+                    $("#answer").hide();
+                    $("#showAnswer").click(function () {
+                        $("#answer").show();
+                    })
+                }
+                else {
+                    alert("Listenin içinde hiç veri yok :(");
+                }
+            }
+        });
+    });
+    $("#showAnswer").click(isSelectedList);
+    $("#puan1").click(isSelectedList);
+    $("#puan2").click(isSelectedList);
+    $("#puan3").click(isSelectedList);
+    $("#puan4").click(isSelectedList);
+    $("#puan5").click(isSelectedList);
 
+</script>

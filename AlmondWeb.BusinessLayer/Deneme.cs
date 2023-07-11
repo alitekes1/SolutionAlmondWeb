@@ -39,7 +39,7 @@ namespace AlmondWeb.BusinessLayer
             if (userupdate != null)
             {
                 userupdate.Surname = "tekeş";
-                user.Update();
+                user.Update( userupdate);
             }
             #endregion
         }

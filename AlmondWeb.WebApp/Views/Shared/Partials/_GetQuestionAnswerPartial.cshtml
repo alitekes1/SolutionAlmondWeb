@@ -1,0 +1,14 @@
+﻿@model List<AlmondWeb.Entities.AlmondDataTable>
+<div class="row-sm-5 soru">
+    @foreach (var item in Model)
+    {
+        <p id="question">@item.question.ToString()</p>
+    }
+</div>
+
+<div class="row-sm-5 cevap">
+    @foreach (var item in Model)
+    {
+        <p id="answer">@item.answer.ToString()</p>
+    }
+</div>

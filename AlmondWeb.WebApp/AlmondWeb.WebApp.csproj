@@ -139,6 +139,7 @@
     <Content Include="Content\AlmondCss\index.css" />
     <Content Include="Content\AlmondCss\login_register.css" />
     <Content Include="Content\AlmondCss\navbar.css" />
+    <Content Include="Content\AlmondCss\registerSuccess.css" />
     <Content Include="Content\AlmondCss\sliderBoyut.css" />
     <Content Include="Content\AlmondCss\veriekle.css" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -171,6 +172,11 @@
     <Content Include="Images\favicon\favicon2.ico" />
     <Content Include="Images\logo\logoalmond.png" />
     <Content Include="Images\background\sea.jpg" />
+    <Content Include="Images\register_success.png" />
+    <Content Include="Images\register_success2.png" />
+    <Content Include="Images\success.png" />
+    <Content Include="Images\success3.png" />
+    <Content Include="Images\success4.jpg" />
     <Content Include="Scripts\AlmondJs\changeBackground.js" />
     <Content Include="Scripts\AlmondJs\Error.js" />
     <Content Include="Content\AlmondCss\errorpage2.css" />
@@ -212,6 +218,7 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Jquery.ajax\showQuestionAnswer.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -242,6 +249,10 @@
     <Content Include="Views\Home\AllData.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\MainPage.cshtml" />
+    <Content Include="Views\Shared\Partials\_GetQuestionAnswerPartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_TextAreaPartial.cshtml" />
+    <Content Include="Views\Home\RegisterSuccess.cshtml" />
+    <Content Include="Views\Home\ForgetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

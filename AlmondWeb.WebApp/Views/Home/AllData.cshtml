@@ -3,30 +3,46 @@
     ViewBag.Title = "Tüm Verilerim ";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 }
-<main class="container-fluid mt-3 mb-5" style="height:573px">
-    <div class="container-fluid">
-        @Html.Partial("Partials/_AddDataTablePartial")
-        <a href="#" title="PDF" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-warning float-end">Verilerimi PDF olarak almak istiyorum </a>
+@Html.Partial("Partials/_AddDataTablePartial")
+<style>
+    .buttonpdf {
+        border: none;
+        outline: none;
+        background-color: #6c5ce7;
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #a29bfe;
+    }
 
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Dikkat!</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Verilerinizi PDF şeklinde almak için aşağıdaki şartlar aranmaktadır.<br />
-                        1-Üyelik tarihi 14 günü geçmelidir.<br />2-Toplam eklenen veri adedi 50'den fazla olmalıdır.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                        <button type="button" class="btn btn-warning">Onayla</button>
-                    </div>
-                </div>
+        .buttonpdf:active {
+            transform: translateY(5px);
+            box-shadow: 0px 0px 0px 0px #a29bfe;
+        }
+</style>
+<div class="mb-sm-5" id="pdfalbuton">
+    <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="buttonpdf float-end">Verilerimi PDF olarak almak istiyorum </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Dikkat!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Verilerinizi PDF şeklinde almak için aşağıdaki şartlar aranmaktadır.<br />
+                1-Üyelik tarihi 14 günü geçmelidir.<br />2-Toplam eklenen veri adedi 50'den fazla olmalıdır.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-warning">Onayla</button>
             </div>
         </div>
     </div>
-
-</main>
+</div>

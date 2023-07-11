@@ -10,8 +10,11 @@
     align-items: center;
 }
 
-body {
+::-webkit-scrollbar {
+    width: 0px;
+}
 
+body {
     background-repeat: no-repeat;
     background-size: cover;
     align-items: center;
@@ -19,8 +22,6 @@ body {
     min-height: 100vh;
     place-items: center;
     display: flex;
-
-
 }
 
 form {
@@ -29,22 +30,21 @@ form {
     align-items: center;
     border-radius: 1%;
     height: 485px;
-
 }
 
-form input {
-    padding-bottom: 5px;
-    background: none;
-    text-align: left;
-}
+    form input {
+        padding-bottom: 5px;
+        background: none;
+        text-align: left;
+    }
 
-form input[type="email"],
-form input[type="password"],
-form input[type="text"] {
-    border: solid 0.5px black;
-    border-radius: 4px;
-    margin-top: 15px;
-}
+        form input[type="email"],
+        form input[type="password"],
+        form input[type="text"] {
+            border: solid 0.5px black;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
 
 .girisbutonu {
     height: 40px;
@@ -76,7 +76,6 @@ a {
     float: right;
     font-size: small;
     font-family: 'Titillium Web', sans-serif;
-
 }
 
 .carousel-item {
@@ -109,4 +108,16 @@ a {
     .sumbitbutonudiv {
         margin-top: 20px;
     }
+}
+
+.validation-summary-errors ul li {
+    width: 90%;
+    height: 47px;
+    list-style: none;
+    background-color: rgb(248,215,218);
+    border: solid 1px;
+    border-radius: 3px;
+    padding-top: 8px;
+    text-align: center;
+    float:left;
 }

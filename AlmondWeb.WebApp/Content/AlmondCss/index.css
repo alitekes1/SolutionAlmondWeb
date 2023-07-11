@@ -3,18 +3,19 @@
 }
 
 .puanlar {
-    width: 19%;
-}
-
-.sonrakisoru {
-    width: 100%;
+    width: 19% !important;
 }
 
 .butonlar {
     text-align: center;
 }
-textarea{
-    resize:none;
+
+textarea {
+    resize: none;
+}
+
+.yeniozellikoner {
+    font-size: 10px;
 }
 
 .soru {
@@ -23,13 +24,14 @@ textarea{
     height: 220px;
     border-radius: 10px;
     background-color: #dfd3c3;
+    margin-bottom: 4px;
 }
 
 .cevap {
-    height: 220px;
-    border-radius: 10px;
     place-items: center;
     display: grid;
+    height: 220px;
+    border-radius: 10px;
     background-color: #a7bcb9;
 }
 
@@ -88,15 +90,28 @@ textarea{
 @media(max-width:767px) {
 
     /* küçük ekranlarda css*/
-    .liste-dropdown {
-        width: 100%;
+    .mainliste-dropdown {
+        width: 120%;
+        height: 40px;
+        float: inherit;
+        text-align: center;
+    }
+
+    #pdfalbuton {
+        height: 50px !important;
     }
 }
 
 @media (min-width:768px) {
 
     /* büyük ekranlarda css */
-    .liste-dropdown {
-        width: 20% !important;
+    .mainliste-dropdown {
+        width: 70% !important;
+        height: 40px;
+        float: inherit;
+        text-align: center;
+    }
+
+    #pdfalbuton {
     }
 }
