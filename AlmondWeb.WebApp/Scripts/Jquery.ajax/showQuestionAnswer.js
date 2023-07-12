@@ -9,7 +9,8 @@
 function isSelectedList() {
     var selectedOption = $("#liste-dropdown option:selected");
     if (selectedOption.val() === "") {
-        alert("Liste seçimi yapmanız gerekiyor asas:)");
+        alert("Liste seçimi yapmanız gerekiyor :)");
+        focus("#liste-dropdown");
     }
 };
 $(document).ready(function () {

@@ -66,6 +66,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AlmondWeb.Common\AlmondWeb.Common.csproj">
+      <Project>{869c47f1-85d4-4c0a-9bd9-a0d40010b922}</Project>
+      <Name>AlmondWeb.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AlmondWeb.Entities\AlmondWeb.Entities.csproj">
       <Project>{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}</Project>
       <Name>AlmondWeb.Entities</Name>

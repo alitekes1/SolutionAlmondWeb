@@ -29,7 +29,6 @@ form {
     padding: 25px;
     align-items: center;
     border-radius: 1%;
-    height: 485px;
 }
 
     form input {
@@ -41,7 +40,7 @@ form {
         form input[type="email"],
         form input[type="password"],
         form input[type="text"] {
-            border: solid 0.5px black;
+            /*border: solid 0.5px black;*/
             border-radius: 4px;
             margin-top: 15px;
         }
@@ -119,5 +118,5 @@ a {
     border-radius: 3px;
     padding-top: 8px;
     text-align: center;
-    float:left;
+    float: left;
 }

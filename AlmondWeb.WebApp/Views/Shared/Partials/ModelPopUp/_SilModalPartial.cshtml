@@ -1,17 +1,17 @@
-﻿<div class="modal fade" id=@ViewData["modelID"] tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+﻿<div class="modal fade" id=exampleModalsilliste tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="h1ler"> @ViewData["headertextinModel"] </h1>
+                <h1 class="modal-title fs-5" id="">@ViewData["modelHeader"] </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label>İlgili veri veya liste</label>
+                <label id=@ViewData["modelID"]></label>
             </div>
             <div class="modal-footer">
                 <p class="small fst-italic text-start">@ViewData["not"]</p>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                <button type="button" @*style="width:90px"*@ class="btn btn-danger">@ViewData["AcceptButtoninModel"]</button>
+                <button type="button" class="btn btn-danger">Sil</button>
             </div>
         </div>
     </div>

@@ -166,7 +166,6 @@
     <Content Include="Images\logo\almondLgo.png" />
     <Content Include="Images\logo\almondLogo1.png" />
     <Content Include="Images\logo\almondLogo1rmvbg.png" />
-    <Content Include="Images\background\bg1.jpg" />
     <Content Include="Images\background\contactimg.jpg" />
     <Content Include="Images\favicon\favicon.ico" />
     <Content Include="Images\favicon\favicon2.ico" />
@@ -177,7 +176,6 @@
     <Content Include="Images\success.png" />
     <Content Include="Images\success3.png" />
     <Content Include="Images\success4.jpg" />
-    <Content Include="Scripts\AlmondJs\changeBackground.js" />
     <Content Include="Scripts\AlmondJs\Error.js" />
     <Content Include="Content\AlmondCss\errorpage2.css" />
     <Content Include="Scripts\AlmondJs\tableInizilation.js" />
@@ -225,6 +223,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\AlmondJs\index.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Images\background\bg1.jpg" />
+    <Content Include="Images\background\bg10.jpg" />
+    <Content Include="Images\background\bg3.jpg" />
+    <Content Include="Images\background\bg4.jpg" />
+    <Content Include="Images\background\bg5.jpg" />
+    <Content Include="Images\background\bg6.jpg" />
+    <Content Include="Images\background\bg8.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -257,6 +262,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Home\Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -265,6 +271,10 @@
     <ProjectReference Include="..\AlmondWeb.BusinessLayer\AlmondWeb.BusinessLayer.csproj">
       <Project>{75e4dcb5-20cc-42ce-ba8c-aebfc1f84fc7}</Project>
       <Name>AlmondWeb.BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AlmondWeb.Common\AlmondWeb.Common.csproj">
+      <Project>{869c47f1-85d4-4c0a-9bd9-a0d40010b922}</Project>
+      <Name>AlmondWeb.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\AlmondWeb.Entities\AlmondWeb.Entities.csproj">
       <Project>{d3780b67-cdb3-4bab-af09-830df6c6d5c9}</Project>

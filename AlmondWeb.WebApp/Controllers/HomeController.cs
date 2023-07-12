@@ -2,9 +2,15 @@
 using AlmondWeb.BusinessLayer.RepositoryPattern;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
+using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.EnterpriseServices;
 using System.Web.Mvc;
+using System.Web.Security;
+using System.Web.SessionState;
+using System.Web.UI.WebControls;
 
 
 /* business katmanda oluşturduğumuz manager classlar crud işlemlerini yapacaklar.
@@ -13,29 +19,27 @@ using System.Web.Mvc;
  */
 namespace AlmondWeb.WebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+        UserManager userManager = new UserManager();
+        DataManager dataManager = new DataManager();
 
         public ActionResult MainPage()
         {
-            ////BusinessLayer.Deneme db = new BusinessLayer.Deneme();
-            //DataManager dm = new DataManager();
-
-            return View();//sayfaya model gönderiyor
+            return View();
         }
         public ActionResult GetQuestionAnswer()
         {
-            Repository<AlmondDataTable> repo_data = new Repository<AlmondDataTable>();
-            List<AlmondDataTable> almondData = repo_data.List(x => x.Id == 3);
+            AlmondDataTable almondData = dataManager.getSingleData(x => x.Id == 3);// TODO: bu işlem için bir manager yapılacak.
             return PartialView("Partials/_GetQuestionAnswerPartial", almondData);
         }
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
-        UserManager userManager = new UserManager();
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -57,13 +61,12 @@ namespace AlmondWeb.WebApp.Controllers
             return View(model);
         }
 
-
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult ForgetPassword()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public ActionResult ForgetPassword(RegisterModel newPassword)
         {
             if (ModelState.IsValid)
@@ -74,12 +77,12 @@ namespace AlmondWeb.WebApp.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public ActionResult Login(LoginModal modal)
         {
             //UserManager userManager = new UserManager();//globale taşıdık.
@@ -95,41 +98,64 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
+                    FormsAuthentication.SetAuthCookie(errorresult.resultModel.Name, false);
+                    HttpContext.Session.Add("userId", errorresult.resultModel.Id);
+                    Session["user"] = modal;
                     return RedirectToAction("MainPage");
                 }
             }
             return View(modal);
         }
-
-
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
         public ActionResult AddData()
         {
-            return View();
+            return View(dataManager.List());
         }
+
         public ActionResult UpdateData()
         {
-            return View();
+            return View(dataManager.List());
         }
         public ActionResult DeleteData()
         {
-            return View();
+            return View(dataManager.List());
         }
         public ActionResult AllData()
         {
-            return View();
+            return View(dataManager.List(1));
         }
         public ActionResult ListOperations()
         {
-            return View();
+            return View(dataManager.List());
         }
+        [AllowAnonymous]
         public ActionResult Contact()
         {
             return View();
         }
+        [AllowAnonymous]
         public ActionResult Error()
         {
             return View();
         }
-
+        [AllowAnonymous]
+        public ActionResult RegisterSuccess()
+        {
+            return View();
+        }
+        public ActionResult SuggestFeature()
+        {
+            return View();
+        }
+        public ActionResult FillTablewithData()
+        {
+            var dataList = dataManager.List();
+            return PartialView("Partials/GetAllDataPartial", dataList);
+        }
     }
 }

@@ -4,6 +4,7 @@ using AlmondWeb.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net.Mail;
 using System.Reflection;

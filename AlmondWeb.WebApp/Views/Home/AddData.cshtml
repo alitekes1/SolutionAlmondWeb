@@ -1,4 +1,4 @@
-﻿
+﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
 @{
     ViewBag.Title = "Veri Ekle";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
@@ -28,6 +28,6 @@
     </div>
 
     <div class="col-sm-8">
-        @Html.Partial("Partials/_AddDataTablePartial")
+        @Html.Partial("Partials/_AddDataTablePartial", Model)
     </div>
 </div>

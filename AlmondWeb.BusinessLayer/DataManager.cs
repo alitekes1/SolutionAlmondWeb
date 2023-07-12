@@ -21,5 +21,14 @@ namespace AlmondWeb.BusinessLayer
         //veri ekleme ve çekme işlemlerinin hepsi burada yapılır.kullanıcı db
         //ye direkt erişememesi için web katmanından alınanları data katmanına
         //etki etmesini sağlayan ara bir katman olarak düşün burayı.
+        public List<AlmondDataTable> List()
+        {
+            return repo_data.List();
+        }
+
+        public List<AlmondDataTable> List(int ownerId)
+        {
+            return repo_data.List(x => x.Owner.Id == ownerId && x.isDeleted == false);
+        }
     }
 }

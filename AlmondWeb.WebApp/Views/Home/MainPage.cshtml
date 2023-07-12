@@ -1,18 +1,20 @@
-﻿@{
+﻿@using AlmondWeb.BusinessLayer.RepositoryPattern
+
+@{
     ViewBag.Title = "Anasayfa";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
-    AlmondWeb.BusinessLayer.RepositoryPattern.Repository<AlmondWeb.Entities.ListTable> repo_list = new AlmondWeb.BusinessLayer.RepositoryPattern.Repository<AlmondWeb.Entities.ListTable>();
+    Repository<AlmondWeb.Entities.ListTable> repo_list = new Repository<AlmondWeb.Entities.ListTable>();
     SelectList listItems = new SelectList(repo_list.List(), "id", "listName");//value ve text in ne olduğunu belirliyoruz.
     ViewData["list"] = listItems;//liste listesini viewdata ile gönderiyoruz.
 
 }
 <script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
 <link href="~/AlmondInterface/css/index.css" rel="stylesheet" />
+@* butonlar ile ilgili css *@
 <style>
     .button {
         padding: 7px 10px;
         border-radius: 5px;
-        border: 0;
         background-color: whitesmoke;
         box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
         letter-spacing: 1.5px;
@@ -27,7 +29,7 @@
             background-color: hsl(261deg 80% 48%);
             color: hsl(0, 0%, 100%);
             box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
-            border: none !important;
+            border: 0 !important;
         }
 
         .button:active {
@@ -37,9 +39,9 @@
             box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
             transform: translateY(10px);
             transition: 100ms;
-            border: none !important;
+            border: 0 !important;
         }
-
+    /**/
     .stars {
         position: absolute;
         opacity: 0;
@@ -69,18 +71,22 @@
         .button2:hover {
             transform: translate(.3em,-.3em);
             box-shadow: -.3em .3em #999;
+            border: none !important;
         }
 
             .button2:hover > .stars {
                 opacity: 1;
                 transform: translate(.2em,-.2em);
+                border: none !important;
             }
 
         .button2:active > .stars :nth-child(n) {
             fill: #ccc;
         }
 </style>
-
+@{
+    //TODO:bu css ler style bundle işlemiyle bir yerde toplanacak
+}
 <div class=" mt-2">
     <div class="row justify-content-end gx-0">
         <div class="col-sm-3 offset-7">
@@ -122,11 +128,11 @@
             <div class="row">
                 <div class="col-sm-10 offset-lg-1 butonlar">
                     <div class="col gx-0 text-center">
-                        <button id="puan1" class="button border border-0 puanlar">1</button>
-                        <button id="puan2" class="button border border-0 puanlar">2</button>
-                        <button id="puan3" class="button border border-0 puanlar">3</button>
-                        <button id="puan4" class="button border border-0 puanlar">4</button>
-                        <button id="puan5" class="button border border-0 puanlar">5</button>
+                        <button id="puan1" class="button border border-dark-subtle puanlar">1</button>
+                        <button id="puan2" class="button border border-secondary-subtle puanlar">2</button>
+                        <button id="puan3" class="button border border-secondary-subtle puanlar">3</button>
+                        <button id="puan4" class="button border border-secondary-subtle puanlar">4</button>
+                        <button id="puan5" class="button border border-secondary-subtle puanlar">5</button>
                     </div>
                 </div>
             </div>

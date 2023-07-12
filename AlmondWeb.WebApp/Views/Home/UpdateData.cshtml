@@ -1,4 +1,4 @@
-﻿
+﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
 @{
     ViewBag.Title = "Veri Güncelle";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
@@ -15,8 +15,8 @@
                 {
                     @Html.Partial("Partials/_TextAreaPartial", new ViewDataDictionary
                     {
-                   {"updateQuestionPlacholder","Tablodan guncellemek istediğiniz veriyi seçiniz."},
-                   {"updateAnswerPlacholder","Sectiginiz veri otomatik olarak buraya gelecektir." },
+                   {"updateQuestionPlacholder","Tablodan güncellemek istediğiniz veriyi kalem ikonuna tıklayarak seçiniz."},
+                   {"updateAnswerPlacholder","Seçtiğiniz veri otomatik olarak buraya gelecektir." },
                    {"addDataPage","0"},
                    {"updateList",list}
                })
@@ -30,7 +30,7 @@
 
     <div class="col-sm-8 ">
         @* Tablo olıuşturmak için *@
-        @Html.Partial("Partials/_UpdateDeleteTablePartial", new ViewDataDictionary
+        @Html.Partial("Partials/_UpdateDeleteTablePartial", Model, new ViewDataDictionary
         {
         {"islemturu","Guncelle" },
         {"islemturuLogosu","sil"}

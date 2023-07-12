@@ -20,7 +20,7 @@ form {
 
 .shadow-textarea textarea.form-control {
     padding-left: 0.8rem;
-    width: 70%;
+    width: 80%;
     height: 225px;
     resize: none;
     place-items: center;

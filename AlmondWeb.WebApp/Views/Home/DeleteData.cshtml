@@ -1,12 +1,13 @@
-﻿
+﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
+
 @{
     ViewBag.Title = "Veri Sil";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 }
 <div class="mb-lg-5">
-@Html.Partial("Partials/_UpdateDeleteTablePartial", new ViewDataDictionary
-{
-{"islemturu","Sil" },
-{"islemturuLogosu","guncelle"}
-})
+    @Html.Partial("Partials/_UpdateDeleteTablePartial", Model, new ViewDataDictionary
+    {
+    {"islemturu","Sil" },
+    {"islemturuLogosu","guncelle"}
+    })
 </div>

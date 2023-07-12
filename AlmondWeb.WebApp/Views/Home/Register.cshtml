@@ -20,27 +20,27 @@
         </div>
     </div>
     <div class="form-floating row-sm-2 mt-3">
-        @Html.TextBoxFor(x => x.name, new { @class = "form-control", id = "formGroupExampleInput", placeholder = "Ad", autofocus = "autofocus" })
+        @Html.TextBoxFor(x => x.name, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Ad", autofocus = "autofocus" })
         <label for="floatingPassword">Ad</label>
         <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.name)</p>
     </div>
     <div class="form-floating row-sm-2 mt-2">
-        @Html.TextBoxFor(x => x.surname, new { @class = "form-control", id = "formGroupExampleInput", placeholder = "Soyad" })
+        @Html.TextBoxFor(x => x.surname, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Soyad" })
         <label for="floatingPassword">Soyad</label>
         <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.surname)</p>
     </div>
     <div class="form-floating row-sm-2">
-        @Html.TextBoxFor(x => x.email, new { @class = "form-control", id = "formGroupExampleInput", placeholder = "Email", type = "email" })
+        @Html.TextBoxFor(x => x.email, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Email", type = "email" })
         <label for="floatingPassword">E-mail</label>
         <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.email)</p>
     </div>
     <div class="form-floating row-sm-2">
-        @Html.TextBoxFor(x => x.password, new { @class = "form-control", id = "formGroupExampleInput", placeholder = "Şifre", type = "password" })
+        @Html.TextBoxFor(x => x.password, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Şifre", type = "password" })
         <label for="floatingPassword">Şifre </label>
         <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.password)</p>
     </div>
     <div class="form-floating row-sm-2">
-        @Html.TextBoxFor(x => x.password2, new { @class = "form-control", id = "formGroupExampleInput", placeholder = "Şifre(Tekrar)", type = "password" })
+        @Html.TextBoxFor(x => x.password2, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Şifre(Tekrar)", type = "password" })
         <label for="floatingPassword">Şifre (Tekrar)</label>
         <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.password2)</p>
     </div>

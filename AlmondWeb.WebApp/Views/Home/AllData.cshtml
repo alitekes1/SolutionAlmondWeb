@@ -1,9 +1,8 @@
-﻿
+﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
 @{
     ViewBag.Title = "Tüm Verilerim ";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 }
-@Html.Partial("Partials/_AddDataTablePartial")
 <style>
     .buttonpdf {
         border: none;
@@ -23,6 +22,9 @@
             box-shadow: 0px 0px 0px 0px #a29bfe;
         }
 </style>
+
+@Html.Partial("Partials/_AddDataTablePartial", Model)
+
 <div class="mb-sm-5" id="pdfalbuton">
     <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="buttonpdf float-end">Verilerimi PDF olarak almak istiyorum </button>
 </div>
