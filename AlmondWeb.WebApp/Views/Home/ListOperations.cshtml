@@ -1,8 +1,10 @@
-﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
+﻿@using AlmondWeb.BusinessLayer
 @{
     ViewBag.Title = "ListOperations";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
     int counter = 0;
+    DataManager dm = new DataManager();
+    var list = dm.List(1);
 }
 <style>
     .buttoncreateList {
@@ -128,7 +130,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                    @foreach (var item in Model)
+                    @foreach (var item in list)
                     {
                         counter++;
                         <tr>

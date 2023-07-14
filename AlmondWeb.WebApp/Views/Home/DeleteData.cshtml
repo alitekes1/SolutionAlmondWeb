@@ -1,11 +1,15 @@
-﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
+﻿@using AlmondWeb.BusinessLayer
 
 @{
     ViewBag.Title = "Veri Sil";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
+    var myData = HttpContext.Current.Session["userId"];
+    int currentUserID = Convert.ToInt32(myData);
+    DataManager dm = new DataManager();
+    var list = dm.List(currentUserID);
 }
 <div class="mb-lg-5">
-    @Html.Partial("Partials/_UpdateDeleteTablePartial", Model, new ViewDataDictionary
+    @Html.Partial("Partials/_UpdateDeleteTablePartial", list, new ViewDataDictionary
     {
     {"islemturu","Sil" },
     {"islemturuLogosu","guncelle"}

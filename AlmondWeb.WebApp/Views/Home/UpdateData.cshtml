@@ -1,39 +1,73 @@
-﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
+﻿@model AlmondWeb.BusinessLayer.ViewModels.UserQueAnswListModel
+﻿@using AlmondWeb.BusinessLayer
 @{
     ViewBag.Title = "Veri Güncelle";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
     SelectList list = ViewData["list"] as SelectList;
+    var myData = HttpContext.Current.Session["userId"];
+    int currentUserID = Convert.ToInt32(myData);
+    DataManager dm = new DataManager();
+    var listData = dm.List(currentUserID);
 }
 
-<link href="~/Content/Datatable.css" rel="stylesheet" />
 <link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
-<div class="row mt-3 mb-lg-5">
-    <div class="col-sm-4 ">
-        <div class="form-container" style="padding-top:11px">
-            <div class="col-sm-12 mt-lg-4">
-                @using (Html.BeginForm("Partials/UpdateData", "Home", "POST"))
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<div class="row mb-5">
+    <div class="col-sm-4" style="padding-top:11px">
+        <div class="form-container">
+            <div class="col-sm-12 ">
+
+                @Html.Partial("Partials/_TextAreaPartial", new ViewDataDictionary
                 {
-                    @Html.Partial("Partials/_TextAreaPartial", new ViewDataDictionary
-                    {
-                   {"updateQuestionPlacholder","Tablodan güncellemek istediğiniz veriyi kalem ikonuna tıklayarak seçiniz."},
-                   {"updateAnswerPlacholder","Seçtiğiniz veri otomatik olarak buraya gelecektir." },
-                   {"addDataPage","0"},
-                   {"updateList",list}
+
+                    {"updateQuestionPlacholder","Tablodan güncellemek istediğiniz veriyi kalem ikonuna tıklayarak seçiniz."},
+                    {"updateAnswerPlacholder","Seçtiğiniz veri otomatik olarak buraya gelecektir." },
+                    {"addDataPage","0"},
+                    {"updateList",list},
+                    {"UpdateData","UpdateData"}
+
                })
-                    <div class="row-sm-3 mt-1">
-                        <button type="submit" class="btn btn-success verieklebtn">Kaydet</button>
-                    </div>
-                }
+
             </div>
         </div>
     </div>
 
-    <div class="col-sm-8 ">
-        @* Tablo olıuşturmak için *@
-        @Html.Partial("Partials/_UpdateDeleteTablePartial", Model, new ViewDataDictionary
+    <div class="col-sm-8">
+
+        @Html.Partial("Partials/_UpdateDeleteTablePartial", listData, new ViewDataDictionary
         {
-        {"islemturu","Guncelle" },
-        {"islemturuLogosu","sil"}
+            {"islemturu","Guncelle" },
+            {"islemturuLogosu","sil"}
         })
     </div>
 </div>
+
+<script>
+    //TODO:Burada tabloya gerçek veriler aktarıldıktan sonra guncelleme butonuna tıklanıldığında ilgili soru hucresindeki veri soru textbox ına aktarılacak.
+    function transferToData(question) {
+        let _question = document.getElementById("exampleModalsil");
+        _question.innerText = question;
+
+    };
+    function transferdataTotextarea(question, answer, listValue, dataId) {
+        let _questionfortextarea = document.getElementById("exampleFormControlTextarea17");
+        let _answerfortextarea = document.getElementById("exampleFormControlTextarea16");
+        let _list = document.getElementById("liste-dropdown");
+        let _dataId = document.getElementById("updatadatam");
+
+        _questionfortextarea.value = question;
+        _answerfortextarea.value = answer;
+        _list.selectedIndex = listValue;
+        _dataId.setAttribute("value", dataId);
+    };
+    var submitbuton = document.getElementById("submitbtn");
+    var isSelectedData = document.getElementById("updatadatam");
+
+    submitbuton.addEventListener("click", function () {
+        if (isSelectedData.value == null) {
+            return alert("Hangi veriyi güncellemek istediğinizi tablodaki kalem ikonuna tıklayarak seçiniz.");
+        }
+    });
+
+</script>

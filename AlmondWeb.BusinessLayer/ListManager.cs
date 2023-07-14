@@ -1,4 +1,4 @@
-﻿using AlmondWeb.BusinessLayer.RepositoryPattern;
+﻿using AlmondWeb.DataAccessLayer.RepositoryPattern;
 using AlmondWeb.DataAccessLayer;
 using AlmondWeb.Entities;
 using System;
@@ -11,12 +11,11 @@ using System.Web.WebPages.Html;
 
 namespace AlmondWeb.BusinessLayer
 {
-    public class ListManager
+    public class ListManager : BaseManager<ListTable>
     {
-        Repository<ListTable> repo_list = new Repository<ListTable>();
-        public List<ListTable> lists()
+        public List<ListTable> List(int ownerId)
         {
-            return repo_list.List();
+            return List(x => x.Owner.Id == ownerId && x.isDeleted == false);
         }
     }
 }

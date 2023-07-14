@@ -243,9 +243,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\LoginRegisterLayout.cshtml" />
-    <Content Include="Views\Home\AddData.cshtml" />
     <Content Include="Views\Shared\Partials\_AddDataTablePartial.cshtml" />
-    <Content Include="Views\Home\UpdateData.cshtml" />
     <Content Include="Views\Shared\Partials\_UpdateDeleteTablePartial.cshtml" />
     <Content Include="Views\Home\DeleteData.cshtml" />
     <Content Include="Views\Shared\Partials\ModelPopUp\_SilModalPartial.cshtml" />
@@ -258,11 +256,12 @@
     <Content Include="Views\Shared\Partials\_TextAreaPartial.cshtml" />
     <Content Include="Views\Home\RegisterSuccess.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
+    <Content Include="Views\Home\UpdateData.cshtml" />
+    <Content Include="Views\Home\AddData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Home\Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -275,6 +274,10 @@
     <ProjectReference Include="..\AlmondWeb.Common\AlmondWeb.Common.csproj">
       <Project>{869c47f1-85d4-4c0a-9bd9-a0d40010b922}</Project>
       <Name>AlmondWeb.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AlmondWeb.Core\AlmondWeb.Core.csproj">
+      <Project>{3156b16d-2824-42c0-8289-7b1768b87f57}</Project>
+      <Name>AlmondWeb.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\AlmondWeb.Entities\AlmondWeb.Entities.csproj">
       <Project>{d3780b67-cdb3-4bab-af09-830df6c6d5c9}</Project>

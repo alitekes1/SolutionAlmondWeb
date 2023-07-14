@@ -1,4 +1,4 @@
-﻿using AlmondWeb.BusinessLayer.RepositoryPattern;
+﻿using AlmondWeb.DataAccessLayer.RepositoryPattern;
 using AlmondWeb.Entities;
 using System;
 using System.Collections.Generic;

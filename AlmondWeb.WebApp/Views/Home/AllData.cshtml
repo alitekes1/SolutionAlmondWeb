@@ -1,7 +1,12 @@
-﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
+﻿@using AlmondWeb.BusinessLayer
 @{
     ViewBag.Title = "Tüm Verilerim ";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
+
+    var myData = HttpContext.Current.Session["userId"];
+    int currentUserID = Convert.ToInt32(myData);
+    DataManager dm = new DataManager();
+    var list = dm.List(currentUserID);
 }
 <style>
     .buttonpdf {
@@ -23,7 +28,7 @@
         }
 </style>
 
-@Html.Partial("Partials/_AddDataTablePartial", Model)
+@Html.Partial("Partials/_AddDataTablePartial", list)
 
 <div class="mb-sm-5" id="pdfalbuton">
     <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="buttonpdf float-end">Verilerimi PDF olarak almak istiyorum </button>

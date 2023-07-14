@@ -1,13 +1,18 @@
 ﻿using AlmondWeb.BusinessLayer;
-using AlmondWeb.BusinessLayer.RepositoryPattern;
+//using AlmondWeb.data.RepositoryPattern;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
+using Antlr.Runtime.Tree;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.EnterpriseServices;
+using System.Net;
+using System.Net.Sockets;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Razor.Generator;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.UI.WebControls;
@@ -24,14 +29,14 @@ namespace AlmondWeb.WebApp.Controllers
     {
         UserManager userManager = new UserManager();
         DataManager dataManager = new DataManager();
-
+        [AllowAnonymous]
         public ActionResult MainPage()
         {
             return View();
         }
         public ActionResult GetQuestionAnswer()
         {
-            AlmondDataTable almondData = dataManager.getSingleData(x => x.Id == 3);// TODO: bu işlem için bir manager yapılacak.
+            var almondData = dataManager.Find(x => x.Id == 3);// TODO: bu işlem için bir manager yapılacak.
             return PartialView("Partials/_GetQuestionAnswerPartial", almondData);
         }
         [HttpGet, AllowAnonymous]
@@ -71,11 +76,10 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View("RegisterSuccess");
+                return View("RegisterSuccess");//TODO: şifremi unuttum işlemleri yapılacak
             }
             return View(newPassword);
         }
-
 
         [HttpGet, AllowAnonymous]
         public ActionResult Login()
@@ -85,7 +89,6 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpPost, AllowAnonymous]
         public ActionResult Login(LoginModal modal)
         {
-            //UserManager userManager = new UserManager();//globale taşıdık.
             if (ModelState.IsValid)
             {
                 var errorresult = userManager.LoginUser(modal);
@@ -110,28 +113,95 @@ namespace AlmondWeb.WebApp.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+
+            Session.Clear();
+            Request.Cookies.Clear();
+            Response.Cookies.Clear();
+
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
         public ActionResult AddData()
         {
-            return View(dataManager.List());
+            return View();
         }
-
+        [HttpPost]
+        public ActionResult AddData(AlmondDataTable data)
+        {
+            if (ModelState.IsValid)
+            {
+                if (data != null)
+                {
+                    if (dataManager.Insert(data) > 0)
+                    {
+                        return View(data);
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(Error));
+                    }
+                }
+                return View(data);
+            }
+            return View(data);
+        }
+        [AllowAnonymous]
+        [HttpGet]
         public ActionResult UpdateData()
         {
-            return View(dataManager.List());
+            return View();
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult UpdateData(UserQueAnswListModel data)
+        {
+            if (ModelState.IsValid)
+            {
+                if (data != null)
+                {
+                    //int result = dataManager.Update(data);
+                    //if (result != -1)
+                    {
+                        return View(data);//TODO:işlem başarılı toastr çıkacak
+                    }
+                    return RedirectToAction("Error");
+                }
+            }
+            return View(data);
+        }
+        [HttpGet]
         public ActionResult DeleteData()
         {
-            return View(dataManager.List());
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DeleteData(int? id)
+        {
+            if (id != null)
+            {
+                var deletedata = dataManager.Find(x => x.Id == id);
+                if (deletedata != null)
+                {
+                    if (dataManager.Delete(deletedata) > 0)
+                    {
+                        return View();//işlem başarılı
+                    }
+                    else
+                    {
+                        //işlem başarısız
+                    }
+                }
+            }
+            return RedirectToAction("Error", "Home");
         }
         public ActionResult AllData()
         {
-            return View(dataManager.List(1));
+            return View();
         }
         public ActionResult ListOperations()
         {
-            return View(dataManager.List());
+            return View();
         }
         [AllowAnonymous]
         public ActionResult Contact()
@@ -152,10 +222,9 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        public ActionResult FillTablewithData()
-        {
-            var dataList = dataManager.List();
-            return PartialView("Partials/GetAllDataPartial", dataList);
-        }
+        //public ActionResult FillTablewithData()
+        //{
+        //    return PartialView("Partials/GetAllDataPartial",);
+        //}
     }
 }

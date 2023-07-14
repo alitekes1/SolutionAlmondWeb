@@ -12,9 +12,10 @@ using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using AlmondWeb.BusinessLayer;
+using System.Runtime.InteropServices.WindowsRuntime;
 
-namespace AlmondWeb.BusinessLayer.RepositoryPattern
+namespace AlmondWeb.DataAccessLayer.RepositoryPattern
 {
     public class Repository<T> where T : class
     {
@@ -26,13 +27,18 @@ namespace AlmondWeb.BusinessLayer.RepositoryPattern
         private int Save() { return database.SaveChanges(); }
         public int Insert(T dataset)
         {
-            if (dataset is MyEntityBase)
+            if (dataset is AlmondDataTable)
             {
-                MyEntityBase o = dataset as MyEntityBase;
+                AlmondDataTable o = dataset as AlmondDataTable;
                 o.createdTime = getDate();
                 o.deletedTime = getDate();
                 o.isDeleted = false;
-
+                o.puan = 0;
+            }
+            if (dataset is AlmondDataTable)
+            {
+                AlmondDataTable o = dataset as AlmondDataTable;
+                o.puan = 0;
             }
             database.Set<T>().Add(dataset);
 
@@ -44,19 +50,21 @@ namespace AlmondWeb.BusinessLayer.RepositoryPattern
         }
         public int Delete(T dataset)
         {
-            if (dataset is MyEntityBase)
+            if (dataset is AlmondDataTable)
             {
-                MyEntityBase o = new MyEntityBase();
-
-                o.deletedTime = DateTime.Now;
-                o.isDeleted = true;
+                AlmondDataTable a = dataset as AlmondDataTable;
+                a.isDeleted = true;
+                a.deletedTime = getDate();
             }
-            //database.Set<T>().Remove(dataset);
             return Save();
         }
         public List<T> List()
         {
             return database.Set<T>().ToList();
+        }
+        public List<T> List(int ownerId)
+        {
+            return database.Set<T>().Where(x => x.Equals(ownerId)).ToList();
         }
         public List<T> List(Expression<Func<T, bool>> expression)
         {
@@ -64,6 +72,7 @@ namespace AlmondWeb.BusinessLayer.RepositoryPattern
         }
         public T Find(Expression<Func<T, bool>> expression)
         {
+
             return database.Set<T>().SingleOrDefault(expression);
         }
         private DateTime getDate()

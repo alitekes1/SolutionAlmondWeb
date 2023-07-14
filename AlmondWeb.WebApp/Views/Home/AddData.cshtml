@@ -1,33 +1,33 @@
-﻿@model  List<AlmondWeb.Entities.AlmondDataTable>
+﻿@using AlmondWeb.BusinessLayer
 @{
     ViewBag.Title = "Veri Ekle";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
     SelectList list = ViewData["list"] as SelectList;
+    var myData = HttpContext.Current.Session["userId"];
+    int currentUserID = Convert.ToInt32(myData);
+    DataManager dm = new DataManager();
+    var listData = dm.List(currentUserID);
 }
 
 <link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
-<div class="row mt-3 mb-5">
-    <div class="col-sm-4" style="padding-top:11px">
-        <div class="form-container">
+<div class="row mt-3 mb-lg-5">
+    <div class="col-sm-4 ">
+        <div class="form-container" style="padding-top:11px">
             <div class="col-sm-12 mt-lg-4">
-                @using (Html.BeginForm("Partials/UpdateData", "Home", "POST"))
+                @Html.Partial("Partials/_TextAreaPartial", new ViewDataDictionary
                 {
-                    @Html.Partial("Partials/_TextAreaPartial", new ViewDataDictionary
-                    {
                    {"addDataQuestionPlacholder","Soru"},
                    {"addDataAnswerPlacholder","Cevap" },
                    {"updateList",list},
-                   {"addDataPage","1"}
+                   {"addDataPage","1"},
+                   {"AddData","AddData"}
                })
-                    <div class="row-sm-3 mt-1">
-                        <button type="submit" class="btn btn-success verieklebtn">Kaydet</button>
-                    </div>
-                }
             </div>
         </div>
     </div>
 
-    <div class="col-sm-8">
-        @Html.Partial("Partials/_AddDataTablePartial", Model)
+    <div class="col-sm-8 ">
+        @* Tablo oluşturmak için *@
+        @Html.Partial("Partials/_AddDataTablePartial", listData)
     </div>
 </div>

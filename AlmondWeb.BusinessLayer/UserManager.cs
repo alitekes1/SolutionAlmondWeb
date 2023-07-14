@@ -1,4 +1,4 @@
-﻿using AlmondWeb.BusinessLayer.RepositoryPattern;
+﻿using AlmondWeb.DataAccessLayer.RepositoryPattern;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using System;
@@ -13,16 +13,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.WebPages.Html;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AlmondWeb.BusinessLayer
 {
-    public class UserManager
+    public class UserManager : BaseManager<AlmondUserTable>
     {
-        private Repository<AlmondUserTable> repo_user = new Repository<AlmondUserTable>();
+
         public ErrorResult<AlmondUserTable> RegisterUser(RegisterModel modal)//gerekli kontroller ve kayıt işlemi gerçekleşecek.
         {
-            Repository<AlmondUserTable> repo_data = new Repository<AlmondUserTable>();
-            AlmondUserTable user = repo_data.Find(x => x.Email == modal.email && x.Password == modal.password);
+            AlmondUserTable user = Find(x => x.Email == modal.email && x.Password == modal.password);
+
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();
             if (user != null)//kayıt işlemi gerçekleşecek.
             {
@@ -34,7 +35,7 @@ namespace AlmondWeb.BusinessLayer
             }
             else
             {
-                int isSave = repo_user.Insert(new AlmondUserTable
+                int isSave = Insert(new AlmondUserTable
                 {
                     Email = modal.email,
                     Password = modal.password,
@@ -46,7 +47,7 @@ namespace AlmondWeb.BusinessLayer
                 });
                 if (isSave > 0)
                 {
-                    errorResult.resultModel = repo_data.Find(x => x.Email == modal.email && x.Password == modal.password);//kayıt edilen kişiyi aldık
+                    errorResult.resultModel = Find(x => x.Email == modal.email && x.Password == modal.password);//kayıt edilen kişiyi aldık
                 }
                 return errorResult;
             }
@@ -54,8 +55,7 @@ namespace AlmondWeb.BusinessLayer
         }
         public ErrorResult<AlmondUserTable> LoginUser(LoginModal modal)
         {
-            Repository<AlmondUserTable> repo_data = new Repository<AlmondUserTable>();
-            AlmondUserTable user = repo_data.Find(x => x.Email == modal.email);
+            AlmondUserTable user = Find(x => x.Email == modal.email);
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();
             if (user != null)//kayıtlıysa eğer
             {
@@ -83,6 +83,7 @@ namespace AlmondWeb.BusinessLayer
             }
             return errorResult;
         }
+
     }
 }
 
