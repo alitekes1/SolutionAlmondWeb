@@ -1,12 +1,13 @@
 ﻿@using AlmondWeb.BusinessLayer
+@using AlmondWeb.WebApp.CacheHelper
 @{
     ViewBag.Title = "Tüm Verilerim ";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 
-    var myData = HttpContext.Current.Session["userId"];
-    int currentUserID = Convert.ToInt32(myData);
+    int currentUserID = CacheHelper.CurrentUserID();
+
     DataManager dm = new DataManager();
-    var list = dm.List(currentUserID);
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID);//current user a ait dataları listeliyoruz.
 }
 <style>
     .buttonpdf {
@@ -28,7 +29,7 @@
         }
 </style>
 
-@Html.Partial("Partials/_AddDataTablePartial", list)
+@Html.Partial("Partials/_AddDataTablePartial", tableData)
 
 <div class="mb-sm-5" id="pdfalbuton">
     <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="buttonpdf float-end">Verilerimi PDF olarak almak istiyorum </button>

@@ -18,12 +18,10 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.Delete(dataset);
         }
-
-        public T Find(Expression<Func<T, bool>> expression)
+        public T FindwithOwnerId(int ownerid)
         {
-            return repo.Find(expression);
+            return repo.FindwithOwnerId(ownerid);
         }
-
         public int Insert(T dataset)
         {
             return repo.Insert(dataset);
@@ -33,18 +31,20 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.List();
         }
-        public List<T> List(int sayi)
+
+        public List<T> ListwithExpression(Expression<Func<T, bool>> expression)
         {
-            return repo.List(sayi);
-        }
-        public List<T> List(Expression<Func<T, bool>> expression)
-        {
-            return repo.List(expression);
+            return repo.ListwithExpression(expression);
         }
 
         public int Update(T dataset)
         {
             return repo.Update(dataset);
         }
+        public T FindwithExpression(Expression<Func<T, bool>> expression)
+        {
+            return repo.FindwithExpression(expression);
+        }
+
     }
 }

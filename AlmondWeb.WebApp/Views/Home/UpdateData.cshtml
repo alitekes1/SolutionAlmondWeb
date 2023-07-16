@@ -1,13 +1,18 @@
 ﻿@model AlmondWeb.BusinessLayer.ViewModels.UserQueAnswListModel
 ﻿@using AlmondWeb.BusinessLayer
+@using AlmondWeb.WebApp.CacheHelper
 @{
     ViewBag.Title = "Veri Güncelle";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
-    SelectList list = ViewData["list"] as SelectList;
-    var myData = HttpContext.Current.Session["userId"];
-    int currentUserID = Convert.ToInt32(myData);
+
+    int currentUserID = CacheHelper.CurrentUserID();
+
+
+    var list = CacheHelper.GetListDataformCache(CacheHelper.CurrentUserID());
+    var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
+
     DataManager dm = new DataManager();
-    var listData = dm.List(currentUserID);
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID);//current user a ait dataları listeliyoruz.
 }
 
 <link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
@@ -17,17 +22,38 @@
     <div class="col-sm-4" style="padding-top:11px">
         <div class="form-container">
             <div class="col-sm-12 ">
-
-                @Html.Partial("Partials/_TextAreaPartial", new ViewDataDictionary
+                @using (Html.BeginForm("UpdateData", "Home", "POST"))
                 {
+                    <div>
+                        @Html.ValidationSummary(true)
+                    </div>
 
-                    {"updateQuestionPlacholder","Tablodan güncellemek istediğiniz veriyi kalem ikonuna tıklayarak seçiniz."},
-                    {"updateAnswerPlacholder","Seçtiğiniz veri otomatik olarak buraya gelecektir." },
-                    {"addDataPage","0"},
-                    {"updateList",list},
-                    {"UpdateData","UpdateData"}
+                    <div class="row-sm-3 form-group shadow-textarea textareas">
+                        @Html.TextAreaFor(x => x.question, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Tablodan güncellemek istediğiniz veriyi kalem ikonuna tıklayarak seçiniz.", autofocus = "autofocus", title = "Soru", id = "exampleFormControlTextarea17" })
+                        <p class="text-danger text-sm-start" style="font-size: 13px; display: inline-block">@Html.ValidationMessageFor(x => x.question)</p>
+                        <br>
+                    </div>
 
-               })
+                    <div class="row-sm-3 form-group shadow-textarea textareas ">
+                        @Html.TextAreaFor(x => x.answer, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Seçtiğiniz veri otomatik olarak buraya gelecektir.", autofocus = "autofocus", title = "Cevap", id = "exampleFormControlTextarea16" })
+                        <p class="text-danger text-sm-start" style="font-size: 13px; display: inline-block">@Html.ValidationMessageFor(x => x.answer)</p>
+                        <br>
+                    </div>
+
+                    <div class="row-sm-3">
+                        <div class="col-sm-3 " style=" display: inline-block;width:80%">
+                            @Html.DropDownListFor(x => x.list_Id, selectList, "Liste Seçiniz", new { @class = "form-select bg-white ", id = "liste-dropdown" })
+                        </div>
+                    </div>
+
+                    <div>
+                        @Html.HiddenFor(x => x.update_Id, new { @id = "UpdateData_Id" })
+                    </div>
+
+                    <div class="row-sm-3 mt-1">
+                        <button type="submit" id="submitbtn" class="btn btn-success verieklebtn">Kaydet</button>
+                    </div>
+                }
 
             </div>
         </div>
@@ -35,39 +61,10 @@
 
     <div class="col-sm-8">
 
-        @Html.Partial("Partials/_UpdateDeleteTablePartial", listData, new ViewDataDictionary
+        @Html.Partial("Partials/_UpdateDeleteTablePartial", tableData, new ViewDataDictionary
         {
             {"islemturu","Guncelle" },
             {"islemturuLogosu","sil"}
         })
     </div>
 </div>
-
-<script>
-    //TODO:Burada tabloya gerçek veriler aktarıldıktan sonra guncelleme butonuna tıklanıldığında ilgili soru hucresindeki veri soru textbox ına aktarılacak.
-    function transferToData(question) {
-        let _question = document.getElementById("exampleModalsil");
-        _question.innerText = question;
-
-    };
-    function transferdataTotextarea(question, answer, listValue, dataId) {
-        let _questionfortextarea = document.getElementById("exampleFormControlTextarea17");
-        let _answerfortextarea = document.getElementById("exampleFormControlTextarea16");
-        let _list = document.getElementById("liste-dropdown");
-        let _dataId = document.getElementById("updatadatam");
-
-        _questionfortextarea.value = question;
-        _answerfortextarea.value = answer;
-        _list.selectedIndex = listValue;
-        _dataId.setAttribute("value", dataId);
-    };
-    var submitbuton = document.getElementById("submitbtn");
-    var isSelectedData = document.getElementById("updatadatam");
-
-    submitbuton.addEventListener("click", function () {
-        if (isSelectedData.value == null) {
-            return alert("Hangi veriyi güncellemek istediğinizi tablodaki kalem ikonuna tıklayarak seçiniz.");
-        }
-    });
-
-</script>

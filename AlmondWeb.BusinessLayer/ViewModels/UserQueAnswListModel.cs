@@ -21,8 +21,7 @@ namespace AlmondWeb.BusinessLayer.ViewModels
         public int list_Id { get; set; }
 
         [DisplayName("Güncellenekek veri")]
-        public int? updateDataId { get; set; }
-        public int? deleteDataId { get; set; }
-        public int owner_Id { get; set; }
+        public int? update_Id { get; set; }
+        public int? delete_Id { get; set; }
     }
 }

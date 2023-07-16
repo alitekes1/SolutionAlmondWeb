@@ -15,7 +15,7 @@ namespace AlmondWeb.BusinessLayer
     {
         public List<ListTable> List(int ownerId)
         {
-            return List(x => x.Owner.Id == ownerId && x.isDeleted == false);
+            return ListwithExpression(x => x.Owner.Id == ownerId && x.isDeleted == false);
         }
     }
 }

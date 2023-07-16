@@ -22,7 +22,7 @@ namespace AlmondWeb.BusinessLayer
 
         public ErrorResult<AlmondUserTable> RegisterUser(RegisterModel modal)//gerekli kontroller ve kayıt işlemi gerçekleşecek.
         {
-            AlmondUserTable user = Find(x => x.Email == modal.email && x.Password == modal.password);
+            AlmondUserTable user = FindwithExpression(x => x.Email == modal.email && x.Password == modal.password);
 
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();
             if (user != null)//kayıt işlemi gerçekleşecek.
@@ -47,7 +47,7 @@ namespace AlmondWeb.BusinessLayer
                 });
                 if (isSave > 0)
                 {
-                    errorResult.resultModel = Find(x => x.Email == modal.email && x.Password == modal.password);//kayıt edilen kişiyi aldık
+                    errorResult.resultModel = FindwithExpression(x => x.Email == modal.email && x.Password == modal.password);//kayıt edilen kişiyi aldık
                 }
                 return errorResult;
             }
@@ -55,7 +55,7 @@ namespace AlmondWeb.BusinessLayer
         }
         public ErrorResult<AlmondUserTable> LoginUser(LoginModal modal)
         {
-            AlmondUserTable user = Find(x => x.Email == modal.email);
+            AlmondUserTable user = FindwithExpression(x => x.Email == modal.email);
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();
             if (user != null)//kayıtlıysa eğer
             {

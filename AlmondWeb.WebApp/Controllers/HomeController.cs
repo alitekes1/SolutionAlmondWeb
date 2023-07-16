@@ -2,6 +2,8 @@
 //using AlmondWeb.data.RepositoryPattern;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
+using AlmondWeb.WebApp.CacheHelper;
+using AlmondWeb.WebApp.Filters;
 using Antlr.Runtime.Tree;
 using Microsoft.Ajax.Utilities;
 using System;
@@ -10,13 +12,13 @@ using System.Diagnostics;
 using System.EnterpriseServices;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Generator;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.UI.WebControls;
-
 
 /* business katmanda oluşturduğumuz manager classlar crud işlemlerini yapacaklar.
  
@@ -27,16 +29,18 @@ namespace AlmondWeb.WebApp.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        UserManager userManager = new UserManager();
-        DataManager dataManager = new DataManager();
-        [AllowAnonymous]
+        private UserManager userManager = new UserManager();
+        private DataManager dataManager = new DataManager();
+        private ListManager listManager = new ListManager();
+        private int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
+
         public ActionResult MainPage()
         {
             return View();
         }
         public ActionResult GetQuestionAnswer()
         {
-            var almondData = dataManager.Find(x => x.Id == 3);// TODO: bu işlem için bir manager yapılacak.
+            AlmondDataTable almondData = dataManager.FindwithOwnerId(currentUserId);// TODO: bu işlem için bir manager yapılacak.
             return PartialView("Partials/_GetQuestionAnswerPartial", almondData);
         }
         [HttpGet, AllowAnonymous]
@@ -60,7 +64,7 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("RegisterSuccess");
+                    return RedirectToAction(nameof(RegisterSuccess));
                 }
             }
             return View(model);
@@ -104,7 +108,7 @@ namespace AlmondWeb.WebApp.Controllers
                     FormsAuthentication.SetAuthCookie(errorresult.resultModel.Name, false);
                     HttpContext.Session.Add("userId", errorresult.resultModel.Id);
                     Session["user"] = modal;
-                    return RedirectToAction("MainPage");
+                    return RedirectToAction(nameof(MainPage));
                 }
             }
             return View(modal);
@@ -129,47 +133,55 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpPost]
         public ActionResult AddData(AlmondDataTable data)
         {
-            if (ModelState.IsValid)
+
+            if (data.question != null && data.answer != null && data.List.Id > 0)//almamız gerekn bilgileri alıp almadığımızı kontrol ediyoruz.
             {
-                if (data != null)
+                data.puan = 0;
+                data.Owner = userManager.FindwithOwnerId(data.Owner.Id);
+                data.List = listManager.FindwithOwnerId(data.List.Id);
+                int result = dataManager.Insert(data);
+                if (result > 0)
                 {
-                    if (dataManager.Insert(data) > 0)
-                    {
-                        return View(data);
-                    }
-                    else
-                    {
-                        return RedirectToAction(nameof(Error));
-                    }
+                    return View(data);
                 }
-                return View(data);
+                else
+                {
+                    return RedirectToAction(nameof(Error));
+                }
             }
             return View(data);
         }
-        [AllowAnonymous]
+        public ActionResult CreateData()
+        {
+            return PartialView();
+        }
         [HttpGet]
         public ActionResult UpdateData()
         {
             return View();
         }
-        [AllowAnonymous]
         [HttpPost]
         public ActionResult UpdateData(UserQueAnswListModel data)
         {
             if (ModelState.IsValid)
             {
-                if (data != null)
+                if (data.update_Id != null)
                 {
-                    //int result = dataManager.Update(data);
-                    //if (result != -1)
+                    AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id);
+                    updateData.answer = data.answer;
+                    updateData.question = data.question;
+                    updateData.List.Id = data.list_Id;
+                    int result = dataManager.Update(updateData);
+                    if (result > -1)
                     {
-                        return View(data);//TODO:işlem başarılı toastr çıkacak
+                        return View();//TODO:işlem başarılı toastr çıkacak
                     }
-                    return RedirectToAction("Error");
                 }
+                return RedirectToAction(nameof(Error));
             }
             return View(data);
         }
+
         [HttpGet]
         public ActionResult DeleteData()
         {
@@ -180,7 +192,7 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (id != null)
             {
-                var deletedata = dataManager.Find(x => x.Id == id);
+                var deletedata = dataManager.FindwithExpression(x => x.Id == id);
                 if (deletedata != null)
                 {
                     if (dataManager.Delete(deletedata) > 0)
@@ -193,7 +205,7 @@ namespace AlmondWeb.WebApp.Controllers
                     }
                 }
             }
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction(nameof(Error));
         }
         public ActionResult AllData()
         {

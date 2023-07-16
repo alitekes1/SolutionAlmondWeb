@@ -62,18 +62,18 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         {
             return database.Set<T>().ToList();
         }
-        public List<T> List(int ownerId)
-        {
-            return database.Set<T>().Where(x => x.Equals(ownerId)).ToList();
-        }
-        public List<T> List(Expression<Func<T, bool>> expression)
+        public List<T> ListwithExpression(Expression<Func<T, bool>> expression)
         {
             return database.Set<T>().Where(expression).ToList();
         }
-        public T Find(Expression<Func<T, bool>> expression)
+        public T FindwithExpression(Expression<Func<T, bool>> expression)
         {
 
             return database.Set<T>().SingleOrDefault(expression);
+        }
+        public T FindwithOwnerId(int ownerId)
+        {
+            return database.Set<T>().Find(ownerId);
         }
         private DateTime getDate()
         {

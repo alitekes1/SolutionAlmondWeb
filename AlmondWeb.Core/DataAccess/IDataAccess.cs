@@ -11,9 +11,10 @@ namespace AlmondWeb.Core.DataAccess
     {
         List<T> List();
 
-        List<T> List(Expression<Func<T, bool>> expression);
+        List<T> ListwithExpression(Expression<Func<T, bool>> expression);
 
-        T Find(Expression<Func<T, bool>> expression);
+        T FindwithExpression(Expression<Func<T, bool>> expression);
+        T FindwithOwnerId(int ownerId);
         int Insert(T dataset);
         int Update(T dataset);
         int Delete(T dataset);

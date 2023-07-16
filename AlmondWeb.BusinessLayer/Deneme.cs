@@ -35,11 +35,11 @@ namespace AlmondWeb.BusinessLayer
             #endregion
 
             #region update işlemi
-            AlmondUserTable userupdate = user.Find(x => x.Surname == "korkmaz");
+            AlmondUserTable userupdate = user.FindwithExpression(x => x.Surname == "korkmaz");
             if (userupdate != null)
             {
                 userupdate.Surname = "tekeş";
-                user.Update( userupdate);
+                user.Update(userupdate);
             }
             #endregion
         }
