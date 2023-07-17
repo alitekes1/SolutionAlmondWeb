@@ -271,6 +271,8 @@
     <Content Include="Views\Home\UpdateData.cshtml" />
     <Content Include="Views\Home\AddData.cshtml" />
     <Content Include="Views\Admin\AllUser.cshtml" />
+    <Content Include="Views\Shared\Partials\_DataTablePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_UpdateDeleteDataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

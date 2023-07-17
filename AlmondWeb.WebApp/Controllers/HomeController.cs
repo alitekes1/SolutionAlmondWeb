@@ -13,6 +13,7 @@ using System.EnterpriseServices;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Generator;
@@ -131,25 +132,20 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddData(AlmondDataTable data)
+        public ActionResult AddData(AlmondDataTable alm)
         {
-
-            if (data.question != null && data.answer != null && data.List.Id > 0)//almamız gerekn bilgileri alıp almadığımızı kontrol ediyoruz.
+            if (alm.question != null && alm.answer != null && alm.List.Id > 0)//almamız gerekn bilgileri alıp almadığımızı kontrol ediyoruz.
             {
-                data.puan = 0;
-                data.Owner = userManager.FindwithOwnerId(data.Owner.Id);
-                data.List = listManager.FindwithOwnerId(data.List.Id);
-                int result = dataManager.Insert(data);
-                if (result > 0)
-                {
-                    return View(data);
-                }
-                else
-                {
-                    return RedirectToAction(nameof(Error));
-                }
+                alm.puan = 0;
+                alm.Owner = userManager.FindwithOwnerId(currentUserId);
+                alm.List = listManager.FindwithOwnerId(alm.List.Id);
+                dataManager.Insert(alm);
             }
-            return View(data);
+            else
+            {
+                return View(alm);
+            }
+            return RedirectToAction(nameof(FillTablewithData));
         }
         public ActionResult CreateData()
         {
@@ -174,7 +170,7 @@ namespace AlmondWeb.WebApp.Controllers
                     int result = dataManager.Update(updateData);
                     if (result > -1)
                     {
-                        return View();//TODO:işlem başarılı toastr çıkacak
+                        return RedirectToAction(nameof(FillTableDataForUpdate));
                     }
                 }
                 return RedirectToAction(nameof(Error));
@@ -234,9 +230,13 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        //public ActionResult FillTablewithData()
-        //{
-        //    return PartialView("Partials/GetAllDataPartial",);
-        //}
+        public PartialViewResult FillTablewithData()
+        {
+            return PartialView("Partials/_DataTablePartial");
+        }
+        public PartialViewResult FillTableDataForUpdate()
+        {
+            return PartialView("Partials/_UpdateDeleteDataTable");
+        }
     }
 }

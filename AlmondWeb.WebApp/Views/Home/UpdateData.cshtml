@@ -7,22 +7,23 @@
 
     int currentUserID = CacheHelper.CurrentUserID();
 
-
-    var list = CacheHelper.GetListDataformCache(CacheHelper.CurrentUserID());
+    var list = CacheHelper.GetListDataformCache(currentUserID);
     var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
-
-    DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID);//current user a ait dataları listeliyoruz.
 }
 
 <link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
 <div class="row mb-5">
     <div class="col-sm-4" style="padding-top:11px">
         <div class="form-container">
             <div class="col-sm-12 ">
-                @using (Html.BeginForm("UpdateData", "Home", "POST"))
+                @using (Ajax.BeginForm("UpdateData", "Home", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "example",
+                    InsertionMode = InsertionMode.ReplaceWith
+                }))
                 {
                     <div>
                         @Html.ValidationSummary(true)
@@ -40,7 +41,7 @@
                         <br>
                     </div>
 
-                    <div class="row-sm-3">
+                    <div class="row-sm-3 mt-2">
                         <div class="col-sm-3 " style=" display: inline-block;width:80%">
                             @Html.DropDownListFor(x => x.list_Id, selectList, "Liste Seçiniz", new { @class = "form-select bg-white ", id = "liste-dropdown" })
                         </div>
@@ -50,7 +51,7 @@
                         @Html.HiddenFor(x => x.update_Id, new { @id = "UpdateData_Id" })
                     </div>
 
-                    <div class="row-sm-3 mt-1">
+                    <div class="row-sm-3 mt-2">
                         <button type="submit" id="submitbtn" class="btn btn-success verieklebtn">Kaydet</button>
                     </div>
                 }
@@ -60,11 +61,11 @@
     </div>
 
     <div class="col-sm-8">
-
-        @Html.Partial("Partials/_UpdateDeleteTablePartial", tableData, new ViewDataDictionary
+        @Html.Action("FillTableDataForUpdate", new ViewDataDictionary
         {
-            {"islemturu","Guncelle" },
-            {"islemturuLogosu","sil"}
+            {"islemTuru","Güncelle" },
+            {"islemturuLogosu","guncelle"}
         })
     </div>
 </div>
+

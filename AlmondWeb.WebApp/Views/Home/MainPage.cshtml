@@ -5,10 +5,9 @@
     ViewBag.Title = "Anasayfa";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 
-    //var myData = HttpContext.Current.Session["userId"];
     int currentUserID = CacheHelper.CurrentUserID();
 
-    var list = CacheHelper.GetListDataformCache(CacheHelper.CurrentUserID());
+    var list = CacheHelper.GetListDataformCache(currentUserID);
     var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
 
     DataManager dm = new DataManager();
@@ -163,7 +162,7 @@
                     })
                 }
                 else {
-                    alert("Listenin içinde hiç veri yok :(");
+                    alert("Listenin içinde hiç veri yok :( ");
                 }
             }
         });

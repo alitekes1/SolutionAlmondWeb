@@ -1,0 +1,42 @@
+﻿@using AlmondWeb.WebApp.CacheHelper
+@using AlmondWeb.BusinessLayer
+@{
+    int counter = 0;
+    int currentUserID = CacheHelper.CurrentUserID();
+
+    DataManager dm = new DataManager();
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID).OrderByDescending(x => x.Id);//current user a ait dataları listeliyoruz.
+
+}
+<div id="example">
+    <div class="tbl-header">
+        <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
+            <thead class="bg-success bg-opacity-50">
+                <tr>
+                    <th class="text-center" width="5%">#</th>
+                    <th class="text-center" width="35%">Soru</th>
+                    <th class="text-center" width="35%">Cevap</th>
+                    <th class="text-center" width="10%">Puan</th>
+                    <th class="text-center" width="15%">Liste</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div style="width:100%;overflow:auto;  max-height:530px;">
+        <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
+            @foreach (var item in tableData)
+            {
+                counter++;
+                <tr id="dataTable1">
+                    <td class="text-center" width="5%">@counter</td>
+                    <td class="text-center" width="35%">@item.question</td>
+                    <td class="text-center" width="35%">@item.answer</td>
+                    <td class="text-center" width="10%">@item.puan</td>
+                    <td class="text-center" width="15%">@item.List.listName</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.7.0.min.js"></script>
+
