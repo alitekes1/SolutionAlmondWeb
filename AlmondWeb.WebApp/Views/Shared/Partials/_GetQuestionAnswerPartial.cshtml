@@ -1,5 +1,7 @@
-﻿@model AlmondWeb.Entities.AlmondDataTable
-
+﻿@using AlmondWeb.Entities
+@using AlmondWeb.BusinessLayer
+@using AlmondWeb.WebApp.CacheHelper
+@model AlmondDataTable
 
 <div class="row-sm-5 soru">
     <p id="question">@Model.question</p>
@@ -8,3 +10,5 @@
 <div class="row-sm-5 cevap">
     <p id="answer">@Model.answer</p>
 </div>
+
+<input type="hidden" name="dataId" form="formMain" value="@Model.Id" />

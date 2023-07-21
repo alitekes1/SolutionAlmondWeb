@@ -10,8 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.EnterpriseServices;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.Web;
@@ -34,15 +36,44 @@ namespace AlmondWeb.WebApp.Controllers
         private DataManager dataManager = new DataManager();
         private ListManager listManager = new ListManager();
         private int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
-
+        private static int i = -1;
         public ActionResult MainPage()
         {
             return View();
         }
         public ActionResult GetQuestionAnswer()
         {
-            AlmondDataTable almondData = dataManager.FindwithOwnerId(currentUserId);// TODO: bu işlem için bir manager yapılacak.
-            return PartialView("Partials/_GetQuestionAnswerPartial", almondData);
+            i++;
+            List<AlmondDataTable> al = dataManager.ListwithExpression(x => x.Owner.Id == currentUserId).OrderByDescending(x => x.puan).ToList();
+            if (al.Count <= i)
+            {
+                return Content("<script type='text/javascript'>alert('Listedeki tüm verileri gözden geçirdiniz.Tebrikler.');</script>");
+                //return RedirectToAction("Error");
+            }
+            else
+            {
+                return PartialView("Partials/_GetQuestionAnswerPartial", al[i]);
+            }
+        }
+        [HttpGet]
+        public ActionResult puanUpdate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult puanUpdate(int? dataId, int? puanValue)
+        {
+            if (dataId != null && puanValue != null)
+            {
+                AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId && !x.isDeleted);
+                data.puan += (int)puanValue;//burdan sonra diğer soruya geçmeli
+                int result = dataManager.Update(data);
+                return RedirectToAction("mainpage");
+            }
+            else
+            {
+                return RedirectToAction(nameof(Error));
+            }
         }
         [HttpGet, AllowAnonymous]
         public ActionResult Register()
@@ -92,7 +123,7 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost, AllowAnonymous]
-        public ActionResult Login(LoginModal modal)
+        public ActionResult Login(LoginModel modal)
         {
             if (ModelState.IsValid)
             {
@@ -147,10 +178,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return RedirectToAction(nameof(FillTablewithData));
         }
-        public ActionResult CreateData()
-        {
-            return PartialView();
-        }
+
         [HttpGet]
         public ActionResult UpdateData()
         {
@@ -163,7 +191,7 @@ namespace AlmondWeb.WebApp.Controllers
             {
                 if (data.update_Id != null)
                 {
-                    AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id);
+                    AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id && !x.isDeleted);
                     updateData.answer = data.answer;
                     updateData.question = data.question;
                     updateData.List.Id = data.list_Id;
@@ -184,30 +212,30 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DeleteData(int? id)
+        public int DeleteData(int? id)
         {
+            int result;
             if (id != null)
             {
-                var deletedata = dataManager.FindwithExpression(x => x.Id == id);
+                var deletedata = dataManager.FindwithExpression(x => x.Id == id && !x.isDeleted);
                 if (deletedata != null)
                 {
-                    if (dataManager.Delete(deletedata) > 0)
-                    {
-                        return View();//işlem başarılı
-                    }
-                    else
-                    {
-                        //işlem başarısız
-                    }
+                    result = dataManager.Delete(deletedata);
+                    return result;
                 }
             }
-            return RedirectToAction(nameof(Error));
+            return -1;
         }
         public ActionResult AllData()
         {
             return View();
         }
         public ActionResult ListOperations()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ListOperations(string listName, int ownerId)
         {
             return View();
         }
@@ -232,11 +260,15 @@ namespace AlmondWeb.WebApp.Controllers
         }
         public PartialViewResult FillTablewithData()
         {
-            return PartialView("Partials/_DataTablePartial");
+            return PartialView("Partials/_AddDataTablePartial");
         }
         public PartialViewResult FillTableDataForUpdate()
         {
-            return PartialView("Partials/_UpdateDeleteDataTable");
+            return PartialView("Partials/_UpdateTablePartial");
+        }
+        public PartialViewResult FillTableForDelete()
+        {
+            return PartialView("Partials/_DeleteandAllDataTable");
         }
     }
 }

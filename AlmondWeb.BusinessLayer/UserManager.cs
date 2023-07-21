@@ -53,7 +53,7 @@ namespace AlmondWeb.BusinessLayer
             }
 
         }
-        public ErrorResult<AlmondUserTable> LoginUser(LoginModal modal)
+        public ErrorResult<AlmondUserTable> LoginUser(LoginModel modal)
         {
             AlmondUserTable user = FindwithExpression(x => x.Email == modal.email);
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();

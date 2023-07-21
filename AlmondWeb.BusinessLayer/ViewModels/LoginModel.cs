@@ -7,7 +7,7 @@ using System.Web;
 
 namespace AlmondWeb.BusinessLayer.ViewModels
 {
-    public class LoginModal
+    public class LoginModel
     {
 
         [DisplayName("E-mail"), Required, MinLength(2, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(50, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.EmailAddress, ErrorMessage = "Geçerli bir mail adresi giriniz.")]

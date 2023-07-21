@@ -187,6 +187,8 @@
     <Content Include="Content\AlmondCss\errorpage2.css" />
     <Content Include="Scripts\AlmondJs\tableInizilation.js" />
     <Content Include="Scripts\AlmondJs\tablePageing.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -256,8 +258,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\LoginRegisterLayout.cshtml" />
-    <Content Include="Views\Shared\Partials\_AddDataTablePartial.cshtml" />
-    <Content Include="Views\Shared\Partials\_UpdateDeleteTablePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_DeleteandAllDataTable.cshtml" />
     <Content Include="Views\Home\DeleteData.cshtml" />
     <Content Include="Views\Shared\Partials\ModelPopUp\_SilModalPartial.cshtml" />
     <Content Include="Views\Shared\Partials\ModelPopUp\_GuncelleModalPartial.cshtml" />
@@ -271,8 +272,8 @@
     <Content Include="Views\Home\UpdateData.cshtml" />
     <Content Include="Views\Home\AddData.cshtml" />
     <Content Include="Views\Admin\AllUser.cshtml" />
-    <Content Include="Views\Shared\Partials\_DataTablePartial.cshtml" />
-    <Content Include="Views\Shared\Partials\_UpdateDeleteDataTable.cshtml" />
+    <Content Include="Views\Shared\Partials\_AddDataTablePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_UpdateTablePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

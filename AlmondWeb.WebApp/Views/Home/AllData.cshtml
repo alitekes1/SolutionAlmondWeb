@@ -7,7 +7,14 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID);//current user a ait dataları listeliyoruz.
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
+
+    UserManager um = new UserManager();
+    var user = um.FindwithExpression(x => x.Id == currentUserID);
+    TimeSpan time = DateTime.Now - user.createdTime;
+    bool dateControlforPDF = time.Days > 2;
+    int dataCount = tableData.Count;
+    bool dataCountControlforPDF = dataCount > 50;
 }
 <style>
     .buttonpdf {
@@ -29,7 +36,7 @@
         }
 </style>
 
-@Html.Partial("Partials/_AddDataTablePartial", tableData)
+@Html.Partial("Partials/_DeleteandAllDataTable", tableData)
 
 <div class="mb-sm-5" id="pdfalbuton">
     <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="buttonpdf float-end">Verilerimi PDF olarak almak istiyorum </button>
@@ -40,16 +47,59 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Dikkat!</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Uyarı!</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Verilerinizi PDF şeklinde almak için aşağıdaki şartlar aranmaktadır.<br />
                 1-Üyelik tarihi 14 günü geçmelidir.<br />2-Toplam eklenen veri adedi 50'den fazla olmalıdır.
+
+                @if (dateControlforPDF && dataCountControlforPDF)
+                {
+                    <br />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all text-success" viewBox="0 0 16 16">
+                        <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z" />
+                        <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z" />
+                    </svg>
+                    <span>
+                        <label class="small text-success">Gerekli şartları sağlıyorsunuz.Verilerinizi PDF şeklinde indirebilirsiniz.</label>
+                    </span>
+                }
+                else
+                {
+                    <br />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square text-danger" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                    <span>
+                        <label class="small text-danger">Gerekli şartları sağlamıyorsunuz.</label><br />
+                        @if (time.Days > 14)
+                        {
+                            <label class="small text-success">Üyelik tarihi : @user.createdTime -  @time.Days gün </label><br />
+                        }
+                        else
+                        {
+                            <label class="small text-danger">Üyelik tarihi : @user.createdTime -  @time.Days gün </label><br />
+                        }
+                        @if (dataCount > 50)
+                        {
+                            <label class="small text-success">Toplam veri adedi: @dataCount </label>
+                        }
+                        else
+                        {
+                            <label class="small text-danger">Toplam veri adedi: @dataCount </label>
+                        }
+                    </span>
+                }
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                <button type="button" class="btn btn-warning">Onayla</button>
+                @if (dateControlforPDF && dataCountControlforPDF)
+                {
+                    <button type="button" class="btn btn-warning">PDF Al</button>//TODO:PDF işlemleri yapılacak.
+                }
             </div>
         </div>
     </div>

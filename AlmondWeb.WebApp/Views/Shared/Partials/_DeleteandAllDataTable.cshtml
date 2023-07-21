@@ -1,0 +1,147 @@
+﻿@*@model List<AlmondWeb.Entities.AlmondDataTable>*@
+@using AlmondWeb.WebApp.CacheHelper
+@using AlmondWeb.BusinessLayer
+
+@{
+    string sil = "Sil";
+    int counter = 0;
+    int currentUserID = CacheHelper.CurrentUserID();
+
+    var list = CacheHelper.GetListDataformCache(currentUserID);
+
+
+    DataManager dm = new DataManager();
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
+
+}
+<style>
+    .btntableDelete {
+        background-color: transparent;
+        position: relative;
+        border: none;
+    }
+
+    .icon {
+        transform: scale(1.2);
+        transition: .2s linear;
+    }
+
+    .btntableDelete:hover > .icon {
+        transform: scale(1.5);
+    }
+
+    .btntableDelete:hover::after {
+        visibility: visible;
+        opacity: 1;
+        top: -160%;
+    }
+</style>
+<div>
+    <script defer src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link defer href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script defer src="~/Scripts/AlmondJs/tableInizilation.js"></script>
+</div>
+<table id="example" class="cell-border order-column hover table table-borderless table-responsive " style="text-align:center;width:100%;">
+    <thead class="bg-success bg-opacity-50">
+        <tr>
+            <th class="text-center" style="width:5%">#</th>
+            <th class="text-center" style="width:30%">Soru</th>
+            <th class="text-center" style="width:30%">Cevap</th>
+            <th class="text-center" style="width:15%">Puan</th>
+            <th class="text-center" style="width:20%">Liste</th>
+            @if (ViewData["islemTuru"] == sil)
+            {
+                <th class="text-center" style="width:20%">Sil</th>
+            }
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in tableData)
+        {
+            counter++;
+            <tr>
+                <td class="text-center" style="width:5%">@counter</td>
+                <td class="text-center" style="width:30%">@item.question</td>
+                <td class="text-center" style="width:30%">@item.answer</td>
+                <td class="text-center" style="width:15%">@item.puan</td>
+                <td class="text-center" style="width:20%">@item.List.listName</td>
+                @if (ViewData["islemTuru"] == sil)
+                {
+                    <td>
+                        <a class="btntableDelete" id="btndelete_@item.Id" data-ids="@item.Id" data-que="@item.question" data-ans="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModalsilliste">
+                            <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                            </svg>
+                        </a>
+                        @*@Ajax.BeginForm("DeleteData", "Home", item.Id, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "data", InsertionMode = InsertionMode.ReplaceWith })
+                            @Html.Hidden("id", item.Id)*@
+                        @*@(Html.Partial("Partials/ModelPopUp/_SilModalPartial", new ViewDataDictionary
+                                             {
+                                               {"modelHeader","Aşağıdaki veri silinecek.Emin misiniz?"},
+                                               {"not","*Seçmiş olduğunuz veri geri alınamayacak şekilde silinecektir.Silmeden önce dikkatli olunuz."}
+                                             })
+                            )*@
+                        <div class="modal fade" id=exampleModalsilliste tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class=" modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="header_@item.Id">"Aşağıdaki veri silinecek.Emin misiniz?" </h1>
+                                        <button type="button" id="closeButton" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label id="_questionLabel"></label><br />
+                                        <label id="_answerLabel"></label>
+                                    </div>
+                                    <input type="hidden" name="id" id="@item.Id" value="@item.Id" />
+                                    <div class="modal-footer">
+                                        <p class="small fst-italic text-start">"*Seçmiş olduğunuz veri geri alınamayacak şekilde silinecektir.Silmeden önce dikkatli olunuz."</p>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                        <button type="submit" id="confirmBtn" data-confirm="1" class="btn btn-danger">Sil</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    // "DOMContentLoaded" olayını dinleyen bir event listener ekleyin.
+    document.addEventListener("DOMContentLoaded", function () {
+        $("#example").on("click", ".btntableDelete", function () {
+            let _questionLabel = document.getElementById("_questionLabel");
+            let _answerLabel = document.getElementById("_answerLabel");
+
+            let question = $(this).data("que");
+            let id = $(this).data("ids");
+            let answer = $(this).data("ans");
+
+            _questionLabel.innerText = question;
+            _answerLabel.innerText = answer;
+            document.getElementById("confirmBtn").addEventListener("click", function () {
+                $.ajax({
+                    method: "POST",
+                    url: '/Home/DeleteData/' + id,
+                    success: function (result) {
+                        if (result > 0) {
+                            //var confirmationModal = new bootstrap.Modal(document.getElementById("exampleModalsilliste"));
+                            //confirmationModal.hide
+                            alert("işlem Başarılı:)");
+                        } else {
+                            alert("Veri Silinemedi. Sayfayı yeniledikten sonra tekrar deneyiniz.");
+                        }
+                    },
+                    complete: function () {
+                        $("#closeButton").click();
+                    }
+                });
+            });
+
+        });
+    });
+</script>

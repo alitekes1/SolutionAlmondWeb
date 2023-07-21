@@ -11,11 +11,10 @@
     var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
 
     DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID);//current user a ait dataları listeliyoruz.
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
 
 }
 <script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
-<link href="~/AlmondInterface/css/index.css" rel="stylesheet" />
 @* butonlar ile ilgili css *@
 <style>
     .button {
@@ -90,6 +89,7 @@
             fill: #ccc;
         }
 </style>
+
 @{
     //TODO:bu css ler style bundle işlemiyle bir yerde toplanacak
 }
@@ -119,7 +119,6 @@
                                         <path d="M275.626 97.3875C278.179 88.2512 277.138 83.7734 270.281 77.4407C280.63 80.423 285.214 78.8959 291.687 71.7049C288.553 80.8937 289.197 85.4019 297.032 91.6517C287.761 89.3164 283.212 91.2658 275.626 97.3875Z"></path>
                                     </svg>
                                 </button>
-                                @*@Html.ActionLink("Cevabı Göster", "MainPage", "Home", null, new { @class = "btn btn-secondary cevap-butonu my-2", id = "cevabiGoster", type = "button" })*@
                             </div>
                         </div>
                     </div>
@@ -132,15 +131,20 @@
         <!-- start Puanlama Kısımları-->
         <div class="col-sm-12">
             <div class="row">
+                @Ajax.BeginForm("puanUpdate", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "data", InsertionMode = InsertionMode.ReplaceWith }, new { @id = "formMain" })
+                {
                 <div class="col-sm-10 offset-lg-1 butonlar">
                     <div class="col gx-0 text-center">
-                        <button id="puan1" class="button border border-dark-subtle puanlar">1</button>
-                        <button id="puan2" class="button border border-secondary-subtle puanlar">2</button>
-                        <button id="puan3" class="button border border-secondary-subtle puanlar">3</button>
-                        <button id="puan4" class="button border border-secondary-subtle puanlar">4</button>
-                        <button id="puan5" class="button border border-secondary-subtle puanlar">5</button>
+
+                        <button id="puan1" name="puanValue" type="submit" value="1" class="button border border-secondary-subtle puanlar">1</button>
+                        <button id="puan2" name="puanValue" type="submit" value="2" class="button border border-secondary-subtle puanlar">2</button>
+                        <button id="puan3" name="puanValue" type="submit" value="3" class="button border border-secondary-subtle puanlar">3</button>
+                        <button id="puan4" name="puanValue" type="submit" value="4" class="button border border-secondary-subtle puanlar">4</button>
+                        <button id="puan5" name="puanValue" type="submit" value="5" class="button border border-secondary-subtle puanlar">5</button>
+
                     </div>
                 </div>
+                }
             </div>
         </div>
     </div> <!-- end Puanlama Kısımları-->
@@ -167,11 +171,39 @@
             }
         });
     });
+
+    function GetQueAns() {
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetQuestionAnswer",
+            dataType: "html",
+            success: function (almondData) {
+                if (almondData != null) {
+                    $("#data").html(almondData);
+                    //
+                    $("#answer").hide();
+                    $("#showAnswer").click(function () {
+                        $("#answer").show();
+                    })
+                }
+                else {
+                    alert("Listenin içinde hiç veri yok :( ");
+                }
+            }
+        });
+    };
+
     $("#showAnswer").click(isSelectedList);
     $("#puan1").click(isSelectedList);
     $("#puan2").click(isSelectedList);
     $("#puan3").click(isSelectedList);
     $("#puan4").click(isSelectedList);
     $("#puan5").click(isSelectedList);
+
+    $("#puan1").click(GetQueAns);
+    $("#puan2").click(GetQueAns);
+    $("#puan3").click(GetQueAns);
+    $("#puan4").click(GetQueAns);
+    $("#puan5").click(GetQueAns);
 
 </script>

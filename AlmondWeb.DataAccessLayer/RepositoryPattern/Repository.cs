@@ -69,7 +69,7 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         public T FindwithExpression(Expression<Func<T, bool>> expression)
         {
 
-            return database.Set<T>().SingleOrDefault(expression);
+            return database.Set<T>().FirstOrDefault(expression);
         }
         public T FindwithOwnerId(int ownerId)
         {
