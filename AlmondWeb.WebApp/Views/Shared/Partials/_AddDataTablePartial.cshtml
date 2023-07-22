@@ -5,7 +5,7 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);//current user a ait dataları listeliyoruz.
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);//current user a ait dataları puana göre artan şekilde listeliyoruz.
 
 }
 <div id="example">
@@ -24,16 +24,25 @@
     </div>
     <div style="width:100%;overflow:auto;  max-height:530px;">
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
-            @foreach (var item in tableData)
+            @if (tableData.Count() == 0)
             {
-                counter++;
-                <tr id="dataTable1">
-                    <td class="text-center" width="5%">@counter</td>
-                    <td class="text-center" width="35%">@item.question</td>
-                    <td class="text-center" width="35%">@item.answer</td>
-                    <td class="text-center" width="10%">@item.puan</td>
-                    <td class="text-center" width="15%">@item.List.listName</td>
+                <tr>
+                    <td>Kayıtlı veriniz bulunmamaktadır. sVeri ekleyebilirsiniz.</td>
                 </tr>
+            }
+            else
+            {
+                foreach (var item in tableData)
+                {
+                    counter++;
+                    <tr id="dataTable1">
+                        <td class="text-center" width="5%">@counter</td>
+                        <td class="text-center" width="35%">@item.question</td>
+                        <td class="text-center" width="35%">@item.answer</td>
+                        <td class="text-center" width="10%">@item.puan</td>
+                        <td class="text-center" width="15%">@item.List.listName</td>
+                    </tr>
+                }
             }
         </table>
     </div>

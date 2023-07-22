@@ -7,7 +7,8 @@
 
     int currentUserID = CacheHelper.CurrentUserID();
 
-    var list = CacheHelper.GetListDataformCache(currentUserID);
+    ListManager lm = new ListManager();
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);
     var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
 }
 

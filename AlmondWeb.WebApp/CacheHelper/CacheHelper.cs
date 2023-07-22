@@ -10,17 +10,17 @@ namespace AlmondWeb.WebApp.CacheHelper
 {
     public class CacheHelper
     {
-        public static List<ListTable> GetListDataformCache(int ownerId)
-        {
-            var list = WebCache.Get("MyList");
-            if (list == null)
-            {
-                ListManager listManager = new ListManager();
-                list = listManager.List(ownerId);
-                WebCache.Set("MyList", list, 60, true);
-            }
-            return list;
-        }
+        //public static List<ListTable> GetListDataformCache(int ownerId)
+        //{
+        //    var list = WebCache.Get("MyList");
+        //    if (list == null)
+        //    {
+        //        ListManager listManager = new ListManager();
+        //        list = listManager.ListwithExpression(x => x.Owner.Id == ownerId && !x.isDeleted);
+        //        WebCache.Set("MyList", list, 60, true);
+        //    }
+        //    return list;
+        //}
         public static void ClearCacheforList()
         {
             WebCache.Remove("MyList");

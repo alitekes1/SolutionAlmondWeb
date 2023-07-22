@@ -274,6 +274,7 @@
     <Content Include="Views\Admin\AllUser.cshtml" />
     <Content Include="Views\Shared\Partials\_AddDataTablePartial.cshtml" />
     <Content Include="Views\Shared\Partials\_UpdateTablePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_ListOperationsTablePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

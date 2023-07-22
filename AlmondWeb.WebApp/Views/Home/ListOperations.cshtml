@@ -4,11 +4,8 @@
 @{
     ViewBag.Title = "ListOperations";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
-    int counter = 0;
-    int currentUserID = CacheHelper.CurrentUserID();
 
-    ListManager dm = new ListManager();
-    var list = dm.ListwithExpression(x => x.Owner.Id == currentUserID);
+
 }
 <style>
     .buttoncreateList {
@@ -97,84 +94,133 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Vazgeç"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" autofocus name="textcreate" required aria-describedby="inputGroup-sizing-default" placeholder="Liste İsmi"><hr />
-                            <p class="fst-italic fs-6" style="font-size:10px">*Oluşturmuş  olduğunuz listeye varolan verilerinizi aktarmak istiyorsanız <a href="/Home/UpdateData" title="Veri Guncelle sayfasına gider">Veri Güncelle</a> sayfasından ilgili verinin listesini güncelleyebilirisiniz.</p>
+                            <input type="text" class="form-control" id="inputTextCreateList" autofocus name="textcreate" required aria-describedby="inputGroup-sizing-default" placeholder="Liste İsmi"><hr />
+                            <p class="fst-italic fs-6" style="font-size:10px">*Oluşturmuş  olduğunuz listeye varolan verilerinizi aktarmak istiyorsanız Veri Güncelle sayfasından ilgili verinin listesini güncelleyebilirisiniz.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                            <a href="#" type="submit" class="btn btn-success">Oluştur</a>
+                            <button type="reset" id="closeBtnCreateList" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                            <button type="submit" id="confirmBtnCreateList" class="btn btn-success">Oluştur</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-sm-12 bloklar" id="example">
-            <div class="tbl-header">
-                <div id="example" class="cell-border  hover" style="text-align:center;width:100%;">
-                    <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
-                        <thead class="bg-success bg-opacity-50">
-                            <tr>
-                                <th class="text-center" style="width:10%">#</th>
-                                <th class="text-center" style="width:50%">Liste</th>
-                                <th class="text-center" style="width:10%">Kay. Veri Adedi </th>
-                                <th class="text-center" style="width:15%">Guncelle</th>
-                                <th class="text-center" style="width:15%">Sil</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-            <div style="width:100%;overflow:auto;  max-height:530px;">
-                <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
-                    @foreach (var item in list)
-                    {
-                        counter++;
-                        <tr>
-                            <td class="text-center" width="10%">@counter</td>
-                            <td class="text-center" width="50%">@item.listName</td>
-                            <td class="text-center" width="10%">55</td>
-                            <td class="text-center" width="15%">
-                                <button type="button" class="btntableDelete" onclick="transfertoUpdateData('@item.listName')" id="updatelist" data-bs-toggle="modal" data-bs-target="#exampleModalguncelleliste">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">
-                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
-                                    </svg>
-                                </button>
-                                @(Html.Partial("Partials/ModelPopUp/_GuncelleModalPartial",new ViewDataDictionary
-                                      {
-                                        {"placeholderinModelText","Yeni liste ismini giriniz."},
-                                        {"modelID", "exampleModalguncelleliste" }
-                                      })
-                                        )
-                            </td>
-                            <td class="text-center" width="15%">
-                                <button type="button" class="btntableDelete" onclick="transfertoDeleteData('@item.listName')" data-bs-toggle="modal" id="deleteList" data-bs-target="#exampleModalsilliste">
-                                    <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
-                                        <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
-                                    </svg>
-                                </button>
-                                @(Html.Partial("Partials/ModelPopUp/_SilModalPartial",new ViewDataDictionary
-                                      {
-                                        {"modelHeader","Aşağıdaki liste silinecek.Emin misiniz?"},
-                                        {"not","*İlgili listenin içindeki veriler silinmez.Sileceğiniz listede bulunan verilerin artık bir listesi olmaz."}
-                                      })
-                                        )
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>
-        </div>
+        @Html.Action("FillTableForListOperations", "Home")
     </div>
 </div>
 
 <script>
-    function transfertoUpdateData(data) {
-        var listContent = document.getElementById("modelTextUpdate");
-        listContent.value = data;
+    var table = $("#example");
+
+    function transfertoUpdateData(lstnm, id) {
+        var listContent = document.getElementById("inputTextUpdateList");
+        listContent.value = lstnm;
+
+
+        document.getElementById("confirmBtnUpdateList").addEventListener("click", function () {
+            var listNme = $("#inputTextUpdateList").val();
+            //var idm = $(this).data("Id");
+            $.ajax({
+                method: "POST",
+                url: '/Home/UpdateList/' + id,
+                data: { listName: listNme },
+                success: function (result) {
+                    if (result > 0) {
+                        //işlem başarılı tablo tekrardan yüklenecek.
+                        $.ajax({
+                            method: "GET",
+                            url: '/Home/FillTableForListOperations',
+                            success: function (tableData) {
+                                table.empty(); // Tabloyu temizliyoruz
+
+                                table.append(tableData);
+                            }
+                        });
+                    }
+                    else {
+                        alert("Liste güncelleme sırasında bir hata meyda geldi.");//TODO:sayfa otomatik olarak yenilenecek.
+                    }
+                },
+                complete: function () {
+                    $("#closeButtonUpdate").click();
+                }
+            });
+        });
     };
-    function transfertoDeleteData(data) {
+
+    function transfertoDeleteData(data, idM) {
         let _list = document.getElementById("_questionLabel");
         _list.innerText = data;
+
+        document.getElementById("confirmBtnDeleteList").addEventListener("click", function () {
+            //let idM = $("#list_delete").data("Id");
+            $.ajax({
+                method: "POST",
+                url: '/Home/DeleteList/' + idM,
+                success: function (result) {
+                    if (result > 0) {
+                        //işlem başarılı tablo tekrardan yüklenecek.
+                        $.ajax({
+                            method: "GET",
+                            url: '/Home/FillTableForListOperations',
+                            success: function (tableData) {
+                                table.empty(); // Tabloyu temizliyoruz
+
+                                table.append(tableData);
+                            }
+                        });
+                    }
+                    else {
+                        return alert("işlem başarısız:(");
+                    }
+                },
+                complete: function () {
+                    $("#closeBtnDeleteList").click();
+                }
+            });
+        });
     };
+    document.getElementById("confirmBtnCreateList").addEventListener("click", function () {
+        //var deleteRow = $(this).closest("tr");
+        var listName = $("#inputTextCreateList").val();
+        $.ajax({
+            method: "POST",
+            url: '/Home/CreateList',
+            data: { listNm: listName },
+            success: function (result) {
+                if (result > 0) {
+                    //TODO:işlem başarılı toastr çıkacak.
+                    $.ajax({
+                        method: "GET",
+                        url: '/Home/FillTableForListOperations',
+                        success: function (tableData) {
+                            table.empty(); // Tabloyu temizliyoruz
+
+                            table.append(tableData);
+                        }
+                    });
+                } else {
+                    alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
+                }
+            },
+            complete: function () {
+                $("#closeBtnCreateList").click();
+            }
+        });
+    });
+    document.getElementById("confirmBtnDeleteList").addEventListener("click", function () {//popup işlemleri
+
+    })
+
+    function ReLoadListData() {
+        $.ajax({
+            method: "GET",
+            url: '/Home/FillTableForListOperations',
+            success: function (tableData) {
+                table.empty(); // Tabloyu temizliyoruz
+
+                table.append(tableData);
+            }
+        });
+    }
 </script>

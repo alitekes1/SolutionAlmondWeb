@@ -8,6 +8,7 @@ using Antlr.Runtime.Tree;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.MappingViews;
 using System.Diagnostics;
 using System.EnterpriseServices;
 using System.Linq;
@@ -22,6 +23,7 @@ using System.Web.Razor.Generator;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.UI.WebControls;
+using System.Web.WebPages;
 
 /* business katmanda oluşturduğumuz manager classlar crud işlemlerini yapacaklar.
  
@@ -35,7 +37,7 @@ namespace AlmondWeb.WebApp.Controllers
         private UserManager userManager = new UserManager();
         private DataManager dataManager = new DataManager();
         private ListManager listManager = new ListManager();
-        private int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
+        public int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
         private static int i = -1;
         public ActionResult MainPage()
         {
@@ -44,7 +46,7 @@ namespace AlmondWeb.WebApp.Controllers
         public ActionResult GetQuestionAnswer()
         {
             i++;
-            List<AlmondDataTable> al = dataManager.ListwithExpression(x => x.Owner.Id == currentUserId).OrderByDescending(x => x.puan).ToList();
+            List<AlmondDataTable> al = dataManager.ListwithExpression(x => x.Owner.Id == currentUserId && !x.isDeleted).OrderBy(x => x.puan).ToList();
             if (al.Count <= i)
             {
                 return Content("<script type='text/javascript'>alert('Listedeki tüm verileri gözden geçirdiniz.Tebrikler.');</script>");
@@ -205,7 +207,26 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return View(data);
         }
-
+        [HttpGet]
+        public ActionResult UpdateList()
+        {
+            return View();
+        }
+        [HttpPost]
+        public int UpdateList(string listName, int? id)
+        {
+            if (id != null && !listName.IsNullOrWhiteSpace())
+            {
+                ListTable list = listManager.FindwithExpression(x => x.Id == id && !x.isDeleted);
+                if (list != null)
+                {
+                    list.listName = listName;
+                    int result = listManager.Update(list);
+                    return result;
+                }
+            }
+            return -1;
+        }
         [HttpGet]
         public ActionResult DeleteData()
         {
@@ -226,16 +247,48 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
+        [HttpGet]
+        public ActionResult DeleteList()
+        {
+            return View();
+        }
+        [HttpPost]
+        public int DeleteList(int? id)
+        {
+            if (id.HasValue)
+            {
+                ListTable list = listManager.FindwithExpression(x => x.Id == id && !x.isDeleted);
+                if (list != null)
+                {
+                    int result = listManager.Delete(list);
+                    return result;
+                }
+            }
+            return -1;
+        }
+        [HttpGet]
+        public ActionResult CreateList()
+        {
+            return View();
+        }
+        [HttpPost]
+        public int CreateList(string listNm)
+        {
+            if (!listNm.IsNullOrWhiteSpace())
+            {
+                ListTable newList = new ListTable();
+                newList.listName = listNm;
+                newList.Owner = userManager.FindwithOwnerId(currentUserId);
+                int result = listManager.Insert(newList);
+                return result;
+            }
+            return -1;
+        }
         public ActionResult AllData()
         {
             return View();
         }
         public ActionResult ListOperations()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult ListOperations(string listName, int ownerId)
         {
             return View();
         }
@@ -269,6 +322,10 @@ namespace AlmondWeb.WebApp.Controllers
         public PartialViewResult FillTableForDelete()
         {
             return PartialView("Partials/_DeleteandAllDataTable");
+        }
+        public PartialViewResult FillTableForListOperations()
+        {
+            return PartialView("Partials/_ListOperationsTablePartial");
         }
     }
 }

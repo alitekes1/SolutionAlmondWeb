@@ -35,10 +35,12 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
                 o.isDeleted = false;
                 o.puan = 0;
             }
-            if (dataset is AlmondDataTable)
+            if (dataset is ListTable)
             {
-                AlmondDataTable o = dataset as AlmondDataTable;
-                o.puan = 0;
+                ListTable list = dataset as ListTable;
+                list.createdTime = getDate();
+                list.deletedTime = getDate();
+                list.isDeleted = false;
             }
             database.Set<T>().Add(dataset);
 
@@ -55,6 +57,12 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
                 AlmondDataTable a = dataset as AlmondDataTable;
                 a.isDeleted = true;
                 a.deletedTime = getDate();
+            }
+            if (dataset is ListTable)
+            {
+                ListTable li = dataset as ListTable;
+                li.isDeleted = true;
+                li.deletedTime = getDate();
             }
             return Save();
         }
