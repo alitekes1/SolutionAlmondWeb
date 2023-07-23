@@ -7,8 +7,8 @@
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
 
-    var list = CacheHelper.GetListDataformCache(currentUserID);
-
+    ListManager lm = new ListManager();
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);
 
     DataManager dm = new DataManager();
     var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
@@ -78,7 +78,7 @@
                             <div class=" modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="header_@item.Id">"Aşağıdaki veri silinecek.Emin misiniz?" </h1>
+                                        <h1 class="modal-title fs-5" id="header_@item.Id">Aşağıdaki veri silinecek.Emin misiniz? </h1>
                                         <button type="button" id="closeButton" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

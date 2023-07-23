@@ -2,28 +2,12 @@
 //using AlmondWeb.data.RepositoryPattern;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
-using AlmondWeb.WebApp.CacheHelper;
-using AlmondWeb.WebApp.Filters;
-using Antlr.Runtime.Tree;
 using Microsoft.Ajax.Utilities;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure.MappingViews;
-using System.Diagnostics;
-using System.EnterpriseServices;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Permissions;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Razor.Generator;
 using System.Web.Security;
-using System.Web.SessionState;
 using System.Web.UI.WebControls;
-using System.Web.WebPages;
 
 /* business katmanda oluşturduğumuz manager classlar crud işlemlerini yapacaklar.
  
@@ -260,6 +244,7 @@ namespace AlmondWeb.WebApp.Controllers
                 ListTable list = listManager.FindwithExpression(x => x.Id == id && !x.isDeleted);
                 if (list != null)
                 {
+                    list.listName = "--Listesiz--";
                     int result = listManager.Delete(list);
                     return result;
                 }
@@ -297,6 +282,7 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
+
         [AllowAnonymous]
         public ActionResult Error()
         {
@@ -307,9 +293,13 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        public ActionResult SuggestFeature()
+        public PartialViewResult SuggestNewFeature()
         {
-            return View();
+            return PartialView("Partials/_SuggestNewFeaturePartial");
+        }
+        public PartialViewResult Shortcuts()
+        {
+            return PartialView("Partials/_ShortcutsPartial");
         }
         public PartialViewResult FillTablewithData()
         {
