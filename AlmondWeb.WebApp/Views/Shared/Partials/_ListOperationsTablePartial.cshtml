@@ -5,8 +5,8 @@
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
 
-    ListManager dm = new ListManager();
-    var list = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);
+    ListManager lm = new ListManager();
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.Id > 1).OrderByDescending(x => x.Id);
 }
 
 <div class="col-sm-12 bloklar" id="example">
@@ -42,8 +42,12 @@
                         <td class="text-center" width="10%">@counter</td>
                         <td class="text-center" width="50%">@item.listName</td>
                         <td class="text-center" width="10%">55</td>
+
+
+
                         <td class="text-center" width="15%">
-                            <button type="button" class="btntableDelete" onclick="transfertoUpdateData('@item.listName','@item.Id')" data-Id="@item.Id" id="list_update_@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModalguncelleliste">
+                            @* Güncelle Butonu *@
+                            <button type="button" class="btntableDelete" onclick="transfertoUpdateData('@item.listName','@item.Id')" data-bs-toggle="modal" data-bs-target="#exampleModalguncelleliste">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">
                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
                                 </svg>
@@ -54,21 +58,24 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5">Listenin ismini güncelleyebilirsiniz.</h1>
-                                            <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                                            <a class="btn-close" id="btn-close3" data-bs-dismiss="modal" aria-label="Close"></a>
                                         </div>
                                         <div class="modal-body">
                                             <input type="text" id="inputTextUpdateList" class="form-control" autofocus name="textcreate" required aria-describedby="inputGroup-sizing-default" placeholder="@ViewData["placeholderinModelText"]">
                                         </div>
                                         <div class="modal-footer">
-                                            <a class="btn btn-secondary" id="closeButtonUpdate" data-bs-dismiss="modal">Vazgeç</a>
-                                            <a class="btn btn-success" id="confirmBtnUpdateList">Güncelle</a>
+                                            <button class="btn btn-secondary" id="closeBtnUpdate23" data-bs-dismiss="modal">Vazgeç</button>
+                                            <button type="submit" class="btn btn-success" id="confirmBtnUpdateList">Güncelle</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </td>
+
+
+
                         <td class="text-center" width="15%">
+                            @* Sil Butonu *@
                             <button type="button" class="btntableDelete" onclick="transfertoDeleteData('@item.listName','@item.Id')" data-bs-toggle="modal" id="list_delete_@item.Id" data-bs-target="#exampleModalsilliste">
                                 <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
                                     <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>

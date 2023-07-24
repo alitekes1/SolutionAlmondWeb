@@ -4,8 +4,6 @@
 @{
     ViewBag.Title = "ListOperations";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
-
-
 }
 <style>
     .buttoncreateList {
@@ -113,36 +111,24 @@
     var table = $("#example");
 
     function transfertoUpdateData(lstnm, id) {
-        var listContent = document.getElementById("inputTextUpdateList");
+        let listContent = document.getElementById("inputTextUpdateList");
         listContent.value = lstnm;
-
 
         document.getElementById("confirmBtnUpdateList").addEventListener("click", function () {
             var listNme = $("#inputTextUpdateList").val();
-            //var idm = $(this).data("Id");
             $.ajax({
                 method: "POST",
                 url: '/Home/UpdateList/' + id,
-                data: { listName: listNme },
+                data: { listName: listNme },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
                 success: function (result) {
                     if (result > 0) {
                         //işlem başarılı tablo tekrardan yüklenecek.
-                        $.ajax({
-                            method: "GET",
-                            url: '/Home/FillTableForListOperations',
-                            success: function (tableData) {
-                                table.empty(); // Tabloyu temizliyoruz
-
-                                table.append(tableData);
-                            }
-                        });
+                        ReLoadListData();
+                        $("#closeBtnUpdate23").click();
                     }
                     else {
                         alert("Liste güncelleme sırasında bir hata meyda geldi.");//TODO:sayfa otomatik olarak yenilenecek.
                     }
-                },
-                complete: function () {
-                    $("#closeButtonUpdate").click();
                 }
             });
         });
@@ -153,22 +139,13 @@
         _list.innerText = data;
 
         document.getElementById("confirmBtnDeleteList").addEventListener("click", function () {
-            //let idM = $("#list_delete").data("Id");
             $.ajax({
                 method: "POST",
                 url: '/Home/DeleteList/' + idM,
                 success: function (result) {
                     if (result > 0) {
-                        //işlem başarılı tablo tekrardan yüklenecek.
-                        $.ajax({
-                            method: "GET",
-                            url: '/Home/FillTableForListOperations',
-                            success: function (tableData) {
-                                table.empty(); // Tabloyu temizliyoruz
-
-                                table.append(tableData);
-                            }
-                        });
+                        //TODO:işlem başarılı toastr çıkacak.
+                        ReLoadListData();
                     }
                     else {
                         return alert("işlem başarısız:(");
@@ -181,7 +158,6 @@
         });
     };
     document.getElementById("confirmBtnCreateList").addEventListener("click", function () {
-        //var deleteRow = $(this).closest("tr");
         var listName = $("#inputTextCreateList").val();
         $.ajax({
             method: "POST",
@@ -190,15 +166,7 @@
             success: function (result) {
                 if (result > 0) {
                     //TODO:işlem başarılı toastr çıkacak.
-                    $.ajax({
-                        method: "GET",
-                        url: '/Home/FillTableForListOperations',
-                        success: function (tableData) {
-                            table.empty(); // Tabloyu temizliyoruz
-
-                            table.append(tableData);
-                        }
-                    });
+                    ReLoadListData();
                 } else {
                     alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
                 }
@@ -208,9 +176,6 @@
             }
         });
     });
-    document.getElementById("confirmBtnDeleteList").addEventListener("click", function () {//popup işlemleri
-
-    })
 
     function ReLoadListData() {
         $.ajax({

@@ -130,6 +130,7 @@
     <Compile Include="CacheHelper\CacheHelper.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\Exc.cs" />
     <Compile Include="Filters\isAdmin.cs" />
     <Compile Include="Filters\isAuth.cs" />
@@ -166,6 +167,8 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="Images\person-4.png" />
+    <Content Include="Images\userPerson.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -262,7 +265,6 @@
     <Content Include="Views\Shared\Partials\_DeleteandAllDataTable.cshtml" />
     <Content Include="Views\Home\DeleteData.cshtml" />
     <Content Include="Views\Shared\Partials\ModelPopUp\_SilModalPartial.cshtml" />
-    <Content Include="Views\Shared\Partials\ModelPopUp\_GuncelleModalPartial.cshtml" />
     <Content Include="Views\Home\ListOperations.cshtml" />
     <Content Include="Views\Home\AllData.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -278,6 +280,8 @@
     <Content Include="Views\Shared\Partials\_ListOperationsTablePartial.cshtml" />
     <Content Include="Views\Shared\Partials\_ShortcutsPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SuggestNewFeaturePartial.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Shared\Partials\_profileSocialMediaIconsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

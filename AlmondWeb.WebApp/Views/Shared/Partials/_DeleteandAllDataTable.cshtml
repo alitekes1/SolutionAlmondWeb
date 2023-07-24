@@ -8,7 +8,7 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.Id > 2).OrderByDescending(x => x.Id);
 
     DataManager dm = new DataManager();
     var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.

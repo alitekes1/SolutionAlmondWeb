@@ -54,7 +54,7 @@ namespace AlmondWeb.WebApp.Controllers
                 AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId && !x.isDeleted);
                 data.puan += (int)puanValue;//burdan sonra diğer soruya geçmeli
                 int result = dataManager.Update(data);
-                return RedirectToAction("mainpage");
+                return RedirectToAction(nameof(MainPage));
             }
             else
             {
@@ -241,10 +241,16 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (id.HasValue)
             {
-                ListTable list = listManager.FindwithExpression(x => x.Id == id && !x.isDeleted);
+                ListTable list = listManager.FindwithExpression(x => x.Id == id);//silinecek veriyi buluyoruz.
+                ListTable deleteList1 = listManager.FindwithExpression(x => x.Id == 1);//silinenler listesini buluyoruz.
                 if (list != null)
                 {
-                    list.listName = "--Listesiz--";
+                    List<AlmondDataTable> deleteList = dataManager.ListwithExpression(x => x.List.Id == id).ToList();
+                    foreach (var item in deleteList)
+                    {
+                        item.List = deleteList1;//bulduğumuz verinin listesini silinenler listesi olarak değiştiriyoruz.
+                        dataManager.Update(item);
+                    }
                     int result = listManager.Delete(list);
                     return result;
                 }

@@ -7,11 +7,13 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
+    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.List.Id > 2);//current user a ait dataları listeliyoruz.
 
     UserManager um = new UserManager();
     var user = um.FindwithExpression(x => x.Id == currentUserID);
+
     TimeSpan time = DateTime.Now - user.createdTime;
+
     bool dateControlforPDF = time.Days > 2;
     int dataCount = tableData.Count;
     bool dataCountControlforPDF = dataCount > 50;
