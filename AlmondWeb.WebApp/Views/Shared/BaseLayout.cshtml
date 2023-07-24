@@ -1,9 +1,7 @@
 ﻿@using AlmondWeb.Entities
 @{
     Layout = null;
-    //Repository<ListTable> repo_list = new Repository<ListTable>();
-    AlmondWeb.BusinessLayer.ListManager lm = new AlmondWeb.BusinessLayer.ListManager();
-    ViewData["list"] = new SelectList(lm.List(), "id", "listName") as SelectList;//liste listesini viewdata ile gönderiyoruz.
+
 }
 
 <!DOCTYPE html>
@@ -38,7 +36,7 @@
             <div class="container-fluid">
 
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <a class="navbar-brand" href="MainPage">
+                    <a class="navbar-brand" href="/Home/MainPage">
                         <img src="~/Images/logo/almondLogo1rmvbg.png" width="178px" alt="logoAlmond">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -55,13 +53,13 @@
                                         <a class="nav-link active dropdown-toggle" id="navbarDropdown" href="#" role="button"
                                            data-bs-toggle="dropdown" aria-expanded="false">Veri İşlemleri</a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="AddData">Veri Ekle</a></li>
-                                            <li><a class="dropdown-item" href="UpdateData">Veri Güncelle</a></li>
-                                            <li><a class="dropdown-item" href="DeleteData">Veri Sil</a></li>
+                                            <li><a class="dropdown-item" href="/Home/AddData">Veri Ekle</a></li>
+                                            <li><a class="dropdown-item" href="/Home/UpdateData">Veri Güncelle</a></li>
+                                            <li><a class="dropdown-item" href="/Home/DeleteData">Veri Sil</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item dropdown ">
-                                        <a class="nav-link active" id="navbarDropdown" href="ListOperations">Liste İşlemleri</a>
+                                        <a class="nav-link active" id="navbarDropdown" href="/Home/ListOperations">Liste İşlemleri</a>
 
                                     </li>
                                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="AllData">Verilerim</a></li>
@@ -73,19 +71,19 @@
                                 {
                                     <li class="nav-item ">
                                         <a class="btn btn-outline-success " style="border-radius: 5px 0px 0px 5px;width: 120px;"
-                                           href="Login" role="button">
+                                           href="/Home/Login" role="button">
                                             Giriş Yap
                                         </a>
                                         <button type="button" class="btn btn-lg btn-success dropdown-toggle dropdown-toggle-split"
-                                                data-bs-toggle="dropdown" aria-expanded="false" style="    margin-left: -5px;
+                                                data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: -5px;
                                                 height: 37px;
                                                 border-radius: 0px 5px 5px 0px;">
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
-                                            <li><a class="dropdown-item" href="Register">Kayıt Ol</a></li>
+                                            <li><a class="dropdown-item" href="/Home/Register">Kayıt Ol</a></li>
                                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" href="#">Kısayollar ve SSS.</a></li>
-                                            <li><a class="dropdown-item" href="Contact">İletişim</a></li>
+                                            <li><a class="dropdown-item" href="/Home/Contact">İletişim</a></li>
                                         </ul>
                                     </li>
                                 }
@@ -93,7 +91,7 @@
                                 {
                                     <li class="nav-item ">
                                         <a class="btn btn-outline-success " style="border-radius: 5px 0px 0px 5px;width: 118px;"
-                                           href="#" role="button">
+                                           href="/User/Index" role="button">
                                             @{ if (User.Identity.Name.Length <= 12)
                                                 {
                                                     @User.Identity.Name
@@ -113,11 +111,11 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
                                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Yeni bir özellik öner?</a></li>
                                             <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Kısayollar ve SSS.</button></li>   @*  //TODO: kısayollar ve sss sayfası oluşturulacak.*@
-                                            <li><a class="dropdown-item" href="Contact">İletişim</a></li>
+                                            <li><a class="dropdown-item" href="/Home/Contact">İletişim</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
-                                            <li><a class="dropdown-item" href="Logout">Çıkış Yap</a></li>
+                                            <li><a class="dropdown-item" href="/Home/Logout">Çıkış Yap</a></li>
                                         </ul>
                                     </li>
 
@@ -166,7 +164,7 @@
                     <li><a href="#">Yeni bir özellik öner?</a></li>
                 </div>
                 <div class="col-sm-3">
-                    <li><a href="Contact">İletişim</a></li>
+                    <li><a href="/Home/Contact">İletişim</a></li>
                 </div>
             </div>
             </ul>
