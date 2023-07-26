@@ -8,7 +8,7 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.Id > 2);
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);
     var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
 }
 
@@ -23,7 +23,8 @@
                 {
                     HttpMethod = "POST",
                     UpdateTargetId = "example",
-                    InsertionMode = InsertionMode.ReplaceWith
+                    InsertionMode = InsertionMode.ReplaceWith,
+                    
                 }))
                 {
                     <div>
@@ -44,7 +45,7 @@
 
                     <div class="row-sm-3 mt-2">
                         <div class="col-sm-3 " style=" display: inline-block;width:80%">
-                            @Html.DropDownListFor(x => x.list_Id, selectList, "Liste Seçiniz", new { @class = "form-select bg-white ", id = "liste-dropdown" })
+                            @Html.DropDownListFor(x => x.list_Id, selectList, "Liste Seçiniz", new { @class = "form-select bg-white ", id = "liste-dropdown", required = "required", style = "max-width: 100%;" })
                         </div>
                     </div>
 

@@ -7,6 +7,9 @@
 
     ListManager lm = new ListManager();
     var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.Id > 1).OrderByDescending(x => x.Id);
+
+    //DataManager dm = new DataManager();
+    var listCount = list.GroupBy(x => x.listName).ToList();
 }
 
 <div class="col-sm-12 bloklar" id="example">
@@ -27,7 +30,7 @@
     </div>
     <div style="width:100%;overflow:auto;  max-height:530px;">
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
-            @if (list.Count() == 0)
+            @if (list.Count() == 0 || list is null)
             {
                 <tr>
                     <td>Kayıtlı listeniz bulunmamaktadır.Sol üstte bulunan "<span class="fst-italic">Liste Oluştur</span>" butonundan liste ekleyebilirsiniz.</td>
@@ -41,7 +44,7 @@
                     <tr>
                         <td class="text-center" width="10%">@counter</td>
                         <td class="text-center" width="50%">@item.listName</td>
-                        <td class="text-center" width="10%">55</td>
+                        <td class="text-center" width="10%">@listCount[counter-1].Count() </td>
 
 
 
@@ -85,7 +88,7 @@
 
                                       {
                                         {"modelHeader","Aşağıdaki liste silinecek.Emin misiniz?"},
-                                        {"not","*İlgili listenin içindeki veriler silinmez.Sileceğiniz listede bulunan verilerin artık bir listesi olmaz.(NULL)"}
+                                        {"not","*İlgili listenin içindeki veriler silinmez.Sileceğiniz listede bulunan verilerin artık bir listesi olmaz.Listeye sahip olmayan veriler Anasayfa da karşına çıkarılmaz.(--Listesiz--)"}
                                       })
 
                                  )

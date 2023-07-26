@@ -6,6 +6,10 @@
     float: right;
 }
 
+.liste-dropdown {
+    max-width: 100% !important;
+}
+
 form {
     text-align: center;
 }
@@ -25,6 +29,7 @@ form {
     resize: none;
     place-items: center;
     display: inline-block;
+    max-width: 100% !important;
 }
 
 .AlmondWebtext {

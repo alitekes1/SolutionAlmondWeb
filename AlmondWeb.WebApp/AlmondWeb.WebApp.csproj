@@ -140,6 +140,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AlmondCss\AllButtons.css" />
     <Content Include="Content\AlmondCss\error.css" />
     <Content Include="Content\AlmondCss\footer.css" />
     <Content Include="Content\AlmondCss\index.css" />
@@ -231,7 +232,10 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Jquery.ajax\DeleteDataAjax.js" />
+    <Content Include="Scripts\Jquery.ajax\ListOperationsAjax.js" />
     <Content Include="Scripts\Jquery.ajax\showQuestionAnswer.js" />
+    <Content Include="Scripts\Jquery.ajax\UpdateDataAjax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

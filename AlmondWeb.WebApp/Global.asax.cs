@@ -14,8 +14,8 @@ namespace AlmondWeb.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);//gerekli route tanýmlamalarýný yaptýk uygulama baþlamadan önce aktifleþmesi için buraya haber verdik.
+            BundleConfig.RegisterBundles(BundleTable.Bundles);//gerekli bundle larý yaptýk uygulama baþlamadan önce aktifleþmesi için buraya haber verdik
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@using AlmondWeb.Entities
+﻿@using System.Web.Optimization
 @{
     Layout = null;
 
@@ -9,23 +9,21 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="AlmondWeb" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title | AlmondWeb</title>
 
-    @* css *@
-    <link href="~/Content/AlmondCss/index.css" rel="stylesheet" />
-    <link href="~/Content/AlmondCss/navbar.css" rel="stylesheet" />
-    <link href="~/Content/AlmondCss/footer.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/AlmondCss/shortcuts.css" rel="stylesheet" />
+    @Styles.Render("~/allCss")
+    @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous">
+    </script>
+    <script src=""></script>
 
-    @* js *@
-    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
-    <script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
-
+    @Scripts.Render("~/allJs")
 
 </head>
 
@@ -36,7 +34,7 @@
             <div class="container-fluid">
 
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <a class="navbar-brand" href="/Home/MainPage">
+                    <a class="navbar-brand" href="/Anasayfa">
                         <img src="~/Images/logo/almondLogo1rmvbg.png" width="178px" alt="logoAlmond">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -53,16 +51,16 @@
                                         <a class="nav-link active dropdown-toggle" id="navbarDropdown" href="#" role="button"
                                            data-bs-toggle="dropdown" aria-expanded="false">Veri İşlemleri</a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="/Home/AddData">Veri Ekle</a></li>
-                                            <li><a class="dropdown-item" href="/Home/UpdateData">Veri Güncelle</a></li>
-                                            <li><a class="dropdown-item" href="/Home/DeleteData">Veri Sil</a></li>
+                                            <li><a class="dropdown-item" href="/Veri-Ekle">Veri Ekle</a></li>
+                                            <li><a class="dropdown-item" href="/Veri-Guncelle">Veri Güncelle</a></li>
+                                            <li><a class="dropdown-item" href="/Veri-Sil">Veri Sil</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item dropdown ">
-                                        <a class="nav-link active" id="navbarDropdown" href="/Home/ListOperations">Liste İşlemleri</a>
+                                        <a class="nav-link active" id="navbarDropdown" href="/Liste-Islemleri">Liste İşlemleri</a>
 
                                     </li>
-                                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="AllData">Verilerim</a></li>
+                                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/Verilerim">Verilerim</a></li>
 
                                 }
                             }
@@ -71,7 +69,7 @@
                                 {
                                     <li class="nav-item ">
                                         <a class="btn btn-outline-success " style="border-radius: 5px 0px 0px 5px;width: 120px;"
-                                           href="/Home/Login" role="button">
+                                           href="/Giris-Yap" role="button">
                                             Giriş Yap
                                         </a>
                                         <button type="button" class="btn btn-lg btn-success dropdown-toggle dropdown-toggle-split"
@@ -81,9 +79,9 @@
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
-                                            <li><a class="dropdown-item" href="/Home/Register">Kayıt Ol</a></li>
+                                            <li><a class="dropdown-item" href="/Kayit-Ol">Kayıt Ol</a></li>
                                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" href="#">Kısayollar ve SSS.</a></li>
-                                            <li><a class="dropdown-item" href="/Home/Contact">İletişim</a></li>
+                                            <li><a class="dropdown-item" href="/Iletisim">İletişim</a></li>
                                         </ul>
                                     </li>
                                 }
@@ -91,7 +89,7 @@
                                 {
                                     <li class="nav-item ">
                                         <a class="btn btn-outline-success " style="border-radius: 5px 0px 0px 5px;width: 118px;"
-                                           href="/User/Index" role="button">
+                                           href="/Kullanici" role="button">
                                             @{ if (User.Identity.Name.Length <= 12)
                                                 {
                                                     @User.Identity.Name
@@ -111,7 +109,7 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
                                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Yeni bir özellik öner?</a></li>
                                             <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Kısayollar ve SSS.</button></li>   @*  //TODO: kısayollar ve sss sayfası oluşturulacak.*@
-                                            <li><a class="dropdown-item" href="/Home/Contact">İletişim</a></li>
+                                            <li><a class="dropdown-item" href="/Iletisim">İletişim</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -175,11 +173,7 @@
     </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous">
 
-    </script>
 
 </body>
 </html>

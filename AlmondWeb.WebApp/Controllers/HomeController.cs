@@ -180,7 +180,7 @@ namespace AlmondWeb.WebApp.Controllers
                     AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id && !x.isDeleted);
                     updateData.answer = data.answer;
                     updateData.question = data.question;
-                    updateData.List.Id = data.list_Id;
+                    updateData.List = listManager.FindwithOwnerId(data.list_Id);
                     int result = dataManager.Update(updateData);
                     if (result > -1)
                     {

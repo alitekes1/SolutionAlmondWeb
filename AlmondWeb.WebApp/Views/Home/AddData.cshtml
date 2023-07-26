@@ -12,6 +12,7 @@
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
+
 <div class="row mt-3 mb-lg-5">
     <div class="col-sm-4 ">
         <div class="form-container" style="padding-top:11px">
@@ -36,7 +37,7 @@
 
                     <div class="row-sm-3 mt-2">
                         <div class="col-sm-3 " style=" display: inline-block;width:80%">
-                            @Html.DropDownListFor(x => x.List.Id, selectList, "Liste Seçiniz", new { @class = "form-select bg-white ", id = "liste-dropdown", required = "required" })
+                            @Html.DropDownListFor(x => x.List.Id, selectList, "Liste Seçiniz", new { @class = "form-select bg-white ", id = "liste-dropdown", required = "required", style = "max-width: 100%;" })
                         </div>
                     </div>
 

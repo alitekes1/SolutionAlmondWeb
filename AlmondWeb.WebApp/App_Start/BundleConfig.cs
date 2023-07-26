@@ -5,7 +5,6 @@ namespace AlmondWeb.WebApp
 {
     public class BundleConfig
     {
-        // Paketleme hakkında daha fazla bilgi için lütfen https://go.microsoft.com/fwlink/?LinkId=301862 adresini ziyaret edin.
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -14,17 +13,32 @@ namespace AlmondWeb.WebApp
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            // Geliştirme yapmak ve öğrenme kaynağı olarak yararlanmak için Modernizr uygulamasının geliştirme sürümünü kullanın. Ardından
-            // üretim için hazır. https://modernizr.com adresinde derleme aracını kullanarak yalnızca ihtiyacınız olan testleri seçin.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/bootsrap.min.css"
+                      ));
+
+
+            bundles.Add(new StyleBundle("~/allCss").Include(
+                "~/Content/AlmondCss/index.css",
+                "~/Content/AlmondCss/navbar.css",
+                "~/Content/AlmondCss/footer.css",
+                "~/Content/AlmondCss/shortcuts.css",
+                "~/Content/AlmondCss/AllButtons.css"
+
+                ));
+            bundles.Add(new ScriptBundle("~/allJs").Include(
+                "~/Scripts/jquery-3.7.0.min.js"
+                ));
+            BundleTable.EnableOptimizations = true;//yüklerken dosya optimazsyonu için   
         }
     }
 }
