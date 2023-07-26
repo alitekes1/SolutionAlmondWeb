@@ -10,8 +10,6 @@ function transferdataTotextarea(question, listId, answer, dataId) {
     _questionfortextarea.value = question;
     _answerfortextarea.value = answer;
 
-
-
     for (var i = 0; i < options.length; i++) {
         if (options[i].value == listId) {
             options[i].selected = true;

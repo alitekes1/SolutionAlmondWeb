@@ -17,7 +17,7 @@
     <div class="col-sm-4 ">
         <div class="form-container" style="padding-top:11px">
             <div class="col-sm-12 ">
-                @using (Ajax.BeginForm("AddData", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "example", InsertionMode = InsertionMode.ReplaceWith }))
+                @using (Ajax.BeginForm("AddData", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "example", InsertionMode = InsertionMode.ReplaceWith, OnSuccess = "onSuccess" }))
                 {
                     <div>
                         @Html.ValidationSummary(true)
@@ -60,4 +60,10 @@
         let ownerHidden = document.getElementById("owner_hidden");
         ownerHidden.setAttribute("value", owner_id);
     };
+
+    function onSuccess() {
+        // Toastr mesajını göster
+        toastr.success('Veri başarıyla eklendi.', 'İşlem başarılı', 2000);
+    }
 </script>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />

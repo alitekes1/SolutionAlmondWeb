@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (result > 0) {
                         deleteRow.fadeOut(400, function () {
                             deleteRow.remove();
+                            toastr.success(question + " verisi başarıyla silindi.", "İşlem başarılı!");
+
                             //TODO:burada toastr çıkacak.
                         })
                     } else {

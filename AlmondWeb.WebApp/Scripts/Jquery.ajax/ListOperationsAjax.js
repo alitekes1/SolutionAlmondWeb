@@ -12,8 +12,8 @@ function transfertoUpdateData(lstnm, id) {
             data: { listName: listNme },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
             success: function (result) {
                 if (result > 0) {
-                    //işlem başarılı tablo tekrardan yüklenecek.
                     ReLoadListData();
+                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!");
                 }
                 else {
                     alert("Liste güncelleme sırasında bir hata meyda geldi.");//TODO:sayfa otomatik olarak yenilenecek.
@@ -37,6 +37,7 @@ function transfertoDeleteData(data, idM) {
                 if (result > 0) {
                     //TODO:işlem başarılı toastr çıkacak.
                     ReLoadListData();
+                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!");
                 }
                 else {
                     return alert("işlem başarısız:(");
@@ -58,6 +59,7 @@ document.getElementById("confirmBtnCreateList").addEventListener("click", functi
             if (result > 0) {
                 //TODO:işlem başarılı toastr çıkacak.
                 ReLoadListData();
+                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!");
             } else {
                 alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
             }

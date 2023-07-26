@@ -32,11 +32,12 @@ namespace AlmondWeb.WebApp
                 "~/Content/AlmondCss/navbar.css",
                 "~/Content/AlmondCss/footer.css",
                 "~/Content/AlmondCss/shortcuts.css",
-                "~/Content/AlmondCss/AllButtons.css"
-
+                "~/Content/AlmondCss/AllButtons.css",
+                "~/Content/toastr.min.css"
                 ));
             bundles.Add(new ScriptBundle("~/allJs").Include(
-                "~/Scripts/jquery-3.7.0.min.js"
+                "~/Scripts/jquery-3.7.0.min.js",
+                "~/Scripts/toastr.js"
                 ));
             BundleTable.EnableOptimizations = true;//yüklerken dosya optimazsyonu için   
         }
