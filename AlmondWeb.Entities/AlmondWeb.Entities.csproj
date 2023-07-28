@@ -53,8 +53,10 @@
   <ItemGroup>
     <Compile Include="AlmondUserTable.cs" />
     <Compile Include="AlmondDataTable.cs" />
+    <Compile Include="ContactTable.cs" />
     <Compile Include="ListTable.cs" />
     <Compile Include="MyEntityBase.cs" />
+    <Compile Include="ProfileTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
