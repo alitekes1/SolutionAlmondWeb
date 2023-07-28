@@ -1,13 +1,12 @@
 ﻿@model  AlmondWeb.Entities.AlmondDataTable
-@using AlmondWeb.WebApp.CacheHelper
 @{
     ViewBag.Title = "Veri Ekle";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 
     int currentUserID = CacheHelper.CurrentUserID();
 
-    AlmondWeb.BusinessLayer.ListManager lm = new AlmondWeb.BusinessLayer.ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.Id > 2);
+    ListManager lm = new ListManager();
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null);
     var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
@@ -65,5 +64,7 @@
         // Toastr mesajını göster
         toastr.success('Veri başarıyla eklendi.', 'İşlem başarılı', 2000);
     }
+    let _list = document.getElementById("liste-dropdown");
+    _list.options[0].disabled = true;
 </script>
 <link href="~/Content/toastr.min.css" rel="stylesheet" />

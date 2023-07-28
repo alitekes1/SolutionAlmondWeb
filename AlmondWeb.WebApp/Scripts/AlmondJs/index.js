@@ -7,3 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     activeSlide.style.backgroundImage = "url('" + Images[currentIndex] + "')";
     body.css("background-size", "cover");
 });
+
+let _list = document.getElementById("liste-dropdown");
+_list.options[0].disabled = true;

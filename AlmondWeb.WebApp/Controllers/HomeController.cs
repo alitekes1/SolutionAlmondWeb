@@ -1,5 +1,4 @@
 ﻿using AlmondWeb.BusinessLayer;
-//using AlmondWeb.data.RepositoryPattern;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using Microsoft.Ajax.Utilities;
@@ -9,10 +8,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 
-/* business katmanda oluşturduğumuz manager classlar crud işlemlerini yapacaklar.
- 
- 
- */
 namespace AlmondWeb.WebApp.Controllers
 {
     [Authorize]
@@ -33,7 +28,7 @@ namespace AlmondWeb.WebApp.Controllers
             List<AlmondDataTable> al = dataManager.ListwithExpression(x => x.Owner.Id == currentUserId && !x.isDeleted).OrderBy(x => x.puan).ToList();
             if (al.Count <= i)
             {
-                return Content("<script type='text/javascript'>alert('Listedeki tüm verileri gözden geçirdiniz.Tebrikler.');</script>");
+                return JavaScript("alert('almonddatatables');");//ÖNEMLİ BURASI
                 //return RedirectToAction("Error");
             }
             else
@@ -42,19 +37,19 @@ namespace AlmondWeb.WebApp.Controllers
             }
         }
         [HttpGet]
-        public ActionResult puanUpdate()
+        public ActionResult UpdatePuan()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult puanUpdate(int? dataId, int? puanValue)
+        public ActionResult UpdatePuan(int? dataId, int? puan)
         {
-            if (dataId != null && puanValue != null)
+            if (puan != null && dataId > 0)
             {
                 AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId && !x.isDeleted);
-                data.puan += (int)puanValue;//burdan sonra diğer soruya geçmeli
+                data.puan += (int)puan;//burdan sonra diğer soruya geçmeli
                 int result = dataManager.Update(data);
-                return RedirectToAction(nameof(MainPage));
+                return RedirectToAction(nameof(GetQuestionAnswer));
             }
             else
             {
@@ -242,16 +237,10 @@ namespace AlmondWeb.WebApp.Controllers
             if (id.HasValue)
             {
                 ListTable list = listManager.FindwithExpression(x => x.Id == id);//silinecek veriyi buluyoruz.
-                ListTable deleteList1 = listManager.FindwithExpression(x => x.Id == 1);//silinenler listesini buluyoruz.
+
                 if (list != null)
                 {
-                    List<AlmondDataTable> deleteList = dataManager.ListwithExpression(x => x.List.Id == id).ToList();
-                    foreach (var item in deleteList)
-                    {
-                        item.List = deleteList1;//bulduğumuz verinin listesini silinenler listesi olarak değiştiriyoruz.
-                        dataManager.Update(item);
-                    }
-                    int result = listManager.Delete(list);
+                    int result = listManager.DeleteList(list);
                     return result;
                 }
             }
@@ -277,6 +266,13 @@ namespace AlmondWeb.WebApp.Controllers
         }
         public ActionResult AllData()
         {
+            //return new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(
+            //   new
+            //   {
+            //       action = "MainPage",
+            //       controller = "Home"
+            //   }));
+
             return View();
         }
         public ActionResult ListOperations()
@@ -299,6 +295,11 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
+        //public JavaScriptResult HelloWorld()
+        //{
+        //    string js = " function puanValue (){ alert('HelloWorld')}";
+        //    return JavaScript(js);
+        //}
         public PartialViewResult SuggestNewFeature()
         {
             return PartialView("Partials/_SuggestNewFeaturePartial");

@@ -18,6 +18,10 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.Delete(dataset);
         }
+        public int DeleteList(ListTable dataset)
+        {
+            return repo.DeleteList(dataset);
+        }
         public T FindwithOwnerId(int ownerid)
         {
             return repo.FindwithOwnerId(ownerid);

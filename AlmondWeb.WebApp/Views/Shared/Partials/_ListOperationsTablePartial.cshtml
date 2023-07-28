@@ -1,14 +1,10 @@
-﻿@using AlmondWeb.BusinessLayer
-@using AlmondWeb.WebApp.CacheHelper
-
-@{
+﻿@{
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
 
     ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.Id > 1).OrderByDescending(x => x.Id);
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null).OrderByDescending(x => x.Id);
 
-    //DataManager dm = new DataManager();
     var listCount = list.GroupBy(x => x.listName).ToList();
 }
 
@@ -44,7 +40,7 @@
                     <tr>
                         <td class="text-center" width="10%">@counter</td>
                         <td class="text-center" width="50%">@item.listName</td>
-                        <td class="text-center" width="10%">@listCount[counter-1].Count() </td>
+                        <td class="text-center" width="10%">@listCount[counter - 1].Count() </td>
 
 
 

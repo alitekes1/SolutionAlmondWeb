@@ -25,7 +25,7 @@ namespace AlmondWeb.BusinessLayer
             AlmondUserTable user = FindwithExpression(x => x.Email == modal.email && x.Password == modal.password);
 
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();
-            if (user != null)//kayıt işlemi gerçekleşecek.
+            if (user != null)
             {
                 if (user.Email == modal.email)
                 {
@@ -33,7 +33,7 @@ namespace AlmondWeb.BusinessLayer
                 }
                 return errorResult;
             }
-            else
+            else//kayıt işlemi gerçekleşecek.
             {
                 int isSave = Insert(new AlmondUserTable
                 {

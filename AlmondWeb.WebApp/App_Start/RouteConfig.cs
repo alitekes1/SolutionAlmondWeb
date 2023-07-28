@@ -67,7 +67,10 @@ namespace AlmondWeb.WebApp
                 name: "kullanici",
                 url: "Kullanici",//TODO:databaseden username gelecek.
                 defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
-            );//TODO: user işlemleri bittikten sonra ilgli tanımlamalar yapılacak.
+            );
+            
+            //TODO: user işlemleri bittikten sonra ilgli tanımlamalar yapılacak.
+
             //routes.MapRoute(
             //    name: "UpdateData",
             //    url: "Veri-Guncelle",

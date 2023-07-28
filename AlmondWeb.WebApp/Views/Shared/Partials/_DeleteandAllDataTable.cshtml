@@ -1,13 +1,7 @@
-﻿@using AlmondWeb.WebApp.CacheHelper
-@using AlmondWeb.BusinessLayer
-
-@{
+﻿@{
     string sil = "Sil";
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
-
-    ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted && x.Id > 2).OrderByDescending(x => x.Id);
 
     DataManager dm = new DataManager();
     var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
@@ -42,7 +36,14 @@
                 <td class="text-center" style="width:30%">@item.question</td>
                 <td class="text-center" style="width:30%">@item.answer</td>
                 <td class="text-center" style="width:15%">@item.puan</td>
-                <td class="text-center" style="width:20%">@item.List.listName</td>
+                @if (item.List == null)
+                {
+                    <td class="text-center" style="width:20%">NULL</td>
+                }
+                else
+                {
+                    <td class="text-center" style="width:20%">@item.List.listName</td>
+                }
                 @if (ViewData["islemTuru"] == sil)
                 {
                     <td>

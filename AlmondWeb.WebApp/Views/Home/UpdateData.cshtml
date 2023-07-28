@@ -1,5 +1,4 @@
 ﻿@model AlmondWeb.BusinessLayer.ViewModels.UserQueAnswListModel
-﻿@using AlmondWeb.BusinessLayer
 @using AlmondWeb.WebApp.CacheHelper
 @{
     ViewBag.Title = "Veri Güncelle";
@@ -8,14 +7,14 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null);
     var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
 }
 
 <link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
-<div class="row mb-5">
+<div class="row mt-3 mb-5">
     <div class="col-sm-4" style="padding-top:11px">
         <div class="form-container">
             <div class="col-sm-12 ">
@@ -76,5 +75,7 @@
         // Toastr mesajını göster
         toastr.success('Veri başarıyla güncellendi.', 'İşlem başarılı!');
     }
+    let _list = document.getElementById("liste-dropdown");
+    _list.options[0].disabled = true;
 </script>
 <link href="~/Content/toastr.min.css" rel="stylesheet" />

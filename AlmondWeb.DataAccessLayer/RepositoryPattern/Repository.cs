@@ -66,6 +66,11 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
             }
             return Save();
         }
+        public int DeleteList(ListTable dataset)
+        {
+            database.Set<ListTable>().Remove(dataset);
+            return Save();
+        }
         public List<T> List()
         {
             return database.Set<T>().ToList();

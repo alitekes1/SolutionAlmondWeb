@@ -1,6 +1,4 @@
-﻿@using AlmondWeb.WebApp.CacheHelper
-@using AlmondWeb.BusinessLayer
-@{
+﻿@{
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
 
@@ -40,7 +38,14 @@
                         <td class="text-center" width="35%">@item.question</td>
                         <td class="text-center" width="35%">@item.answer</td>
                         <td class="text-center" width="10%">@item.puan</td>
-                        <td class="text-center" width="15%">@item.List.listName</td>
+                        @if (item.List == null)
+                        {
+                            <td class="text-center" style="width:15%">NULL</td>
+                        }
+                        else
+                        {
+                            <td class="text-center" width="15%">@item.List.listName</td>
+                        }
                     </tr>
                 }
             }
