@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "AlmondWeb.DataAccessLayer.DatabaseContext";
         }
 
         protected override void Seed(AlmondWeb.DataAccessLayer.DatabaseContext context)

@@ -96,6 +96,52 @@
 
     //verileri aktarrıken değişken tutmak yerine length ten geriye gelinebilir.
 
+    $(document).ready(function () {
+        // Kısayol tuşlarına tepki vereceğimiz olay dinleyicisini ekleyin
+        $(document).keydown(shortcuts);
+        $(document).keydown(mainpageShortcuts);
+    });
+
+    function shortcuts(event) {
+        if (event.shiftKey && event.key === 'A') {
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'U') {
+
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'D') {
+
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'L') {
+
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'T') {
+            alert("kısayol tuşuna basıldı:)");
+        }
+    }
+    function mainpageShortcuts(event) {
+        if (event.key === '1') {
+            $("#puan1").click();
+        }
+        if (event.key === '2') {
+            $("#puan2").click();
+        }
+        if (event.key === '3') {
+            $("#puan3").click();
+        }
+        if (event.key === '4') {
+            $("#puan4").click();
+        }
+        if (event.key === '5') {
+            $("#puan5").click();
+        }
+        if (event.key === ' ') {
+            $("#showanswer").click();
+        }
+    }
 
     $(".puanlar").click(function () {
         var puan = $(this).val();

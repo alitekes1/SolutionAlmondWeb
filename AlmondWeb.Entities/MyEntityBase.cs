@@ -16,8 +16,7 @@ namespace AlmondWeb.Entities
         public bool isDeleted { get; set; }
         [Required]
         public DateTime createdTime { get; set; }
-        [Required]
-        public DateTime deletedTime { get; set; }
+        public DateTime deletedTime { get; set; } = DateTime.MinValue;
 
     }
 }

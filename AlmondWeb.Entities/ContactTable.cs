@@ -22,5 +22,7 @@ namespace AlmondWeb.Entities
 
         [Required, StringLength(maximumLength: 250, MinimumLength = 10), DisplayName("Mesaj")]
         public string message { get; set; }
+
+        public virtual AlmondUserTable Owner { get; set; }
     }
 }
