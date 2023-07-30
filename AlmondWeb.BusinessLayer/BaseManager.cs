@@ -49,6 +49,9 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.FindwithExpression(expression);
         }
-
+        public AlmondUserTable FindwithExpresionOneToOneforProfileTable(Expression<Func<AlmondUserTable, bool>> expression)
+        {
+            return repo.FindwithExpresionOneToOneforProfileTable(expression);
+        }
     }
 }

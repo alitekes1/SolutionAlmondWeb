@@ -6,9 +6,18 @@ using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
-        public ActionResult Index()
+        public ActionResult PrivateProfile()
+        {
+            return View();
+        }
+        public ActionResult ProfileEdit()
+        {
+            return View();
+        }
+        public ActionResult PublicProfile()
         {
             return View();
         }

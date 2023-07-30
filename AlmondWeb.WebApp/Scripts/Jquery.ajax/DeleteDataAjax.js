@@ -12,21 +12,16 @@ document.addEventListener("DOMContentLoaded", function () {
         _answerLabel.innerText = answer;
 
 
-        document.getElementById("confirmBtn").addEventListener("click", function () {
-            var deleteRow = $(this).closest("tr");
+        document.getElementById("confirmbtnDelete").addEventListener("click", function () {
             $.ajax({
                 method: "POST",
                 url: '/Home/DeleteData/' + id,
                 success: function (result) {
                     if (result > 0) {
-                        deleteRow.fadeOut(400, function () {
-                            deleteRow.remove();
-                            toastr.success(question + " verisi başarıyla silindi.", "İşlem başarılı!");
-
-                            //TODO:burada toastr çıkacak.
-                        })
+                        ReLoadDeleteData();
+                        toastr.success(question + " verisi başarıyla silindi.", "İşlem başarılı!");
                     } else {
-                        alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
+                        alert("işlem başarısız:(");
                     }
                 },
                 complete: function () {
@@ -34,6 +29,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
-
     });
 });
+function ReLoadDeleteData() {
+    let table = $("#table");
+    $.ajax({
+        method: "GET",
+        url: '/Home/FillTableForDelete',
+        success: function (tableData) {
+            table.empty(); // Tabloyu temizliyoruz
+
+            table.append(tableData);
+        }
+    });
+}

@@ -17,7 +17,7 @@
     bool dataCountControlforPDF = dataCount > 50;
 }
 
-@Html.Partial("Partials/_DeleteandAllDataTable", tableData)
+@Html.Action("FillTableForAllData", "Home", tableData)
 
 <div class="mb-sm-5" id="pdfalbuton">
     <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="buttonpdf float-end">Verilerimi PDF olarak almak istiyorum </button>

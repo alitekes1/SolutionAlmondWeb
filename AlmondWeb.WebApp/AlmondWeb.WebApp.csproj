@@ -147,6 +147,8 @@
     <Content Include="Content\AlmondCss\index.css" />
     <Content Include="Content\AlmondCss\login_register.css" />
     <Content Include="Content\AlmondCss\navbar.css" />
+    <Content Include="Content\AlmondCss\PrivateProfile.css" />
+    <Content Include="Content\AlmondCss\ProfileEdit.css" />
     <Content Include="Content\AlmondCss\registerSuccess.css" />
     <Content Include="Content\AlmondCss\shortcuts.css" />
     <Content Include="Content\AlmondCss\sliderBoyut.css" />
@@ -267,7 +269,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\LoginRegisterLayout.cshtml" />
-    <Content Include="Views\Shared\Partials\_DeleteandAllDataTable.cshtml" />
+    <Content Include="Views\Shared\Partials\_AllDataTable.cshtml" />
     <Content Include="Views\Home\DeleteData.cshtml" />
     <Content Include="Views\Shared\Partials\ModelPopUp\_SilModalPartial.cshtml" />
     <Content Include="Views\Home\ListOperations.cshtml" />
@@ -285,8 +287,11 @@
     <Content Include="Views\Shared\Partials\_ListOperationsTablePartial.cshtml" />
     <Content Include="Views\Shared\Partials\_ShortcutsPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SuggestNewFeaturePartial.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\Partials\_profileSocialMediaIconsPartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_DeleteDataTable.cshtml" />
+    <Content Include="Views\User\PrivateProfile.cshtml" />
+    <Content Include="Views\User\PublicProfile.cshtml" />
+    <Content Include="Views\User\ProfileEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

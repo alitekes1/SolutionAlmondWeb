@@ -318,11 +318,15 @@ namespace AlmondWeb.WebApp.Controllers
         }
         public PartialViewResult FillTableForDelete()
         {
-            return PartialView("Partials/_DeleteandAllDataTable");
+            return PartialView("Partials/_DeleteDataTable");
         }
         public PartialViewResult FillTableForListOperations()
         {
             return PartialView("Partials/_ListOperationsTablePartial");
+        }
+        public PartialViewResult FillTableForAllData()
+        {
+            return PartialView("Partials/_AllDataTable");
         }
     }
 }

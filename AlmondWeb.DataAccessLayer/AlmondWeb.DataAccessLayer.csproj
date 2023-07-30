@@ -59,6 +59,18 @@
     <Compile Include="Migrations\202307292236513_mig3.designer.cs">
       <DependentUpon>202307292236513_mig3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202307292257167_mig4.cs" />
+    <Compile Include="Migrations\202307292257167_mig4.designer.cs">
+      <DependentUpon>202307292257167_mig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202307300950047_miggr1.cs" />
+    <Compile Include="Migrations\202307300950047_miggr1.designer.cs">
+      <DependentUpon>202307300950047_miggr1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202307301038532_migraiton1.cs" />
+    <Compile Include="Migrations\202307301038532_migraiton1.designer.cs">
+      <DependentUpon>202307301038532_migraiton1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Myinitiliazer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +101,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202307292236513_mig3.resx">
       <DependentUpon>202307292236513_mig3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307292257167_mig4.resx">
+      <DependentUpon>202307292257167_mig4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307300950047_miggr1.resx">
+      <DependentUpon>202307300950047_miggr1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307301038532_migraiton1.resx">
+      <DependentUpon>202307301038532_migraiton1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -64,18 +64,21 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "Home", action = "RegisterSuccess", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-                name: "kullanici",
-                url: "Kullanici",//TODO:databaseden username gelecek.
-                defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
+                name: "hesabim",
+                url: "Hesabim",//TODO:databaseden username gelecek.
+                defaults: new { controller = "User", action = "PrivateProfile", id = UrlParameter.Optional }
             );
-            
             //TODO: user işlemleri bittikten sonra ilgli tanımlamalar yapılacak.
-
-            //routes.MapRoute(
-            //    name: "UpdateData",
-            //    url: "Veri-Guncelle",
-            //    defaults: new { controller = "Home", action = "UpdateData", id = UrlParameter.Optional }
-            //);
+            routes.MapRoute(
+                name: "updateprofile",
+                url: "Profil-Guncelle",
+                defaults: new { controller = "User", action = "ProfileEdit", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+            name: "publicprofile",
+            url: "username",
+            defaults: new { controller = "User", action = "PublicProfile", id = UrlParameter.Optional }
+            );
             routes.MapRoute(
                 name: "User",
                 url: "User/{action}/{username}",

@@ -19,11 +19,10 @@ namespace AlmondWeb.BusinessLayer
 {
     public class UserManager : BaseManager<AlmondUserTable>
     {
-
         public ErrorResult<AlmondUserTable> RegisterUser(RegisterModel modal)//gerekli kontroller ve kayıt işlemi gerçekleşecek.
         {
-            AlmondUserTable user = FindwithExpression(x => x.Email == modal.email && x.Password == modal.password);
-
+            AlmondUserTable user = FindwithExpression(x => x.Email == modal.email);
+            AlmondUserTable checkUsername = FindwithExpression(x => x.Username == modal.username);
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();
             if (user != null)
             {
@@ -33,17 +32,23 @@ namespace AlmondWeb.BusinessLayer
                 }
                 return errorResult;
             }
+            if (checkUsername != null)
+            {
+                errorResult.errorList.Add("Girilen Kullanıcı Adı kayıtlıdır.");
+                return errorResult;
+            }
             else//kayıt işlemi gerçekleşecek.
             {
                 int isSave = Insert(new AlmondUserTable
                 {
+                    Username = modal.username,
                     Email = modal.email,
                     Password = modal.password,
                     Name = modal.name,
                     Surname = modal.surname,
                     isActive = true,
                     isAdmin = false,
-                    ActivateGuid = Guid.NewGuid(),
+                    ActivateGuid = Guid.NewGuid()
                 });
                 if (isSave > 0)
                 {

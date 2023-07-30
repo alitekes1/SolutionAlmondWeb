@@ -1,19 +1,10 @@
-﻿using AlmondWeb.DataAccessLayer;
-using AlmondWeb.Entities;
+﻿using AlmondWeb.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Data;
-using System.Data.Odbc;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using AlmondWeb.BusinessLayer;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace AlmondWeb.DataAccessLayer.RepositoryPattern
 {
@@ -34,6 +25,13 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
                 o.deletedTime = getDate();
                 o.isDeleted = false;
                 o.puan = 0;
+            }
+            if (dataset is AlmondUserTable)
+            {
+                AlmondUserTable o = dataset as AlmondUserTable;
+                o.createdTime = getDate();
+                o.deletedTime = getDate();
+                o.isDeleted = false;
             }
             if (dataset is ListTable)
             {
@@ -87,6 +85,10 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         public T FindwithOwnerId(int ownerId)
         {
             return database.Set<T>().Find(ownerId);
+        }
+        public AlmondUserTable FindwithExpresionOneToOneforProfileTable(Expression<Func<AlmondUserTable, bool>> expression)
+        {
+            return database.FindwithExpresionOneToOneforProfileTable(expression);
         }
         private DateTime getDate()
         {
