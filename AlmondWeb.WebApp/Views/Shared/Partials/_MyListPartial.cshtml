@@ -1,0 +1,58 @@
+﻿@using AlmondWeb.Entities
+@{
+    int currentUserID = CacheHelper.CurrentUserID();
+    ListManager lm = new ListManager();
+    List<ListTable> data = lm.ListwithExpression(x => x.Owner.Id == currentUserID);
+
+}
+<link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
+<div class="row  ">
+    @foreach (var item in data)
+    {
+        <div class="col-sm-4 mt-3 d-flex justify-content-center">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        @if (item.listName.Length > 13)
+                        {
+                            <p class="title text-danger">@item.listName.Substring(0, 11)...</p>
+                        }
+                        else
+                        {
+                            <p class="title text-danger">@item.listName</p>
+                        }
+                        <p>@@@item.Owner.Username</p>
+                        <p>
+                            Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        </p>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="text-dark mx-3 text-start">Türü:Gizli</p>
+                        <p class="text-dark mx-3 text-start">Toplam Veri Adedi:15</p>
+                        <p class="text-dark mx-3 text-start">Oluş. Tarihi:@item.createdTime.ToShortDateString()</p>
+                        <a href="/Liste-Islemleri" class="btn btn-dark btn-sm mx-3">Düzenle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@*<div class="col-sm-4 mt-3 d-flex justify-content-center ">
+        <div class="flip-card text-center">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+
+                    <p class="title">FLIP CARD</p>
+                    <p>Hover Me</p>
+
+                </div>
+                <div class="flip-card-back">
+
+                    <p class="title">BACK</p>
+                    <p>Leave Me</p>
+
+                </div>
+            </div>
+        </div>
+    </div>*@

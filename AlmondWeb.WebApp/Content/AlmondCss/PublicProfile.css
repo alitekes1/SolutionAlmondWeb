@@ -1,0 +1,146 @@
+﻿body {
+    background-color: white;
+}
+
+.profile .profile-header {
+    position: relative;
+}
+
+    .profile .profile-header .profile-header-cover {
+        background-image: url('../../images/background/marita-kavelashvili-ugnrxk1129g-unsplash.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 11.625rem;
+        position: relative;
+    }
+
+@@media (max-width: 991.98px) {
+    .profile .profile-header .profile-header-cover {
+        height: 4.25rem;
+    }
+}
+
+.profile .profile-header .profile-header-cover:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(33, 40, 55, 0.35);
+}
+
+.profile .profile-header .profile-header-content {
+    position: relative;
+    padding: 0 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+}
+
+@@media (max-width: 991.98px) {
+    .profile .profile-header .profile-header-content {
+        display: block;
+        padding: 0 20px;
+    }
+}
+
+.profile .profile-header .profile-header-content .profile-header-img {
+    width: 12.5rem;
+    height: 12.5rem;
+    overflow: hidden;
+    z-index: 10;
+    margin-top: -8.75rem;
+    padding: 0.1875rem;
+    background: #fff;
+    -webkit-border-radius: 9px;
+    border-radius: 9px;
+}
+
+@@media (max-width: 991.98px) {
+    .profile .profile-header .profile-header-content .profile-header-img {
+        width: 4.375rem;
+        height: 4.375rem;
+        margin: -3.75rem 0 0;
+    }
+}
+
+.profile .profile-header .profile-header-content .profile-header-img img {
+    max-width: 100%;
+    width: 100%;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+
+.profile .profile-container {
+    padding: 30px 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@@media (max-width: 991.98px) {
+    .profile .profile-container {
+        padding: 20px 20px;
+    }
+}
+
+.profile .profile-container .profile-sidebar {
+    width: 13.75rem;
+}
+
+@@media (max-width: 991.98px) {
+    .profile .profile-container .profile-sidebar {
+        display: none;
+    }
+}
+
+.profile .profile-container .profile-content {
+    padding-left: 30px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+@@media (max-width: 991.98px) {
+    .profile .profile-container .profile-content {
+        padding-left: 0;
+    }
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: sans-serif;
+}
+
+.tabs__label {
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+.tabs__radio {
+    display: none;
+}
+
+.tabs__content {
+    order: 1;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 0.9em;
+    display: none;
+}
+
+.tabs__radio:checked + .tabs__label {
+    font-weight: bold;
+    color: #009578;
+    border-bottom: 2px solid #009578;
+}
+
+    .tabs__radio:checked + .tabs__label + .tabs__content {
+        display: initial;
+    }

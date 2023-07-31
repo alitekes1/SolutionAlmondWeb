@@ -75,9 +75,14 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "User", action = "ProfileEdit", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-            name: "publicprofile",
-            url: "username",
-            defaults: new { controller = "User", action = "PublicProfile", id = UrlParameter.Optional }
+                name: "publicprofile",
+                url: "Profilim",
+                defaults: new { controller = "User", action = "PublicProfile", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "privateProfile",
+                url: "Hesabim",
+                defaults: new { controller = "User", action = "PrivateProfile", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "User",
