@@ -1,52 +1,51 @@
-﻿@{
-
+﻿@using AlmondWeb.Entities
+@{
     int currentUserID = CacheHelper.CurrentUserID();
+    ProfilListManager plm = new ProfilListManager();
+    List<ProfileListTable> list = plm.ListwithExpression(x => x.profile.Owner.Id == currentUserID);
+    ProfilListManager um = new ProfilListManager();
+    //List<ProfileListTable> list2 = um.FindwithExpression()
+    //select* from ProfileListTables inner join ListTables on ProfileListTables.listId = ListTables.Id inner join AlmondUserTables on AlmondUserTables.Id = ProfileListTables.profileId inner join ProfileTables on ProfileTables.Id = ProfileListTables.profileId
 
 
 }
 <link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
-
 <div class="row  ">
-    <div class="col-sm-4  mt-3 d-flex justify-content-center">
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <p class="title"></p>
-                    <p>Hover Me</p>
-                </div>
-                <div class="flip-card-back">
-                    <p class="title">BACK</p>
-                    <p>Leave Me</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4 mt-3 d-flex justify-content-center">
-        <div class="flip-card ">
-            <div class="flip-card-inner text-center">
-                <div class="flip-card-front">
-                    <p class="title">FLIP CARD</p>
-                    <p>Hover Me</p>
-                </div>
-                <div class="flip-card-back">
-                    <p class="title">BACK</p>
-                    <p>Leave Me</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4 mt-3 d-flex justify-content-center ">
-        <div class="flip-card text-center">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <p class="title">FLIP CARD</p>
-                    <p>Hover Me</p>
-                </div>
-                <div class="flip-card-back">
-                    <p class="title">BACK</p>
-                    <p>Leave Me</p>
+    @foreach (var item in list)
+    {
+        <div class="col-sm-4  mt-3 d-flex justify-content-center">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        @*@if (item.> 13)
+                            {
+
+                                <p title="@item.list.listName" class="title text-danger">@item.list.listName.Substring(0, 11)...</p>
+                            }
+                            else
+                            {
+                                <p class="title text-danger">@item.list.listName</p>
+                            }
+                            <p>@@@item.profile.Owner.Username</p>
+                            @if (!item.list.listDescription.IsEmpty())
+                            {
+                                <p> @item.list.listDescription</p>
+                            }
+                            else
+                            {
+                                <p>Açıklama eklenmemiş.</p>
+                            }*@
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="text-dark mx-2 text-start">
+                            Oluşturan:<a href="#" class="text-dark-emphasis" title="@item.profile.Owner.Username adlı hesaba git.">@@@item.profile.Owner.Username</a>
+                        </p>
+                        <p class="text-dark mx-3 text-start">Toplam Kaydedilme :@item.profile.List.Count()</p>
+                        <p class="text-dark mx-3 text-start">Toplam Veri Adedi:15</p>
+                        <a href="/Liste-Islemleri" class="btn btn-dark btn-sm mx-3">Kaldır</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>

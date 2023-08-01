@@ -6,10 +6,10 @@
 
 }
 <link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
-<div class="row  ">
+<div class="row my-3">
     @foreach (var item in data)
     {
-        <div class="col-sm-4 mt-3 d-flex justify-content-center">
+        <div class="col-sm-3 mb-5 d-flex justify-content-center">
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -22,12 +22,24 @@
                             <p class="title text-danger">@item.listName</p>
                         }
                         <p>@@@item.Owner.Username</p>
-                        <p>
-                            Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
-                        </p>
+                        @if (!item.listDescription.IsEmpty())
+                        {
+                            <p> @item.listDescription</p>
+                        }
+                        else
+                        {
+                            <p>Açıklama eklenmemiş.</p>
+                        }
                     </div>
                     <div class="flip-card-back">
-                        <p class="text-dark mx-3 text-start">Türü:Gizli</p>
+                        @if (!item.isPublic)
+                        {
+                            <p class="text-dark mx-3 text-start">Türü:Herkese Açık</p>
+                        }
+                        else
+                        {
+                            <p class="text-dark mx-3 text-start">Türü:Gizli</p>
+                        }
                         <p class="text-dark mx-3 text-start">Toplam Veri Adedi:15</p>
                         <p class="text-dark mx-3 text-start">Oluş. Tarihi:@item.createdTime.ToShortDateString()</p>
                         <a href="/Liste-Islemleri" class="btn btn-dark btn-sm mx-3">Düzenle</a>

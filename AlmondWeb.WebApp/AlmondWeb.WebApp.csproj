@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AlmondCss\AllButtons.css" />
+    <Content Include="Content\AlmondCss\deneme.css" />
     <Content Include="Content\AlmondCss\error.css" />
     <Content Include="Content\AlmondCss\footer.css" />
     <Content Include="Content\AlmondCss\index.css" />
@@ -303,6 +304,7 @@
     <Content Include="Views\User\ProfileEdit.cshtml" />
     <Content Include="Views\Shared\Partials\_MyListPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SavedListPartial.cshtml" />
+    <Content Include="Views\User\PublicList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

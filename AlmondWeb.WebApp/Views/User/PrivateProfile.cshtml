@@ -47,7 +47,11 @@
                                 </svg>
                                 <label>Linkedin</label>
                             </h6>
-                            <span class="text-secondary"><a href="@user.linkedinUrl" class="text-dark">...@user.linkedinUrl.Substring(24)</a></span>
+                            @if (!user.linkedinUrl.IsEmpty())
+                            {
+                                <span class="text-secondary"><a href="@user.linkedinUrl" class="text-dark">...@user.linkedinUrl.Substring(24)</a></span>
+                            }
+                            <span class="text-secondary"><a href="@user.linkedinUrl" class="text-dark">@user.linkedinUrl</a></span>
                         </li>
                     </ul>
                 </div>

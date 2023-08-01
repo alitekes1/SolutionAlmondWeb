@@ -11,7 +11,12 @@ namespace AlmondWeb.Entities
     {
         [Required, StringLength(60)]
         public string listName { get; set; }
+        [StringLength(60)]
+        public string listDescription { get; set; }
+        [Required]
+        public bool isPublic { get; set; }
         public virtual List<AlmondDataTable> DataTables { get; set; }//çokları liste halinde tanımlıyoruz
         public virtual AlmondUserTable Owner { get; set; }//her listenin bir tane user ı olacağı için sanal bir property olarak tanımlıyoruz.
+        public virtual List<ProfileListTable> Profile { get; set; }//many to many ilişki için
     }
 }
