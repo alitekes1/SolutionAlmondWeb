@@ -1,19 +1,6 @@
-﻿using AlmondWeb.DataAccessLayer.RepositoryPattern;
-using AlmondWeb.BusinessLayer.ViewModels;
+﻿using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Net.Mail;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Web.WebPages.Html;
-using System.Security.Cryptography.X509Certificates;
 
 namespace AlmondWeb.BusinessLayer
 {

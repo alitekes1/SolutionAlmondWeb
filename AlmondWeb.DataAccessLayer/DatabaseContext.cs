@@ -1,13 +1,5 @@
 ﻿using AlmondWeb.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlmondWeb.DataAccessLayer
 {
@@ -23,10 +15,10 @@ namespace AlmondWeb.DataAccessLayer
         public DbSet<ProfileTable> ProfileTables { get; set; }
         public DbSet<ContactTable> ContactTables { get; set; }
 
-        public AlmondUserTable FindwithExpresionOneToOneforProfileTable(Expression<Func<AlmondUserTable, bool>> expression)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            AlmondUserTable user = AlmondUserTables.Include(x => x.Id).Where(x => x.Id == 2).FirstOrDefault();
-            return user;
+            modelBuilder.Entity<ProfileListTable>()
+                .HasKey(value => new { value.profileId, value.listId });
         }
     }
 }

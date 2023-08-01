@@ -71,6 +71,26 @@
     <Compile Include="Migrations\202307301038532_migraiton1.designer.cs">
       <DependentUpon>202307301038532_migraiton1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308010920304_migrat.cs" />
+    <Compile Include="Migrations\202308010920304_migrat.designer.cs">
+      <DependentUpon>202308010920304_migrat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308010954171_mig41.cs" />
+    <Compile Include="Migrations\202308010954171_mig41.designer.cs">
+      <DependentUpon>202308010954171_mig41.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308011029515_migListdescription.cs" />
+    <Compile Include="Migrations\202308011029515_migListdescription.designer.cs">
+      <DependentUpon>202308011029515_migListdescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308011113413_manytomanyrelation.cs" />
+    <Compile Include="Migrations\202308011113413_manytomanyrelation.designer.cs">
+      <DependentUpon>202308011113413_manytomanyrelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308011210106_createProfilListTable.cs" />
+    <Compile Include="Migrations\202308011210106_createProfilListTable.designer.cs">
+      <DependentUpon>202308011210106_createProfilListTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Myinitiliazer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +130,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202307301038532_migraiton1.resx">
       <DependentUpon>202307301038532_migraiton1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308010920304_migrat.resx">
+      <DependentUpon>202308010920304_migrat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308010954171_mig41.resx">
+      <DependentUpon>202308010954171_mig41.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308011029515_migListdescription.resx">
+      <DependentUpon>202308011029515_migListdescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308011113413_manytomanyrelation.resx">
+      <DependentUpon>202308011113413_manytomanyrelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308011210106_createProfilListTable.resx">
+      <DependentUpon>202308011210106_createProfilListTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

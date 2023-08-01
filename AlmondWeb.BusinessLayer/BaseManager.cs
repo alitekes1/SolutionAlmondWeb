@@ -35,7 +35,6 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.List();
         }
-
         public List<T> ListwithExpression(Expression<Func<T, bool>> expression)
         {
             return repo.ListwithExpression(expression);
@@ -49,9 +48,6 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.FindwithExpression(expression);
         }
-        public AlmondUserTable FindwithExpresionOneToOneforProfileTable(Expression<Func<AlmondUserTable, bool>> expression)
-        {
-            return repo.FindwithExpresionOneToOneforProfileTable(expression);
-        }
+
     }
 }

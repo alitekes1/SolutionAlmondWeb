@@ -86,10 +86,6 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         {
             return database.Set<T>().Find(ownerId);
         }
-        public AlmondUserTable FindwithExpresionOneToOneforProfileTable(Expression<Func<AlmondUserTable, bool>> expression)
-        {
-            return database.FindwithExpresionOneToOneforProfileTable(expression);
-        }
         private DateTime getDate()
         {
             DateTime now = DateTime.Now.Date;
