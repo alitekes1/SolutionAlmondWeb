@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace AlmondWeb.WebApp
@@ -70,10 +66,20 @@ namespace AlmondWeb.WebApp
             );
             //TODO: user işlemleri bittikten sonra ilgli tanımlamalar yapılacak.
             routes.MapRoute(
-                name: "updateprofile",
-                url: "Profil-Guncelle",
-                defaults: new { controller = "User", action = "ProfileEdit", id = UrlParameter.Optional }
+                name: "updateprofile2",
+                url: "User/ProfileUpdate/{id}",
+                defaults: new { controller = "User", action = "ProfileUpdate", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "profileexplore",
+                url: "Liste-Kesfet",
+                defaults: new { controller = "User", action = "PublicList", id = UrlParameter.Optional }
+            );
+            //routes.MapRoute(
+            //    name: "updateprofile",
+            //    url: "Profil-Guncelle",
+            //    defaults: new { controller = "User", action = "ProfileUpdate", id = UrlParameter.Optional }
+            //);
             routes.MapRoute(
                 name: "publicprofile",
                 url: "Profilim",

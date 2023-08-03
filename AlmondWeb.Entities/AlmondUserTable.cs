@@ -30,6 +30,6 @@ namespace AlmondWeb.Entities
         public virtual List<AlmondDataTable> DataTables { get; set; }//bir user ın birden çok datası olacağı için list e şeklinde tanımlıyoruz ve bu liste virtual olmak zorunda.
         public virtual List<ListTable> ListTables { get; set; }//bir user ın birden fazla listesi olacağı için list şeklinde tanımlıyoruz ve bu liste virtual olmak zorunda.
         public virtual List<ContactTable> ContactTables { get; set; }//bir user ın birden fazla listesi olacağı için list şeklinde tanımlıyoruz ve bu liste virtual olmak zorunda.
-        public virtual ProfileTable ProfileTable { get; set; }
+
     }
 }

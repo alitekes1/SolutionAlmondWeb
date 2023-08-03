@@ -2,9 +2,13 @@
 @{
     ViewBag.Title = "PublicProfile";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
-    ProfileManager pm = new ProfileManager();
     int currentUserID = CacheHelper.CurrentUserID();
-    ProfileTable profile = pm.FindwithExpression(x => x.Id == currentUserID);
+
+    ProfileListManager lm = new ProfileListManager();
+    List<ProfileListTable> list = lm.RelationList(currentUserID);//current user a ait dataları listeliyoruz.
+
+    ProfileManager pm = new ProfileManager();
+    var user = pm.FindwithExpression(x => x.Id == currentUserID);
 }
 <link href="~/Content/AlmondCss/PublicProfile.css" rel="stylesheet" />
 <div class="row">
@@ -28,12 +32,12 @@
         <div class="profile-container">
             <div class="profile-sidebar">
                 <div class="desktop-sticky-top">
-                    <h4 class="text-start mx-5">@profile.Owner.Name @profile.Owner.Surname</h4>
-                    <div class="font-weight-600 mb-2 text-muted ms-5">@@@profile.Owner.Username</div>
+                    <h4 class="text-start mx-5">@user.Owner.Name    @user.Owner.Surname</h4>
+                    <div class="font-weight-600 mb-2 text-muted ms-5">@@@user.Owner.Username</div>
                     <p class="ms-5">
-                        @profile.aboutmeText
+                        @user.aboutmeText
                     </p>
-                    <div class="mb-3"><i class="fa fa-link ms-5 fa-fw text-muted"></i> <a class="text-dark" href="@profile.githubUrl">@profile.githubUrl</a></div>
+                    <div class="mb-3"><i class="fa fa-link ms-5 fa-fw text-muted"></i> <a class="text-dark" href="@user.websiteUrl">@user.websiteUrl</a></div>
                     <hr class="mb-4" />
                 </div>
             </div>
@@ -45,7 +49,7 @@
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab1" checked>
                 <label for="tab1" class="tabs__label text-center">Listelerim</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_MyListPartial")
+                    @Html.Partial("Partials/_MyListPartial", list)
                 </div>
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab2">
                 <label for="tab2" class="tabs__label text-center">Kaydettiğim Listeler</label>

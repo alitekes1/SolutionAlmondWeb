@@ -173,7 +173,7 @@
     <Compile Include="ErrorResult.cs" />
     <Compile Include="ListManager.cs" />
     <Compile Include="ProfileManager.cs" />
-    <Compile Include="ProfilListManager.cs" />
+    <Compile Include="ProfileListManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="UserManager.cs" />

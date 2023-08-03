@@ -1,11 +1,5 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Linq;
-using System.Web;
 
 namespace AlmondWeb.BusinessLayer.ViewModels
 {

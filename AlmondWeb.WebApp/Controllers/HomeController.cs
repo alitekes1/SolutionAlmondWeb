@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using System.Web.WebPages;
 
 namespace AlmondWeb.WebApp.Controllers
 {
@@ -192,7 +193,7 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public int UpdateList(string listName, int? id)
+        public int UpdateList(string listName, int? id, string listDesc, string listisPub)
         {
             if (id != null && !listName.IsNullOrWhiteSpace())
             {
@@ -200,6 +201,8 @@ namespace AlmondWeb.WebApp.Controllers
                 if (list != null)
                 {
                     list.listName = listName;
+                    list.listDescription = listDesc;
+                    list.isPublic = listisPub == "1" ? true : false;
                     int result = listManager.Update(list);
                     return result;
                 }
@@ -252,12 +255,14 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public int CreateList(string listNm)
+        public int CreateList(string listNm, string listDesc, string listisPub)
         {
             if (!listNm.IsNullOrWhiteSpace())
             {
                 ListTable newList = new ListTable();
                 newList.listName = listNm;
+                newList.listDescription = listDesc;
+                newList.isPublic = listisPub == "1" ? true : false;
                 newList.Owner = userManager.FindwithOwnerId(currentUserId);
                 int result = listManager.Insert(newList);
                 return result;

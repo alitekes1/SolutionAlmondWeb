@@ -146,6 +146,7 @@
     <Content Include="Content\AlmondCss\error.css" />
     <Content Include="Content\AlmondCss\footer.css" />
     <Content Include="Content\AlmondCss\index.css" />
+    <Content Include="Content\AlmondCss\Listcheckbox.css" />
     <Content Include="Content\AlmondCss\login_register.css" />
     <Content Include="Content\AlmondCss\navbar.css" />
     <Content Include="Content\AlmondCss\PrivateProfile.css" />
@@ -174,13 +175,19 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
-    <Content Include="Images\background\federico-respini-sYffw0LNr7s-unsplash.jpg" />
-    <Content Include="Images\background\janko-ferlic-QeCLpxSay5s-unsplash.jpg" />
-    <Content Include="Images\background\joel-holland-TRhGEGdw-YY-unsplash.jpg" />
-    <Content Include="Images\background\marek-piwnicki-uW6R5Raaz3M-unsplash.jpg" />
-    <Content Include="Images\background\marita-kavelashvili-ugnrXk1129g-unsplash.jpg" />
-    <Content Include="Images\background\nick-mollenbeck-coIQpWW5xjc-unsplash.jpg" />
-    <Content Include="Images\background\semih-aydin-PnTQ7-VqsGk-unsplash.jpg" />
+    <Content Include="Images\background\bg1.jpg" />
+    <Content Include="Images\background\bg10.jpg" />
+    <Content Include="Images\background\bg11.jpg" />
+    <Content Include="Images\background\bg12.jpg" />
+    <Content Include="Images\background\bg13.jpg" />
+    <Content Include="Images\background\bg2.jpg" />
+    <Content Include="Images\background\bg9.jpg" />
+    <Content Include="Images\background\bg4.jpg" />
+    <Content Include="Images\background\bg5.jpg" />
+    <Content Include="Images\background\bg6.jpg" />
+    <Content Include="Images\background\bg7.jpg" />
+    <Content Include="Images\background\bg8.jpg" />
+    <Content Include="Images\background\contactimg.jpg" />
     <Content Include="Images\person-4.png" />
     <Content Include="Images\userPerson.jpg" />
     <Content Include="favicon.ico" />
@@ -191,11 +198,9 @@
     <Content Include="Images\logo\almondLgo.png" />
     <Content Include="Images\logo\almondLogo1.png" />
     <Content Include="Images\logo\almondLogo1rmvbg.png" />
-    <Content Include="Images\background\contactimg.jpg" />
     <Content Include="Images\favicon\favicon.ico" />
     <Content Include="Images\favicon\favicon2.ico" />
     <Content Include="Images\logo\logoalmond.png" />
-    <Content Include="Images\background\sea.jpg" />
     <Content Include="Images\register_success.png" />
     <Content Include="Images\register_success2.png" />
     <Content Include="Images\success.png" />
@@ -257,13 +262,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\AlmondJs\index.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Images\background\bg1.jpg" />
-    <Content Include="Images\background\bg10.jpg" />
-    <Content Include="Images\background\bg3.jpg" />
-    <Content Include="Images\background\bg4.jpg" />
-    <Content Include="Images\background\bg5.jpg" />
-    <Content Include="Images\background\bg6.jpg" />
-    <Content Include="Images\background\bg8.jpg" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
@@ -301,10 +299,11 @@
     <Content Include="Views\Shared\Partials\_DeleteDataTable.cshtml" />
     <Content Include="Views\User\PrivateProfile.cshtml" />
     <Content Include="Views\User\PublicProfile.cshtml" />
-    <Content Include="Views\User\ProfileEdit.cshtml" />
+    <Content Include="Views\User\ProfileUpdate.cshtml" />
     <Content Include="Views\Shared\Partials\_MyListPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SavedListPartial.cshtml" />
     <Content Include="Views\User\PublicList.cshtml" />
+    <Content Include="Views\Shared\Partials\_PublicListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

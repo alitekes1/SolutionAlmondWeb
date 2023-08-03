@@ -15,8 +15,8 @@ namespace AlmondWeb.Entities
         public string listDescription { get; set; }
         [Required]
         public bool isPublic { get; set; }
-        public virtual List<AlmondDataTable> DataTables { get; set; }//çokları liste halinde tanımlıyoruz
         public virtual AlmondUserTable Owner { get; set; }//her listenin bir tane user ı olacağı için sanal bir property olarak tanımlıyoruz.
-        public virtual List<ProfileListTable> Profile { get; set; }//many to many ilişki için
+        public virtual List<AlmondDataTable> DataTables { get; set; }//çokları liste halinde tanımlıyoruz
+        public virtual List<ProfileListTable> List { get; set; }//many to many ilişki için
     }
 }

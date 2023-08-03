@@ -1,48 +1,52 @@
-﻿@using AlmondWeb.Entities
-@{
+﻿@{
     int currentUserID = CacheHelper.CurrentUserID();
-    ProfilListManager plm = new ProfilListManager();
-    List<ProfileListTable> list = plm.ListwithExpression(x => x.profile.Owner.Id == currentUserID);
-    ProfilListManager um = new ProfilListManager();
-    //List<ProfileListTable> list2 = um.FindwithExpression()
-    //select* from ProfileListTables inner join ListTables on ProfileListTables.listId = ListTables.Id inner join AlmondUserTables on AlmondUserTables.Id = ProfileListTables.profileId inner join ProfileTables on ProfileTables.Id = ProfileListTables.profileId
 
-
+    ProfileListManager plm1 = new ProfileListManager();
+    var list = plm1.RelationList(currentUserID);
 }
 <link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
 <div class="row  ">
     @foreach (var item in list)
     {
-        <div class="col-sm-4  mt-3 d-flex justify-content-center">
+        <div class="col-sm-4 mt-3 d-flex justify-content-center">
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        @*@if (item.> 13)
-                            {
+                        @if (item.List.listName.Length > 18)
+                        {
 
-                                <p title="@item.list.listName" class="title text-danger">@item.list.listName.Substring(0, 11)...</p>
-                            }
-                            else
-                            {
-                                <p class="title text-danger">@item.list.listName</p>
-                            }
-                            <p>@@@item.profile.Owner.Username</p>
-                            @if (!item.list.listDescription.IsEmpty())
-                            {
-                                <p> @item.list.listDescription</p>
-                            }
-                            else
-                            {
-                                <p>Açıklama eklenmemiş.</p>
-                            }*@
+                            <p title="@item.List.listName" class="title text-danger text-sm-center ">@item.List.listName.Substring(0, 15)...</p>
+                        }
+                        else
+                        {
+                            <p class="title text-danger">@item.List.listName</p>
+                        }
+                        <p>@@@item.List.Owner.Username</p>
+                        @if (!item.List.listDescription.IsEmpty())
+                        {
+                            <p> @item.List.listDescription</p>
+                        }
+                        else
+                        {
+                            <p>@string.Empty</p>
+                        }
                     </div>
-                    <div class="flip-card-back">
-                        <p class="text-dark mx-2 text-start">
-                            Oluşturan:<a href="#" class="text-dark-emphasis" title="@item.profile.Owner.Username adlı hesaba git.">@@@item.profile.Owner.Username</a>
-                        </p>
-                        <p class="text-dark mx-3 text-start">Toplam Kaydedilme :@item.profile.List.Count()</p>
-                        <p class="text-dark mx-3 text-start">Toplam Veri Adedi:15</p>
-                        <a href="/Liste-Islemleri" class="btn btn-dark btn-sm mx-3">Kaldır</a>
+                    <div class="flip-card-back ">
+                        <label class="backListName mx-2 fs-5 text-center">@item.List.listName</label><hr />
+                        <span style="font-size:15px" class="backside text-dark text-start mx-2">
+                            Sahibi:
+                            <a href="#" class="text-dark" title="@item.List.Owner.Username adlı hesaba git.">
+                                @@@item.List.Owner.Username
+                            </a>
+                        </span>
+                        <label class="text-dark backside mx-2 text-start">Toplam Kaydedilme :2</label>
+                        <label class="text-dark backside mx-2 text-start">Toplam Veri Adedi:@item.List.DataTables.Count()</label>
+                        <a href="/Liste-Islemleri" class="btn btn-dark mx-5 my-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
+                            </svg>
+                            <label class="small">Kaldır</label>
+                        </a>
                     </div>
                 </div>
             </div>

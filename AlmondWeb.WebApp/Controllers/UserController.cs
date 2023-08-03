@@ -1,11 +1,7 @@
 ﻿using AlmondWeb.BusinessLayer;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.ModelBinding;
+using System.Collections.Specialized;
 using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
@@ -14,9 +10,39 @@ namespace AlmondWeb.WebApp.Controllers
     public class UserController : Controller
     {
         private ProfileManager pm = new ProfileManager();
+        private UserManager um = new UserManager();
+        public ActionResult CreateProfile(int? id)
+        {
+            if (id != null)
+            {
+                if (pm.CreateProfil(id) > 0)
+                {
+                    return RedirectToAction(nameof(ProfileUpdate), id);
+                }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
+
         public ActionResult PrivateProfile()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult PrivateProfile(int id)
+        {
+            var ishaveprofil = pm.FindwithExpression(x => x.Id == id);
+            if (ishaveprofil != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(nameof(CreateProfile), id);
+            }
         }
         public ActionResult ProfileEdit()
         {
@@ -27,9 +53,14 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult ProfileUpdate()
+        public ActionResult ProfileUpdate(int? id)
         {
-            return View();
+            ProfileTable profil = pm.FindwithExpression(x => x.Owner.Id == id);
+            if (profil != null)
+            {
+                return View(profil);
+            }
+            return RedirectToAction(nameof(PrivateProfile));
         }
         [HttpPost]
         public ActionResult ProfileUpdate(ProfileModal profile)
@@ -56,7 +87,7 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpPost]
         public ActionResult PublicList(ProfileListTable list)
         {
-            
+
             return View();
         }
     }

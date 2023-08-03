@@ -1,13 +1,11 @@
-﻿using AlmondWeb.DataAccessLayer.RepositoryPattern;
-using AlmondWeb.Core.DataAccess;
+﻿using AlmondWeb.Core.DataAccess;
+using AlmondWeb.DataAccessLayer.RepositoryPattern;
 using AlmondWeb.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlmondWeb.BusinessLayer
 {
@@ -48,6 +46,13 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.FindwithExpression(expression);
         }
-
+        public List<ProfileListTable> RelationList(int userId)
+        {
+            return repo.RelationList(userId);
+        }
+        public List<ProfileListTable> RelationListAll(int userId)
+        {
+            return repo.RelationListAll(userId);
+        }
     }
 }

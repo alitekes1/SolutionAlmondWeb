@@ -21,9 +21,9 @@ namespace AlmondWeb.BusinessLayer.ViewModels
         public string githubUrl { get; set; }
         [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Almond Profil Adresi")]
         public string almondUrl { get; set; }
-        [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Linkedin Adresi")]
+        [StringLength(maximumLength: 75, MinimumLength = 3), DisplayName("Linkedin Adresi")]
         public string linkedinUrl { get; set; }
-        [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Bağlantı Adresi")]
+        [StringLength(maximumLength: 75, MinimumLength = 3), DisplayName("Bağlantı Adresi")]
         public string websiteUrl { get; set; }
         [Required, StringLength(maximumLength: 250, MinimumLength = 10), DisplayName("Hakkımda")]
         public string aboutmeText { get; set; }

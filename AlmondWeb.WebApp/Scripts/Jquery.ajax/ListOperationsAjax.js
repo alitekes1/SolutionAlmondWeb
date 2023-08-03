@@ -1,15 +1,55 @@
 ﻿var table = $("#example");
+$(document).ready(function () {
+    $("#checkbox1").click(function () {
+        if ($(this).is(":checked")) {
+            $(this).val(1);
+        } else {
+            $(this).val(0);
+        }
+    });
+    $("#checkbox2").click(function () {
+        if ($(this).is(":checked")) {
+            $(this).val(1);
+        } else {
+            $(this).val(0);
+        }
+    });
+});
 
-function transfertoUpdateData(lstnm, id) {
+document.getElementById("confirmBtnCreateList").addEventListener("click", function () {
+    var listName = $("#inputTextCreateList").val();
+    var listDescription = $("#listDescriptionTextArea").val();
+    var listisPublic = $("#checkbox1").val();
+    $.ajax({
+        method: "POST",
+        url: '/Home/CreateList',
+        data: { listNm: listName, listDesc: listDescription, listisPub: listisPublic },
+        success: function (result) {
+            if (result > 0) {
+                //TODO:işlem başarılı toastr çıkacak.
+                ReLoadListData();
+                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!");
+            } else {
+                alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
+            }
+        },
+        complete: function () {
+            $("#closeBtnCreateList").click();
+        }
+    });
+});
+function transfertoUpdateData(lstnm, idValue) {
     let listContent = document.getElementById("inputTextUpdateList");
     listContent.value = lstnm;
 
     document.getElementById("confirmBtnUpdateList").addEventListener("click", function () {
         var listNme = $("#inputTextUpdateList").val();
+        var listDescription = $("#ListdescriptionTextAreaUpdate").val();
+        var listisPublic = $("#checkbox2").val();
         $.ajax({
             method: "POST",
-            url: '/Home/UpdateList/' + id,
-            data: { listName: listNme },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
+            url: '/Home/UpdateList',
+            data: { listName: listNme, id: idValue, listDesc: listDescription, listisPub: listisPublic },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
             success: function (result) {
                 if (result > 0) {
                     ReLoadListData();
@@ -49,26 +89,7 @@ function transfertoDeleteData(data, idM) {
         });
     });
 };
-document.getElementById("confirmBtnCreateList").addEventListener("click", function () {
-    var listName = $("#inputTextCreateList").val();
-    $.ajax({
-        method: "POST",
-        url: '/Home/CreateList',
-        data: { listNm: listName },
-        success: function (result) {
-            if (result > 0) {
-                //TODO:işlem başarılı toastr çıkacak.
-                ReLoadListData();
-                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!");
-            } else {
-                alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
-            }
-        },
-        complete: function () {
-            $("#closeBtnCreateList").click();
-        }
-    });
-});
+
 
 function ReLoadListData() {
     $.ajax({
