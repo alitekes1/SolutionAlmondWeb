@@ -15,7 +15,5 @@ function isSelectedList() {
 };
 $(document).ready(function () {
     var dropdown = document.getElementById("liste-dropdown");
-
-    // İlk öğeyi devre dışı bırak
     dropdown.options[0].disabled = true;
 })

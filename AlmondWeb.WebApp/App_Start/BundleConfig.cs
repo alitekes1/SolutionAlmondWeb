@@ -22,10 +22,15 @@ namespace AlmondWeb.WebApp
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
                       "~/Content/bootsrap.min.css"
                       ));
 
+            bundles.Add(new StyleBundle("~/Content/profileCss").Include(
+                "~/Content/AlmondCss/ProfileLists.css",
+                "~/Content/AlmondCss/content.css",
+                "~/Content/AlmondCss/Listcheckbox.css",
+                "~/Content/AlmondCss/PrivateProfile.css"
+                ));
 
             bundles.Add(new StyleBundle("~/allCss").Include(
                 "~/Content/AlmondCss/index.css",
@@ -33,7 +38,7 @@ namespace AlmondWeb.WebApp
                 "~/Content/AlmondCss/footer.css",
                 "~/Content/AlmondCss/shortcuts.css",
                 "~/Content/AlmondCss/AllButtons.css",
-                "~/Content/toastr.min.css"
+                "~/Content/AlmondCss/ListCheckbox.css"
                 ));
             bundles.Add(new ScriptBundle("~/allJs").Include(
                 "~/Scripts/jquery-3.7.0.min.js",

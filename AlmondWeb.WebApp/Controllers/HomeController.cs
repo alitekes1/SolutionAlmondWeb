@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Services.Protocols;
 using System.Web.UI.WebControls;
-using System.Web.WebPages;
 
 namespace AlmondWeb.WebApp.Controllers
 {
@@ -17,6 +17,7 @@ namespace AlmondWeb.WebApp.Controllers
         private UserManager userManager = new UserManager();
         private DataManager dataManager = new DataManager();
         private ListManager listManager = new ListManager();
+        private ContactManager contactManager = new ContactManager();
         public int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
         private static int i = -1;
         public ActionResult MainPage()
@@ -271,13 +272,6 @@ namespace AlmondWeb.WebApp.Controllers
         }
         public ActionResult AllData()
         {
-            //return new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(
-            //   new
-            //   {
-            //       action = "MainPage",
-            //       controller = "Home"
-            //   }));
-
             return View();
         }
         public ActionResult ListOperations()
@@ -290,6 +284,17 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
 
+        [HttpPost, AllowAnonymous]
+        public int Contact(ContactTable contact)
+        {
+            if (contact != null)
+            {
+                int result = contactManager.Insert(contact);
+                return result;
+            }
+            else { return -1; }
+        }
+
         [AllowAnonymous]
         public ActionResult Error()
         {
@@ -300,15 +305,27 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        //public JavaScriptResult HelloWorld()
-        //{
-        //    string js = " function puanValue (){ alert('HelloWorld')}";
-        //    return JavaScript(js);
-        //}
+        [AllowAnonymous, HttpGet]
         public PartialViewResult SuggestNewFeature()
         {
             return PartialView("Partials/_SuggestNewFeaturePartial");
         }
+        [HttpPost]
+        public int SuggestNewFeature(ContactTable suggest)
+        {
+            if (suggest != null)
+            {
+                suggest.contactType = "--Tavsiye--";
+                int result = contactManager.Insert(suggest);
+                return result;
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
+        [AllowAnonymous]
         public PartialViewResult Shortcuts()
         {
             return PartialView("Partials/_ShortcutsPartial");

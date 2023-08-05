@@ -302,7 +302,7 @@
     <Content Include="Views\User\ProfileUpdate.cshtml" />
     <Content Include="Views\Shared\Partials\_MyListPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SavedListPartial.cshtml" />
-    <Content Include="Views\User\PublicList.cshtml" />
+    <Content Include="Views\User\PublicAllList.cshtml" />
     <Content Include="Views\Shared\Partials\_PublicListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>

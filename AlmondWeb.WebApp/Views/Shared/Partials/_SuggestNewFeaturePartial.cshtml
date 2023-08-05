@@ -1,4 +1,4 @@
-﻿
+﻿@model ContactTable
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content ">
@@ -6,25 +6,45 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Yeni Özellik Öner?</h1><br /><br />
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <h6>
-                    AlmondWeb'de görmek istediğin yeni geliştirmelerin, fikirlerin varsa paylaş! Öneri konusunda ise tamamen özgürsün :)
-                </h6>
-                <form>
+            @using (Ajax.BeginForm("SuggestNewFeature", "Home", new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "clearTextBox",
+                OnFailure = "failmessage"
+            }))
+            {
+                <div class="modal-body">
+                    <h6>
+                        AlmondWeb'de görmek istediğin yeni geliştirmelerin, fikirlerin varsa paylaş! Öneri konusunda ise tamamen özgürsün :)
+                    </h6>
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">E-mail</label>
-                        <input type="text" class="form-control" required placeholder="Geri dönüş bu mail adresine yapılacaktır" autofocus id="recipient-name">
+                        @Html.TextBoxFor(x => x.contactMail, new { @class = "form-control", placeholder = "Email", type = "email", required = "required", id = "email" })
                     </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Öneri:</label>
-                        <textarea class="form-control" required cols="30" rows="10" placeholder="Mesaj" id="message-text"></textarea>
+
+                    <div class="input-group">
+                        @Html.TextAreaFor(x => x.message, new { @class = "form-control", id = "message", required = "required", maxlength = "600", rows = 10, cols = 30, style = "resize:none", placeholder = "Mesajınız minumum 10, maksimum 500 karakter olmalıdır." })
                     </div>
-                </form>
-                <h6 class="small">Örnek Öneri: Oluşturulan listeleri uygulama kullanan diğer kişiler ile paylaşabilmek.</h6>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success">Gönder</button>
-            </div>
+                    <input type="reset" style="display:none" id="resetButtonSuggest" />
+                    <h6 class="small mt-2">Örnek Öneri: Oluşturulan listeleri uygulama kullanan diğer kişiler ile paylaşabilmek.</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnclosesuggest" data-bs-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-success">Gönder</button>
+                </div>
+            }
         </div>
     </div>
 </div>
+
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+<script>
+    function clearTextBox() {
+        $("#btnclosesuggest").click();
+        $("#resetButtonSuggest").click();
+        toastr.success('Mesajınız başarıyla gönderildi .', 'İşlem başarılı', 1000);
+    } function failmessage() {
+        $("#btnclosesuggest").click();
+        $("#resetButtonSuggest").click();
+        toastr.danger('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', 1000);
+    }
+</script>

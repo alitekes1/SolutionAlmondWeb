@@ -1,7 +1,6 @@
 ﻿using AlmondWeb.BusinessLayer;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
-using System.Collections.Specialized;
 using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
@@ -11,51 +10,39 @@ namespace AlmondWeb.WebApp.Controllers
     {
         private ProfileManager pm = new ProfileManager();
         private UserManager um = new UserManager();
-        public ActionResult CreateProfile(int? id)
+        private int currentUserID = CacheHelper.CacheHelper.CurrentUserID();
+
+        public ActionResult CreateProfile()
         {
-            if (id != null)
+            if (pm.CreateProfil(currentUserID) > 0)
             {
-                if (pm.CreateProfil(id) > 0)
-                {
-                    return RedirectToAction(nameof(ProfileUpdate), id);
-                }
-                return View();
+                return RedirectToAction(nameof(ProfileUpdate), currentUserID);
             }
             else
             {
                 return RedirectToAction("Login", "Home");
             }
         }
-
         public ActionResult PrivateProfile()
         {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult PrivateProfile(int id)
-        {
-            var ishaveprofil = pm.FindwithExpression(x => x.Id == id);
+            var ishaveprofil = pm.FindwithExpression(x => x.Id == currentUserID);
             if (ishaveprofil != null)
             {
                 return View();
             }
             else
             {
-                return RedirectToAction(nameof(CreateProfile), id);
+                return RedirectToAction(nameof(CreateProfile), currentUserID);
             }
-        }
-        public ActionResult ProfileEdit()
-        {
-            return View();
         }
         public ActionResult PublicProfile()
         {
             return View();
         }
         [HttpGet]
-        public ActionResult ProfileUpdate(int? id)
+        public ActionResult ProfileUpdate()
         {
-            ProfileTable profil = pm.FindwithExpression(x => x.Owner.Id == id);
+            ProfileTable profil = pm.FindwithExpression(x => x.Owner.Id == currentUserID);
             if (profil != null)
             {
                 return View(profil);
@@ -80,15 +67,16 @@ namespace AlmondWeb.WebApp.Controllers
             return RedirectToAction(nameof(PrivateProfile));
         }
         [HttpGet]
-        public ActionResult PublicList()
+        public ActionResult PublicAllList()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult PublicList(ProfileListTable list)
+        public ActionResult PublicAllList(ProfileListTable list)
         {
 
             return View();
         }
+
     }
 }

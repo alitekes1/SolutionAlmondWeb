@@ -50,6 +50,7 @@
     background: linear-gradient(120deg, rgb(255, 174, 145) 30%, coral 88%, bisque 40%, rgb(255, 185, 160) 78%);
     color: white;
     transform: rotateY(180deg);
+    font-size: 14px;
 }
 
 .backside {

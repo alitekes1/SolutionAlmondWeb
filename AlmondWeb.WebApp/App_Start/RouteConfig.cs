@@ -73,7 +73,7 @@ namespace AlmondWeb.WebApp
             routes.MapRoute(
                 name: "profileexplore",
                 url: "Liste-Kesfet",
-                defaults: new { controller = "User", action = "PublicList", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "PublicAllList", id = UrlParameter.Optional }
             );
             //routes.MapRoute(
             //    name: "updateprofile",

@@ -5,10 +5,10 @@ namespace AlmondWeb.BusinessLayer.ViewModels
 {
     public class RegisterModel
     {
-        [DisplayName("Kullanıcı Ad"), Required, MinLength(2, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(20, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.Text)]
+        [DisplayName("Kullanıcı Ad"), Required, MinLength(8, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(15, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.Text)]
         public string username { get; set; }
 
-        [DisplayName("Ad"), Required, MinLength(2, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(20, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.Text)]
+        [DisplayName("Ad"), Required, MinLength(2, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(25, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.Text)]
         public string name { get; set; }
 
         [DisplayName("Soyad"), Required, MinLength(2, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(25, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.Text)]

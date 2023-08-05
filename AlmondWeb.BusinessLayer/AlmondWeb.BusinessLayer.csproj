@@ -168,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
+    <Compile Include="ContactManager.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Deneme.cs" />
     <Compile Include="ErrorResult.cs" />

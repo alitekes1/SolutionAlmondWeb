@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Proifili Düzenle";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
-    ProfileManager pm = new ProfileManager();
-    int currentUserID = CacheHelper.CurrentUserID();
 
+    int currentUserID = CacheHelper.CurrentUserID();
+    ProfileManager pm = new ProfileManager();
     ProfileTable user = pm.FindwithExpression(x => x.Id == currentUserID);
 }
 <link href="~/Content/AlmondCss/PrivateProfile.css" rel="stylesheet" />

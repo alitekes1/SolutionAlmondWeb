@@ -86,7 +86,8 @@
                     iconClass: getOptions().iconClasses.success,
                     message: message,
                     optionsOverride: optionsOverride,
-                    title: title
+                    title: title,
+                    closeButton: setCloseButton()
                 });
             }
 

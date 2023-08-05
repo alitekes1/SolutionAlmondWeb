@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AlmondWeb.Entities
@@ -20,9 +15,8 @@ namespace AlmondWeb.Entities
         [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Konu"), Required]
         public string contactType { get; set; }
 
-        [Required, StringLength(maximumLength: 250, MinimumLength = 10), DisplayName("Mesaj")]
+        [Required, StringLength(maximumLength: 500, MinimumLength = 10), DisplayName("Mesaj")]
         public string message { get; set; }
 
-        public virtual AlmondUserTable Owner { get; set; }
     }
 }
