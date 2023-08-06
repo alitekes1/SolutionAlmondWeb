@@ -304,6 +304,8 @@
     <Content Include="Views\Shared\Partials\_SavedListPartial.cshtml" />
     <Content Include="Views\User\PublicAllList.cshtml" />
     <Content Include="Views\Shared\Partials\_PublicListPartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_Saved_PublicListsPartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_deneme.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

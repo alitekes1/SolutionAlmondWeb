@@ -9,13 +9,13 @@ namespace AlmondWeb.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Mail Adresi"), Required]
+        [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Mail Adresi")]
         public string contactMail { get; set; }
 
-        [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Konu"), Required]
+        [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Konu")]
         public string contactType { get; set; }
 
-        [Required, StringLength(maximumLength: 500, MinimumLength = 10), DisplayName("Mesaj")]
+        [StringLength(maximumLength: 500, MinimumLength = 10), DisplayName("Mesaj")]
         public string message { get; set; }
 
     }

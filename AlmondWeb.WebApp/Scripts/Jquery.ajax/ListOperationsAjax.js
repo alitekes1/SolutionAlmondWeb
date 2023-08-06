@@ -26,9 +26,8 @@ document.getElementById("confirmBtnCreateList").addEventListener("click", functi
         data: { listNm: listName, listDesc: listDescription, listisPub: listisPublic },
         success: function (result) {
             if (result > 0) {
-                //TODO:işlem başarılı toastr çıkacak.
                 ReLoadListData();
-                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!");
+                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!",1500);
             } else {
                 alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
             }
@@ -53,7 +52,7 @@ function transfertoUpdateData(lstnm, idValue) {
             success: function (result) {
                 if (result > 0) {
                     ReLoadListData();
-                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!");
+                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!",1500);
                 }
                 else {
                     alert("Liste güncelleme sırasında bir hata meyda geldi.");//TODO:sayfa otomatik olarak yenilenecek.
@@ -75,9 +74,8 @@ function transfertoDeleteData(data, idM) {
             url: '/Home/DeleteList/' + idM,
             success: function (result) {
                 if (result > 0) {
-                    //TODO:işlem başarılı toastr çıkacak.
                     ReLoadListData();
-                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!");
+                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!",1500);
                 }
                 else {
                     return alert("işlem başarısız:(");

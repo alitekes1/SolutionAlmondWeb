@@ -1,0 +1,76 @@
+﻿@model List<ProfileListTable>
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-3 mt-3 d-flex justify-content-center">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    @if (item.List.listName.Length > 18)
+                    {
+
+                        <p title="@item.List.listName" class="title text-danger text-sm-center ">@item.List.listName.Substring(0, 15)...</p>
+                    }
+                    else
+                    {
+                        <p class="title text-danger">@item.List.listName</p>
+                    }
+                    <p>@@@item.List.Owner.Username</p>
+                    @if (!item.List.listDescription.IsEmpty())
+                    {
+                        <p> @item.List.listDescription</p>
+                    }
+                    else
+                    {
+                        <p>@string.Empty</p>
+                    }
+                </div>
+                <div class="flip-card-back ">
+                    <label class="backListName mx-2 fs-5 text-center">@item.List.listName</label><hr />
+                    @{
+                        int totalSaved = item.List.List.Count() - 1;
+                    }
+                    <span class="backside text-dark text-start mx-2 my-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 384 512"><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" /></svg>
+                        <label class="text-dark">Toplam Kaydedilme : @totalSaved</label>
+                    </span>
+
+                    <span class="backside text-dark text-start mx-2 my-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z" /></svg>
+                        <label class="text-dark">Toplam Veri Adedi : @item.Owner.DataTables.Count()</label>
+                    </span>
+
+                    <span style="font-size:15px" class="text-start mx-2 my-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" /></svg>
+                        <label class="text-dark">Yazar:</label>
+                        <a href="#" class="text-dark" title="@item.List.Owner.Username adlı profile git.">
+                            @item.List.Owner.Username
+                        </a>
+                    </span>
+                    <button class="btn btn-dark mx-5 my-2" onclick="SaveOtherList('@item.List.Id')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
+                        </svg>
+                        <span class="small">@ViewData["cardButtonText"]</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+
+    function SaveOtherList(lstid) {
+        $.ajax({
+            method: "POST",
+            url: '/User/SaveOtherList',
+            data: { listId: lstid },
+            success: function (result) {
+                if (result > 0) {
+                    toastr.success("Liste kaydedilmiştir.", "İşlem Başarılı", 500)
+                }
+            }
+        });
+    }
+
+</script>

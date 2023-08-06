@@ -1,6 +1,7 @@
 ﻿using AlmondWeb.BusinessLayer;
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
@@ -9,7 +10,9 @@ namespace AlmondWeb.WebApp.Controllers
     public class UserController : Controller
     {
         private ProfileManager pm = new ProfileManager();
+        private ProfileListManager plm = new ProfileListManager();
         private UserManager um = new UserManager();
+        private ListManager lm = new ListManager();
         private int currentUserID = CacheHelper.CacheHelper.CurrentUserID();
 
         public ActionResult CreateProfile()
@@ -67,16 +70,16 @@ namespace AlmondWeb.WebApp.Controllers
             return RedirectToAction(nameof(PrivateProfile));
         }
         [HttpGet]
-        public ActionResult PublicAllList()
+        public ActionResult PublicAllList()//TODO: liste paylaşma hakkında SSS hazırlanacak. acordion şeklinde
         {
-            return View();
+            List<ProfileListTable> list = plm.RelationListAll(currentUserID);//current user a ait dataları listeliyoruz.
+            return View(list);
         }
         [HttpPost]
-        public ActionResult PublicAllList(ProfileListTable list)
+        public ActionResult PublicAllList(string searchText)
         {
-
-            return View();
+            List<ProfileListTable> list = plm.FindRelotionList(searchText, currentUserID);
+            return View(list);
         }
-
     }
 }

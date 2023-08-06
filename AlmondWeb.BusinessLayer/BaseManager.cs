@@ -3,8 +3,6 @@ using AlmondWeb.DataAccessLayer.RepositoryPattern;
 using AlmondWeb.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace AlmondWeb.BusinessLayer
@@ -53,6 +51,10 @@ namespace AlmondWeb.BusinessLayer
         public List<ProfileListTable> RelationListAll(int userId)
         {
             return repo.RelationListAll(userId);
+        }
+        public List<ProfileListTable> FindRelotionList(string text, int userid)
+        {
+            return repo.FindRelotionList(text, userid);
         }
     }
 }

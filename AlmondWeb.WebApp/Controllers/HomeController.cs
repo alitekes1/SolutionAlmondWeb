@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Web.Services.Protocols;
 using System.Web.UI.WebControls;
 
 namespace AlmondWeb.WebApp.Controllers
@@ -18,6 +17,8 @@ namespace AlmondWeb.WebApp.Controllers
         private DataManager dataManager = new DataManager();
         private ListManager listManager = new ListManager();
         private ContactManager contactManager = new ContactManager();
+        private ProfileManager profileManager = new ProfileManager();
+        private ProfileListManager profileListManager = new ProfileListManager();
         public int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
         private static int i = -1;
         public ActionResult MainPage()
@@ -188,28 +189,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return View(data);
         }
-        [HttpGet]
-        public ActionResult UpdateList()
-        {
-            return View();
-        }
-        [HttpPost]
-        public int UpdateList(string listName, int? id, string listDesc, string listisPub)
-        {
-            if (id != null && !listName.IsNullOrWhiteSpace())
-            {
-                ListTable list = listManager.FindwithExpression(x => x.Id == id && !x.isDeleted);
-                if (list != null)
-                {
-                    list.listName = listName;
-                    list.listDescription = listDesc;
-                    list.isPublic = listisPub == "1" ? true : false;
-                    int result = listManager.Update(list);
-                    return result;
-                }
-            }
-            return -1;
-        }
+
         [HttpGet]
         public ActionResult DeleteData()
         {
@@ -231,6 +211,31 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
         [HttpGet]
+        public ActionResult CreateList()
+        {
+            return View();
+        }
+        [HttpPost]
+        public int CreateList(string listNm, string listDesc, string listisPub)
+        {
+            if (!listNm.IsNullOrWhiteSpace())
+            {
+                ListTable newList = new ListTable();
+                newList.listName = listNm;
+                newList.listDescription = listDesc;
+                newList.isPublic = listisPub == "1" ? true : false;
+                newList.Owner = userManager.FindwithOwnerId(currentUserId);
+                int result = listManager.Insert(newList);
+                if (newList.isPublic)
+                {
+                    InserttoProfileListTable(newList.Id);
+                }
+                return result;
+            }
+            return -1;
+        }
+
+        [HttpGet]
         public ActionResult DeleteList()
         {
             return View();
@@ -251,29 +256,51 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
         [HttpGet]
-        public ActionResult CreateList()
+        public ActionResult UpdateList()
         {
             return View();
         }
         [HttpPost]
-        public int CreateList(string listNm, string listDesc, string listisPub)
+        public int UpdateList(string listName, int? id, string listDesc, string listisPub)
         {
-            if (!listNm.IsNullOrWhiteSpace())
+            if (id != null && !listName.IsNullOrWhiteSpace())
             {
-                ListTable newList = new ListTable();
-                newList.listName = listNm;
-                newList.listDescription = listDesc;
-                newList.isPublic = listisPub == "1" ? true : false;
-                newList.Owner = userManager.FindwithOwnerId(currentUserId);
-                int result = listManager.Insert(newList);
-                return result;
+                ListTable list = listManager.FindwithExpression(x => x.Id == id);
+                if (list != null)
+                {
+                    list.listName = listName;
+                    list.listDescription = listDesc;
+                    list.isPublic = listisPub == "1" ? true : false;
+                    if (list.isPublic)
+                    {
+                        InserttoProfileListTable(id);
+                    }
+                    int result = listManager.Update(list);
+                    return result;
+                }
             }
             return -1;
         }
+        public int InserttoProfileListTable(int? listId)
+        {
+            if (listId != null)
+            {
+                ProfileListTable profileList = new ProfileListTable();
+                profileList.profileId = currentUserId;
+                profileList.listId = listId.Value;
+                profileList.Owner = listManager.FindwithExpression(x => x.Id == listId).Owner;//liste sahibini verdik
+
+
+                return profileListManager.Insert(profileList);
+            }
+            else { return -1; }
+        }
+
         public ActionResult AllData()
         {
             return View();
         }
+        //TODO:kullanıcıların listelerim sayfasında kaydettiği listeler bulunmayacak. diğer yerlerda bulunacak.
         public ActionResult ListOperations()
         {
             return View();

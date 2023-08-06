@@ -80,3 +80,7 @@
 input, select, textarea {
     max-width: none !important;
 }
+
+main.container-fluid {
+    min-height: 640px;
+}

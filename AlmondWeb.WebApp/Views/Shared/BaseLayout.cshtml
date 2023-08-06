@@ -56,7 +56,9 @@
                                     </li>
                                     <li class="nav-item dropdown ">
                                         <a class="nav-link active" id="navbarDropdown" href="/Liste-Islemleri">Liste İşlemleri</a>
-
+                                    </li>
+                                    <li class="nav-item dropdown ">
+                                        <a class="nav-link active" id="navbarDropdown" href="/Liste-Kesfet">Liste Keşfet</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="/Verilerim">Verilerim</a></li>
 
@@ -130,11 +132,11 @@
             </div>
         </div>
     </div>
-    @Html.Action("Shortcuts", "Home")
-    @Html.Action("SuggestNewFeature", "Home")
     <main class="container-fluid">
         @RenderBody()
     </main>
+    @Html.Action("Shortcuts", "Home")
+    @Html.Action("SuggestNewFeature", "Home")
 
     <footer>
         <!--start Footer-->
@@ -170,6 +172,7 @@
                 </div>
                 <div class="col-sm-3"></div>
             </div>
+        </div>
     </footer>
 </body>
 </html>
