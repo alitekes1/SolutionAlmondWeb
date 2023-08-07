@@ -55,41 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Migrations\202307292236513_mig3.cs" />
-    <Compile Include="Migrations\202307292236513_mig3.designer.cs">
-      <DependentUpon>202307292236513_mig3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202307292257167_mig4.cs" />
-    <Compile Include="Migrations\202307292257167_mig4.designer.cs">
-      <DependentUpon>202307292257167_mig4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202307300950047_miggr1.cs" />
-    <Compile Include="Migrations\202307300950047_miggr1.designer.cs">
-      <DependentUpon>202307300950047_miggr1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202307301038532_migraiton1.cs" />
-    <Compile Include="Migrations\202307301038532_migraiton1.designer.cs">
-      <DependentUpon>202307301038532_migraiton1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202308010920304_migrat.cs" />
-    <Compile Include="Migrations\202308010920304_migrat.designer.cs">
-      <DependentUpon>202308010920304_migrat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202308010954171_mig41.cs" />
-    <Compile Include="Migrations\202308010954171_mig41.designer.cs">
-      <DependentUpon>202308010954171_mig41.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202308011029515_migListdescription.cs" />
-    <Compile Include="Migrations\202308011029515_migListdescription.designer.cs">
-      <DependentUpon>202308011029515_migListdescription.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202308011113413_manytomanyrelation.cs" />
-    <Compile Include="Migrations\202308011113413_manytomanyrelation.designer.cs">
-      <DependentUpon>202308011113413_manytomanyrelation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202308011210106_createProfilListTable.cs" />
-    <Compile Include="Migrations\202308011210106_createProfilListTable.designer.cs">
-      <DependentUpon>202308011210106_createProfilListTable.cs</DependentUpon>
+    <Compile Include="Migrations\202308071853179_migFirst.cs" />
+    <Compile Include="Migrations\202308071853179_migFirst.designer.cs">
+      <DependentUpon>202308071853179_migFirst.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Myinitiliazer.cs" />
@@ -119,32 +87,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202307292236513_mig3.resx">
-      <DependentUpon>202307292236513_mig3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202307292257167_mig4.resx">
-      <DependentUpon>202307292257167_mig4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202307300950047_miggr1.resx">
-      <DependentUpon>202307300950047_miggr1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202307301038532_migraiton1.resx">
-      <DependentUpon>202307301038532_migraiton1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308010920304_migrat.resx">
-      <DependentUpon>202308010920304_migrat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308010954171_mig41.resx">
-      <DependentUpon>202308010954171_mig41.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308011029515_migListdescription.resx">
-      <DependentUpon>202308011029515_migListdescription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308011113413_manytomanyrelation.resx">
-      <DependentUpon>202308011113413_manytomanyrelation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202308011210106_createProfilListTable.resx">
-      <DependentUpon>202308011210106_createProfilListTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202308071853179_migFirst.resx">
+      <DependentUpon>202308071853179_migFirst.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

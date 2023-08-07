@@ -30,8 +30,8 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "Home", action = "UpdateData", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-                name: "listeislemleri",
-                url: "Liste-Islemleri",
+                name: "listeyonetimi",
+                url: "Liste-Yonetimi",
                 defaults: new { controller = "Home", action = "ListOperations", id = UrlParameter.Optional }
             );
             routes.MapRoute(

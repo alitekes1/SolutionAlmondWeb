@@ -3,7 +3,9 @@ using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using Microsoft.Ajax.Utilities;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
@@ -80,7 +82,7 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction(nameof(RegisterSuccess));
+                    return RedirectToAction(nameof(Login));
                 }
             }
             return View(model);
@@ -265,17 +267,13 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (id != null && !listName.IsNullOrWhiteSpace())
             {
-                ListTable list = listManager.FindwithExpression(x => x.Id == id);
-                if (list != null)
+                ProfListTable isThereList = profileListManager.FindwithExpression(x => x.profileId == currentUserId && x.listId == id);
+                if (isThereList != null)
                 {
-                    list.listName = listName;
-                    list.listDescription = listDesc;
-                    list.isPublic = listisPub == "1" ? true : false;
-                    if (list.isPublic)
-                    {
-                        InserttoProfileListTable(id);
-                    }
-                    int result = listManager.Update(list);
+                    isThereList.List.listName = listName;
+                    isThereList.List.listDescription = listDesc;
+                    isThereList.List.isPublic = listisPub == "1" ? true : false;
+                    int result = profileListManager.Update(isThereList);
                     return result;
                 }
             }
@@ -285,7 +283,7 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (listId != null)
             {
-                ProfileListTable profileList = new ProfileListTable();
+                ProfListTable profileList = new ProfListTable();
                 profileList.profileId = currentUserId;
                 profileList.listId = listId.Value;
                 profileList.Owner = listManager.FindwithExpression(x => x.Id == listId).Owner;//liste sahibini verdik

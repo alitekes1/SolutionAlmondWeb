@@ -1,11 +1,11 @@
 ﻿@using AlmondWeb.Entities
 @{
-    ViewBag.Title = "PublicProfile";
+    ViewBag.Title = "Profilim";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
     int currentUserID = CacheHelper.CurrentUserID();
 
     ProfileListManager lm = new ProfileListManager();
-    List<ProfileListTable> list = lm.RelationList(currentUserID);//current user a ait dataları listeliyoruz.
+    List<ProfListTable> list = lm.RelationList(currentUserID);//current user a ait dataları listeliyoruz.
 
     ProfileManager pm = new ProfileManager();
     var user = pm.FindwithExpression(x => x.Id == currentUserID);
@@ -19,7 +19,7 @@
                 <div class="col-sm-3">
                     <div class="profile-header-content">
                         <div class="profile-header-img">
-                            <img src="https://media.licdn.com/dms/image/D4D03AQHG7t_oX_6guA/profile-displayphoto-shrink_400_400/0/1666186436288?e=1696464000&v=beta&t=C1tn4PwprJVYdu_orxPoLxe5cmNEPmHJ5zIUtE_PgWM" alt="" />
+                            <img src="@user.profileImageUrl" alt="" />
                         </div>
                     </div>
                 </div>

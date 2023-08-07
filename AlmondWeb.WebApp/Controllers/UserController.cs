@@ -3,6 +3,8 @@ using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Razor.Parser.SyntaxTree;
+using System.Web.UI.WebControls;
 
 namespace AlmondWeb.WebApp.Controllers
 {
@@ -72,14 +74,26 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpGet]
         public ActionResult PublicAllList()//TODO: liste paylaşma hakkında SSS hazırlanacak. acordion şeklinde
         {
-            List<ProfileListTable> list = plm.RelationListAll(currentUserID);//current user a ait dataları listeliyoruz.
+            List<ProfListTable> list = plm.RelationListAll(currentUserID);//current user a ait dataları listeliyoruz.
             return View(list);
         }
-        [HttpPost]
-        public ActionResult PublicAllList(string searchText)
+        public PartialViewResult SearchList(string searchText)
         {
-            List<ProfileListTable> list = plm.FindRelotionList(searchText, currentUserID);
-            return View(list);
+            List<ProfListTable> list = plm.FindRelotionList(searchText, currentUserID);
+            return PartialView("Partials/_PublicListPartial", list);
+        }
+        [HttpPost]
+        public int SaveList(int? listId)
+        {
+            if (listId != null)
+            {
+                ProfListTable data = new ProfListTable();
+                data.listId = listId.Value;
+                data.profileId = currentUserID;
+                int result = plm.Insert(data);
+                return result;
+            }
+            return -1;
         }
     }
 }

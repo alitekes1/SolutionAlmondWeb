@@ -16,3 +16,8 @@
 .dropdown-toggle-split::after {
     display: flex !important;
 }
+
+.dropdown-menu {
+    --bs-dropdown-link-active-color: black !important;
+    --bs-dropdown-link-active-bg: whitesmoke !important;
+}
