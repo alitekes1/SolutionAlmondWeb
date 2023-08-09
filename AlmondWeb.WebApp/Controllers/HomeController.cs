@@ -322,8 +322,18 @@ namespace AlmondWeb.WebApp.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Error()
+        public ActionResult Error(int? id)
         {
+            if (id == 1)
+            {
+                ViewData["errorCode"] = "403";
+                ViewData["errorMessage"] = "Bu alana sadece Adminler girebilir.Admin yetkiniz bulunmamaktadır.Daha da geç olmadan bu alanı terkedin!";
+            }
+            else
+            {
+                ViewData["errorMessage"] = "Bakmış olduğunuz sayfa kaldırılmış veya ismi değiştirilmiş olabilir.Dolayısıyla geçici bir süre kullanım dışıdır.Anasayfaya geri dönebilirsiniz veya bizimle iletişime geçebilirsiniz.";
+                ViewData["errorCode"] = "404";
+            }
             return View();
         }
         [AllowAnonymous]

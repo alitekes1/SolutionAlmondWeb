@@ -28,10 +28,10 @@
         </div>
         <div class="notfound">
             <div class="notfound-404">
-                <h1>404</h1>
+                <h1>@ViewData["errorCode"]</h1>
             </div>
             <h2>Sayfa Bulunamadı!</h2>
-            <p style="font-family: monospace; font-size: 14px; , sans-serif">Bakmış olduğunuz sayfa kaldırılmış veya ismi değiştirilmiş olabilir.Dolayısıyla geçici bir süre kullanım dışıdır.Anasayfaya geri dönebilirsiniz veya bizimle iletişime geçebilirsiniz.</p>
+            <p style="font-family: monospace; font-size: 14px; , sans-serif">@ViewData["errorMessage"]</p>
             @Html.ActionLink("Anasayfa", "MainPage", "Home")
             <div class="notfound-social">
                 <a href="/Home/Contact" title="Bize Bildirin?" target="_blank">

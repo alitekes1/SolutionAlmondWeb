@@ -141,26 +141,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdminPanel\assets\css\bootstrap.css" />
     <Content Include="AdminPanel\assets\css\custom.css" />
     <Content Include="AdminPanel\assets\css\font-awesome.css" />
     <Content Include="AdminPanel\assets\font-awesome\fonts\fontawesome-webfontba72.svg" />
     <Content Include="AdminPanel\assets\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="AdminPanel\assets\img\1.png" />
-    <Content Include="AdminPanel\assets\img\2.png" />
-    <Content Include="AdminPanel\assets\img\3.png" />
-    <Content Include="AdminPanel\assets\img\4.png" />
-    <Content Include="AdminPanel\assets\img\find_user.png" />
-    <Content Include="AdminPanel\assets\js\bootstrap.min.js" />
-    <Content Include="AdminPanel\assets\js\custom.js" />
-    <Content Include="AdminPanel\assets\js\dataTables\dataTables.bootstrap.css" />
-    <Content Include="AdminPanel\assets\js\dataTables\dataTables.bootstrap.js" />
-    <Content Include="AdminPanel\assets\js\dataTables\jquery.dataTables.js" />
-    <Content Include="AdminPanel\assets\js\jquery-1.10.2.js" />
-    <Content Include="AdminPanel\assets\js\jquery.metisMenu.js" />
-    <Content Include="AdminPanel\assets\js\morris\morris-0.4.3.min.css" />
-    <Content Include="AdminPanel\assets\js\morris\morris.js" />
-    <Content Include="AdminPanel\assets\js\morris\raphael-2.1.0.min.js" />
     <Content Include="AdminPanel\blank.html" />
     <Content Include="AdminPanel\chart.html" />
     <Content Include="AdminPanel\form.html" />

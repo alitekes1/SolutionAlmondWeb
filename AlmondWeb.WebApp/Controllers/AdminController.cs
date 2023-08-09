@@ -21,21 +21,26 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
+        [isAdmin]
         public ActionResult Admins()
         {
             return View();
         }
+        [isAdmin]
         public ActionResult AllMessages()
         {
             return View();
         }
+        [isAdmin]
         public ActionResult AlmondWebStatistic()
         {
             return View();
         }
-        public ActionResult NoAdminError()
+        [AllowAnonymous]
+        public ActionResult NoAdminError(int? id)
         {
-            return View();
+            ViewData["adminErrorMessage"] = "Bu alana sadece Adminler girebilir.Admin yetkiniz Bulunmamaktadır.";
+            return RedirectToAction("Error", "Home", new { id = 1 });
         }
     }
 }

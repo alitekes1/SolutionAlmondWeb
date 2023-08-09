@@ -16,7 +16,7 @@ namespace AlmondWeb.WebApp.Filters
                 var a = userManager.FindwithExpression(x => x.Id == currentUserId);
                 if (!a.isAdmin)//TODO: buraya bi bak
                 {
-                    filterContext.Result = new RedirectResult("/Admin/NoAdmin");
+                    filterContext.Result = new RedirectResult("/Admin/NoAdminError");
                 }
                 else
                 {
