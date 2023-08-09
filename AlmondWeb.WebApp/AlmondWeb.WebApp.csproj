@@ -346,6 +346,7 @@
     <Content Include="Views\Admin\AllList.cshtml" />
     <Content Include="Views\Admin\Admins.cshtml" />
     <Content Include="Views\Admin\AllMessages.cshtml" />
+    <Content Include="Views\Admin\AlmondWebStatistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

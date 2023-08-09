@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "AllList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int counter = 0;
+    ListManager lm = new ListManager();
+    List<ListTable> allList = lm.List();
+
 }
 
 <div id="page-wrapper">
@@ -14,9 +18,10 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover"
+                            <table class="table table-striped table-bordered table-hover text-center"
                                    id="dataTables-example">
                                 <thead>
+                                    @{counter++;}
                                     <tr>
                                         <th>#</th>
                                         <th>Sahibi</th>
@@ -27,14 +32,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>1</td>
-                                        <td>Ali Tekeş</td>
-                                        <td>Bilgisayar Mühendisliği</td>
-                                        <td>8-8-2023</td>
-                                        <td>http://alitekes.com.tr</td>
-                                        <td>http://github.com/alitekes1</td>
-                                    </tr>
+                                    @foreach (var item in allList)
+                                    {
+
+                                        <tr class="odd gradeX">
+                                            <td>@counter</td>
+                                            <td>@item.Owner.Username</td>
+                                            <td>@item.listName</td>
+                                            <td>@item.DataTables.Count()</td>
+                                            <td>@item.isPublic</td>
+                                            <td>ayarlanacak</td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

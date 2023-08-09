@@ -75,11 +75,6 @@ namespace AlmondWeb.WebApp
                 url: "Liste-Kesfet",
                 defaults: new { controller = "User", action = "PublicAllList", id = UrlParameter.Optional }
             );
-            //routes.MapRoute(
-            //    name: "updateprofile",
-            //    url: "Profil-Guncelle",
-            //    defaults: new { controller = "User", action = "ProfileUpdate", id = UrlParameter.Optional }
-            //);
             routes.MapRoute(
                 name: "publicprofile",
                 url: "Profilim",
@@ -89,6 +84,31 @@ namespace AlmondWeb.WebApp
                 name: "privateProfile",
                 url: "Hesabim",
                 defaults: new { controller = "User", action = "PrivateProfile", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "adminpage",
+                url: "Admin54",
+                defaults: new { controller = "Admin", action = "AllData", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "alldata",
+                url: "TumListeler54",
+                defaults: new { controller = "Admin", action = "AllList", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "allmesssages",
+                url: "TumMesajlar54",
+                defaults: new { controller = "Admin", action = "AllMessages", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "statictis",
+                url: "Istatistikler54",
+                defaults: new { controller = "Admin", action = "AlmondWebStatistic", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "alluser",
+                url: "TumKullanicilar54",
+                defaults: new { controller = "Admin", action = "AllUser", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "User",
