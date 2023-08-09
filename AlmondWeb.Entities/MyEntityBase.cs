@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlmondWeb.Entities
 {
@@ -16,7 +12,6 @@ namespace AlmondWeb.Entities
         public bool isDeleted { get; set; }
         [Required]
         public DateTime createdTime { get; set; }
-        public DateTime deletedTime { get; set; } = DateTime.MinValue;
 
     }
 }

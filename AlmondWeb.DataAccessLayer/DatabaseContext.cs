@@ -14,10 +14,11 @@ namespace AlmondWeb.DataAccessLayer
         public DbSet<ListTable> ListTables { get; set; }
         public DbSet<ProfileTable> ProfileTables { get; set; }
         public DbSet<ContactTable> ContactTables { get; set; }
-        public DbSet<ProfListTable> profListTables { get; set; }
+        public DbSet<SharedListTable> SharedListTables { get; set; }
+        public DbSet<SharedDataTable> SharedDataTables { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProfListTable>()
+            modelBuilder.Entity<SharedListTable>()
                 .HasKey(value => new { value.profileId, value.listId });
             modelBuilder.Entity<ListTable>()
                 .HasKey(value => new { value.Id });

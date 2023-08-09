@@ -17,6 +17,5 @@ namespace AlmondWeb.Entities
         public int puan { get; set; }
         public virtual AlmondUserTable Owner { get; set; }//bir tarafaında olduğu için 
         public virtual ListTable List { get; set; }
-
     }
 }

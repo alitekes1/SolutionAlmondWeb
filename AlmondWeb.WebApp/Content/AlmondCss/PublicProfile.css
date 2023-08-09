@@ -15,7 +15,7 @@
         position: relative;
     }
 
-@@media (max-width: 991.98px) {
+@media (max-width: 991.98px) {
     .profile .profile-header .profile-header-cover {
         height: 4.25rem;
     }
@@ -41,7 +41,7 @@
     align-items: flex-end;
 }
 
-@@media (max-width: 991.98px) {
+@media (max-width: 991.98px) {
     .profile .profile-header .profile-header-content {
         display: block;
         padding: 0 20px;
@@ -60,7 +60,7 @@
     border-radius: 9px;
 }
 
-@@media (max-width: 991.98px) {
+@media (max-width: 991.98px) {
     .profile .profile-header .profile-header-content .profile-header-img {
         width: 4.375rem;
         height: 4.375rem;
@@ -83,7 +83,7 @@
     display: flex;
 }
 
-@@media (max-width: 991.98px) {
+@media (max-width: 991.98px) {
     .profile .profile-container {
         padding: 20px 20px;
     }
@@ -93,7 +93,7 @@
     width: 13.75rem;
 }
 
-@@media (max-width: 991.98px) {
+@media (max-width: 991.98px) {
     .profile .profile-container .profile-sidebar {
         display: none;
     }
@@ -106,7 +106,7 @@
     flex: 1;
 }
 
-@@media (max-width: 991.98px) {
+@media (max-width: 991.98px) {
     .profile .profile-container .profile-content {
         padding-left: 0;
     }
@@ -143,4 +143,15 @@
 
     .tabs__radio:checked + .tabs__label + .tabs__content {
         display: initial;
+    }
+
+
+
+.socialButons {
+    border-radius: 3px !important;
+    text-align: center;
+}
+
+    .socialButons svg {
+        fill: #ffffff
     }

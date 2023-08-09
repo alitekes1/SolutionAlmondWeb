@@ -1,10 +1,11 @@
-﻿using AlmondWeb.Entities;
+﻿using AlmondWeb.BusinessLayer;
+using AlmondWeb.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using AlmondWeb.BusinessLayer;
 
 namespace AlmondWeb.DataAccessLayer.RepositoryPattern
 {
@@ -22,7 +23,6 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
             {
                 AlmondDataTable o = dataset as AlmondDataTable;
                 o.createdTime = getDate();
-                o.deletedTime = getDate();
                 o.isDeleted = false;
                 o.puan = 0;
             }
@@ -30,15 +30,20 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
             {
                 AlmondUserTable o = dataset as AlmondUserTable;
                 o.createdTime = getDate();
-                o.deletedTime = getDate();
                 o.isDeleted = false;
             }
             if (dataset is ListTable)
             {
                 ListTable list = dataset as ListTable;
                 list.createdTime = getDate();
-                list.deletedTime = getDate();
                 list.isDeleted = false;
+            }
+            if (dataset is SharedDataTable)
+            {
+                SharedDataTable data = dataset as SharedDataTable;
+                data.createdTime = getDate();
+                data.isDeleted = false;
+                data.puan = 0;
             }
             database.Set<T>().Add(dataset);
 
@@ -54,13 +59,11 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
             {
                 AlmondDataTable a = dataset as AlmondDataTable;
                 a.isDeleted = true;
-                a.deletedTime = getDate();
             }
             if (dataset is ListTable)
             {
                 ListTable li = dataset as ListTable;
                 li.isDeleted = true;
-                li.deletedTime = getDate();
             }
             return Save();
         }
@@ -85,6 +88,32 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         public T FindwithOwnerId(int ownerId)
         {
             return database.Set<T>().Find(ownerId);
+        }
+        public List<SharedListTable> RelationList(int userid)
+        {
+            var profileLists = database.SharedListTables
+                .Include(pl => pl.List)
+                .Where(pl => pl.profileId == userid && pl.List.Owner.Id != userid && pl.List.isPublic).ToList();
+
+            return profileLists;
+        }
+        public List<SharedListTable> RelationListAll(int userid)
+        {
+
+            var profileLists = database.SharedListTables
+                .Include(pl => pl.List)
+                .Where(pl => pl.profileId == pl.List.Owner.Id && pl.List.Owner.Id != userid && pl.List.isPublic).ToList();
+
+            return profileLists;
+        }
+        public List<SharedListTable> FindRelotionList(string text, int userid)
+        {
+
+            var profileLists = database.SharedListTables
+                .Include(pl => pl.List)
+                .Where(pl => pl.profileId == pl.List.Owner.Id && pl.List.Owner.Id != userid && pl.List.listName == text || pl.List.Owner.Username == text && pl.List.isPublic).ToList();
+
+            return profileLists;
         }
         private DateTime getDate()
         {

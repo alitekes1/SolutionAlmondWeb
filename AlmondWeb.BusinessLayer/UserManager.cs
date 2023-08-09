@@ -1,6 +1,7 @@
 ﻿using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using System;
+using System.Runtime.InteropServices;
 
 namespace AlmondWeb.BusinessLayer
 {
@@ -10,6 +11,7 @@ namespace AlmondWeb.BusinessLayer
         {
             AlmondUserTable user = FindwithExpression(x => x.Email == modal.email);
             AlmondUserTable checkUsername = FindwithExpression(x => x.Username == modal.username);
+            ProfileManager profileManager = new ProfileManager();
             ErrorResult<AlmondUserTable> errorResult = new ErrorResult<AlmondUserTable>();
             if (user != null)
             {
@@ -26,18 +28,20 @@ namespace AlmondWeb.BusinessLayer
             }
             else//kayıt işlemi gerçekleşecek.
             {
-                int isSave = Insert(new AlmondUserTable
-                {
-                    Username = modal.username,
-                    Email = modal.email,
-                    Password = modal.password,
-                    Name = modal.name,
-                    Surname = modal.surname,
-                    isActive = true,
-                    isAdmin = false,
-                    ActivateGuid = Guid.NewGuid()
-                });
-                if (isSave > 0)
+                AlmondUserTable registerUser = new AlmondUserTable();
+                registerUser.Email = modal.email;
+                registerUser.Name = modal.name;
+                registerUser.Surname = modal.surname;
+                registerUser.Username = modal.username;
+                registerUser.Password = modal.password;
+                registerUser.isActive = true;
+                registerUser.isAdmin = false;
+                registerUser.ActivateGuid = Guid.NewGuid();
+
+                int isSaveUser = Insert(registerUser);
+                int isSaveProfil = profileManager.CreateProfil(registerUser.Id);
+
+                if (isSaveUser + isSaveProfil > 1)
                 {
                     errorResult.resultModel = FindwithExpression(x => x.Email == modal.email && x.Password == modal.password);//kayıt edilen kişiyi aldık
                 }

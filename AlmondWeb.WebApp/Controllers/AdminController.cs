@@ -21,18 +21,21 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        public ActionResult NoAllow()
+        public ActionResult Admins()
         {
             return View();
         }
-
+        public ActionResult AllMessages()
+        {
+            return View();
+        }
         public ActionResult AlmondWebStatistic()
         {
             return View();
         }
-        public ActionResult Logout()
+        public ActionResult NoAdminError()
         {
-            return RedirectToAction("Login", "Home");
+            return View();
         }
     }
 }

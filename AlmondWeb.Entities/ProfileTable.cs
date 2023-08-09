@@ -24,6 +24,6 @@ namespace AlmondWeb.Entities
         public string aboutmeText { get; set; }
         public string profileImageUrl { get; set; }
         public virtual AlmondUserTable Owner { get; set; }
-        public virtual List<ProfListTable> Profil { get; set; }
+        public virtual List<SharedListTable> Profil { get; set; }
     }
 }

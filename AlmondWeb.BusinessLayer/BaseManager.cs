@@ -44,15 +44,15 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.FindwithExpression(expression);
         }
-        public List<ProfListTable> RelationList(int userId)
+        public List<SharedListTable> RelationList(int userId)
         {
             return repo.RelationList(userId);
         }
-        public List<ProfListTable> RelationListAll(int userId)
+        public List<SharedListTable> RelationListAll(int userId)
         {
             return repo.RelationListAll(userId);
         }
-        public List<ProfListTable> FindRelotionList(string text, int userid)
+        public List<SharedListTable> FindRelotionList(string text, int userid)
         {
             return repo.FindRelotionList(text, userid);
         }

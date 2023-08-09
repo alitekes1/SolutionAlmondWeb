@@ -1,8 +1,8 @@
 ﻿@{
     int currentUserID = CacheHelper.CurrentUserID();
 
-    ProfileListManager plm1 = new ProfileListManager();
-    List<ProfListTable> list = plm1.RelationList(currentUserID);
+    SharedListManager slm = new SharedListManager();
+    List<SharedListTable> list = slm.RelationList(currentUserID);
 }
 <link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
 <div class="row mb-4 ">

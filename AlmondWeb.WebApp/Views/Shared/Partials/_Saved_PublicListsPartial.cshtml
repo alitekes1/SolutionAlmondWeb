@@ -1,4 +1,4 @@
-﻿@model List<ProfListTable>
+﻿@model List<SharedListTable>
 
 @foreach (var item in Model)
 {
@@ -68,6 +68,9 @@
             success: function (result) {
                 if (result > 0) {
                     toastr.success("Liste kaydedilmiştir.", "İşlem Başarılı", 500)
+                }
+                else {
+                    toastr.warning("Liste zaten kayıtlı.", "İşlem başarısız", 500)
                 }
             }
         });

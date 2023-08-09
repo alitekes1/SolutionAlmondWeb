@@ -3,9 +3,7 @@ using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using Microsoft.Ajax.Utilities;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
@@ -20,7 +18,7 @@ namespace AlmondWeb.WebApp.Controllers
         private ListManager listManager = new ListManager();
         private ContactManager contactManager = new ContactManager();
         private ProfileManager profileManager = new ProfileManager();
-        private ProfileListManager profileListManager = new ProfileListManager();
+        private SharedListManager sharedListManager = new SharedListManager();
         public int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
         private static int i = -1;
         public ActionResult MainPage()
@@ -71,7 +69,7 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorResult<AlmondUserTable> errorList = userManager.RegisterUser(model);//kontrol işlemlerini çağıran manager sınıfındaki register methodunu çağırıyoruz.
+                ErrorResult<AlmondUserTable> errorList = userManager.RegisterUser(model);//crud işlemlerini çağıran manager sınıfındaki register methodunu çağırıyoruz.
                 if (errorList.errorList.Count > 0)
                 {
                     foreach (var item in errorList.errorList)
@@ -230,7 +228,7 @@ namespace AlmondWeb.WebApp.Controllers
                 int result = listManager.Insert(newList);
                 if (newList.isPublic)
                 {
-                    InserttoProfileListTable(newList.Id);
+                    InsertToSharedListTable(newList.Id, newList.isPublic);
                 }
                 return result;
             }
@@ -267,29 +265,32 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (id != null && !listName.IsNullOrWhiteSpace())
             {
-                ProfListTable isThereList = profileListManager.FindwithExpression(x => x.profileId == currentUserId && x.listId == id);
-                if (isThereList != null)
+                ListTable isThereList = listManager.FindwithExpression(x => x.Owner.Id == currentUserId && x.Id == id);
+                SharedListTable updateSharedList = sharedListManager.FindwithExpression(x => x.listId == id && x.profileId == currentUserId);
+                if (isThereList != null && updateSharedList != null)//eğer böyle bir liste varsa
                 {
-                    isThereList.List.listName = listName;
-                    isThereList.List.listDescription = listDesc;
-                    isThereList.List.isPublic = listisPub == "1" ? true : false;
-                    int result = profileListManager.Update(isThereList);
-                    return result;
+                    isThereList.listName = listName;
+                    isThereList.listDescription = listDesc;
+                    isThereList.isPublic = listisPub == "1" ? true : false;
+                    updateSharedList.isPublic = isThereList.isPublic;
+                    int result = listManager.Update(isThereList);
+                    int result2 = sharedListManager.Update(updateSharedList);
+                    return result + result2;
                 }
             }
             return -1;
         }
-        public int InserttoProfileListTable(int? listId)
+        public int InsertToSharedListTable(int? listId, bool ispublic)
         {
             if (listId != null)
             {
-                ProfListTable profileList = new ProfListTable();
+                SharedListTable profileList = new SharedListTable();
                 profileList.profileId = currentUserId;
                 profileList.listId = listId.Value;
+                profileList.isPublic = ispublic;
                 profileList.Owner = listManager.FindwithExpression(x => x.Id == listId).Owner;//liste sahibini verdik
 
-
-                return profileListManager.Insert(profileList);
+                return sharedListManager.Insert(profileList);
             }
             else { return -1; }
         }

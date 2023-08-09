@@ -1,10 +1,6 @@
 ﻿using AlmondWeb.Entities;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlmondWeb.DataAccessLayer
 {
@@ -25,7 +21,6 @@ namespace AlmondWeb.DataAccessLayer
             admin.isAdmin = true;
             admin.isDeleted = false;
             admin.createdTime = DateTime.Now;
-            admin.deletedTime = DateTime.Now.AddDays(2);
             admin.ActivateGuid = Guid.NewGuid();
 
 
@@ -37,7 +32,6 @@ namespace AlmondWeb.DataAccessLayer
             user.isAdmin = false;
             user.isDeleted = false;
             user.createdTime = DateTime.Now;
-            user.deletedTime = DateTime.Now.AddDays(2);
             user.ActivateGuid = Guid.NewGuid();
 
             db.AlmondUserTables.Add(admin);
@@ -49,7 +43,6 @@ namespace AlmondWeb.DataAccessLayer
                 isDeleted = false,
                 createdTime = DateTime.Now,
                 listName = FakeData.TextData.GetSentence(),
-                deletedTime = DateTime.Now.AddDays(2),
                 Owner = admin
             };
             db.ListTables.Add(list);
@@ -65,7 +58,6 @@ namespace AlmondWeb.DataAccessLayer
                     puan = FakeData.NumberData.GetNumber(),
                     isDeleted = false,
                     createdTime = DateTime.Now,
-                    deletedTime = DateTime.Now.AddDays(2),
                     Owner = user,
                     List = list
                 };

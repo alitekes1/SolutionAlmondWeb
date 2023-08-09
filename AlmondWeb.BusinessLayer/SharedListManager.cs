@@ -2,7 +2,7 @@
 
 namespace AlmondWeb.BusinessLayer
 {
-    public class ProfileListManager : BaseManager<ProfListTable>
+    public class SharedListManager : BaseManager<SharedListTable>
     {
     }
 }

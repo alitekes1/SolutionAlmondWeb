@@ -57,7 +57,8 @@
     <Compile Include="ListTable.cs" />
     <Compile Include="MyEntityBase.cs" />
     <Compile Include="ProfileTable.cs" />
-    <Compile Include="ProfListTable.cs" />
+    <Compile Include="SharedDataTable.cs" />
+    <Compile Include="SharedListTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

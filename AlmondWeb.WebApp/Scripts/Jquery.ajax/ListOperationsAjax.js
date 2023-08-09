@@ -50,7 +50,7 @@ function transfertoUpdateData(lstnm, idValue) {
             url: '/Home/UpdateList',
             data: { listName: listNme, id: idValue, listDesc: listDescription, listisPub: listisPublic },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
             success: function (result) {
-                if (result > 0) {
+                if (result > 1) {
                     ReLoadListData();
                     toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!",1500);
                 }

@@ -1,9 +1,4 @@
 ﻿using AlmondWeb.BusinessLayer;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 namespace AlmondWeb.WebApp.Filters
 {
@@ -21,16 +16,16 @@ namespace AlmondWeb.WebApp.Filters
                 var a = userManager.FindwithExpression(x => x.Id == currentUserId);
                 if (!a.isAdmin)//TODO: buraya bi bak
                 {
-                    filterContext.Result = new RedirectResult("/Admin/Index");
+                    filterContext.Result = new RedirectResult("/Admin/NoAdmin");
                 }
                 else
                 {
-                    new RedirectResult("/Home/Error");//TODO:admin olmayan kişilerin yönlendirileceği sayfa oluşturulacak
+                    new RedirectResult("/Admin/AllUser");//TODO:admin olmayan kişilerin yönlendirileceği sayfa oluşturulacak
                 }
             }
             else
             {
-                new RedirectResult("/Home/Login");
+                new RedirectResult("../Home/Login");
             }
         }
     }

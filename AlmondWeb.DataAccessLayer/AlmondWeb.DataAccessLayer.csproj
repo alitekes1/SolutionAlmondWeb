@@ -55,9 +55,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Migrations\202308071853179_migFirst.cs" />
-    <Compile Include="Migrations\202308071853179_migFirst.designer.cs">
-      <DependentUpon>202308071853179_migFirst.cs</DependentUpon>
+    <Compile Include="Migrations\202308081028482_mig2.cs" />
+    <Compile Include="Migrations\202308081028482_mig2.designer.cs">
+      <DependentUpon>202308081028482_mig2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308081108471_mig3.cs" />
+    <Compile Include="Migrations\202308081108471_mig3.designer.cs">
+      <DependentUpon>202308081108471_mig3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308081111089_mig4.cs" />
+    <Compile Include="Migrations\202308081111089_mig4.designer.cs">
+      <DependentUpon>202308081111089_mig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308081116319_mig5.cs" />
+    <Compile Include="Migrations\202308081116319_mig5.designer.cs">
+      <DependentUpon>202308081116319_mig5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Myinitiliazer.cs" />
@@ -87,8 +99,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202308071853179_migFirst.resx">
-      <DependentUpon>202308071853179_migFirst.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202308081028482_mig2.resx">
+      <DependentUpon>202308081028482_mig2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308081108471_mig3.resx">
+      <DependentUpon>202308081108471_mig3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308081111089_mig4.resx">
+      <DependentUpon>202308081111089_mig4.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308081116319_mig5.resx">
+      <DependentUpon>202308081116319_mig5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
