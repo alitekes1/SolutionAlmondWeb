@@ -30,7 +30,7 @@
             <div class="notfound-404">
                 <h1>@ViewData["errorCode"]</h1>
             </div>
-            <h2>Sayfa Bulunamadı!</h2>
+            <h2>@ViewData["errorTitle"]</h2>
             <p style="font-family: monospace; font-size: 14px; , sans-serif">@ViewData["errorMessage"]</p>
             @Html.ActionLink("Anasayfa", "MainPage", "Home")
             <div class="notfound-social">

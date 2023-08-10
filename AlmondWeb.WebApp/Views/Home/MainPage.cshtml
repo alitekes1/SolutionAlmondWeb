@@ -73,6 +73,26 @@
 
 <script>
     $("#liste-dropdown").change(function () {//liste de eleman seçimi değiştiğinde çalışacak method
+        getData();
+    });
+
+    //verileri aktarrıken değişken tutmak yerine length ten geriye gelinebilir.
+    $(".puanlar").click(function () {
+        var puanVal = $(this).val();
+        var dataID = $("#dataId").val();
+        var listcount = $("#listCount").val();
+        if (dataID > 0 && puanVal > 0) {
+            $.ajax({
+                method: 'POST',
+                url: 'Home/UpdatePuan',
+                data: { dataId: dataID, puan: puanVal, listCount: listcount },
+                success: function () {
+                    getData();
+                }
+            })
+        }
+    });
+    function getData() {
         $.ajax({
             type: "GET",
             url: "/Home/GetQuestionAnswer",
@@ -84,16 +104,15 @@
                     $("#answer").hide();
                     $("#showAnswer").click(function () {
                         $("#answer").show();
-                    })
+                    });
                 }
                 else {
                     alert("Listenin içinde hiç veri yok :( ");
                 }
             }
         });
-    });
+    }
 
-    //verileri aktarrıken değişken tutmak yerine length ten geriye gelinebilir.
 
     $(document).ready(function () {
         // Kısayol tuşlarına tepki vereceğimiz olay dinleyicisini ekleyin

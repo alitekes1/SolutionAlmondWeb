@@ -146,12 +146,19 @@
     }
 
 
-
-.socialButons {
-    border-radius: 3px !important;
-    text-align: center;
+#contact-social {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-    .socialButons svg {
-        fill: #ffffff
+    #contact-social .socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 25px;
+        flex-wrap: nowrap;
     }

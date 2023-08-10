@@ -1,33 +1,36 @@
 ﻿var table = $("#example");
-$(document).ready(function () {
-    $("#checkbox1").click(function () {
-        if ($(this).is(":checked")) {
-            $(this).val(1);
-        } else {
-            $(this).val(0);
-        }
-    });
-    $("#checkbox2").click(function () {
-        if ($(this).is(":checked")) {
-            $(this).val(1);
-        } else {
-            $(this).val(0);
-        }
-    });
+$("#publicRadio").click(function () {
+    $("#publicRadio").val(1);
+    $("#privateRadio").val(0);
 });
+$("#privateRadio").click(function () {
+    $("#privateRadio").val(1);
+    $("#publicRadio").val(0);
+});
+$("#publicRadioUpdate").click(function () {
+    $("#publicRadioUpdate").val(1);
+    $("#privateRadioUpdate").val(0);
+});
+$("#privateRadioUpdate").click(function () {
+    $("#privateRadioUpdate").val(1);
+    $("#publicRadioUpdate").val(0);
+});
+
 
 document.getElementById("confirmBtnCreateList").addEventListener("click", function () {
     var listName = $("#inputTextCreateList").val();
     var listDescription = $("#listDescriptionTextArea").val();
-    var listisPublic = $("#checkbox1").val();
+    var listPublic = $("#publicRadio").val();
+    var listPrivate = $("#privateRadio").val();
+
     $.ajax({
         method: "POST",
         url: '/Home/CreateList',
-        data: { listNm: listName, listDesc: listDescription, listisPub: listisPublic },
+        data: { listNm: listName, listDesc: listDescription, listPub: listPublic, listPriv: listPrivate },
         success: function (result) {
             if (result > 0) {
                 ReLoadListData();
-                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!",1500);
+                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!", 1500);
             } else {
                 alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
             }
@@ -44,15 +47,16 @@ function transfertoUpdateData(lstnm, idValue) {
     document.getElementById("confirmBtnUpdateList").addEventListener("click", function () {
         var listNme = $("#inputTextUpdateList").val();
         var listDescription = $("#ListdescriptionTextAreaUpdate").val();
-        var listisPublic = $("#checkbox2").val();
+        var listPublic = $("#publicRadioUpdate").val();
+        var listPrivate = $("#privateRadioUpdate").val();
         $.ajax({
             method: "POST",
             url: '/Home/UpdateList',
-            data: { listName: listNme, id: idValue, listDesc: listDescription, listisPub: listisPublic },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
+            data: { listName: listNme, id: idValue, listDesc: listDescription, listPub: listPublic, listPriv: listPrivate },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
             success: function (result) {
-                if (result > 1) {
+                if (result > 0) {
                     ReLoadListData();
-                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!",1500);
+                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!", 1500);
                 }
                 else {
                     alert("Liste güncelleme sırasında bir hata meyda geldi.");//TODO:sayfa otomatik olarak yenilenecek.
@@ -75,7 +79,7 @@ function transfertoDeleteData(data, idM) {
             success: function (result) {
                 if (result > 0) {
                     ReLoadListData();
-                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!",1500);
+                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!", 1500);
                 }
                 else {
                     return alert("işlem başarısız:(");

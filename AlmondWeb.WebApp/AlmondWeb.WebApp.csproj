@@ -141,17 +141,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminPanel\assets\css\bootstrap.css" />
     <Content Include="AdminPanel\assets\css\custom.css" />
     <Content Include="AdminPanel\assets\css\font-awesome.css" />
     <Content Include="AdminPanel\assets\font-awesome\fonts\fontawesome-webfontba72.svg" />
     <Content Include="AdminPanel\assets\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="AdminPanel\blank.html" />
-    <Content Include="AdminPanel\chart.html" />
-    <Content Include="AdminPanel\form.html" />
-    <Content Include="AdminPanel\index.html" />
-    <Content Include="AdminPanel\tab-panel.html" />
-    <Content Include="AdminPanel\table.html" />
-    <Content Include="AdminPanel\ui.html" />
     <Content Include="Content\AlmondCss\AllButtons.css" />
     <Content Include="Content\AlmondCss\deneme.css" />
     <Content Include="Content\AlmondCss\error.css" />

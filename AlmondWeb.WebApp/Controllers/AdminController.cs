@@ -37,9 +37,8 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [AllowAnonymous]
-        public ActionResult NoAdminError(int? id)
+        public ActionResult NoAdminError()
         {
-            ViewData["adminErrorMessage"] = "Bu alana sadece Adminler girebilir.Admin yetkiniz Bulunmamaktadır.";
             return RedirectToAction("Error", "Home", new { id = 1 });
         }
     }

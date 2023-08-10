@@ -1,46 +1,17 @@
-﻿@using AlmondWeb.Entities
-@model AlmondDataTable
+﻿@model int
+@{
+    DataManager dm = new DataManager();
+    int currentUserId = CacheHelper.CurrentUserID();
 
+    List<AlmondDataTable> list = dm.ListwithExpression(x => x.Owner.Id == currentUserId && !x.isDeleted).OrderBy(x => x.puan).ToList();
+}
 <div class="row-sm-5 soru">
-    <p id="question">@Model.question</p>
+    <p id="question">@list[Model].question</p>
 </div>
 
 <div class="row-sm-5 cevap">
-    <p id="answer">@Model.answer</p>
+    <p id="answer">@list[Model].answer</p>
 </div>
+@Html.Hidden("dataId", list[Model].Id)
+@Html.Hidden("listCount", list.Count())
 
-<input type="hidden" id="dataId" name="dataId" form="formMain" value="@Model.Id" />
-
-
-<script>
-    $(".puanlar").click(function () {
-        var puan = $(this).val();
-        let dataId = $("#dataId").val();
-        if (dataId > 0) {
-
-            $.ajax({
-                method="POST",
-                url="Home/UpdatePuan" + dataId,
-                data={ puanValue: puan },
-                success: function (almondData) {
-                    if (almondData != null) {
-                        $("#data").html(almondData);
-                        //
-                        $("#answer").hide();
-                        $("#showAnswer").click(function () {
-                            $("#answer").show();
-                        })
-                    }
-                    else {
-                        alert("Listenin içinde hiç veri yok :( ");
-                    }
-                }
-            })
-
-        }
-        else {
-            alert("dataid alınamdı");
-        }
-    });
-
-</script>

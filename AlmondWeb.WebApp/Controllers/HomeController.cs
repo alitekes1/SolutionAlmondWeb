@@ -2,11 +2,8 @@
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using Microsoft.Ajax.Utilities;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Web.UI.WebControls;
 
 namespace AlmondWeb.WebApp.Controllers
 {
@@ -20,34 +17,21 @@ namespace AlmondWeb.WebApp.Controllers
         private ProfileManager profileManager = new ProfileManager();
         private SharedListManager sharedListManager = new SharedListManager();
         public int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
-        private static int i = -1;
+        public static int i = 0;
         public ActionResult MainPage()
         {
             return View();
         }
+        [HttpGet]
         public ActionResult GetQuestionAnswer()
         {
-            i++;
-            List<AlmondDataTable> al = dataManager.ListwithExpression(x => x.Owner.Id == currentUserId && !x.isDeleted).OrderBy(x => x.puan).ToList();
-            if (al.Count <= i)
-            {
-                return JavaScript("alert('almonddatatables');");//ÖNEMLİ BURASI
-                //return RedirectToAction("Error");
-            }
-            else
-            {
-                return PartialView("Partials/_GetQuestionAnswerPartial", al[i]);
-            }
+            return PartialView("Partials/_GetQuestionAnswerPartial", i);
         }
-        [HttpGet]
-        public ActionResult UpdatePuan()
-        {
-            return View();
-        }
+
         [HttpPost]
-        public ActionResult UpdatePuan(int? dataId, int? puan)
+        public ActionResult UpdatePuan(int dataId, int puan, int listCount)
         {
-            if (puan != null && dataId > 0)
+            if (puan > 0 && dataId > 0)
             {
                 AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId && !x.isDeleted);
                 data.puan += (int)puan;//burdan sonra diğer soruya geçmeli
@@ -216,20 +200,17 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public int CreateList(string listNm, string listDesc, string listisPub)
+        public int CreateList(string listNm, string listDesc, string listPub, string listPriv)
         {
             if (!listNm.IsNullOrWhiteSpace())
             {
                 ListTable newList = new ListTable();
                 newList.listName = listNm;
                 newList.listDescription = listDesc;
-                newList.isPublic = listisPub == "1" ? true : false;
+                newList.isPublic = listPub == "1" ? true : false;
                 newList.Owner = userManager.FindwithOwnerId(currentUserId);
                 int result = listManager.Insert(newList);
-                if (newList.isPublic)
-                {
-                    InsertToSharedListTable(newList.Id, newList.isPublic);
-                }
+                InsertToSharedListTable(newList.Id, newList.isPublic);
                 return result;
             }
             return -1;
@@ -261,18 +242,21 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public int UpdateList(string listName, int? id, string listDesc, string listisPub)
+        public int UpdateList(string listName, int? id, string listDesc, string listPub, string listPriv)
         {
             if (id != null && !listName.IsNullOrWhiteSpace())
             {
                 ListTable isThereList = listManager.FindwithExpression(x => x.Owner.Id == currentUserId && x.Id == id);
                 SharedListTable updateSharedList = sharedListManager.FindwithExpression(x => x.listId == id && x.profileId == currentUserId);
-                if (isThereList != null && updateSharedList != null)//eğer böyle bir liste varsa
+                if (isThereList != null || updateSharedList != null)//eğer böyle bir liste varsa
                 {
                     isThereList.listName = listName;
                     isThereList.listDescription = listDesc;
-                    isThereList.isPublic = listisPub == "1" ? true : false;
+
+                    isThereList.isPublic = listPub == "1" ? true : false;
+
                     updateSharedList.isPublic = isThereList.isPublic;
+
                     int result = listManager.Update(isThereList);
                     int result2 = sharedListManager.Update(updateSharedList);
                     return result + result2;
@@ -327,11 +311,13 @@ namespace AlmondWeb.WebApp.Controllers
             if (id == 1)
             {
                 ViewData["errorCode"] = "403";
+                ViewData["errorTitle"] = "Yetkiniz Bulunmamaktadır!";
                 ViewData["errorMessage"] = "Bu alana sadece Adminler girebilir.Admin yetkiniz bulunmamaktadır.Daha da geç olmadan bu alanı terkedin!";
             }
             else
             {
                 ViewData["errorMessage"] = "Bakmış olduğunuz sayfa kaldırılmış veya ismi değiştirilmiş olabilir.Dolayısıyla geçici bir süre kullanım dışıdır.Anasayfaya geri dönebilirsiniz veya bizimle iletişime geçebilirsiniz.";
+                ViewData["errorTitle"] = "Sayfa bulunamadı!";
                 ViewData["errorCode"] = "404";
             }
             return View();
