@@ -96,7 +96,7 @@ function transfertoDeleteData(data, idM) {
 function ReLoadListData() {
     $.ajax({
         method: "GET",
-        url: '/Home/FillTableForListOperations',
+        url: '/User/AllUser',
         success: function (tableData) {
             table.empty(); // Tabloyu temizliyoruz
 

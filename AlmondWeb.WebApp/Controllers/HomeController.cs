@@ -2,8 +2,11 @@
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using Microsoft.Ajax.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 
 namespace AlmondWeb.WebApp.Controllers
 {
@@ -16,33 +19,57 @@ namespace AlmondWeb.WebApp.Controllers
         private ContactManager contactManager = new ContactManager();
         private ProfileManager profileManager = new ProfileManager();
         private SharedListManager sharedListManager = new SharedListManager();
-        public int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
-        public static int i = 0;
+        private int currentUserId = CacheHelper.CacheHelper.CurrentUserID();
+        private static List<UserQueAnswListModel> dataJson = new List<UserQueAnswListModel>();
+
         public ActionResult MainPage()
         {
             return View();
         }
         [HttpGet]
-        public ActionResult GetQuestionAnswer()
+        public ActionResult GetQuestionAnswerJson(int listId)
         {
-            return PartialView("Partials/_GetQuestionAnswerPartial", i);
+            dataJson = getList(listId);
+            return Json(dataJson, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult UpdatePuan(int dataId, int puan, int listCount)
+        public ActionResult UpdatePuan(int? dataId, int puan, int? listId)
         {
-            if (puan > 0 && dataId > 0)
+            if (dataJson == null)
             {
-                AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId && !x.isDeleted);
-                data.puan += (int)puan;//burdan sonra diğer soruya geçmeli
-                int result = dataManager.Update(data);
-                return RedirectToAction(nameof(GetQuestionAnswer));
+                return null;
             }
             else
             {
-                return RedirectToAction(nameof(Error));
+                if (puan > 0 || dataId > 0)
+                {
+                    AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == 102 && !x.isDeleted);
+                    data.puan += puan;//burdan sonra diğer soruya geçmeli
+                    int result = dataManager.Update(data);
+                    dataJson = getList(listId);
+                    return Json(dataJson, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
+        private List<UserQueAnswListModel> getList(int? listId)
+        {
+            List<AlmondDataTable> datalist = dataManager.ListwithExpression(x => x.List.Id == listId).OrderBy(x => x.puan).ToList();
+            for (int i = 0; i < datalist.Count(); i++)
+            {
+                UserQueAnswListModel data = new UserQueAnswListModel();
+                data.question = datalist[i].question;
+                data.answer = datalist[i].answer;
+                data.update_Id = datalist[i].Id;
+                dataJson.Add(data);
+            }
+            return dataJson;
+        }
+
         [HttpGet, AllowAnonymous]
         public ActionResult Register()
         {

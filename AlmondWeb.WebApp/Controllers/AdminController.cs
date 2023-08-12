@@ -1,12 +1,17 @@
-﻿using AlmondWeb.WebApp.Filters;
+﻿using AlmondWeb.BusinessLayer;
+using AlmondWeb.Entities;
+using AlmondWeb.WebApp.Filters;
 using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
 {
+
     [Authorize, Exc]
     public class AdminController : Controller
     {
-        [isAdmin]
+
+        private UserManager um = new UserManager();
+        [isAdmin, HttpGet]
         public ActionResult AllUser()
         {
             return View();
@@ -40,6 +45,21 @@ namespace AlmondWeb.WebApp.Controllers
         public ActionResult NoAdminError()
         {
             return RedirectToAction("Error", "Home", new { id = 1 });
+        }
+        [HttpGet]
+        public int DeleteUser(int? id)
+        {
+            if (id != null)
+            {
+                AlmondUserTable user = um.FindwithExpression(x => x.Id == id);
+                user.isActive = false;
+                int result = um.Update(user);
+                return result;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

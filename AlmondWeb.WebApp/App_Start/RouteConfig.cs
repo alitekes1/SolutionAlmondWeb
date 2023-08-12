@@ -111,6 +111,11 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "Admin", action = "AllUser", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "getque",
+                url: "Home/GetQuestionAnswerJson/{listId}",
+                defaults: new { controller = "Home", action = "GetQuestionAnswerJson", listId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "User",
                 url: "User/{action}/{username}",
                 defaults: new { controller = "User", action = "Index", username = UrlParameter.Optional }

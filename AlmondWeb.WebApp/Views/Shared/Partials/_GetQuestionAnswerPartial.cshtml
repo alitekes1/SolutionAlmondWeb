@@ -1,17 +1,11 @@
-﻿@model int
-@{
-    DataManager dm = new DataManager();
-    int currentUserId = CacheHelper.CurrentUserID();
+﻿@model AlmondDataTable
 
-    List<AlmondDataTable> list = dm.ListwithExpression(x => x.Owner.Id == currentUserId && !x.isDeleted).OrderBy(x => x.puan).ToList();
-}
 <div class="row-sm-5 soru">
-    <p id="question">@list[Model].question</p>
+    <p id="question">@Model.question</p>
 </div>
 
 <div class="row-sm-5 cevap">
-    <p id="answer">@list[Model].answer</p>
+    static i = @Model
+    <p id="answer">@Model.answer</p>
 </div>
-@Html.Hidden("dataId", list[Model].Id)
-@Html.Hidden("listCount", list.Count())
-
+@Html.Hidden("dataId", Model.Id)

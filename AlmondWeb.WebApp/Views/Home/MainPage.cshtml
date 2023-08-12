@@ -7,11 +7,7 @@
 
     ListManager lm = new ListManager();
     var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null);
-    var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.z.
-
-    DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
-
+    var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
@@ -61,7 +57,7 @@
                         <button id="puan3" name="puanValue" type="submit" value="3" class="button border border-secondary-subtle puanlar">3</button>
                         <button id="puan4" name="puanValue" type="submit" value="4" class="button border border-secondary-subtle puanlar">4</button>
                         <button id="puan5" name="puanValue" type="submit" value="5" class="button border border-secondary-subtle puanlar">5</button>
-
+                        <label id="dataId"></label>
                     </div>
                 </div>
             </div>
@@ -72,50 +68,124 @@
 
 
 <script>
-    $("#liste-dropdown").change(function () {//liste de eleman seçimi değiştiğinde çalışacak method
-        getData();
-    });
+    //$("#liste-dropdown").change(function () {//liste de eleman seçimi değiştiğinde çalışacak method
+    //    getData();
+    //});
 
-    //verileri aktarrıken değişken tutmak yerine length ten geriye gelinebilir.
-    $(".puanlar").click(function () {
-        var puanVal = $(this).val();
-        var dataID = $("#dataId").val();
-        var listcount = $("#listCount").val();
-        if (dataID > 0 && puanVal > 0) {
+    ////verileri aktarrıken değişken tutmak yerine length ten geriye gelinebilir.
+    //$(".puanlar").click(function () {
+    //    var puanVal = $(this).val();
+    //    var dataID = $("#dataId").val();
+    //    var listcount = $("#listCount").val();
+    //    if (dataID > 0 && puanVal > 0) {
+    //        $.ajax({
+    //            method: 'POST',
+    //            url: 'Home/UpdatePuan',
+    //            data: { dataId: dataID, puan: puanVal, listCount: listcount },
+    //            success: function () {
+    //                getData();
+    //            }
+    //        })
+    //    }
+    //});
+    //function getData() {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/Home/GetQuestionAnswer",
+    //        success: function (almondData) {
+    //            if (almondData != null) {
+    //                //$("#data").html(almondData);
+    //                ////
+    //                //$("#answer").hide();
+    //                //$("#showAnswer").click(function () {
+    //                //    $("#answer").show();
+    //                //});
+    //                var deger = almondData.question;
+    //            }
+    //            else {
+    //                alert("Listenin içinde hiç veri yok :( ");
+    //            }
+    //        }
+    //    });
+    //}
+
+    //if (datalist != null) {
+    //    $("#question").html(datalist[0].question);//liste seçildiğinde otomatik olarak ilk veri ekrana basılacak
+    //    $("#showAnswer").click(function () {
+    //        $("#answer").html(datalist[0].answer);
+    //    })
+    //}
+    //else {
+    //    alert("data null geldi");
+    //}
+    $(function () {
+        $("#liste-dropdown").change(function () {//liste de eleman seçimi değiştiğinde çalışacak method
+            var listid = $("#liste-dropdown").val();
+            var dataId = $("#dataId");
+            $("#question").html("");
+            $("#answer").html("");
+
             $.ajax({
-                method: 'POST',
-                url: 'Home/UpdatePuan',
-                data: { dataId: dataID, puan: puanVal, listCount: listcount },
-                success: function () {
-                    getData();
+                method: "GET",
+                url: "Home/GetQuestionAnswerJson",
+                data: { listId: listid },
+                success: function (datalist) {
+                    console.log(datalist);
+                    dataId.html(datalist[0].update_Id);
+                    $("#question").html(datalist[0].question);//liste seçildiğinde otomatik olarak ilk veri ekrana basılacak
+                    $("#showAnswer").click(function () {
+                        $("#answer").html(datalist[0].answer);
+                    })
                 }
             })
-        }
+        });
     });
-    function getData() {
-        $.ajax({
-            type: "GET",
-            url: "/Home/GetQuestionAnswer",
-            dataType: "html",
-            success: function (almondData) {
-                if (almondData != null) {
-                    $("#data").html(almondData);
-                    //
-                    $("#answer").hide();
-                    $("#showAnswer").click(function () {
-                        $("#answer").show();
-                    });
-                }
-                else {
-                    alert("Listenin içinde hiç veri yok :( ");
-                }
+    $(function () {
+        var i = 1;
+        $(".puanlar").click(function () {
+            $("#answer").html("");
+            var listid = $("#liste-dropdown").val();
+            var puanVal = $(this).val();
+            var dataid = $("#dataId").val();
+            if (puanVal > 0) {
+                $.ajax({
+                    method: "POST",
+                    url: "Home/UpdatePuan",
+                    data: { puan: puanVal, dataId: dataid, listId: listid },
+                    success: function (datalist) {
+                        if (datalist != null) {
+                            console.log(datalist);
+                            $("#question").html(datalist[i].question);
+                            $("#showAnswer").click(function () {
+                                $("#answer").html(datalist[i].answer);
+                            })
+                            i++;
+                        }
+                        else {
+                            alert("veri puanı güncellenemedi");
+                        }
+                    }
+                });
             }
         });
-    }
+
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     $(document).ready(function () {
-        // Kısayol tuşlarına tepki vereceğimiz olay dinleyicisini ekleyin
         $(document).keydown(shortcuts);
         $(document).keydown(mainpageShortcuts);
     });
