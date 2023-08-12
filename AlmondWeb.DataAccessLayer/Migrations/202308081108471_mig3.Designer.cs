@@ -7,13 +7,13 @@ namespace AlmondWeb.DataAccessLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class manytomanyrelation : IMigrationMetadata
+    public sealed partial class mig3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(manytomanyrelation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(mig3));
         
         string IMigrationMetadata.Id
         {
-            get { return "202308011113413_manytomanyrelation"; }
+            get { return "202308081108471_mig3"; }
         }
         
         string IMigrationMetadata.Source
