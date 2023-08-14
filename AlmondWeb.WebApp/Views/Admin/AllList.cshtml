@@ -1,55 +1,72 @@
 ﻿
 @{
-    ViewBag.Title = "AllList";
+    ViewBag.Title = "Tüm Listeler";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     int counter = 0;
-    ListManager lm = new ListManager();
-    List<ListTable> allList = lm.List();
+    SharedListManager slm = new SharedListManager();
+    List<SharedListTable> allList = slm.List();
 
 }
 
-<div id="page-wrapper">
-    <div id="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Liste Tablosu
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover text-center"
-                                   id="dataTables-example">
-                                <thead>
-                                    @{counter++;}
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Sahibi</th>
-                                        <th>Liste </th>
-                                        <th>Kayıtlı Veri Adedi</th>
-                                        <th>Durum</th>
-                                        <th>Kaydedilme Sayısı</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in allList)
-                                    {
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb" class="m-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Admin</li>
+                <li class="breadcrumb-item active" aria-current="page">Tüm Listeler</li>
+            </ol>
+        </nav>
+        <table class="table table-responsive table-striped table-bordered table-hover text-center"
+               id="dataTables-example">
+            <thead>
+                @{counter++;}
+                <tr>
+                    <th>#</th>
+                    <th>Sahibi</th>
+                    <th>Liste </th>
+                    <th>Kayıtlı Veri Adedi</th>
+                    <th>Durum</th>
+                    <th>Kaydedilme Sayısı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in allList)
+                {
 
-                                        <tr class="odd gradeX">
-                                            <td>@counter</td>
-                                            <td>@item.Owner.Username</td>
-                                            <td>@item.listName</td>
-                                            <td>@item.DataTables.Count()</td>
-                                            <td>@item.isPublic</td>
-                                            <td>ayarlanacak</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <tr class="odd gradeX">
+                        <td>@counter</td>
+                        <td>@item.Owner.Username</td>
+                        <td>@item.List.listName</td>
+                        <td>@item.List.DataTables.Count()</td>
+                        <td>@item.isPublic</td>
+                        <td>
+                            <button class="" onclick="removefromSharedListTables('@item.Id" )">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512">
+                                    <path d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM152 232H296c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+<script>
+    function removefromSharedListTables(id) {
+
+        $.ajax({
+            method: 'POST',
+            url: "/Admin/RemoveSharedList/" + id,
+            success: function (result) {
+                if (result > 0) {
+                    alert("Liste paylaşılanlardan kaldırıldı");
+                }
+                else {
+                    alert("işlem başarısız.");
+                }
+            }
+        })
+
+    }
+</script>

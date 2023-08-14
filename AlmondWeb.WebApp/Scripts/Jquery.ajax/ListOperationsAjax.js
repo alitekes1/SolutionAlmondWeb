@@ -16,7 +16,6 @@ $("#privateRadioUpdate").click(function () {
     $("#publicRadioUpdate").val(0);
 });
 
-
 document.getElementById("confirmBtnCreateList").addEventListener("click", function () {
     var listName = $("#inputTextCreateList").val();
     var listDescription = $("#listDescriptionTextArea").val();
@@ -78,7 +77,7 @@ function transfertoDeleteData(data, idM) {
             url: '/Home/DeleteList/' + idM,
             success: function (result) {
                 if (result > 0) {
-                    ReLoadListData();
+                    ReLoadListData2();
                     toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!", 1500);
                 }
                 else {
@@ -96,7 +95,7 @@ function transfertoDeleteData(data, idM) {
 function ReLoadListData() {
     $.ajax({
         method: "GET",
-        url: '/User/AllUser',
+        url: '/Home/FillTableForListOperations',
         success: function (tableData) {
             table.empty(); // Tabloyu temizliyoruz
 

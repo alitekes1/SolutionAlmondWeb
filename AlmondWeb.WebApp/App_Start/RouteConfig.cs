@@ -106,6 +106,11 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "Admin", action = "AlmondWebStatistic", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "admins",
+                url: "Adminler54",
+                defaults: new { controller = "Admin", action = "Admins", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "alluser",
                 url: "TumKullanicilar54",
                 defaults: new { controller = "Admin", action = "AllUser", id = UrlParameter.Optional }

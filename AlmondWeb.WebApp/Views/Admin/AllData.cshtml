@@ -7,63 +7,73 @@
     List<AlmondDataTable> dataList = dm.List();
 }
 
-<div id="page-wrapper">
-    <div id="page-inner">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Veri Tablosu
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover text-center"
-                                   id="dataTables-example">
-                                <thead>
-                                    @{counter++;}
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Soru</th>
-                                        <th>Cevap</th>
-                                        <th>Liste</th>
-                                        <th>Puan</th>
-                                        <th>Sahibi</th>
-                                        <th>Ekle</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in dataList)
-                                    {
-                                        <tr class="odd gradeX">
-                                            <td>@counter</td>
-                                            <td>@item.question</td>
-                                            <td>@item.answer</td>
-                                            @if (item.List == null)
-                                            {
-                                                <td>NULL</td>
-                                            }
-                                            else
-                                            {
-                                                <td>@item.List.listName</td>
-                                            }
-                                            <td>@item.puan</td>
-                                            <td>@item.Owner.Username</td>
-                                            <td class="text-center">
-                                                <a href="#" class="text-dark text-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                                                    </svg>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb" class="m-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Admin</li>
+                <li class="breadcrumb-item active" aria-current="page">Tüm Veriler</li>
+            </ol>
+        </nav>
+        <table class="table table-responsive table-striped table-bordered table-hover text-center"
+               id="dataTables-example">
+            <thead>
+                @{counter++;}
+                <tr>
+                    <th>#</th>
+                    <th>Soru</th>
+                    <th>Cevap</th>
+                    <th>Liste</th>
+                    <th>Puan</th>
+                    <th>Sahibi</th>
+                    <th>Ekle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in dataList)
+                {
+                    <tr class="odd gradeX">
+                        <td>@counter</td>
+                        <td>@item.question</td>
+                        <td>@item.answer</td>
+                        @if (item.List == null)
+                        {
+                            <td>NULL</td>
+                        }
+                        else
+                        {
+                            <td>@item.List.listName</td>
+                        }
+                        <td>@item.puan</td>
+                        <td>@item.Owner.Username</td>
+                        <td class="text-center">
+                            <button type="submit" onclick="transferTodeleteDataid('@item.Id')" class="text-dark text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+
+<script>
+    function transferTodeleteDataid(id) {
+        $.ajax({
+            method: 'POST',
+            url: '/Admin/DeleteData/' + id,
+            success: function (result) {
+                if (result > 0) {
+                    alert("veri silindi");
+                }
+                else {
+                    alert("Veri SİLİNMEDİ");
+                }
+            }
+        })
+    }
+</script>

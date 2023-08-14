@@ -1,0 +1,7 @@
+﻿.navbar {
+    --bs-navbar-padding-y: 0px !important;
+}
+
+button {
+    border: none;
+}
