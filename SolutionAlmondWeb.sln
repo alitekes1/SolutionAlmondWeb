@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33927.289
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.Core", "AlmondWeb.Core\AlmondWeb.Core.csproj", "{3156B16D-2824-42C0-8289-7B1768B87F57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.WebApp", "..\..\AlmondWeb\AlmondWeb\AlmondWeb.WebApp.csproj", "{A9BC0A22-2DEB-4A03-B4DC-5ED8734EC44E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.WebApp", "D:\AlmondWeb\AlmondWeb\AlmondWeb.WebApp.csproj", "{A9BC0A22-2DEB-4A03-B4DC-5ED8734EC44E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.BusinessLayer", "..\..\AlmondWeb\AlmondWeb.BusinessLayer\AlmondWeb.BusinessLayer.csproj", "{75E4DCB5-20CC-42CE-BA8C-AEBFC1F84FC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.Entities", "D:\AlmondWeb\AlmondWeb.Entities\AlmondWeb.Entities.csproj", "{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.DataAccessLayer", "..\..\AlmondWeb\AlmondWeb.DataAccessLayer\AlmondWeb.DataAccessLayer.csproj", "{8044D189-F276-4B3C-BF93-BBB6977B0342}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.DataAccessLayer", "D:\AlmondWeb\AlmondWeb.DataAccessLayer\AlmondWeb.DataAccessLayer.csproj", "{8044D189-F276-4B3C-BF93-BBB6977B0342}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.Entities", "..\..\AlmondWeb\AlmondWeb.Entities\AlmondWeb.Entities.csproj", "{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.BusinessLayer", "D:\AlmondWeb\AlmondWeb.BusinessLayer\AlmondWeb.BusinessLayer.csproj", "{75E4DCB5-20CC-42CE-BA8C-AEBFC1F84FC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmondWeb.Core", "..\..\AlmondWeb\AlmondWeb.Core\AlmondWeb.Core.csproj", "{3156B16D-2824-42C0-8289-7B1768B87F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,26 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3156B16D-2824-42C0-8289-7B1768B87F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3156B16D-2824-42C0-8289-7B1768B87F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3156B16D-2824-42C0-8289-7B1768B87F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3156B16D-2824-42C0-8289-7B1768B87F57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9BC0A22-2DEB-4A03-B4DC-5ED8734EC44E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9BC0A22-2DEB-4A03-B4DC-5ED8734EC44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9BC0A22-2DEB-4A03-B4DC-5ED8734EC44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9BC0A22-2DEB-4A03-B4DC-5ED8734EC44E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75E4DCB5-20CC-42CE-BA8C-AEBFC1F84FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75E4DCB5-20CC-42CE-BA8C-AEBFC1F84FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75E4DCB5-20CC-42CE-BA8C-AEBFC1F84FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75E4DCB5-20CC-42CE-BA8C-AEBFC1F84FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8044D189-F276-4B3C-BF93-BBB6977B0342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3780B67-CDB3-4BAB-AF09-830DF6C6D5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3156B16D-2824-42C0-8289-7B1768B87F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3156B16D-2824-42C0-8289-7B1768B87F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3156B16D-2824-42C0-8289-7B1768B87F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3156B16D-2824-42C0-8289-7B1768B87F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
