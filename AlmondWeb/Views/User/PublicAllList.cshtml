@@ -21,10 +21,11 @@
             <hr />
         </div>
         <div class="col-sm-12" id="allList">
-            @Html.Partial("TablePartial/_PublicListPartial", Model)
+            @Html.Partial("Partials/_PublicListinProfilePartial", Model)
         </div>
     </div>
 </div>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
 <script>
     document.getElementById("searchListbtn").addEventListener("click", function () {
         var searchtext = $("#searchText").val();
@@ -35,6 +36,7 @@
             data: { searchText: searchtext },
             success: function (listData) {
                 lists.empty();
+
                 lists.append(listData);
             }
         });

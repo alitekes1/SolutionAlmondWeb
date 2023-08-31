@@ -152,7 +152,7 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpGet]
         public ActionResult PublicAllList()//TODO: liste paylaşma hakkında SSS hazırlanacak. acordion şeklinde
         {
-            List<SharedListTable> list = slm.RelationListAll(currentUserID);//current user a ait dataları listeliyoruz.
+            List<SharedListTable> list = slm.RelationListAll(currentUserID);//paylaşılan tüm listeleri gönderiyor.
             return View(list);
         }
         public ViewResult SearchList(string searchText)

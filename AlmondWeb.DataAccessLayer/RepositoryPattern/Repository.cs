@@ -65,11 +65,16 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
                 ListTable li = dataset as ListTable;
                 li.isDeleted = true;
             }
+            if (dataset is SharedListTable)
+            {
+                SharedListTable li = dataset as SharedListTable;
+                li.isPublic = false;
+            }
             return Save();
         }
-        public int DeleteList(ListTable dataset)
+        public int DeleteList(T dataset)
         {
-            database.Set<ListTable>().Remove(dataset);
+            database.Set<T>().Remove(dataset);
             return Save();
         }
         public List<T> List()
@@ -89,20 +94,20 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         {
             return database.Set<T>().Find(ownerId);
         }
-        public List<SharedListTable> RelationList(int userid)
+        public List<SharedListTable> RelationList(int userid)//sadece ilgili kullanıcının kaydettiği listeleri döner
         {
             var profileLists = database.SharedListTables
                 .Include(pl => pl.List)
-                .Where(pl => pl.profileId == userid && pl.List.Owner.Id != userid && pl.List.isPublic).ToList();
+                .Where(pl => pl.profileId == userid && pl.List.Owner.Id != userid && pl.isPublic).ToList();
 
             return profileLists;
         }
-        public List<SharedListTable> RelationListAll(int userid)
+        public List<SharedListTable> RelationListAll(int userid)//paylaşılan listelerin hepsini döner
         {
 
             var profileLists = database.SharedListTables
                 .Include(pl => pl.List)
-                .Where(pl => pl.profileId == pl.List.Owner.Id && pl.List.Owner.Id != userid && pl.List.isPublic).ToList();
+                .Where(pl => pl.profileId == pl.Owner.Id && pl.Owner.Id != userid && pl.isPublic).ToList();
 
             return profileLists;
         }

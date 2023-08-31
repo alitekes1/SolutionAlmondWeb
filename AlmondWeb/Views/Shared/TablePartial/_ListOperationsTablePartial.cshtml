@@ -31,8 +31,8 @@
             {
                 <tr>
                     <td>
-                        Kayıtlı listeniz bulunmamaktadır.Sol üstte bulunan "
-                        <span class="fst-italic">Liste Oluştur</span>" butonundan liste ekleyebilirsiniz.
+                        Kayıtlı listeniz bulunmamaktadır.Sol üstte bulunan
+                        <span class="fst-italic">Liste Oluştur</span> butonundan liste ekleyebilirsiniz.
                     </td>
                 </tr>
             }
@@ -65,7 +65,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5">Listenin ismini güncelleyebilirsiniz.</h1>
+                                            <h1 class="modal-title fs-5">Kaydedilen listenin sadece ismini güncelleyebilirsiniz.</h1>
                                             <a class="btn-close" id="btn-close3" data-bs-dismiss="modal" aria-label="Close"></a>
                                         </div>
                                         <div class="modal-body">
@@ -74,7 +74,7 @@
                                                     <input type="text" id="inputTextUpdateList" class="form-control" autofocus name="textcreate" required aria-describedby="inputGroup-sizing-default" placeholder="@ViewData["placeholderinModelText"]">
                                                 </div>
                                                 <div class="row-sm-6 my-2">
-                                                    <textarea class="form-control" id="ListdescriptionTextAreaUpdate" placeholder="Liste Açıklamasını giriniz.Sade ve anlaşılır bir açıklama olmasına özen gösteriniz." style="resize:none" rows="5"></textarea>
+                                                    <textarea class="form-control" id="ListdescriptionTextAreaUpdate" placeholder="Liste Açıklamasını giriniz.Sade, net ve anlaşılır bir açıklama olmasına özen gösteriniz." style="resize:none" rows="5"></textarea>
                                                 </div>
                                                 <div class="row-sm-3 text-start">
                                                     <div class="form-check">
@@ -109,10 +109,9 @@
                                 </svg>
                             </button>
                             @(Html.Partial("ModelPopUp/_SilModalPartial", new ViewDataDictionary
-
-                                      {
+                                                              {
                                         {"modelHeader","Aşağıdaki liste silinecek.Emin misiniz?"},
-                                        {"not","*İlgili listenin içindeki veriler silinmez.Sileceğiniz listede bulunan verilerin artık bir listesi olmaz.Listeye sahip olmayan veriler Anasayfa da karşına çıkarılmaz.(--Listesiz--)"}
+                                        {"not","*İlgili listenin içindeki veriler silinmez.Sileceğiniz listede bulunan verilerin artık bir listesi olmaz.Listeye sahip olmayan verilere puanlama işlemi yapılamaz."}
                                       })
 
                              )

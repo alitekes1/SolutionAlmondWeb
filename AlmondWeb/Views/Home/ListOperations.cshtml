@@ -16,7 +16,6 @@
             </div>
             <div class="col-sm-7"></div>
         </div>
-
         @* liste işlemlerinden liste ekleme popup ı *@
         <div class="modal fade" id="exampleModallisteolustur" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class=" modal-dialog modal-dialog-centered">
@@ -61,7 +60,13 @@
             </div>
         </div>
     </div>
-    @Html.Action("FillTableForListOperations", "Home")
+    <div class="row">
+        @Html.Action("FillTableForListOperations", "Home")
+    </div>
+    <hr />
+    <div class="row">
+        @Html.Action("SavedListTablePartial", "Home")
+    </div>
 </div>
 <link href="~/Content/toastr.min.css" rel="stylesheet" />
 <script src="~/Scripts/Jquery.ajax/ListOperationsAjax.js"></script>

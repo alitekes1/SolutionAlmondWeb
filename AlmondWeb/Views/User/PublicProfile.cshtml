@@ -4,8 +4,11 @@
     Layout = "~/Views/Shared/BaseLayout.cshtml";
     int currentUserID = CacheHelper.CurrentUserID();
 
-    SharedListManager lm = new SharedListManager();
-    List<SharedListTable> list = lm.RelationList(currentUserID);//current user a ait dataları listeliyoruz.
+    SharedListManager slm = new SharedListManager();
+    List<SharedListTable> mySavedlist = slm.ListwithExpression(x => x.profileId == currentUserID && x.OwnerId != currentUserID && x.isPublic);
+
+    List<SharedListTable> mySharedlist = slm.ListwithExpression(x => x.profileId == currentUserID && x.OwnerId == currentUserID && x.isPublic);
+
 
     ProfileManager pm = new ProfileManager();
     var user = pm.FindwithExpression(x => x.Id == currentUserID);
@@ -81,14 +84,14 @@
         <div class=" w-100 gx-0 ">
             <div class="tabs justify-content-center">
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab1" checked>
-                <label for="tab1" class="tabs__label text-center">Listelerim</label>
+                <label for="tab1" class="tabs__label text-center">Paylaştığım Listelerim</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_MyListinProfilePartial", list)
+                    @Html.Partial("Partials/_PublicListinProfilePartial", mySharedlist)
                 </div>
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab2">
                 <label for="tab2" class="tabs__label text-center">Kaydettiğim Listeler</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_Saved_PublicListinProfilePartial",list)
+                    @Html.Partial("Partials/_Saved_PublicListinProfilePartial", mySavedlist)
                 </div>
             </div>
         </div>

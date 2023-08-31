@@ -14,7 +14,7 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.Delete(dataset);
         }
-        public int DeleteList(ListTable dataset)
+        public int DeleteList(T dataset)
         {
             return repo.DeleteList(dataset);
         }

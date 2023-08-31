@@ -179,6 +179,20 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
+        [HttpPost]
+        public int RemoveSavedList(int? listid)
+        {
+            if (listid != null)
+            {
+                SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.Id == listid);
+                if (sharedlist != null)
+                {
+                    int result = sharedListManager.Delete(sharedlist);
+                    return result;
+                }
+            }
+            return -1;
+        }
         [HttpGet]
         public ActionResult UpdateList()
         {
@@ -272,6 +286,10 @@ namespace AlmondWeb.WebApp.Controllers
         public PartialViewResult FillTableForAllData()
         {
             return PartialView("TablePartial/_AllDataTable");
+        }
+        public PartialViewResult SavedListTablePartial()
+        {
+            return PartialView("TablePartial/_SavedListTablePartial");
         }
     }
 }
