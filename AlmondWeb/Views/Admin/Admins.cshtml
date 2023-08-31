@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Admin İşlemleri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    @Html.Action("AdminTablePartial", "Admin")
+</div>
+<script>
+    function transferIdforRemoveAdmin(id) {
+        $.ajax({
+            method: "POST",
+            url: '/Admin/RemoveAdmin/' + id,
+            success: function (result) {
+                if (result > 0) {
+                    ReLoadTableforAdmin();
+                    toastr.success("İşlem başarılı.", "Kullanıcı Admin olmaktan çıkarıldı.", 500);
+                }
+                else {
+                    toastr.warning("işlem başarısız.Kullanıcı zaten Admin değil.", "işlem başarısız", 500);
+                }
+            }
+        });
+    };
+    function transferIdforActiveAdmin(id) {
+        $.ajax({
+            method: "POST",
+            url: '/Admin/AssignAdmin/' + id,
+            success: function (result) {
+                if (result > 0) {
+                    ReLoadTableforAdmin();
+                    toastr.success("İşlem başarılı.", "Kullanıcı Admin haline getirildi. Hayırlı olsun.", 500);
+                }
+                else {
+                    toastr.warning("işlem başarısız.Kullanıcı zaten Admin olabilir.", "işlem başarısız", 500);
+                }
+            }
+        });
+    };
+    function ReLoadTableforAdmin() {
+        var table = $("#adminTables");
+        $.ajax({
+            method: "GET",
+            url: '/Admin/AdminTablePartial',
+            success: function (tableData) {
+                table.empty(); // Tabloyu temizliyoruz
+
+                table.append(tableData);
+            }
+        });
+    }
+
+</script>

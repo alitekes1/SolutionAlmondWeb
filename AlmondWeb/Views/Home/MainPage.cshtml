@@ -1,0 +1,197 @@
+﻿@using System.Web
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/BaseLayout.cshtml";
+
+    int currentUserID = CacheHelper.CurrentUserID();
+
+    ListManager lm = new ListManager();
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null);
+    var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz
+}
+<script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
+<div class="mt-2">
+    <div class="row justify-content-end gx-0">
+        <div class="col-sm-3 offset-7">
+            @Html.DropDownList("liste-dropdown", selectList, "Liste Seçiniz", new { @class = "form-select bg-white mainliste-dropdown", autofocus = "autofocus", required = "required", id = "liste-dropdown" })
+        </div>
+        <div class="col-sm-12 mt-2">
+            <div class="row gx-0">
+                <div class=" col-sm-8 offset-md-2 text-center pl-5">
+                    <div class="ana-ekran">
+                        <div class="row gx-0 gy-1">
+                            <div id="data" class="gy-1">
+                                <div class="row-sm-5 soru" id="question">
+                                    <p id="questionText">
+
+                                    </p>
+                                </div>
+                                <div class="row-sm-5 cevap" id="answer">
+                                    <p id="answerText">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row-sm-2 cevabigoster-grid mt-1">
+                                <button id="showAnswer" class="button2 cevap-butonu my-2" type="button">
+                                    Cevabı Göster
+                                    <svg class="stars" viewBox="0 0 353 178" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M271 37.9914C289.244 33.3118 295.91 27.0769 299.991 9C305.137 29.7552 312.313 36.1206 331.104 40.1127C312.194 43.8462 305.081 49.4282 302.113 69.1041C296.925 50.845 289.057 44.9589 271 37.9914Z"></path>
+                                        <path d="M254.852 83.012C245.919 73.8857 239.998 72.0853 228 75.817C238.443 65.759 239.748 59.3874 235.721 47C244.325 56.8385 250.014 59.1225 262.574 54.195C253.611 63.4315 252.822 70.0469 254.852 83.012Z"></path>
+                                        <path d="M275.626 97.3875C278.179 88.2512 277.138 83.7734 270.281 77.4407C280.63 80.423 285.214 78.8959 291.687 71.7049C288.553 80.8937 289.197 85.4019 297.032 91.6517C287.761 89.3164 283.212 91.2658 275.626 97.3875Z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gy-0 mt-2" style="padding-top:11px;padding-bottom:3px">
+        <!-- start Puanlama Kısımları-->
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-10 offset-lg-1 butonlar">
+                    <div class="col gx-0 text-center" style="border:none">
+
+                        <button id="puan1" name="puanValue" type="submit" value="1" class="button border border-secondary-subtle puanlar">1</button>
+                        <button id="puan2" name="puanValue" type="submit" value="2" class="button border border-secondary-subtle puanlar">2</button>
+                        <button id="puan3" name="puanValue" type="submit" value="3" class="button border border-secondary-subtle puanlar">3</button>
+                        <button id="puan4" name="puanValue" type="submit" value="4" class="button border border-secondary-subtle puanlar">4</button>
+                        <button id="puan5" name="puanValue" type="submit" value="5" class="button border border-secondary-subtle puanlar">5</button>
+                        <label id="dataId"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end Puanlama Kısımları-->
+</div>
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+
+<script>
+    let datalist;
+    let i = 0;
+    let listId;
+    let que = $("#question");
+    let ans = $("#answer");
+
+    $("#liste-dropdown").change(function () {
+        let listDropdown = document.getElementById("liste-dropdown");
+        listId = listDropdown.value;
+        ans.text("");
+        $.ajax({
+            method: "GET",
+            url: `Home/GetQuestionAnswerJson/${listId}`, // URL düzgün formatta
+            success: function (list) {
+                if (list != null) {
+                    console.log(list);
+                    datalist = list;
+                    i = 0; // Yeni liste için indeks sıfırlanıyor
+                    showQuestionAndAnswer(i); // İlk soru ve cevap gösteriliyor
+                } else {
+                    alert("Liste boş geldi.");
+                }
+            }
+        });
+    });
+
+    $(".puanlar").click(function () {
+        ans.text("");
+        que.text("");
+        var puanVal = $(this).val();
+        //i = 1;
+        $.ajax({
+            method: "POST",
+            url: 'Home/UpdatePuan',
+            data: { dataId: datalist[i].update_Id, puan: puanVal, listIdPost: listId},
+            success: function (result) {
+                if (result > 0 && i + 1 < datalist.length) {
+                    i++; // Bir sonraki soruya geçiliyor
+                    showQuestionAndAnswer(i); // Yeni soru ve cevap gösteriliyor
+                } else {
+                    alert("Puan güncellenemedi veya liste sonuna gelindi.");
+                }
+            }
+        });
+    });
+
+    // Soru ve cevapları gösteren fonksiyon
+    function showQuestionAndAnswer(index) {
+        que.text(datalist[index].question);
+        $("#showAnswer").click(function () {
+            ans.text(datalist[index].answer);
+        });
+    }
+
+
+
+
+
+
+
+
+    $(document).ready(function () {
+        $(document).keydown(shortcuts);
+        $(document).keydown(mainpageShortcuts);
+    });
+
+    function shortcuts(event) {
+        if (event.shiftKey && event.key === 'A') {
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'U') {
+
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'D') {
+
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'L') {
+
+            alert("kısayol tuşuna basıldı:)");
+        }
+        if (event.shiftKey && event.key === 'T') {
+            alert("kısayol tuşuna basıldı:)");
+        }
+    }
+    function mainpageShortcuts(event) {
+        if (event.key === '1') {
+            $("#puan1").click();
+        }
+        if (event.key === '2') {
+            $("#puan2").click();
+        }
+        if (event.key === '3') {
+            $("#puan3").click();
+        }
+        if (event.key === '4') {
+            $("#puan4").click();
+        }
+        if (event.key === '5') {
+            $("#puan5").click();
+        }
+        if (event.key === ' ') {
+            $("#showanswer").click();
+        }
+    }
+
+    $(".puanlar").click(function () {
+        var puan = $(this).val();
+    });
+
+    $("#showAnswer").click(isSelectedList);
+    $("#puan1").click(isSelectedList);
+    $("#puan2").click(isSelectedList);
+    $("#puan3").click(isSelectedList);
+    $("#puan4").click(isSelectedList);
+    $("#puan5").click(isSelectedList);
+
+    //$("#puan1").click(GetQueAns);
+    //$("#puan2").click(GetQueAns);
+    //$("#puan3").click(GetQueAns);
+    //$("#puan4").click(GetQueAns);
+    //$("#puan5").click(GetQueAns);
+
+</script>

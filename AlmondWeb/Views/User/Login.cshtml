@@ -1,0 +1,48 @@
+﻿﻿@model AlmondWeb.BusinessLayer.ViewModels.LoginModel
+@{
+    ViewBag.Title = "Giriş Yap";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+<script src="~/Scripts/AlmondJs/index.js"></script>
+
+@using (Html.BeginForm("Login", "User", "POST"))
+{
+    <div class="col">
+
+        <div class="row-sm-3 mb-5">
+            <div class="col-sm-12">
+                <h2 class="girisyapyazi">Giriş yap</h2>
+            </div>
+            <div>
+                <h6 style="float: left;color: gray;">
+                    Yeni kullanıcı mısınız? <a href="/Kayit-Ol">Bir hesap oluşturun.</a>
+                </h6>
+            </div>
+        </div>
+        <div>
+            @Html.ValidationSummary(true)
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="form-floating row-sm-3 mt-5">
+            @Html.TextBoxFor(x => x.email, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Ad", type = "email", autofocus = "autofocus" })
+            <label for="floatingInput">E-mail </label>
+            <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.email)</p>
+        </div>
+
+        <div class="form-floating row-sm-3 mt-2">
+            <div class="col">
+                <div class="form-floating">
+                    @Html.TextBoxFor(x => x.password, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Şifre", type = "password" })
+                    <label for="floatingPassword">Şifre</label>
+                    <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.password)</p>
+                </div>
+            </div>
+            <a href="ForgetPassword" class="sifremiunuttum mt-1 ">Şifremi Unuttum :(</a>
+        </div>
+        <div class="row-sm-3">
+            <button type="submit" class="btn btn-success mt-4 form-control girisbutonu">Giriş Yap</button>
+        </div>
+    </div>
+}

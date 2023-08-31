@@ -145,6 +145,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
+    <Compile Include="CacheHelper.cs" />
     <Compile Include="ContactManager.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="ErrorResult.cs" />
@@ -191,6 +193,14 @@
     <ProjectReference Include="..\AlmondWeb.Core\AlmondWeb.Core.csproj">
       <Project>{3156b16d-2824-42c0-8289-7b1768b87f57}</Project>
       <Name>AlmondWeb.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AlmondWeb.DataAccessLayer\AlmondWeb.DataAccessLayer.csproj">
+      <Project>{8044d189-f276-4b3c-bf93-bbb6977b0342}</Project>
+      <Name>AlmondWeb.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AlmondWeb.Entities\AlmondWeb.Entities.csproj">
+      <Project>{d3780b67-cdb3-4bab-af09-830df6c6d5c9}</Project>
+      <Name>AlmondWeb.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

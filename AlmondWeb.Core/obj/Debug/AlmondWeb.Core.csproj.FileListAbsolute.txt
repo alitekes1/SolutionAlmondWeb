@@ -1,0 +1,11 @@
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Core\bin\Debug\AlmondWeb.Core.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Core\bin\Debug\AlmondWeb.Core.pdb
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.csproj.AssemblyReference.cache
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.csproj.CoreCompileInputs.cache
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.pdb
+C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Core\bin\Debug\AlmondWeb.Core.dll
+C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Core\bin\Debug\AlmondWeb.Core.pdb
+C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.csproj.CoreCompileInputs.cache
+C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.dll
+C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.pdb

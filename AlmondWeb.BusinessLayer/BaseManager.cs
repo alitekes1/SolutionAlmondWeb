@@ -26,7 +26,6 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.Insert(dataset);
         }
-
         public List<T> List()
         {
             return repo.List();
@@ -56,5 +55,6 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.FindRelotionList(text, userid);
         }
+
     }
 }

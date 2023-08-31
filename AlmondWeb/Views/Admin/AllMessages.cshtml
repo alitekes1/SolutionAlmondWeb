@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int counter = 0;
+    ContactManager cm = new ContactManager();
+    List<ContactTable> messages = cm.List();
+}
+
+<div class="container-fluid">
+    <table class="table table-striped table-bordered table-hover text-center table-responsive" id="dataTables-example">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Yazar Mail Adresi</th>
+                <th>Konu</th>
+                <th>Mesaj</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in messages)
+            {
+                counter++;
+                <tr class="odd gradeX">
+                    <td>@counter</td>
+                    <td>@item.contactMail</td>
+                    <td>@item.contactType</td>
+                    <td>@item.message</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

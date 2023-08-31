@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Tüm kullanıcılar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    @Html.Action("AllUserTablePartial", "Admin");
+</div>
+
+<script>
+    function transferIdforDeActiveAccount(id) {
+        $.ajax({
+            method: "POST",
+            url: '/Admin/DeactiveAccount/' + id,
+            success: function (result) {
+                if (result > 0) {
+                    ReLoadTableforAllUser();
+                    toastr.success("İşlem başarılı.", "Kullanıcı pasif hale getirildi.", 500);
+                }
+                else {
+                    toastr.warning("işlem başarısız.Kullanıcı zaten pasif olabilir.", "işlem başarısız", 500);
+                }
+            }
+        });
+    };
+    function transferIdforActiveAccount(id) {
+        $.ajax({
+            method: "POST",
+            url: '/Admin/ActiveAccount/' + id,
+            success: function (result) {
+                if (result > 0) {
+                    ReLoadTableforAllUser();
+                    toastr.success("İşlem başarılı.", "Kullanıcı aktif hale getirildi.", 500);
+                }
+                else {
+                    toastr.warning("işlem başarısız.Kullanıcı zaten aktif olabilir.", "işlem başarısız", 500);
+                }
+            }
+        });
+    };
+    function ReLoadTableforAllUser() {
+        var table = $("#tableAlluser");
+        $.ajax({
+            method: "GET",
+            url: '/Admin/AllUserTablePartial',
+            success: function (tableData) {
+                table.empty(); // Tabloyu temizliyoruz
+
+                table.append(tableData);
+            }
+        });
+    }
+
+</script>

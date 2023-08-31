@@ -1,0 +1,16 @@
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\AlmondWeb.Entities.dll.config
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\AlmondWeb.Entities.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\AlmondWeb.Entities.pdb
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\AlmondWeb.Common.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\AlmondWeb.Core.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\EntityFramework.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\AlmondWeb.Common.pdb
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\AlmondWeb.Core.pdb
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\EntityFramework.xml
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.csproj.AssemblyReference.cache
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.csproj.CoreCompileInputs.cache
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.csproj.CopyComplete
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.dll
+C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.pdb

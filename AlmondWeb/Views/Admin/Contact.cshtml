@@ -1,0 +1,78 @@
+﻿@model ContactTable
+@{
+    ViewBag.Title = "İletişim";
+    Layout = "~/Views/Shared/BaseLayout.cshtml";
+
+    List<string> list = new List<string>();
+
+    list.Add("Tavsiye");
+    list.Add("Teşekkür");
+    list.Add("Site hakkında bilgi");
+    list.Add("Hata bildirimi");
+    list.Add("Yardım");
+    list.Add("Diğer");
+
+
+    SelectList selectList = new SelectList(list, "contactType");
+}
+<link href="~/Content/AlmondCss/sliderBoyut.css" rel="stylesheet" />
+
+<div class="row mb-5 ">
+    <div class="col-sm-9 gx-0">
+        <div id="carouselExampleAutoplaying" class="carousel slide " data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Images/background/contactimg.jpg" class="imglar d-block w-100 " alt="bg">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" hidden data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" hidden data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-sm-3 bg-light">
+        <h2 class="my-4" style="text-align: center; font-family:Dubai">İletişim</h2>
+
+        @using (Ajax.BeginForm("Contact", "Admin", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = "clearTextBox",
+            OnFailure = "failmessage"
+        }))
+        {
+            <div class="mb-3">
+                @Html.TextBoxFor(x => x.contactMail, new { @class = "form-control", placeholder = "Email", type = "email", required = "required", id = "email" })
+            </div>
+
+            <div class="input-group mb-3">
+                @Html.DropDownListFor(x => x.contactType, selectList, new { @class = "form-select", id = "contactTypeList" })
+            </div>
+
+            <div class="input-group">
+                @Html.TextAreaFor(x => x.message, new { @class = "form-control", id = "message", required = "required", maxlength = "600", rows = "16", style = "resize:none", placeholder = "Mesajınız minumum 10, maksimum 500 karakter olmalıdır." })
+            </div>
+            <input type="reset" style="display:none" id="resetButton" />
+            <div class="row">
+                <div class="col-sm-12 mt-4">
+                    <button type="submit" href="#" class="btn btn-success mt-3" style="text-align: center; width: 100% ;padding-top:10px"> Gönder</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+<script>
+    function clearTextBox() {
+        $("#resetButton").click();
+        toastr.success('Mesajınız başarıyla gönderildi .', 'İşlem başarılı', 1500);
+    } function failmessage() {
+        $("#resetButton").click();
+        toastr.danger('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', 1500);
+    }
+</script>

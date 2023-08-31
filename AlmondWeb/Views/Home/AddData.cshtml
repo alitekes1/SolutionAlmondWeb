@@ -1,0 +1,72 @@
+﻿@model  AlmondWeb.Entities.AlmondDataTable
+@{
+    ViewBag.Title = "Veri Ekle";
+    Layout = "~/Views/Shared/BaseLayout.cshtml";
+
+    int currentUserID = CacheHelper.CurrentUserID();
+
+    ListManager lm = new ListManager();
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null);
+    var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
+}
+<link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
+<div class="mb-lg-5">
+    <div class="row mt-3">
+        <div class="col-sm-4 ">
+            <div class="form-container" style="padding-top:11px">
+                <div class="col-sm-12 ">
+                    @using (Ajax.BeginForm("AddData", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "example", InsertionMode = InsertionMode.ReplaceWith, OnSuccess = "onSuccess" }))
+                    {
+                        <div>
+                            @Html.ValidationSummary(true)
+                        </div>
+
+                        <div class="row-sm-3 form-group shadow-textarea textareas">
+                            @Html.TextAreaFor(x => x.question, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Soru", autofocus = "autofocus", title = "Soru", id = "exampleFormControlTextarea17", required = "required" })
+                            <p class="text-danger text-sm-start" style="font-size: 13px; display: inline-block">@Html.ValidationMessageFor(x => x.question)</p>
+                            <br>
+                        </div>
+
+                        <div class="row-sm-3 form-group shadow-textarea textareas ">
+                            @Html.TextAreaFor(x => x.answer, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Cevap", autofocus = "autofocus", title = "Cevap", id = "exampleFormControlTextarea16", required = "required" })
+                            <p class="text-danger text-sm-start" style="font-size: 13px; display:inline-block">@Html.ValidationMessageFor(x => x.answer)</p>
+                            <br>
+                        </div>
+
+                        <div class="row-sm-3 mt-2">
+                            <div class="col-sm-3 " style=" display: inline-block;width:80%">
+                                @Html.DropDownListFor(x => x.List.Id, selectList, "Liste Seçiniz", new { @class = "form-select bg-white ", id = "liste-dropdown", required = "required", style = "max-width: 100%;" })
+                            </div>
+                        </div>
+
+                        @Html.HiddenFor(x => x.Owner.Id, new { @id = "owner_hidden" })
+
+                        <div class="row-sm-3 mt-2">
+                            <button type="submit" id="submitbtn" onclick="setOwnerId('@currentUserID')" class="btn btn-success verieklebtn">Kaydet</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8 ">
+            @Html.Action("FillTablewithData", "Home")
+        </div>
+    </div>
+</div>
+<script>
+    function setOwnerId(owner_id) {
+        let ownerHidden = document.getElementById("owner_hidden");
+        ownerHidden.setAttribute("value", owner_id);
+    };
+
+    function onSuccess() {
+        // Toastr mesajını göster
+        toastr.success('Veri başarıyla eklendi.', 'İşlem başarılı', 2000);
+        $("#exampleFormControlTextarea17").val("");
+        $("#exampleFormControlTextarea16").val("");
+    }
+    let _list = document.getElementById("liste-dropdown");
+    _list.options[0].disabled = true;
+</script>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />

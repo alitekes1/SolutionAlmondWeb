@@ -1,0 +1,41 @@
+﻿﻿@model  AlmondWeb.BusinessLayer.ViewModels.RegisterModel
+@{
+    ViewBag.Title = "Kayıt Ol";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+<div class="row-sm-3">
+    @Html.ValidationSummary(true)
+</div>
+
+@using (Html.BeginForm("Register", "User", "POST"))
+{
+    <div class="row-sm-3">
+        <div class="col-sm-12">
+            <h2 class="girisyapyazi">Kayıt Ol</h2>
+        </div>
+        <div class="pb-2">
+            <h6 style="float: left;color: gray;">
+                Hesabın Var mı? @Html.ActionLink("Giriş Yap", "Login")
+            </h6>
+        </div>
+    </div>
+
+    @Html.TextBoxFor(x => x.username, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Kullanıcı Ad", autofocus = "autofocus" })
+    <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.username)</p>
+    @Html.TextBoxFor(x => x.name, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Ad", autofocus = "autofocus" })
+    <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.name)</p>
+    @Html.TextBoxFor(x => x.surname, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Soyad" })
+    <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.surname)</p>
+    @Html.TextBoxFor(x => x.email, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Email", type = "email" })
+    <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.email)</p>
+    @Html.TextBoxFor(x => x.password, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Şifre", type = "password" })
+    <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.password)</p>
+    @Html.TextBoxFor(x => x.password2, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Şifre(Tekrar)", type = "password" })
+    <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.password2)</p>
+    <div id="passwordHelpBlock" class="form-text ">
+        *Şifreniz 8-16 karakterden oluşmalıdır.Kullanıcı adınız kayıtlı olmamalıdır.
+    </div>
+    <div class="row-sm-3 sumbitbutonudiv">
+        <button type="submit" class="btn btn-success form-control girisbutonu">Kayıt Ol</button>
+    </div>
+}

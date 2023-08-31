@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "AllList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int counter = 0;
+    ListManager lm = new ListManager();
+    List<ListTable> allList = lm.List();
+
+}
+
+<div class="container-fluid">
+    <table class="table table-striped table-bordered table-hover text-center table-responsive">
+        <thead>
+            @{counter++;}
+            <tr>
+                <th>#</th>
+                <th>Sahibi</th>
+                <th>Liste </th>
+                <th>Kayıtlı Veri Adedi</th>
+                <th>Durum</th>
+                <th>Kaydedilme Sayısı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in allList)
+            {
+
+                <tr>
+                    <td>@counter</td>
+                    <td>@item.Owner.Username</td>
+                    <td>@item.listName</td>
+                    <td>@item.DataTables.Count()</td>
+                    <td>@item.isPublic</td>
+                    <td>ayarlanacak</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

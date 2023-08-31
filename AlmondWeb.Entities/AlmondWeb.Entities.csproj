@@ -66,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AlmondWeb.Common\AlmondWeb.Common.csproj">
+      <Project>{869c47f1-85d4-4c0a-9bd9-a0d40010b922}</Project>
+      <Name>AlmondWeb.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AlmondWeb.Core\AlmondWeb.Core.csproj">
       <Project>{3156b16d-2824-42c0-8289-7b1768b87f57}</Project>
       <Name>AlmondWeb.Core</Name>
