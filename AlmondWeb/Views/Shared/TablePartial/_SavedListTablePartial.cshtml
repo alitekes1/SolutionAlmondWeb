@@ -13,14 +13,14 @@
     <div class="tbl-header">
         <div class="cell-border  hover" style="text-align:center;width:100%;">
             <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
-                <thead class="bg-success bg-opacity-50">
+                <thead class="bg-danger bg-opacity-50">
                     <tr>
                         <th class="text-center" style="width:5%">#</th>
-                        <th class="text-center" style="width:20%">Liste</th>
+                        <th class="text-center" style="width:15%">Liste</th>
                         <th class="text-center" style="width:35%">Açıklama</th>
                         <th class="text-center" style="width:10%">Sahibi</th>
                         <th class="text-center" style="width:10%">Top.Veri</th>
-                        <th class="text-center" style="width:10%">Güncelle</th>
+                        <th class="text-center" style="width:15%">Güncelle</th>
                         <th class="text-center" style="width:10%">Kaldır</th>
                     </tr>
                 </thead>
@@ -29,6 +29,7 @@
     </div>
     <div style="width:100%;overflow:auto;  max-height:530px;">
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
+            <caption>Kaydettiğim Listelerim</caption>
             @if (list.Count() == 0 || list is null)
             {
                 <tr>
@@ -45,13 +46,13 @@
                     counter++;
                     <tr>
                         <td class="text-center" width="5%">@counter</td>
-                        <td class="text-center" width="20%">@item.List.listName</td>
+                        <td class="text-center" width="15%">@item.List.listName</td>
                         <td class="text-center" width="35%">@item.List.listDescription</td>
                         <td class="text-center" width="10%">@item.List.Owner.Username</td>
                         <td class="text-center" width="10%">@item.List.DataTables.Count</td>
 
                         @* Güncelle Butonu *@
-                        <td class="text-center" width="10%">
+                        <td class="text-center" width="15%">
                             <button type="button" class="btntableDelete" onclick="transfertoUpdateData('@item.List.listName','@item.Id')" data-bs-toggle="modal" data-bs-target="#exampleModalsavedguncelleliste">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">
                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
@@ -95,13 +96,13 @@
                                             <button type="button" id="closebtn12" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="" id="removeSavedListName"></p>
+                                            <label class="" id="removeSavedListName"></label>
                                         </div>
                                         <div class="modal-footer">
                                             <p class="small fst-italic text-start">
-                                                İlgili listenin içindeki veriler de dahil olmak üzere bu listedeye dahil herşey geri alınamayacak şekilde kaldırılacaktır.
+                                                *İlgili listenin içindeki veriler de dahil olmak üzere bu listedeye dahil herşey geri alınamayacak şekilde kaldırılacaktır.
                                             </p>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
                                             <button type="button" class="btn btn-danger" onclick="RemoveSavedList('@item.Id')">Kaldır</button>
                                         </div>
                                     </div>

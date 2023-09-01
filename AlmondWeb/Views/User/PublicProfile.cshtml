@@ -84,14 +84,14 @@
         <div class=" w-100 gx-0 ">
             <div class="tabs justify-content-center">
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab1" checked>
-                <label for="tab1" class="tabs__label text-center">Paylaştığım Listelerim</label>
+                <label for="tab1" class="tabs__label text-center">Paylaşılan Listeler</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_PublicListinProfilePartial", mySharedlist)
+                    @Html.Partial("Partials/_MySharedListinProfilePartial", mySharedlist)
                 </div>
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab2">
-                <label for="tab2" class="tabs__label text-center">Kaydettiğim Listeler</label>
+                <label for="tab2" class="tabs__label text-center">Kaydedilen Listeler</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_Saved_PublicListinProfilePartial", mySavedlist)
+                    @Html.Partial("Partials/_MySavedListinProfilePartial", mySavedlist)
                 </div>
             </div>
         </div>

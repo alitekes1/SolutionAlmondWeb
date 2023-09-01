@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 }
 <link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
-<link href="~/Content/AlmondCss/deneme.css" rel="stylesheet" />
 <div class="container-fluid">
     <div class="row" id="searchResults">
         <div class="col-sm-3 mt-3 ">
@@ -21,15 +20,17 @@
             <hr />
         </div>
         <div class="col-sm-12" id="allList">
-            @Html.Partial("Partials/_PublicListinProfilePartial", Model)
+            @Html.Partial("Partials/_SearchList")
         </div>
     </div>
 </div>
+
+
 <link href="~/Content/toastr.min.css" rel="stylesheet" />
 <script>
     document.getElementById("searchListbtn").addEventListener("click", function () {
         var searchtext = $("#searchText").val();
-        var lists = $("#searchlists");
+        var lists = $("#searchResultCard");
         $.ajax({
             method: "POST",
             url: '/User/SearchList',

@@ -298,16 +298,16 @@
     <Content Include="Views\Admin\AllUser.cshtml" />
     <Content Include="Views\Admin\AlmondWebStatistic.cshtml" />
     <Content Include="Views\Shared\Partials\_GetQuestionAnswerPartial.cshtml" />
-    <Content Include="Views\Shared\Partials\_MyListinProfilePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_MySharedListinProfilePartial.cshtml" />
     <Content Include="Views\Shared\Partials\_profileSocialMediaIconsPartial.cshtml" />
-    <Content Include="Views\Shared\Partials\_PublicListinProfilePartial.cshtml" />
-    <Content Include="Views\Shared\Partials\_SavedListinProfilePartial.cshtml" />
-    <Content Include="Views\Shared\Partials\_Saved_PublicListinProfilePartial.cshtml" />
     <Content Include="Views\Shared\Partials\_ShortcutsPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SuggestNewFeaturePartial.cshtml" />
     <Content Include="Views\Shared\TablePartial\_AllUserTablePartial.cshtml" />
     <Content Include="Views\Shared\TablePartial\_AdminTablePartial.cshtml" />
     <Content Include="Views\Shared\TablePartial\_SavedListTablePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_SharedAllListwithCard.cshtml" />
+    <Content Include="Views\Shared\Partials\_MySavedListinProfilePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_SearchList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

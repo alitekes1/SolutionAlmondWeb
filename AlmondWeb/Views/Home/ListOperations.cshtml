@@ -61,11 +61,12 @@
         </div>
     </div>
     <div class="row">
-        @Html.Action("FillTableForListOperations", "Home")
-    </div>
-    <hr />
-    <div class="row">
-        @Html.Action("SavedListTablePartial", "Home")
+        <div class="col-sm-6">
+            @Html.Action("FillTableForListOperations", "Home")
+        </div>
+        <div class="col-sm-6">
+            @Html.Action("SavedListTablePartial", "Home")
+        </div>
     </div>
 </div>
 <link href="~/Content/toastr.min.css" rel="stylesheet" />

@@ -155,10 +155,10 @@ namespace AlmondWeb.WebApp.Controllers
             List<SharedListTable> list = slm.RelationListAll(currentUserID);//paylaşılan tüm listeleri gönderiyor.
             return View(list);
         }
-        public ViewResult SearchList(string searchText)
+        public PartialViewResult SearchList(string searchText)
         {
             List<SharedListTable> list = slm.FindRelotionList(searchText, currentUserID);
-            return View("Partials/_PublicListPartialinProfile", list);
+            return PartialView("Partials/_SearchList", list);
         }
         [HttpPost]
         public int SaveList(int? listId)
