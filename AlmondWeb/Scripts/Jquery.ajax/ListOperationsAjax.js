@@ -30,9 +30,9 @@ document.getElementById("confirmBtnCreateList").addEventListener("click", functi
         success: function (result) {
             if (result > 0) {
                 ReLoadListData();
-                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!", 1500);
+                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
             } else {
-                alert("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.");//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
+                toastr.warning("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.", "İşlem Başarısız", { closeButton: true, timeOut: 1500 });//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
             }
         },
         complete: function () {
@@ -40,6 +40,31 @@ document.getElementById("confirmBtnCreateList").addEventListener("click", functi
         }
     });
 });
+
+function transfertoDeleteData(data, idM) {
+    let _list = document.getElementById("_questionLabel");
+    _list.innerText = data;
+
+    document.getElementById("confirmBtnDeleteList").addEventListener("click", function () {
+        $.ajax({
+            method: "POST",
+            url: '/Home/DeleteList/' + idM,
+            success: function (result) {
+                if (result > 0) {
+                    ReLoadListData();
+                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
+                }
+                else {
+                    toastr.warning("Liste Silinemedi", "İşlem Başarısız", { closeButton: true, timeOut: 1500 });
+                }
+            },
+            complete: function () {
+                $("#closeBtnDeleteList").click();
+            }
+        });
+    });
+};
+
 function transfertoUpdateData(lstnm, idValue) {
     let listContent = document.getElementById("inputTextUpdateList");
     listContent.value = lstnm;
@@ -56,10 +81,10 @@ function transfertoUpdateData(lstnm, idValue) {
             success: function (result) {
                 if (result > 0) {
                     ReLoadListData();
-                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!", 1500);
+                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
                 }
                 else {
-                    alert("Liste güncelleme sırasında bir hata meyda geldi.");//TODO:sayfa otomatik olarak yenilenecek.
+                    toastr.warning("Liste güncelleme sırasında bir hata meyda geldi.", "İşlem Başarısız", { closeButton: true, timeOut: 1500 });//TODO:sayfa otomatik olarak yenilenecek.
                 }
             }, complete: function () {
                 $("#closeBtnUpdate23").click();
@@ -67,31 +92,6 @@ function transfertoUpdateData(lstnm, idValue) {
         });
     });
 };
-
-function transfertoDeleteData(data, idM) {
-    let _list = document.getElementById("_questionLabel");
-    _list.innerText = data;
-
-    document.getElementById("confirmBtnDeleteList").addEventListener("click", function () {
-        $.ajax({
-            method: "POST",
-            url: '/Home/DeleteList/' + idM,
-            success: function (result) {
-                if (result > 0) {
-                    ReLoadListData2();
-                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!", 1500);
-                }
-                else {
-                    return alert("işlem başarısız:(");
-                }
-            },
-            complete: function () {
-                $("#closeBtnDeleteList").click();
-            }
-        });
-    });
-};
-
 
 function ReLoadListData() {
     $.ajax({

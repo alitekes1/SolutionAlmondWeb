@@ -23,7 +23,7 @@ namespace AlmondWeb.Filters
                 }
                 else
                 {
-                    new RedirectResult("/Admin/AllUser");//TODO:admin olmayan kişilerin yönlendirileceği sayfa oluşturulacak
+                    new RedirectResult("/Admin/AllUser");
                 }
             }
             else

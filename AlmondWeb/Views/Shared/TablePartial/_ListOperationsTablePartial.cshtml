@@ -3,7 +3,7 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null).OrderByDescending(x => x.Id);
+    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null && !x.isDeleted).OrderByDescending(x => x.Id);
 
     var listCount = list.GroupBy(x => x.listName).ToList();
     string listType = string.Empty;

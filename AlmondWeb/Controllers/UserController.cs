@@ -166,11 +166,11 @@ namespace AlmondWeb.WebApp.Controllers
             if (listId != null)
             {
                 SharedListTable newlist = new SharedListTable();
-                var shlist = slm.FindwithExpression(x => x.listId == listId);
+                var sharedlist = slm.FindwithExpression(x => x.listId == listId);//paylaşılan listenin aslını buluyoruz.
 
                 newlist.profileId = currentUserID;
-                newlist.listId = shlist.List.Id;
-                newlist.OwnerId = shlist.Owner.Id;
+                newlist.listId = sharedlist.List.Id;
+                newlist.OwnerId = sharedlist.Owner.Id;
 
                 if (isNotSavedList(newlist.OwnerId, listId.Value))
                 {
@@ -185,7 +185,7 @@ namespace AlmondWeb.WebApp.Controllers
         }
 
         private bool isNotSavedList(int ownerId, int ListId)
-        {
+        {//TODO: Buraya bi bak
             SharedListTable i = slm.FindwithExpression(x => x.profileId == currentUserID && x.listId == ListId && x.OwnerId == ownerId);
             return i == null ? true : false;
         }

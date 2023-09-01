@@ -28,10 +28,10 @@
             success: function (result) {
                 if (result > 0) {
                     ReLoadTableforAdmin();
-                    toastr.success("İşlem başarılı.", "Kullanıcı Admin haline getirildi. Hayırlı olsun.", 500);
+                    toastr.success("İşlem başarılı.", "Kullanıcı Admin haline getirildi. Hayırlı olsun.", { closeButton: true, timeOut: 1500 });
                 }
                 else {
-                    toastr.warning("işlem başarısız.Kullanıcı zaten Admin olabilir.", "işlem başarısız", 500);
+                    toastr.warning("işlem başarısız.Kullanıcı zaten Admin olabilir.", "işlem başarısız", { closeButton: true, timeOut: 1500 });
                 }
             }
         });

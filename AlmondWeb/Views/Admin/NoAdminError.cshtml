@@ -27,10 +27,10 @@
         </div>
         <div class="notfound">
             <div class="notfound-404">
-                <h1>@ViewData["errorCode"]</h1>
+                <h1>403</h1>
             </div>
-            <h2>@ViewData["errorTitle"]</h2>
-            <p style="font-family: monospace; font-size: 14px; , sans-serif">@ViewData["errorMessage"]</p>
+            <h2>Yetkiniz Bulunmamaktadır!</h2>
+            <p style="font-family: monospace; font-size: 14px; , sans-serif">Bu alana sadece Adminler girebilir.Admin yetkiniz bulunmamaktadır.Daha da geç olmadan bu alanı terkedin!</p>
             @Html.ActionLink("Anasayfa", "MainPage", "Home")
             <div class="notfound-social">
                 <a href="/Iletisim" title="Bize Bildirin?" target="_blank">

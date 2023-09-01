@@ -67,10 +67,10 @@
             data: { listId: lstid },
             success: function (result) {
                 if (result > 0) {
-                    toastr.success("Liste kaydedilmiştir.", "İşlem Başarılı", 500)
+                    toastr.success("Liste kaydedilmiştir.", "İşlem Başarılı", { closeButton: true, timeOut: 1500 })
                 }
                 else {
-                    toastr.warning("Liste zaten kayıtlı.", "İşlem başarısız", 500)
+                    toastr.warning("Liste zaten kayıtlı.", "İşlem başarısız", { closeButton: true, timeOut: 1500 })
                 }
             }
         });

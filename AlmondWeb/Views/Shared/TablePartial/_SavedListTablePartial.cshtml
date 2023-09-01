@@ -127,11 +127,11 @@
             data: { listid: listId },
             success: function (result) {
                 if (result > 0) {
-                    toastr.success("İşlem başarılı", "Kaydetmiş olduğunuz liste kaldırıldı.", 500);
+                    toastr.success("İşlem başarılı", "Liste kaldırıldı.", { closeButton: true, timeOut: 1500 });
                     ReLoadSavedListTable();
                 }
                 else {
-                    alert("işlem başarısız");
+                    toastr.warning("İşlem başarısız", "Liste Kaldırılamadı.", { closeButton: true, timeOut: 1500 })
                 }
             }, complete: function () {
                 $("#closebtn12").click();

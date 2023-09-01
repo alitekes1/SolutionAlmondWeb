@@ -161,7 +161,7 @@
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
-                                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Yeni bir özellik öner?</a></li>
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Yeni bir özellik öner?</a></li>
                                             <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Kısayollar ve SSS.</button></li>   @*  //TODO: kısayollar ve sss sayfası oluşturulacak.*@
                                             <li><a class="dropdown-item" href="/Iletisim">İletişim</a></li>
                                             <li>
@@ -189,8 +189,8 @@
     <main class="container-fluid">
         @RenderBody()
     </main>
-    @*@Html.Action("Shortcuts", "Home")
-        @Html.Action("SuggestNewFeature", "Home")*@
+    @Html.Action("Shortcuts", "Home")
+    @Html.Action("SuggestNewFeature", "User")
 
     <footer>
         <!--start Footer-->
@@ -224,8 +224,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3"></div>
             </div>
+            <div class="col-sm-3"></div>
+        </div>
         </div>
     </footer>
 </body>

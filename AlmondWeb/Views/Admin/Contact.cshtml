@@ -70,9 +70,9 @@
 <script>
     function clearTextBox() {
         $("#resetButton").click();
-        toastr.success('Mesajınız başarıyla gönderildi .', 'İşlem başarılı', 1500);
+        toastr.success('Mesajınız başarıyla gönderildi .', 'İşlem başarılı', { closeButton: true, timeOut: 1500 });
     } function failmessage() {
         $("#resetButton").click();
-        toastr.danger('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', 1500);
+        toastr.danger('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', { closeButton: true, timeOut: 1500 });
     }
 </script>

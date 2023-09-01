@@ -97,11 +97,6 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "Admin", action = "AllMessages", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-                name: "statictis",
-                url: "Istatistikler54",
-                defaults: new { controller = "Admin", action = "AlmondWebStatistic", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
                 name: "admins",
                 url: "Adminler54",
                 defaults: new { controller = "Admin", action = "Admins", id = UrlParameter.Optional }
@@ -110,6 +105,12 @@ namespace AlmondWeb.WebApp
                 name: "alluser",
                 url: "TumKullanicilar54",
                 defaults: new { controller = "Admin", action = "AllUser", id = UrlParameter.Optional }
+            );
+            //RemoveNullDatainSharedDataTable
+            routes.MapRoute(
+                name: "RemoveNullDatainSharedDataTable1",
+                url: "Temizle54",
+                defaults: new { controller = "Admin", action = "RemoveNullDatainSharedDataTable", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "getque",

@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 success: function (result) {
                     if (result > 0) {
                         ReLoadDeleteData();
-                        toastr.success(question + " verisi başarıyla silindi.", "İşlem başarılı!");
+                        toastr.success(question + " verisi başarıyla silindi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
                     } else {
-                        alert("işlem başarısız:(");
+                        toastr.warning("Veri Eklenemedi.", "İşlem Başarısız", { closeButton: true, timeOut: 1500 })
                     }
                 },
                 complete: function () {

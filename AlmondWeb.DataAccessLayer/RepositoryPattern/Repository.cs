@@ -49,6 +49,13 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
 
             return Save();
         }
+
+        public int RemoveNullDatainSharedDataTable(List<SharedDataTable> datalist)
+        {
+            database.Set<SharedDataTable>().RemoveRange(datalist);
+            return Save();
+        }
+
         public int Update(T dataset)
         {
             return Save();
@@ -64,6 +71,7 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
             {
                 ListTable li = dataset as ListTable;
                 li.isDeleted = true;
+                li.isPublic = false;
             }
             if (dataset is SharedListTable)
             {
@@ -98,7 +106,7 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         {
             var profileLists = database.SharedListTables
                 .Include(pl => pl.List)
-                .Where(pl => pl.profileId == userid && pl.List.Owner.Id != userid && pl.isPublic).ToList();
+                .Where(pl => pl.profileId == userid && pl.List.Owner.Id != userid).ToList();
 
             return profileLists;
         }

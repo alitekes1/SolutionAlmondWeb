@@ -18,6 +18,10 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.DeleteList(dataset);
         }
+        public int RemoveNullDatainSharedDataTable(List<SharedDataTable> datalist)
+        {
+            return repo.RemoveNullDatainSharedDataTable(datalist);
+        }
         public T FindwithOwnerId(int ownerid)
         {
             return repo.FindwithOwnerId(ownerid);

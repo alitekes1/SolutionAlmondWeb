@@ -158,12 +158,6 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
-
-        [HttpGet]
-        public ActionResult DeleteList()
-        {
-            return View();
-        }
         [HttpPost]
         public int DeleteList(int? id)
         {
@@ -173,7 +167,7 @@ namespace AlmondWeb.WebApp.Controllers
 
                 if (list != null)
                 {
-                    int result = listManager.DeleteList(list);
+                    int result = listManager.Delete(list);
                     return result;
                 }
             }
@@ -187,7 +181,7 @@ namespace AlmondWeb.WebApp.Controllers
                 SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.Id == listid);
                 if (sharedlist != null)
                 {
-                    int result = sharedListManager.Delete(sharedlist);
+                    int result = sharedListManager.DeleteList(sharedlist);
                     return result;
                 }
             }
@@ -245,20 +239,12 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        public ActionResult Error(int? id)
+        [AllowAnonymous]
+        public ActionResult Error()
         {
-            if (id == 1)
-            {
-                ViewData["errorCode"] = "403";
-                ViewData["errorTitle"] = "Yetkiniz Bulunmamaktadır!";
-                ViewData["errorMessage"] = "Bu alana sadece Adminler girebilir.Admin yetkiniz bulunmamaktadır.Daha da geç olmadan bu alanı terkedin!";
-            }
-            else
-            {
-                ViewData["errorMessage"] = "Bakmış olduğunuz sayfa kaldırılmış veya ismi değiştirilmiş olabilir.Dolayısıyla geçici bir süre kullanım dışıdır.Anasayfaya geri dönebilirsiniz veya bizimle iletişime geçebilirsiniz.";
-                ViewData["errorTitle"] = "Sayfa bulunamadı!";
-                ViewData["errorCode"] = "404";
-            }
+            ViewData["errorMessage"] = "Bakmış olduğunuz sayfa kaldırılmış veya ismi değiştirilmiş olabilir.Dolayısıyla geçici bir süre kullanım dışıdır.Anasayfaya geri dönebilirsiniz veya bizimle iletişime geçebilirsiniz.";
+            ViewData["errorTitle"] = "Sayfa bulunamadı!";
+            ViewData["errorCode"] = "404";
             return View();
         }
 

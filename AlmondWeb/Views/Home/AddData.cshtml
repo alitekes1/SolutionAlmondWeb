@@ -62,7 +62,7 @@
 
     function onSuccess() {
         // Toastr mesajını göster
-        toastr.success('Veri başarıyla eklendi.', 'İşlem başarılı', 2000);
+        toastr.success('Veri başarıyla eklendi.', 'İşlem başarılı', { closeButton: true, timeOut: 1500 });
         $("#exampleFormControlTextarea17").val("");
         $("#exampleFormControlTextarea16").val("");
     }

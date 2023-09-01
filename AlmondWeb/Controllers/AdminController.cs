@@ -5,48 +5,40 @@ using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
 {
-    [Authorize, Exc]
+    [Authorize, Exc, isAdmin]
     public class AdminController : Controller
     {
         private ContactManager cm = new ContactManager();
         private UserManager um = new UserManager();
         private DataManager dm = new DataManager();
         private SharedListManager slm = new SharedListManager();
+        private SharedDataManager sdm = new SharedDataManager();
         public int result = 0;
-        [isAdmin, HttpGet]
+        [HttpGet]
         public ActionResult AllUser()
         {
             return View();
         }
-        [isAdmin]
         public ActionResult AllData()
         {
             return View();
         }
-        [isAdmin]
         public ActionResult AllList()
         {
             return View();
         }
-        [isAdmin]
         public ActionResult Admins()
         {
             return View();
         }
-        [isAdmin]
         public ActionResult AllMessages()
-        {
-            return View();
-        }
-        [isAdmin]
-        public ActionResult AlmondWebStatistic()
         {
             return View();
         }
         [AllowAnonymous]
         public ActionResult NoAdminError()
         {
-            return RedirectToAction("Error", "Home", new { id = 1 });
+            return View();
         }
         [HttpPost]
         public int DeactiveAccount(int? id)
@@ -108,8 +100,6 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-
-
         [HttpPost]
         public int DeleteData(int? id)
         {
@@ -124,7 +114,6 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
-
         [HttpPost]
         public int RemoveSharedList(int? id)
         {
@@ -139,6 +128,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
+        [AllowAnonymous]
         public ActionResult Contact()
         {
             return View();
@@ -152,6 +142,18 @@ namespace AlmondWeb.WebApp.Controllers
                 return result;
             }
             else { return -1; }
+        }
+        [HttpGet]
+        public ActionResult RemoveNullDatainSharedDataTable()
+        {
+            return View(0);
+        }
+        [HttpPost]
+        public ActionResult RemoveNullDatainSharedDataTable(int? a)
+        {
+            var datalist = sdm.ListwithExpression(x => x.SharedList == null);
+            int result = sdm.RemoveNullDatainSharedDataTable(datalist);
+            return View(result);
         }
         public PartialViewResult AllUserTablePartial()
         {

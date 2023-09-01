@@ -14,10 +14,10 @@
             success: function (result) {
                 if (result > 0) {
                     ReLoadTableforAllUser();
-                    toastr.success("İşlem başarılı.", "Kullanıcı pasif hale getirildi.", 500);
+                    toastr.success("İşlem başarılı.", "Kullanıcı pasif hale getirildi.", { closeButton: true, timeOut: 1500 });
                 }
                 else {
-                    toastr.warning("işlem başarısız.Kullanıcı zaten pasif olabilir.", "işlem başarısız", 500);
+                    toastr.warning("işlem başarısız.Kullanıcı zaten pasif olabilir.", "işlem başarısız", { closeButton: true, timeOut: 1500 });
                 }
             }
         });
@@ -29,10 +29,10 @@
             success: function (result) {
                 if (result > 0) {
                     ReLoadTableforAllUser();
-                    toastr.success("İşlem başarılı.", "Kullanıcı aktif hale getirildi.", 500);
+                    toastr.success("İşlem başarılı.", "Kullanıcı aktif hale getirildi.", { closeButton: true, timeOut: 1500 });
                 }
                 else {
-                    toastr.warning("işlem başarısız.Kullanıcı zaten aktif olabilir.", "işlem başarısız", 500);
+                    toastr.warning("işlem başarısız.Kullanıcı zaten aktif olabilir.", "işlem başarısız", { closeButton: true, timeOut: 1500 });
                 }
             }
         });

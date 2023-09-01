@@ -1,0 +1,21 @@
+﻿@model int
+@{
+    ViewBag.Title = "RemoveNullDatainSharedDataTable";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    @if (Model > 0)
+    {
+        <div class="row alert alert-success" id="success23">
+            İşlem başarılı!
+        </div>
+    }
+
+    @*<div class="row">*@
+    @using (Html.BeginForm("RemoveNullDatainSharedDataTable", "Admin", FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-success text-capitalize">Paylaşılan Data Tablosundaki null değere sahip profileId ve ListId değerlerine ait verileri sil</button>
+    }
+    @*</div>*@
+</div>

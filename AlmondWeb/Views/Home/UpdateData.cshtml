@@ -69,7 +69,7 @@
 <script>
     function onSuccess() {
         // Toastr mesajını göster
-        toastr.success('Veri başarıyla güncellendi.', 'İşlem başarılı!');
+        toastr.success('Veri başarıyla güncellendi.', 'İşlem başarılı!', { closeButton: true, timeOut: 1500 });
     }
     let _list = document.getElementById("liste-dropdown");
     _list.options[0].disabled = true;
