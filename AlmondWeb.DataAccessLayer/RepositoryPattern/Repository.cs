@@ -76,6 +76,7 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
             if (dataset is SharedListTable)
             {
                 SharedListTable li = dataset as SharedListTable;
+                li.isDeleted = true;
                 li.isPublic = false;
             }
             return Save();
