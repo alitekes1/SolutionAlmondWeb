@@ -29,7 +29,7 @@
                     <td>@counter</td>
                     <td>@item.question</td>
                     <td>@item.answer</td>
-                    @if (item.List == null)
+                    @if (item.List.isDeleted)
                     {
                         <td>NULL</td>
                     }

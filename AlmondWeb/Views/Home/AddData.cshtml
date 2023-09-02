@@ -5,9 +5,10 @@
 
     int currentUserID = CacheHelper.CurrentUserID();
 
-    ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null);
-    var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz.
+    SharedListManager slm = new SharedListManager();
+    var list = slm.ListwithExpression(x => !x.isDeleted && x.profileId == currentUserID);
+
+    var selectList = new SelectList(list, "listId", "List.listName");//liste listesini viewdata ile gönderiyoruz
 }
 <link href="~/Content/AlmondCss/veriekle.css" rel="stylesheet" />
 <div class="mb-lg-5">

@@ -4,7 +4,6 @@
 
     DataManager dm = new DataManager();
     var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);//current user a ait dataları listeliyoruz.
-
 }
 <div id="example">
     <div class="tbl-header">
@@ -37,9 +36,9 @@
                         <td class="text-center" width="5%">@counter</td>
                         <td class="text-center" width="35%">@item.question</td>
                         <td class="text-center" width="35%">@item.answer</td>
-                        @if (item.List == null)
+                        @if (item.List.isDeleted)
                         {
-                            <td class="text-center" style="width:15%">NULL</td>
+                            <td class="text-center fw-bold fst-italic bg-danger-subtle" style="width:15%">Listesiz</td>
                             <td class="text-center" width="15%">
                                 <button class="btntableDelete" onclick="transferdataTotextarea('@item.question',-1,'@item.answer','@item.Id')" id="updateDatabutton">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">

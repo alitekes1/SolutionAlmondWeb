@@ -16,7 +16,6 @@ $("#privateRadioUpdate").click(function () {
     $("#publicRadioUpdate").val(0);
 });
 
-
 document.getElementById("confirmBtnCreateList").addEventListener("click", function () {
     var listName = $("#inputTextCreateList").val();
     var listDescription = $("#listDescriptionTextArea").val();

@@ -19,6 +19,7 @@ namespace AlmondWeb.WebApp.Controllers
         private ContactManager contactManager = new ContactManager();
         private ProfileManager profileManager = new ProfileManager();
         private SharedListManager sharedListManager = new SharedListManager();
+        private SharedDataManager sharedDataManager = new SharedDataManager();
         private int currentUserId = CacheHelper.CurrentUserID();
         private List<UserQueAnswListModel> dataJson = new List<UserQueAnswListModel>();
 
@@ -44,25 +45,40 @@ namespace AlmondWeb.WebApp.Controllers
                 if (puan > 0 && dataId > 0)
                 {
                     AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId);//güncellenecek olan veriyi buluyoruz. 
-                    data.puan += puan;//puan güncellemesi yapılıyor
-                    int result = dataManager.Update(data);
-                    return result;
+                    SharedDataTable shareddata = sharedDataManager.FindwithExpression(x => x.Id == dataId);
+                    if (data != null)
+                    {
+                        data.puan += puan;//puan güncellemesi yapılıyor
+                        int result = dataManager.Update(data);
+                        return result;
+                    }
+                    else if (shareddata != null)
+                    {
+                        shareddata.puan += puan;
+                        int result = sharedDataManager.Update(shareddata);
+                        return result;
+                    }
                 }
-                else
-                {
-                    return -1;
-                }
+                return -1;
             }
         }
         private List<UserQueAnswListModel> getList(int? listId)
         {
-            List<AlmondDataTable> datalist = dataManager.ListwithExpression(x => x.List.Id == listId && !x.isDeleted).OrderBy(x => x.puan).ToList();
-            for (int i = 0; i < datalist.Count(); i++)
+            UserQueAnswListModel data = new UserQueAnswListModel();
+            List<AlmondDataTable> mydatalist = dataManager.ListwithExpression(x => x.List.Id == listId && !x.isDeleted && x.Owner.Id == currentUserId).OrderBy(x => x.puan).ToList();
+            List<SharedDataTable> shareddatalist = sharedDataManager.ListwithExpression(x => x.SharedList.listId == listId && x.SharedList.profileId == currentUserId && !x.isDeleted);
+            for (int i = 0; i < mydatalist.Count(); i++)
             {
-                UserQueAnswListModel data = new UserQueAnswListModel();
-                data.question = datalist[i].question;
-                data.answer = datalist[i].answer;
-                data.update_Id = datalist[i].Id;
+                data.question = mydatalist[i].question;
+                data.answer = mydatalist[i].answer;
+                data.update_Id = mydatalist[i].Id;
+                dataJson.Add(data);
+            }
+            for (int i = 0; i < shareddatalist.Count(); i++)
+            {
+                data.question = shareddatalist[i].question;
+                data.answer = shareddatalist[i].answer;
+                data.update_Id = shareddatalist[i].Id;
                 dataJson.Add(data);
             }
             return dataJson;
@@ -107,16 +123,28 @@ namespace AlmondWeb.WebApp.Controllers
                     updateData.question = data.question;
                     updateData.List = listManager.FindwithOwnerId(data.list_Id);
                     int result = dataManager.Update(updateData);
-                    if (result > -1)
+                    if (result > 0)
                     {
                         return RedirectToAction(nameof(FillTableDataForUpdate));
                     }
                 }
-                return RedirectToAction(nameof(Error));
+                else
+                {
+                    return RedirectToAction(nameof(Error));
+                }
             }
-            return View(data);
+            return RedirectToAction(nameof(FillTableDataForUpdate));
         }
-
+        public JavaScriptResult UpdateisSuccess()
+        {
+            string toastrSuccess = "toastr.success('Veri başarıyla güncellendi.', 'İşlem başarılı!', { closeButton: true, timeOut: 1500 })";
+            return JavaScript(toastrSuccess);
+        }
+        public JavaScriptResult UpdateisNotSuccess()
+        {
+            string toastrFail = "toastr.info('Herhangi bir değişiklik yapmadınız.', 'İşlem Başarısız!', { closeButton: true, timeOut: 1500 })";
+            return JavaScript(toastrFail);
+        }
         [HttpGet]
         public ActionResult DeleteData()
         {
@@ -150,6 +178,7 @@ namespace AlmondWeb.WebApp.Controllers
                 ListTable newList = new ListTable();
                 newList.listName = listNm;
                 newList.listDescription = listDesc;
+                newList.isDeleted = false;
                 newList.isPublic = listPub == "1" ? true : false;
                 newList.Owner = userManager.FindwithOwnerId(currentUserId);
                 int result = listManager.Insert(newList);
@@ -163,11 +192,10 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (id.HasValue)
             {
-                ListTable list = listManager.FindwithExpression(x => x.Id == id);//silinecek veriyi buluyoruz.
-
+                SharedListTable list = sharedListManager.FindwithExpression(x => x.listId == id);//silinecek veriyi buluyoruz.
                 if (list != null)
                 {
-                    int result = listManager.Delete(list);
+                    int result = sharedListManager.Delete(list);
                     return result;
                 }
             }
@@ -229,12 +257,12 @@ namespace AlmondWeb.WebApp.Controllers
             }
             else { return -1; }
         }
-
         public ActionResult AllData()
         {
             return View();
         }
         //TODO:kullanıcıların listelerim sayfasında kaydettiği listeler bulunmayacak. diğer yerlerda bulunacak.
+        //TODO:soru cevap sayfası için bootstrap de Scrollspy kullan.
         public ActionResult ListOperations()
         {
             return View();

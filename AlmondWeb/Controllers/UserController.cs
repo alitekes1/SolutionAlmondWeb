@@ -192,7 +192,7 @@ namespace AlmondWeb.WebApp.Controllers
 
         private void SaveDatafromList(int listId, SharedListTable newlist)//listenin içindeki tüm verileri kaydediyoruz.
         {
-            var list = slm.FindwithExpression(x => x.listId == listId).List.DataTables;
+            List<AlmondDataTable> list = slm.FindwithExpression(x => x.List.Owner.Id == x.profile.Id).List.Owner.DataTables;
             for (int i = 0; i < list.Count; i++)
             {
                 SharedDataTable data = new SharedDataTable();

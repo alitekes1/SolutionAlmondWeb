@@ -5,10 +5,10 @@ namespace AlmondWeb.BusinessLayer.ViewModels
 {
     public class UserQueAnswListModel
     {
-        [DisplayName("Soru"), Required, MinLength(2, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(250, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.Text)]
+        [DisplayName("Soru"), Required, MaxLength(250, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir."), DataType(DataType.Text)]
         public string question { get; set; }
 
-        [DisplayName("Cevap"), Required, MinLength(2, ErrorMessage = "{0} en az {1} karakterden oluşmalı"), MaxLength(250, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir.")]
+        [DisplayName("Cevap"), Required, MaxLength(250, ErrorMessage = "{0} en fazla {1} karakterden oluşabilir.")]
         public string answer { get; set; }
 
         [DisplayName("Liste"), Required]

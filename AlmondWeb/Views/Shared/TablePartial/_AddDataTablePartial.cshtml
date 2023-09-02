@@ -3,8 +3,10 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);//current user a ait dataları puana göre artan şekilde listeliyoruz.
+    var myTableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);//current user a ait dataları puana göre artan şekilde listeliyoruz.
 
+    SharedDataManager sdm = new SharedDataManager();
+    List<SharedDataTable> savedTableData = sdm.ListwithExpression(x => x.SharedList.profileId == currentUserID);
 }
 <div id="example">
     <div class="tbl-header">
@@ -22,7 +24,7 @@
     </div>
     <div style="width:100%;overflow:auto;  max-height:530px;">
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
-            @if (tableData.Count() == 0)
+            @if (myTableData.Count() == 0)
             {
                 <tr>
                     <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
@@ -30,7 +32,7 @@
             }
             else
             {
-                foreach (var item in tableData)
+                foreach (var item in myTableData)
                 {
                     counter++;
                     <tr id="dataTable1">
@@ -46,6 +48,25 @@
                         {
                             <td class="text-center" width="15%">@item.List.listName</td>
                         }
+                    </tr>
+                }
+            }
+        </table>
+        <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
+            @if (savedTableData.Count() == 0)
+            {
+            }
+            else
+            {
+                foreach (var item in savedTableData)
+                {
+                    counter++;
+                    <tr id="dataTable1" class="table-secondary">
+                        <td class="text-center" width="5%">@counter</td>
+                        <td class="text-center" width="35%">@item.question</td>
+                        <td class="text-center" width="35%">@item.answer</td>
+                        <td class="text-center" width="10%">@item.puan</td>
+                        <td class="text-center" width="15%">@item.SharedList.List.listName</td>
                     </tr>
                 }
             }

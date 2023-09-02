@@ -5,9 +5,10 @@
 
     int currentUserID = CacheHelper.CurrentUserID();
 
-    ListManager lm = new ListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x != null);
-    var selectList = new SelectList(list, "id", "listName");//liste listesini viewdata ile gönderiyoruz
+    SharedListManager slm = new SharedListManager();
+    var list = slm.ListwithExpression(x => !x.isDeleted && x.profileId == currentUserID);
+
+    var selectList = new SelectList(list, "listId", "List.listName");//liste listesini viewdata ile gönderiyoruz
 }
 <script src="~/Scripts/Jquery.ajax/showQuestionAnswer.js"></script>
 <div class="mt-2">
@@ -104,7 +105,7 @@
         $.ajax({
             method: "POST",
             url: 'Home/UpdatePuan',
-            data: { dataId: datalist[i].update_Id, puan: puanVal, listIdPost: listId},
+            data: { dataId: datalist[i].update_Id, puan: puanVal, listIdPost: listId },
             success: function (result) {
                 if (result > 0 && i + 1 < datalist.length) {
                     i++; // Bir sonraki soruya geçiliyor

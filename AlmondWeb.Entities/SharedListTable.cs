@@ -11,6 +11,7 @@ namespace AlmondWeb.Entities
         public int profileId { get; set; }
         public int listId { get; set; }
         public bool isPublic { get; set; }
+        public bool isDeleted { get; set; }
         public int OwnerId { get; set; }
         public virtual ProfileTable profile { get; set; }
         public virtual ListTable List { get; set; }
