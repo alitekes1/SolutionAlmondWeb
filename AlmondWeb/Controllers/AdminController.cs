@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
 {
-    [Authorize, Exc, isAdmin]
+    [Authorize, Exc]
     public class AdminController : Controller
     {
         private ContactManager cm = new ContactManager();
@@ -128,21 +128,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
-        [AllowAnonymous]
-        public ActionResult Contact()
-        {
-            return View();
-        }
-        [HttpPost, AllowAnonymous]
-        public int Contact(ContactTable contact)
-        {
-            if (contact != null)
-            {
-                int result = cm.Insert(contact);
-                return result;
-            }
-            else { return -1; }
-        }
+
         [HttpGet]
         public ActionResult RemoveNullDatainSharedDataTable()
         {

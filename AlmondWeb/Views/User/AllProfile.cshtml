@@ -1,0 +1,45 @@
+﻿@model List<ProfileTable>
+@{
+    ViewBag.Title = "Tum Profiller";
+    Layout = "~/Views/Shared/BaseLayout.cshtml";
+}
+
+<link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 mt-3 ">
+            <div class="btn-group w-100" role="group" aria-label="Default button group">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="searchText" id="searchUsername" placeholder="Aradığınız kullanıcı adını birebir yazınız." aria-label="Input group example" aria-describedby="basic-addon1">
+                    <button type="submit" class="input-group-text" id="searchUserbtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="col-sm-12" id="allProfile">
+            @Html.Partial("Partials/_AllProfilePartial", Model)
+        </div>
+    </div>
+</div>
+
+@*<link href="~/Content/toastr.min.css" rel="stylesheet" />*@
+<script>
+    document.getElementById("searchUserbtn").addEventListener("click", function () {
+        var searchtext = $("#searchUsername").val();
+        var userData = $("#allProfile");
+        $.ajax({
+            method: "POST",
+            url: '/User/SearchUserPartial',
+            data: { username: searchtext },
+            success: function (result) {
+                userData.empty();
+
+                userData.append(result);
+            }
+        });
+    });
+</script>
