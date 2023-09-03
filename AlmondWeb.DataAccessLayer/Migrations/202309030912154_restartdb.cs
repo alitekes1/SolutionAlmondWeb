@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class migfirst1 : DbMigration
+    public partial class restartdb : DbMigration
     {
         public override void Up()
         {
@@ -50,6 +50,7 @@
                         listId = c.Int(nullable: false),
                         Id = c.Int(nullable: false, identity: true),
                         isPublic = c.Boolean(nullable: false),
+                        isDeleted = c.Boolean(nullable: false),
                         OwnerId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.profileId, t.listId })

@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AlmondCss\AllButtons.css" />
+    <Content Include="Content\AlmondCss\AllProfile.css" />
     <Content Include="Content\AlmondCss\deneme.css" />
     <Content Include="Content\AlmondCss\error.css" />
     <Content Include="Content\AlmondCss\errorpage2.css" />
@@ -285,7 +286,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Home\AddData.cshtml" />
     <Content Include="Views\Home\AllData.cshtml" />
-    <Content Include="Views\Admin\Contact.cshtml" />
+    <Content Include="Views\User\Contact.cshtml" />
     <Content Include="Views\Home\DeleteData.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\ListOperations.cshtml" />
@@ -309,6 +310,9 @@
     <Content Include="Views\Shared\Partials\_SearchList.cshtml" />
     <Content Include="Views\Admin\RemoveNullDatainSharedDataTable.cshtml" />
     <Content Include="Views\Admin\NoAdminError.cshtml" />
+    <Content Include="Views\Shared\Partials\_MainPageQuestionAnswerPartial.cshtml" />
+    <Content Include="Views\User\AllProfile.cshtml" />
+    <Content Include="Views\Shared\Partials\_AllProfilePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

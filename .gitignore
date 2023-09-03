@@ -3,3 +3,15 @@
 ################################################################################
 
 /AlmondWeb/bin
+/AlmondWeb/obj/Debug/AlmondWeb.dll
+/AlmondWeb/obj/Debug/AlmondWeb.pdb
+/AlmondWeb/obj/Debug/AlmondWeb.WebApp.csproj.AssemblyReference.cache
+/AlmondWeb/obj/Debug/AlmondWeb.WebApp.csproj.CopyComplete
+/AlmondWeb/obj/Debug/AlmondWeb.WebApp.csproj.CoreCompileInputs.cache
+/AlmondWeb.BusinessLayer/bin/Debug
+/AlmondWeb.DataAccessLayer/bin/Debug
+/AlmondWeb.BusinessLayer/obj/Debug/AlmondWeb.BusinessLayer.csproj.AssemblyReference.cache
+/AlmondWeb.BusinessLayer/obj/Debug/AlmondWeb.BusinessLayer.csproj.CopyComplete
+/AlmondWeb.BusinessLayer/obj/Debug/AlmondWeb.BusinessLayer.csproj.CoreCompileInputs.cache
+/AlmondWeb.BusinessLayer/obj/Debug/AlmondWeb.BusinessLayer.dll
+/AlmondWeb.BusinessLayer/obj/Debug/AlmondWeb.BusinessLayer.pdb

@@ -55,13 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Migrations\202308302010194_migfirst1.cs" />
-    <Compile Include="Migrations\202308302010194_migfirst1.designer.cs">
-      <DependentUpon>202308302010194_migfirst1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202309021000448_addisdeletedtosharedlist.cs" />
-    <Compile Include="Migrations\202309021000448_addisdeletedtosharedlist.designer.cs">
-      <DependentUpon>202309021000448_addisdeletedtosharedlist.cs</DependentUpon>
+    <Compile Include="Migrations\202309030912154_restartdb.cs" />
+    <Compile Include="Migrations\202309030912154_restartdb.designer.cs">
+      <DependentUpon>202309030912154_restartdb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,11 +86,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202308302010194_migfirst1.resx">
-      <DependentUpon>202308302010194_migfirst1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309021000448_addisdeletedtosharedlist.resx">
-      <DependentUpon>202309021000448_addisdeletedtosharedlist.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202309030912154_restartdb.resx">
+      <DependentUpon>202309030912154_restartdb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

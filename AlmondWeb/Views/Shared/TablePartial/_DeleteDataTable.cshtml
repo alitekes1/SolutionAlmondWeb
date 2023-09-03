@@ -3,7 +3,10 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);//current user a ait dataları puana göre artan şekilde listeliyoruz.
+    List<AlmondDataTable> tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id).ToList();//current user a ait dataları puana göre artan şekilde listeliyoruz.
+
+    SharedDataManager sdm = new SharedDataManager();
+    List<SharedDataTable> savedTableData = sdm.ListwithExpression(x => x.SharedList.profileId == currentUserID);
 
 }
 <div id="example">
@@ -23,7 +26,7 @@
             </table>
         </div>
         <div style="width:100%;overflow:auto;  max-height:530px;">
-            <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
+            <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive" id="mydataTable">
                 @if (tableData.Count() == 0)
                 {
                     <tr>
@@ -49,7 +52,36 @@
                                 <td class="text-center" width="15%">@item.List.listName</td>
                             }
                             <td class="text-center" width="10%">
-                                <a class="btntableDelete" id="btndelete1" data-ids="@item.Id" data-que="@item.question" data-ans="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModalsilliste">
+                                <a class="btntableDelete" id="btndelete_@item.Id" data-ids="@item.Id" data-que="@item.question" data-ans="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModalsilliste">
+                                    <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                        <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            <table style="width:100%;" id="shareddatatableindeletedata" class="text-center table table-hover table-bordered table-responsive table-secondary">
+                @if (savedTableData.Count() == 0)
+                {
+                    <tr>
+                        <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in savedTableData)
+                    {
+                        counter++;
+                        <tr>
+                            <td class="text-center" width="5%">@counter</td>
+                            <td class="text-center" width="30%">@item.question</td>
+                            <td class="text-center" width="30%">@item.answer</td>
+                            <td class="text-center" width="10%">@item.puan</td>
+                            <td class="text-center" width="15%">@item.SharedList.List.listName</td>
+                            <td class="text-center" width="10%">
+                                <a class="btntableSharedDataDelete" id="btnshareddatadelete_@item.Id" data-shareddataId='@item.Id' data-shareddataQue="@item.question" data-shareddataAns="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#modalConfirmSharedDataDelete">
                                     <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
                                         <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
                                     </svg>
@@ -62,28 +94,45 @@
         </div>
     </div>
 </div>
-
+<!-- Kendi Veri silme işlemini onaylamak için modal pop-up-->
 <div class="modal fade" id=exampleModalsilliste tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="header_">Aşağıdaki veri silinecek.Emin misiniz? </h1>
+                <h1 class="modal-title fs-5" id="headerr_">Aşağıdaki veri silinecek.Emin misiniz? </h1>
                 <button type="button" id="closeButton" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <label class="text-center" style="display:block" id="_questionLabel"></label>
                 <label class="text-center" style="display:block" id="_answerLabel"></label>
             </div>
-            <input type="hidden" name="id" />
             <div class="modal-footer">
-                <p class="small fst-italic text-start">*Seçmiş olduğunuz veri geri alınamayacak şekilde silinecektir.Silmeden önce dikkatli olunuz.</p>
+                <p class="small fst-italic text-start">*Seçmiş olduğunuz veri geri alınamayacak şekilde <span class="fw-bold fst-normal">silinecektir</span>.Silmeden önce dikkatli olunuz.</p>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
                 <button type="button" id="confirmbtnDelete" data-confirm="1" class="btn btn-danger">Sil</button>
             </div>
         </div>
     </div>
 </div>
-
-
+<!--Paylaşılan verinin silme işlemini onaylamak için modal pop-up-->
+<div class="modal fade" id=modalConfirmSharedDataDelete tabindex="-1" aria-labelledby="modalConfirmSharedDataDelete" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="headerr_">Aşağıdaki veri silinecek.Emin misiniz? </h1>
+                <button type="button" id="closeButtonsh" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label class="text-center" style="display:block" id="_shareddataquestionLabel"></label>
+                <label class="text-center" style="display:block" id="_shareddataanswerLabel"></label>
+            </div>
+            <div class="modal-footer">
+                <p class="small fst-italic text-start">*Seçmiş olduğunuz veri geri alınamayacak şekilde <span class="fw-bold fst-normal">silinecektir</span>.Silmeden önce dikkatli olunuz.</p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <button type="button" id="confirmbtnDeleteSharedData" data-confirm="1" class="btn btn-danger">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
 <link href="~/Content/toastr.min.css" rel="stylesheet" />
 <script src="~/Scripts/Jquery.ajax/DeleteDataAjax.js"></script>

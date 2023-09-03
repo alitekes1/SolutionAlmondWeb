@@ -3,6 +3,7 @@ using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
 using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -31,6 +32,7 @@ namespace AlmondWeb.WebApp.Controllers
         public ActionResult GetQuestionAnswerJson(int listId)
         {
             dataJson = getList(listId);
+            dataJson = dataJson.OrderBy(x => x.puan).ToList();
             return Json(dataJson, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -40,50 +42,51 @@ namespace AlmondWeb.WebApp.Controllers
             {
                 return -1;
             }
-            else
+
+            if (puan > 0 && dataId != null)
             {
-                if (puan > 0 && dataId > 0)
+                AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId && x.Owner.Id == currentUserId);//güncellenecek olan veriyi buluyoruz.
+                SharedDataTable shareddata = sharedDataManager.FindwithExpression(x => x.Id == dataId && x.SharedList.OwnerId != currentUserId);
+                if (data != null)
                 {
-                    AlmondDataTable data = dataManager.FindwithExpression(x => x.Id == dataId);//güncellenecek olan veriyi buluyoruz. 
-                    SharedDataTable shareddata = sharedDataManager.FindwithExpression(x => x.Id == dataId);
-                    if (data != null)
-                    {
-                        data.puan += puan;//puan güncellemesi yapılıyor
-                        int result = dataManager.Update(data);
-                        return result;
-                    }
-                    else if (shareddata != null)
-                    {
-                        shareddata.puan += puan;
-                        int result = sharedDataManager.Update(shareddata);
-                        return result;
-                    }
+                    data.puan += puan;//puan güncellemesi yapılıyor
+                    int result = dataManager.Update(data);
+                    return result;
                 }
-                return -1;
+                else if (shareddata != null)
+                {
+                    shareddata.puan += puan;
+                    int result = sharedDataManager.Update(shareddata);
+                    return result;
+                }
             }
+            return -1;
         }
         private List<UserQueAnswListModel> getList(int? listId)
         {
-            UserQueAnswListModel data = new UserQueAnswListModel();
             List<AlmondDataTable> mydatalist = dataManager.ListwithExpression(x => x.List.Id == listId && !x.isDeleted && x.Owner.Id == currentUserId).OrderBy(x => x.puan).ToList();
             List<SharedDataTable> shareddatalist = sharedDataManager.ListwithExpression(x => x.SharedList.listId == listId && x.SharedList.profileId == currentUserId && !x.isDeleted);
+
             for (int i = 0; i < mydatalist.Count(); i++)
             {
+                UserQueAnswListModel data = new UserQueAnswListModel();
                 data.question = mydatalist[i].question;
                 data.answer = mydatalist[i].answer;
                 data.update_Id = mydatalist[i].Id;
+                data.puan = mydatalist[i].puan;
                 dataJson.Add(data);
             }
-            for (int i = 0; i < shareddatalist.Count(); i++)
+            for (int i = mydatalist.Count(), j = 0; i < shareddatalist.Count() + 1; i++, j++)
             {
-                data.question = shareddatalist[i].question;
-                data.answer = shareddatalist[i].answer;
-                data.update_Id = shareddatalist[i].Id;
+                UserQueAnswListModel data = new UserQueAnswListModel();
+                data.question = shareddatalist[j].question;
+                data.answer = shareddatalist[j].answer;
+                data.update_Id = shareddatalist[j].Id;
+                data.puan = shareddatalist[j].puan;
                 dataJson.Add(data);
             }
             return dataJson;
         }
-
         [HttpGet]
         public ActionResult AddData()
         {
@@ -114,27 +117,45 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpPost]
         public ActionResult UpdateData(UserQueAnswListModel data)
         {
-            if (ModelState.IsValid)
+            if (data.update_Id == null)
             {
-                if (data.update_Id != null)
-                {
-                    AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id && !x.isDeleted);
-                    updateData.answer = data.answer;
-                    updateData.question = data.question;
-                    updateData.List = listManager.FindwithOwnerId(data.list_Id);
-                    int result = dataManager.Update(updateData);
-                    if (result > 0)
-                    {
-                        return RedirectToAction(nameof(FillTableDataForUpdate));
-                    }
-                }
-                else
-                {
-                    return RedirectToAction(nameof(Error));
-                }
+                return RedirectToAction(nameof(Error)); // Hata durumu daha iyi işlenmeli
             }
-            return RedirectToAction(nameof(FillTableDataForUpdate));
+
+            int result = 0;
+
+            AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id && !x.isDeleted);
+            SharedDataTable sharedUpdateData = sharedDataManager.FindwithExpression(x => x.Id == data.update_Id && x.SharedList.OwnerId != currentUserId);
+
+            if (updateData != null)
+            {
+                updateData.answer = data.answer;
+                updateData.question = data.question;
+                updateData.List = listManager.FindwithOwnerId(data.list_Id);
+                result = dataManager.Update(updateData);
+            }
+            else if (sharedUpdateData != null)
+            {
+                sharedUpdateData.answer = data.answer;
+                sharedUpdateData.question = data.question;
+                result = sharedDataManager.Update(sharedUpdateData);
+            }
+
+            if (result > 0)
+            {
+                return RedirectToAction(nameof(FillTableDataForUpdate));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Error)); // Hata durumu daha iyi işlenmeli
+            }
         }
+
+        private void UpdateSharedData()
+        {
+            throw new NotImplementedException();
+        }
+
         public JavaScriptResult UpdateisSuccess()
         {
             string toastrSuccess = "toastr.success('Veri başarıyla güncellendi.', 'İşlem başarılı!', { closeButton: true, timeOut: 1500 })";
@@ -210,6 +231,9 @@ namespace AlmondWeb.WebApp.Controllers
                 if (sharedlist != null)
                 {
                     int result = sharedListManager.DeleteList(sharedlist);
+                    var datalist = sharedDataManager.ListwithExpression(x => x.SharedList == null);
+                    sharedDataManager.RemoveNullDatainSharedDataTable(datalist);
+                    //kaldırılan listeden sonra ilgili listedeki veriler siliniyor.
                     return result;
                 }
             }
@@ -304,6 +328,11 @@ namespace AlmondWeb.WebApp.Controllers
         public PartialViewResult SavedListTablePartial()
         {
             return PartialView("TablePartial/_SavedListTablePartial");
+        }
+        [HttpGet]
+        public ActionResult MainPageQuestionAnswerPartial()
+        {
+            return PartialView("Partials/_MainPageQuestionAnswerPartial");
         }
     }
 }

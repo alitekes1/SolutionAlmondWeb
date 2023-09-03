@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 // COM'dan erişmeniz gerekiyorsa, o türde ComVisible özniteliğini true olarak ayarlayın.
 [assembly: ComVisible(false)]
 
-// Bu proje COM'a açılmışsa aşağıdaki GUID typelib'in ID'si içindir
+// Bu proje COM'a açılmışsa aşağıdaki int typelib'in ID'si içindir
 [assembly: Guid("eef3d639-56ff-4e06-85e9-d1db465ff256")]
 
 // Bir derlemenin sürüm bilgisi aşağıdaki dört değerden oluşur:

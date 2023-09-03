@@ -83,8 +83,7 @@ C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLa
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\bin\Debug\FakeData.pdb
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.AssemblyReference.cache
-C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.Migrations.migfirst1.resources
-C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.Migrations.addisdeletedtosharedlist.resources
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.Migrations.restartdb.resources
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.GenerateResource.cache
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.CoreCompileInputs.cache
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.CopyComplete

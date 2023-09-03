@@ -7,7 +7,13 @@ namespace AlmondWeb.Filters
         public void OnException(ExceptionContext filterContext)
         {
             filterContext.ExceptionHandled = true;
-            filterContext.Result = new RedirectResult("Home/Error");
+            filterContext.Result = new RedirectToRouteResult(
+                new System.Web.Routing.RouteValueDictionary(
+                    new
+                    {
+                        action = "Error",
+                        contraller = "Home"
+                    }));
         }
     }
 }

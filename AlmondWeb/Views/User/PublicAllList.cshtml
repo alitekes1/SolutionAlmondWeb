@@ -32,7 +32,7 @@
         var lists = $("#searchResultCard");
         $.ajax({
             method: "POST",
-            url: '/User/SearchList',
+            url: '/User/SearchUserPartial',
             data: { searchText: searchtext },
             success: function (listData) {
                 lists.empty();

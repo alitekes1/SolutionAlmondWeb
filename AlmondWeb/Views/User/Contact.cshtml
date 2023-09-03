@@ -19,27 +19,17 @@
 
 <div class="row mb-5 ">
     <div class="col-sm-9 gx-0">
-        <div id="carouselExampleAutoplaying" class="carousel slide " data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="~/Images/background/contactimg.jpg" class="imglar d-block w-100 " alt="bg">
-                </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Images/background/contactimg.jpg" class="imglar d-block w-100 " alt="bg">
             </div>
-            <button class="carousel-control-prev" type="button" hidden data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" hidden data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
     </div>
 
     <div class="col-sm-3 bg-light">
         <h2 class="my-4" style="text-align: center; font-family:Dubai">İletişim</h2>
 
-        @using (Ajax.BeginForm("Contact", "Admin", new AjaxOptions
+        @using (Ajax.BeginForm("Contact", "User", new AjaxOptions
         {
             HttpMethod = "POST",
             OnSuccess = "clearTextBox",
@@ -73,6 +63,6 @@
         toastr.success('Mesajınız başarıyla gönderildi .', 'İşlem başarılı', { closeButton: true, timeOut: 1500 });
     } function failmessage() {
         $("#resetButton").click();
-        toastr.danger('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', { closeButton: true, timeOut: 1500 });
+        toastr.warning('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', { closeButton: true, timeOut: 1500 });
     }
 </script>

@@ -2,6 +2,7 @@
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -221,6 +222,64 @@ namespace AlmondWeb.WebApp.Controllers
             {
                 return -1;
             }
+        }
+        [HttpPost]
+        public int DeleteSharedData(int? id)
+        {
+            if (id != null)
+            {
+                SharedDataTable deleteData = sdm.FindwithExpression(x => x.Id == id);
+                int result = sdm.DeleteList(deleteData);
+                return result;
+            }
+            return -1;
+        }
+        [HttpPost]
+        public int UpdateSharedData(int? id, string que, string ans)
+        {
+            if (id != null)
+            {
+                SharedDataTable updateData = sdm.FindwithExpression(x => x.Id == id);
+                if (updateData != null)
+                {
+                    updateData.question = que;
+                    updateData.answer = ans;
+                    int result = sdm.Update(updateData);
+                    return result;
+                }
+            }
+            return -1;
+        }
+        [AllowAnonymous]
+        public ActionResult Contact()
+        {
+            return View();
+        }
+        [HttpPost, AllowAnonymous]
+        public int Contact(ContactTable contact)
+        {
+            if (contact != null)
+            {
+                int result = cm.Insert(contact);
+                return result;
+            }
+            else { return -1; }
+        }
+        [HttpGet]
+        public ActionResult AllProfile()
+        {
+            List<ProfileTable> allProfileList = pm.List();
+            return View(allProfileList);
+        }
+        [HttpPost]
+        public PartialViewResult SearchUserPartial(string username)
+        {
+            List<ProfileTable> user = pm.ListwithExpression(x => x.Owner.Username == username);
+            return PartialView("Partials/_AllProfilePartial", user);
+        }
+        public PartialViewResult AllProfilePartial()
+        {
+            return PartialView("Partials/_AllProfilePartial");
         }
     }
 }

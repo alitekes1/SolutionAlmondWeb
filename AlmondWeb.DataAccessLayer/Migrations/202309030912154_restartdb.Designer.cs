@@ -7,13 +7,13 @@ namespace AlmondWeb.DataAccessLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class addisdeletedtosharedlist : IMigrationMetadata
+    public sealed partial class restartdb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addisdeletedtosharedlist));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(restartdb));
         
         string IMigrationMetadata.Id
         {
-            get { return "202309021000448_addisdeletedtosharedlist"; }
+            get { return "202309030912154_restartdb"; }
         }
         
         string IMigrationMetadata.Source

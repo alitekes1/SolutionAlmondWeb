@@ -3,10 +3,15 @@ let _questionfortextarea = document.getElementById("exampleFormControlTextarea17
 let _answerfortextarea = document.getElementById("exampleFormControlTextarea16");
 let _selectList = document.getElementById("liste-dropdown");
 let _dataId = document.getElementById("UpdateData_Id");
+
 let submitbtn = document.getElementById("submitbtn");
+
+function sharedListSelected(question, listId, answer, dataId) {
+    transferdataTotextarea(question, listId, answer, dataId);
+    disabledList();
+}
+
 function transferdataTotextarea(question, listId, answer, dataId) {
-
-
     _questionfortextarea.removeAttribute("disabled");
     _answerfortextarea.removeAttribute("disabled");
     _selectList.removeAttribute("disabled");
@@ -29,14 +34,7 @@ function transferdataTotextarea(question, listId, answer, dataId) {
     }
     _dataId.setAttribute("value", dataId);
 };
-
-function checkSelectedData() {
-    let submitbtn = document.getElementById("submitbtn");
-    let isSelectedDatam = document.getElementById("UpdateData_Id");
-
-    submitbtn.addEventListener("click", function () {
-        if (isSelectedDatam.value == null) {
-            return alert("Hangi veriyi güncellemek istediğinizi tablodaki kalem ikonuna tıklayarak seçiniz.");
-        }
-    });
+function disabledList() {
+    _selectList.setAttribute("disabled", "true");
+    toastr.info("Kaydedilen listedeki verilerin listesi değiştirilemez.", "Uyarı", { closeButton: true, timeOut: 3000 });
 }

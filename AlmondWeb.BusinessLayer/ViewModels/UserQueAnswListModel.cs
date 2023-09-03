@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace AlmondWeb.BusinessLayer.ViewModels
@@ -17,5 +18,6 @@ namespace AlmondWeb.BusinessLayer.ViewModels
         [DisplayName("Güncellenekek veri")]
         public int? update_Id { get; set; }
         public int? delete_Id { get; set; }
+        public int puan { get; set; }
     }
 }

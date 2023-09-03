@@ -52,7 +52,7 @@ namespace AlmondWeb.WebApp
             routes.MapRoute(
                 name: "contact",
                 url: "Iletisim",
-                defaults: new { controller = "Admin", action = "Contact", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "Contact", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "RegisterSuccess",
@@ -75,6 +75,11 @@ namespace AlmondWeb.WebApp
                 name: "publicprofile",
                 url: "Profilim",
                 defaults: new { controller = "User", action = "PublicProfile", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+            name: "allprofile",
+            url: "Tum-Profiller",
+            defaults: new { controller = "User", action = "AllProfile", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "privateProfile",

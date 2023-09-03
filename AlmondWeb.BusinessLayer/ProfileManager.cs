@@ -1,5 +1,4 @@
-﻿using AlmondWeb.BusinessLayer.ViewModels;
-using AlmondWeb.Entities;
+﻿using AlmondWeb.Entities;
 
 namespace AlmondWeb.BusinessLayer
 {

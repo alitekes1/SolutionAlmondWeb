@@ -44,3 +44,17 @@ C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Ent
 C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.csproj.CopyComplete
 C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.dll
 C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.pdb
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\AlmondWeb.Entities.dll.config
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\AlmondWeb.Entities.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\AlmondWeb.Entities.pdb
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\AlmondWeb.Core.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\EntityFramework.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\AlmondWeb.Core.pdb
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\EntityFramework.xml
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.csproj.AssemblyReference.cache
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.csproj.CoreCompileInputs.cache
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.csproj.CopyComplete
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Debug\AlmondWeb.Entities.pdb

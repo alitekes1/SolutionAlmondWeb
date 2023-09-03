@@ -12,6 +12,5 @@ namespace AlmondWeb.Entities
         public bool isDeleted { get; set; }
         [Required]
         public DateTime createdTime { get; set; }
-
     }
 }
