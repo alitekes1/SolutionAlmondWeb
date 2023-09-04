@@ -4,6 +4,11 @@
     justify-content: center;
 }
 
+.col-sm-3 {
+    display: flex;
+    justify-content: center;
+}
+
 .card {
     width: 250px;
     background: #fff;
@@ -54,6 +59,7 @@
 
         .card .box p {
             color: #262626;
+            font-size: 13px;
         }
 
         .card .box span {

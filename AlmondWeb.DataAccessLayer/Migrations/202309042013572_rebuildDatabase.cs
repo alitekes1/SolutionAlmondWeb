@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class restartdb : DbMigration
+    public partial class rebuildDatabase : DbMigration
     {
         public override void Up()
         {
@@ -32,7 +32,7 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         listName = c.String(nullable: false, maxLength: 60),
-                        listDescription = c.String(maxLength: 60),
+                        listDescription = c.String(maxLength: 100),
                         isPublic = c.Boolean(nullable: false),
                         isDeleted = c.Boolean(nullable: false),
                         createdTime = c.DateTime(nullable: false),
@@ -85,7 +85,7 @@
                     {
                         Id = c.Int(nullable: false),
                         school = c.String(maxLength: 50),
-                        job = c.String(maxLength: 50),
+                        job = c.String(maxLength: 23),
                         githubUrl = c.String(maxLength: 50),
                         almondUrl = c.String(),
                         linkedinUrl = c.String(maxLength: 75),
@@ -121,7 +121,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         contactMail = c.String(maxLength: 50),
                         contactType = c.String(maxLength: 50),
-                        message = c.String(maxLength: 500),
+                        message = c.String(maxLength: 1000),
                     })
                 .PrimaryKey(t => t.Id);
             

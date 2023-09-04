@@ -103,27 +103,31 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         {
             return database.Set<T>().Find(ownerId);
         }
-        public List<SharedListTable> RelationList(int userid)//sadece ilgili kullanıcının kaydettiği listeleri döner
+        public List<SharedListTable> SharedAllList(int currentUserId)//sadece o anki kullanıcıların dışındaki herkesin paylaştığı listeleri döner. public listte tüm listeler kısmında
+        {
+            List<SharedListTable> profileLists = database.SharedListTables
+                .Include(pl => pl.List)
+                .Where(pl => pl.profileId == pl.Owner.Id && pl.Owner.Id != currentUserId && pl.isPublic).ToList();
+            return profileLists;
+        }
+        public List<SharedListTable> MySavedShareList(int curentuserid)//sadece o anki kullanıcının kaydettiği listeleri döner.profilimdeki mysaved da ve listoperations da saved tabloda 
         {
             var profileLists = database.SharedListTables
                 .Include(pl => pl.List)
-                .Where(pl => pl.profileId == userid && pl.List.Owner.Id != userid).ToList();
+                .Where(pl => pl.profileId == curentuserid && pl.List.Owner.Id != curentuserid).ToList();//TODO:liste artık public değil hatası vereceğiz.
 
             return profileLists;
         }
-        public List<SharedListTable> RelationListAll(int userid)//paylaşılan listelerin hepsini döner
+        public List<SharedListTable> SharedListOnlyCurrentUser(int currentUserId)//sadece kullanıcın paylaştığı listelerin tamamını döner.profilimdeki mysharedda
         {
-
-            var profileLists = database.SharedListTables
+            List<SharedListTable> profileLists = database.SharedListTables
                 .Include(pl => pl.List)
-                .Where(pl => pl.profileId == pl.Owner.Id && pl.Owner.Id != userid && pl.isPublic).ToList();
-
+                .Where(pl => pl.profileId == pl.Owner.Id && pl.Owner.Id == currentUserId && pl.isPublic).ToList();
             return profileLists;
         }
-        public List<SharedListTable> FindRelotionList(string text, int userid)
+        public List<SharedListTable> FindRelotionList(string text, int userid)//liste ismine veya username e göre arama yapar.
         {
-
-            var profileLists = database.SharedListTables
+            List<SharedListTable> profileLists = database.SharedListTables
                 .Include(pl => pl.List)
                 .Where(pl => pl.profileId == pl.List.Owner.Id && pl.List.Owner.Id != userid && pl.List.listName == text || pl.List.Owner.Username == text && pl.List.isPublic).ToList();
 

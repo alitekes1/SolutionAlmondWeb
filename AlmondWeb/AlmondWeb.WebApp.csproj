@@ -313,6 +313,7 @@
     <Content Include="Views\Shared\Partials\_MainPageQuestionAnswerPartial.cshtml" />
     <Content Include="Views\User\AllProfile.cshtml" />
     <Content Include="Views\Shared\Partials\_AllProfilePartial.cshtml" />
+    <Content Include="Views\User\Deneme.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

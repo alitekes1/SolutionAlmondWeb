@@ -83,9 +83,9 @@ C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLa
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\bin\Debug\FakeData.pdb
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.AssemblyReference.cache
-C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.Migrations.restartdb.resources
-C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.GenerateResource.cache
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.CoreCompileInputs.cache
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.CopyComplete
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.pdb
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.Migrations.rebuildDatabase.resources
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.DataAccessLayer\obj\Debug\AlmondWeb.DataAccessLayer.csproj.GenerateResource.cache

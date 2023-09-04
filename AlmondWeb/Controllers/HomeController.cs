@@ -14,7 +14,6 @@ namespace AlmondWeb.WebApp.Controllers
     [Authorize, Exc]
     public class HomeController : Controller
     {
-        private UserManager userManager = new UserManager();
         private DataManager dataManager = new DataManager();
         private ListManager listManager = new ListManager();
         private ContactManager contactManager = new ContactManager();
@@ -23,6 +22,8 @@ namespace AlmondWeb.WebApp.Controllers
         private SharedDataManager sharedDataManager = new SharedDataManager();
         private int currentUserId = CacheHelper.CurrentUserID();
         private List<UserQueAnswListModel> dataJson = new List<UserQueAnswListModel>();
+        private UserManager userManager = new UserManager();
+
 
         public ActionResult MainPage()
         {
@@ -66,7 +67,10 @@ namespace AlmondWeb.WebApp.Controllers
         {
             List<AlmondDataTable> mydatalist = dataManager.ListwithExpression(x => x.List.Id == listId && !x.isDeleted && x.Owner.Id == currentUserId).OrderBy(x => x.puan).ToList();
             List<SharedDataTable> shareddatalist = sharedDataManager.ListwithExpression(x => x.SharedList.listId == listId && x.SharedList.profileId == currentUserId && !x.isDeleted);
-
+            if (shareddatalist.Count() == 0 && mydatalist.Count() == 0)
+            {
+                return dataJson;
+            }
             for (int i = 0; i < mydatalist.Count(); i++)
             {
                 UserQueAnswListModel data = new UserQueAnswListModel();
@@ -141,7 +145,7 @@ namespace AlmondWeb.WebApp.Controllers
                 result = sharedDataManager.Update(sharedUpdateData);
             }
 
-            if (result > 0)
+            if (result > -1)
             {
                 return RedirectToAction(nameof(FillTableDataForUpdate));
             }

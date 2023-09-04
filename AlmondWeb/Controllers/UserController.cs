@@ -71,7 +71,7 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
-                    FormsAuthentication.SetAuthCookie(errorresult.resultModel.Name, false);
+                    FormsAuthentication.SetAuthCookie(errorresult.resultModel.Username, false);
                     HttpContext.Session.Add("userId", errorresult.resultModel.Id);
                     Session["user"] = modal;
                     return RedirectToAction("../Anasayfa");
@@ -114,46 +114,51 @@ namespace AlmondWeb.WebApp.Controllers
             }
         }
         [HttpGet]
-        public ActionResult PublicProfile()
+        public ActionResult PublicProfile(string userName)
         {
-            return View();
-        }
-        [HttpGet]
-        public ActionResult ProfileUpdate()
-        {
-            ProfileTable profil = pm.FindwithExpression(x => x.Owner.Id == currentUserID);
-            if (profil != null)
+            if (userName != null)
             {
-                return View(profil);
-            }
-            return RedirectToAction("Error", "Home");
-
-        }
-        [HttpPost]
-        public ActionResult ProfileUpdate(ProfileModal profile)
-        {
-            ProfileTable profil = pm.FindwithOwnerId(profile.ownerId);
-            if (profil != null)
-            {
-                profil.aboutmeText = profile.aboutmeText;
-                profil.school = profile.school;
-                profil.githubUrl = profile.githubUrl;
-                profil.linkedinUrl = profile.linkedinUrl;
-                profil.websiteUrl = profile.websiteUrl;
-                profil.job = profile.job;
-                profil.profileImageUrl = profile.profileImageUrl;
-                int result = pm.Update(profil);
-                if (result > 0)
+                ProfileTable searchingProfile = pm.FindwithExpression(x => x.Owner.Username == userName);
+                if (searchingProfile != null)
                 {
-                    return View(nameof(PublicProfile));
+                    return View(searchingProfile);
                 }
             }
             return RedirectToAction("Error", "Home");
         }
         [HttpGet]
+        public ActionResult ProfileUpdate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ProfileUpdate(ProfileModal profile)
+        {
+            if (ModelState.IsValid)
+            {
+                ProfileTable profil = pm.FindwithOwnerId(profile.ownerId);
+                if (profil != null)
+                {
+                    profil.aboutmeText = profile.aboutmeText;
+                    profil.school = profile.school;
+                    profil.githubUrl = profile.githubUrl;
+                    profil.linkedinUrl = profile.linkedinUrl;
+                    profil.websiteUrl = profile.websiteUrl;
+                    profil.job = profile.job;
+                    profil.profileImageUrl = profile.profileImageUrl;
+                    int result = pm.Update(profil);
+                    if (result > -1)
+                    {
+                        return View(nameof(PrivateProfile));
+                    }
+                }
+            }
+            return View(profile);
+        }
+        [HttpGet]
         public ActionResult PublicAllList()//TODO: liste paylaşma hakkında SSS hazırlanacak. acordion şeklinde
         {
-            List<SharedListTable> list = slm.RelationListAll(currentUserID);//paylaşılan tüm listeleri gönderiyor.
+            List<SharedListTable> list = slm.SharedAllList(currentUserID);//paylaşılan tüm listeleri gönderiyor.
             return View(list);
         }
         public PartialViewResult SearchList(string searchText)
@@ -223,14 +228,16 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-        [HttpPost]
-        public int DeleteSharedData(int? id)
+        public int DeleteSharedData(int? id)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         {
             if (id != null)
             {
                 SharedDataTable deleteData = sdm.FindwithExpression(x => x.Id == id);
-                int result = sdm.DeleteList(deleteData);
-                return result;
+                if (deleteData != null)
+                {
+                    int result = sdm.DeleteList(deleteData);
+                    return result;
+                }
             }
             return -1;
         }

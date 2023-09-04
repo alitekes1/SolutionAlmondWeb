@@ -45,24 +45,23 @@
             </div>
 
             <div class="input-group">
-                @Html.TextAreaFor(x => x.message, new { @class = "form-control", id = "message", required = "required", maxlength = "600", rows = "16", style = "resize:none", placeholder = "Mesajınız minumum 10, maksimum 500 karakter olmalıdır." })
+                @Html.TextAreaFor(x => x.message, new { @class = "form-control", id = "messageContact", required = "required", maxlength = "1000", minlenght = "10", rows = "16", style = "resize:none", placeholder = "Mesajınız minumum 10, maksimum 1000 karakter olmalıdır." })
             </div>
             <input type="reset" style="display:none" id="resetButton" />
             <div class="row">
                 <div class="col-sm-12 mt-4">
-                    <button type="submit" href="#" class="btn btn-success mt-3" style="text-align: center; width: 100% ;padding-top:10px"> Gönder</button>
+                    <button type="submit" href="#" id="submitbtnContact" class="btn btn-success mt-3" style="text-align: center; width: 100% ;padding-top:10px"> Gönder</button>
                 </div>
             </div>
         }
     </div>
 </div>
-<link href="~/Content/toastr.min.css" rel="stylesheet" />
 <script>
-    function clearTextBox() {
-        $("#resetButton").click();
-        toastr.success('Mesajınız başarıyla gönderildi .', 'İşlem başarılı', { closeButton: true, timeOut: 1500 });
-    } function failmessage() {
-        $("#resetButton").click();
-        toastr.warning('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', { closeButton: true, timeOut: 1500 });
-    }
+    let message = $("#messageContact").val();
+    $("#submitbtnContact").click(function (e) {
+        if (message.length < 9) {
+            e.preventDefault();
+            return toastr.info("Mesajınız en az 10 karakterden oluşmalı.", "Uyarı", { closeButton: true, timeOut: 2500 })
+        }
+    })
 </script>

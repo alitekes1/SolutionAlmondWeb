@@ -15,7 +15,7 @@ namespace AlmondWeb.Entities
         [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Konu")]
         public string contactType { get; set; }
 
-        [StringLength(maximumLength: 500, MinimumLength = 10), DisplayName("Mesaj")]
+        [StringLength(maximumLength: 1000, MinimumLength = 10), DisplayName("Mesaj")]
         public string message { get; set; }
 
     }

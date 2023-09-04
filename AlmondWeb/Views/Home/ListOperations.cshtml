@@ -27,11 +27,10 @@
                     <div class="modal-body">
                         <div class="col form-check">
                             <div class="row-sm-3">
-                                <input type="text" class="form-control" id="inputTextCreateList" autofocus name="textcreate" required aria-describedby="inputGroup-sizing-default" placeholder="Liste İsmi">
+                                <input type="text" class="form-control" id="inputTextCreateList" autofocus name="textcreate" required aria-describedby="inputGroup-sizing-default" placeholder="Liste İsmi" maxlength="60">
                             </div>
-
                             <div class="row-sm-6 my-2">
-                                <textarea class="form-control" id="listDescriptionTextArea" placeholder="Liste Açıklamasını giriniz.Sade ve anlaşılır bir açıklama olmasına özen gösteriniz." style="resize:none" rows="5"></textarea>
+                                <textarea class="form-control" id="listDescriptionTextArea" placeholder="Liste Açıklamasını giriniz.Sade ve anlaşılır bir açıklama olmasına özen gösteriniz." style="resize:none" rows="5" maxlength="100"></textarea>
                             </div>
                             <!-- Liste Ekleme-->
                             <div class="row-sm-3 text-start">
@@ -60,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row gx-2">
         <div class="col-sm-6">
             <!-- Listelerim Tablosu-->
             @Html.Action("FillTableForListOperations", "Home")

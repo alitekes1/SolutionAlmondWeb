@@ -24,19 +24,13 @@
                     OnSuccess = "onSuccess"//post işlemi başarı olduğunda çalışmasını istediğimiz js fonksiyonunun ismini buraya yazabiliriz.
                 }))
                 {
-                    <div>
-                        @Html.ValidationSummary(true)
-                    </div>
-
                     <div class="row-sm-3 form-group shadow-textarea textareas">
                         @Html.TextAreaFor(x => x.question, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Tablodan güncellemek istediğiniz veriyi kalem ikonuna tıklayarak seçiniz.", autofocus = "autofocus", title = "Soru", id = "exampleFormControlTextarea17", disabled = "disabled", required = "required" })
-                        @*<p class="text-danger text-sm-start" style="font-size: 13px; display: inline-block">@Html.ValidationMessageFor(x => x.question)</p>*@
                         <br>
                     </div>
 
                     <div class="row-sm-3 form-group shadow-textarea textareas ">
                         @Html.TextAreaFor(x => x.answer, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Seçtiğiniz veri otomatik olarak buraya gelecektir.", autofocus = "autofocus", title = "Cevap", id = "exampleFormControlTextarea16", disabled = "disabled", required = "required", minlenght = "2" })
-                        @*<p class="text-danger text-sm-start" style="font-size: 13px; display: inline-block">@Html.ValidationMessageFor(x => x.answer)</p>*@
                         <br>
                     </div>
 
@@ -63,9 +57,29 @@
     </div>
 </div>
 <script>
+    let submitbtnUpdate = $("#submitbtn");
+    let updateBtn = $(".btntableDelete");
     function onSuccess() {
         toastr.success("Veri başarıyla güncellendi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
     }
+
+    submitbtnUpdate.click(function (e) {
+        if (updateBtn.hasClass("clicked")) {
+        }
+        else {
+            e.preventDefault();
+            toastr.warning("Güncellenecek veriyi seçiniz.", "Uyarı!", { closeButton: true, timeOut: 1500 });
+        }
+    })
+    updateBtn.click(function () {
+        if (updateBtn.hasClass("clicked")) {
+            //alert("Düğme daha önce tıklandı.");
+        } else {
+            //alert("Düğme ilk defa tıklandı.");
+            updateBtn.addClass("clicked");
+        }
+    });
+
     let _list = document.getElementById("liste-dropdown");
     _list.options[0].disabled = true;
 </script>

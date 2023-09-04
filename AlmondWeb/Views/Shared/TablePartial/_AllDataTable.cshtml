@@ -1,9 +1,13 @@
-﻿@{
+﻿@model List<AlmondDataTable>
+@{
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
 
     DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
+    List<AlmondDataTable> myAllDataList = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
+
+    SharedDataManager sdm = new SharedDataManager();
+    List<SharedDataTable> savedAllDataList = sdm.ListwithExpression(x => x.SharedList.profileId == currentUserID);
 
 }
 <div>
@@ -23,7 +27,7 @@
         </tr>
     </thead>
     <tbody class="text-center">
-        @foreach (var item in tableData)
+        @foreach (var item in myAllDataList)
         {
             counter++;
             <tr>
@@ -38,6 +42,24 @@
                 else
                 {
                     <td class="text-center" style="width:20%">@item.List.listName</td>
+                }
+            </tr>
+        }
+        @foreach (var item in savedAllDataList)
+        {
+            counter++;
+            <tr>
+                <td class="text-center" style="width:5%">@counter</td>
+                <td class="text-center" style="width:30%">@item.question</td>
+                <td class="text-center" style="width:30%">@item.answer</td>
+                <td class="text-center" style="width:15%">@item.puan</td>
+                @if (item.SharedList == null)
+                {
+                    <td class="text-center" style="width:20%">NULL</td>
+                }
+                else
+                {
+                    <td class="text-center" style="width:20%">@item.SharedList.List.listName</td>
                 }
             </tr>
         }

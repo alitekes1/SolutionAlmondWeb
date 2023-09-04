@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Migrations\202309030912154_restartdb.cs" />
-    <Compile Include="Migrations\202309030912154_restartdb.designer.cs">
-      <DependentUpon>202309030912154_restartdb.cs</DependentUpon>
+    <Compile Include="Migrations\202309042013572_rebuildDatabase.cs" />
+    <Compile Include="Migrations\202309042013572_rebuildDatabase.designer.cs">
+      <DependentUpon>202309042013572_rebuildDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,8 +86,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202309030912154_restartdb.resx">
-      <DependentUpon>202309030912154_restartdb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202309042013572_rebuildDatabase.resx">
+      <DependentUpon>202309042013572_rebuildDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

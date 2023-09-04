@@ -7,7 +7,7 @@ namespace AlmondWeb.Entities
     {
         [Required, StringLength(60)]
         public string listName { get; set; }
-        [StringLength(60)]
+        [StringLength(100)]
         public string listDescription { get; set; }
         [Required]
         public bool isPublic { get; set; }

@@ -4,26 +4,25 @@
 
     int currentUserID = CacheHelper.CurrentUserID();
 
-    DataManager dm = new DataManager();
-    var tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);//current user a ait dataları listeliyoruz.
-
     UserManager um = new UserManager();
     var user = um.FindwithExpression(x => x.Id == currentUserID);
 
     TimeSpan time = DateTime.Now - user.createdTime;
 
-    bool dateControlforPDF = time.Days > 2;
-    int dataCount = tableData.Count;
-    bool dataCountControlforPDF = dataCount > 50;
+    //bool dateControlforPDF = time.Days > 2;
+    //int dataCount = tableData.Count;
+    //bool dataCountControlforPDF = dataCount > 50;
 }
 
-@Html.Action("FillTableForAllData", "Home", tableData)
+@Html.Action("FillTableForAllData", "Home")
 
-<div class="mb-sm-5" id="pdfalbuton">
+<!-- #region getpdf -->
+
+@*<div class="mb-sm-5" id="pdfalbuton">
     <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="buttonpdf float-end">Verilerimi PDF olarak almak istiyorum </button>
 </div>
 
-<!-- Modal -->
+ Modal 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -80,4 +79,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
+
+
+<!-- #endregion -->

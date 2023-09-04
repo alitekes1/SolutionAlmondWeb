@@ -47,13 +47,17 @@ namespace AlmondWeb.BusinessLayer
         {
             return repo.FindwithExpression(expression);
         }
-        public List<SharedListTable> RelationList(int userId)
+        public List<SharedListTable> MySavedShareList(int userId)
         {
-            return repo.RelationList(userId);
+            return repo.MySavedShareList(userId);
         }
-        public List<SharedListTable> RelationListAll(int userId)
+        public List<SharedListTable> SharedAllList(int userId)
         {
-            return repo.RelationListAll(userId);
+            return repo.SharedAllList(userId);
+        }
+        public List<SharedListTable> SharedListOnlyCurrentUser(int userid)
+        {
+            return repo.SharedListOnlyCurrentUser(userid);
         }
         public List<SharedListTable> FindRelotionList(string text, int userid)
         {

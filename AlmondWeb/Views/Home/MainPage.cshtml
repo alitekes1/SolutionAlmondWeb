@@ -58,13 +58,14 @@
             method: "GET",
             url: `Home/GetQuestionAnswerJson/${listId}`, // URL düzgün formatta
             success: function (list) {
-                if (list != null) {
+                if (list.length != 0) {
                     console.log(list);
                     datalist = list;
                     i = 0; // Yeni liste için indeks sıfırlanıyor
                     showQuestionAndAnswer(i); // İlk soru ve cevap gösteriliyor
                 } else {
-                    alert("Liste boş geldi.");
+                    que.text("");
+                    return toastr.info("Listede veri yok. Veri eklemelisiniz.", "Uyarı!", { closeButton: true, timeOut: 1500 });
                 }
             }
         });
