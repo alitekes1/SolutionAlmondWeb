@@ -1,19 +1,22 @@
-﻿@using AlmondWeb.Entities
+﻿@model ProfileTable
 @{
     ViewBag.Title = "Profilim";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
+
     int currentUserID = CacheHelper.CurrentUserID();
 
     SharedListManager slm = new SharedListManager();
-    List<SharedListTable> mySavedlist = slm.ListwithExpression(x => x.profileId == currentUserID && x.OwnerId != currentUserID && x.isPublic);
+    List<SharedListTable> mySavedList = slm.MySavedShareList(currentUserID).OrderByDescending(x => x.Id).ToList();//sadece kullanıcın kaydettiği listeleri döner
 
-    List<SharedListTable> mySharedlist = slm.ListwithExpression(x => x.profileId == currentUserID && x.OwnerId == currentUserID && x.isPublic);
+    List<SharedListTable> mySharedList = slm.SharedListOnlyCurrentUser(currentUserID).OrderByDescending(x => x.Id).ToList();//sadece kullanıcın paylaştığı listelerin tamamını döner
 
+    //TODO: bu fonksiyonların ismi düzenlenecek.
 
     ProfileManager pm = new ProfileManager();
-    var user = pm.FindwithExpression(x => x.Id == currentUserID);
+    var user = pm.FindwithExpression(x => x.Id == Model.Id);
 }
 <link href="~/Content/AlmondCss/PublicProfile.css" rel="stylesheet" />
+<link href="~/Content/AlmondCss/ProfileLists.css" rel="stylesheet" />
 
 <div class="row">
     <div class="col-sm-12 gx-0">
@@ -86,12 +89,12 @@
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab1" checked>
                 <label for="tab1" class="tabs__label text-center">Paylaşılan Listeler</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_MySharedListinProfilePartial", mySharedlist)
+                    @Html.Partial("Partials/_MySharedListinProfilePartial", mySharedList)
                 </div>
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab2">
                 <label for="tab2" class="tabs__label text-center">Kaydedilen Listeler</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_MySavedListinProfilePartial", mySavedlist)
+                    @Html.Partial("Partials/_MySharedListinProfilePartial", mySavedList)
                 </div>
             </div>
         </div>

@@ -3,18 +3,18 @@
 <div class="row gx-0" id="resultUserCards">
     @foreach (var item in Model)
     {
-        <div class="col-sm-4 my-5">
+        <div class="col-sm-3 my-5">
             <div class="card">
                 <div class="box">
                     <div class="img">
                         <img src="https://media.licdn.com/dms/image/D4D03AQHG7t_oX_6guA/profile-displayphoto-shrink_400_400/0/1666186436288?e=1699488000&v=beta&t=4NIVGcTKbRESg43QxkvL01mnvO0L1QJ1SgBQFyxlpzg">
                     </div>
-                    <h2>@@@item.Owner.Username<br><span>Bilgisayar Müh. Öğrenci</span></h2>
+                    <h2>@@@item.Owner.Username<br><span>@item.job</span></h2>
                     <p>
                         @item.aboutmeText
                     </p>
                     <span>
-                        <a href="#">
+                        <a href="/@item.Owner.Username">
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1em" viewBox="0 0 187.000000 268.000000" preserveAspectRatio="xMidYMid meet">
                                 <metadata>
                                 </metadata>

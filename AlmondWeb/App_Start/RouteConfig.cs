@@ -59,8 +59,6 @@ namespace AlmondWeb.WebApp
                 url: "Kayit-Basarili",
                 defaults: new { controller = "User", action = "RegisterSuccess", id = UrlParameter.Optional }
             );
-
-            //TODO: user işlemleri bittikten sonra ilgli tanımlamalar yapılacak.
             routes.MapRoute(
                 name: "updateprofile2",
                 url: "User/ProfileUpdate/{id}",
@@ -77,9 +75,9 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "User", action = "PublicProfile", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-            name: "allprofile",
-            url: "Tum-Profiller",
-            defaults: new { controller = "User", action = "AllProfile", id = UrlParameter.Optional }
+                name: "allprofile",
+                url: "Tum-Profiller",
+                defaults: new { controller = "User", action = "AllProfile", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "privateProfile",
@@ -111,7 +109,6 @@ namespace AlmondWeb.WebApp
                 url: "TumKullanicilar54",
                 defaults: new { controller = "Admin", action = "AllUser", id = UrlParameter.Optional }
             );
-            //RemoveNullDatainSharedDataTable
             routes.MapRoute(
                 name: "RemoveNullDatainSharedDataTable1",
                 url: "Temizle54",
@@ -126,6 +123,11 @@ namespace AlmondWeb.WebApp
                 name: "User",
                 url: "User/{action}/{username}",
                 defaults: new { controller = "User", action = "Index", username = UrlParameter.Optional }
+            );
+            routes.MapRoute(//önemli
+                name: "profilesdeneme",
+                url: "{username}",
+                defaults: new { controller = "User", action = "PublicProfile", userName = UrlParameter.Optional }
             );
             //en altta olması tavsiye edilir.
             routes.MapRoute(

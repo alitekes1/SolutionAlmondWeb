@@ -6,21 +6,14 @@ let _dataId = document.getElementById("UpdateData_Id");
 
 let submitbtn = document.getElementById("submitbtn");
 
-function sharedListSelected(question, listId, answer, dataId) {
-    transferdataTotextarea(question, listId, answer, dataId);
+function sharedListSelected(que, listID, ans, dataID, listName) {// kalem ikonuna tıklanıldığında çalışacak olan tüm fonksiyonlar
+    transferdataTotextarea(que, listID, ans, dataID, listName);
     disabledList();
 }
 
-function transferdataTotextarea(question, listId, answer, dataId) {
-    _questionfortextarea.removeAttribute("disabled");
-    _answerfortextarea.removeAttribute("disabled");
-    _selectList.removeAttribute("disabled");
-    submitbtn.removeAttribute("disabled");
+function selectListFunc(listId, listName) {
 
-    _questionfortextarea.value = question;
-    _answerfortextarea.value = answer;
-
-    var options = _selectList.options;
+    let options = _selectList.options;
 
     if (listId > 0) {
         for (var i = 0; i < options.length; i++) {
@@ -30,8 +23,22 @@ function transferdataTotextarea(question, listId, answer, dataId) {
         }
     }
     else {
-        options[0].selected = true;
+        options[1].selected = true;
+        _selectList.selectedOptions[1].innerText = listName;
     }
+}
+
+function transferdataTotextarea(question, listId, answer, dataId, listName) {
+    _questionfortextarea.removeAttribute("disabled");
+    _answerfortextarea.removeAttribute("disabled");
+    _selectList.removeAttribute("disabled");
+    submitbtn.removeAttribute("disabled");
+
+
+    _questionfortextarea.value = question;
+    _answerfortextarea.value = answer;
+
+    selectListFunc(listId, listName);
     _dataId.setAttribute("value", dataId);
 };
 function disabledList() {

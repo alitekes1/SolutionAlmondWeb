@@ -1,28 +1,26 @@
-﻿@{
+﻿@model  List<SharedListTable>
+@{
     int currentUserID = CacheHelper.CurrentUserID();
-    ListManager lm = new ListManager();
-    List<ListTable> data = lm.ListwithExpression(x => x.Owner.Id == currentUserID && x.isPublic);
 }
 <div class="row my-4">
-    @foreach (var item in data)
+    @foreach (var item in Model)
     {
         <div class="col-sm-3 mb-5 d-flex justify-content-center">
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        @if (item.listName.Length > 18)
+                        @if (item.List.listName.Length > 18)
                         {
-
-                            <p title="@item.listName" class="title text-danger text-sm-center ">@item.listName.Substring(0, 15)...</p>
+                            <p title="@item.List.listName" class="title text-danger text-sm-center ">@item.List.listName.Substring(0, 15)...</p>
                         }
                         else
                         {
-                            <p class="title text-danger">@item.listName</p>
+                            <p class="title text-danger">@item.List.listName</p>
                         }
                         <p>@@@item.Owner.Username</p>
-                        @if (!item.listDescription.IsEmpty())
+                        @if (!item.List.listDescription.IsEmpty())
                         {
-                            <p> @item.listDescription</p>
+                            <p> @item.List.listDescription</p>
                         }
                         else
                         {
@@ -30,23 +28,22 @@
                         }
                     </div>
                     <div class="flip-card-back ">
-                        <label class="backListName mx-2 fs-5 text-center">@item.listName</label><hr />
+                        <label class="backListName mx-2 fs-5 text-center">@item.List.listName</label><hr />
                         @{
-                            int totalSaved = item.List.Count() - 1;
+                            //int totalSaved = item.List - 1;
                         }
                         <span class="backside text-dark text-start mx-2 my-1">
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 384 512"><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" /></svg>
-                            <label class="text-dark">Toplam Kaydedilme : @totalSaved</label>
+                            <label class="text-dark">Toplam Kaydedilme : -1</label>
                         </span>
 
                         <span class="backside text-dark text-start mx-2 my-1">
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z" /></svg>
-                            <label class="text-dark">Toplam Veri Adedi :  @item.DataTables.Count()</label>
+                            <label class="text-dark">Toplam Veri Adedi :  -1</label>
                         </span>
-
                         <a href="/Liste-Yonetimi" title="Liste Yönetimi sayfasına gider" class="btn mx-5 my-2 " style="background: #5C8984">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                             </svg>
                         </a>
                     </div>
