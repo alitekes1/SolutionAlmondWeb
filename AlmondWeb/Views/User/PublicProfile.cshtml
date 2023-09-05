@@ -5,10 +5,11 @@
 
     int currentUserID = CacheHelper.CurrentUserID();
 
-    SharedListManager slm = new SharedListManager();
-    List<SharedListTable> mySavedList = slm.MySavedShareList(currentUserID).OrderByDescending(x => x.Id).ToList();//sadece kullanıcın kaydettiği listeleri döner
+    SharedListManager sdm = new SharedListManager();
+    List<SharedListTable> mySavedList = sdm.MySavedShareList(Model.Id);//kaydedilen listelerin verisi
 
-    List<SharedListTable> mySharedList = slm.SharedListOnlyCurrentUser(currentUserID).OrderByDescending(x => x.Id).ToList();//sadece kullanıcın paylaştığı listelerin tamamını döner
+    SharedListManager lm = new SharedListManager();
+    List<SharedListTable> mySharedList = lm.ListwithExpression(x => x.Owner.Id == Model.Id && !x.isDeleted && x.isPublic).OrderByDescending(x => x.Id).ToList();//kişinin paylaştığı listeler
 
     //TODO: bu fonksiyonların ismi düzenlenecek.
 
@@ -26,7 +27,7 @@
                 <div class="col-sm-3">
                     <div class="profile-header-content">
                         <div class="profile-header-img">
-                            <img src="@user.profileImageUrl" alt="image not found" />
+                            <img src="@Url.Content(user.profileImageUrl)" alt="imageNotUpload">
                         </div>
                     </div>
                 </div>
@@ -89,12 +90,12 @@
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab1" checked>
                 <label for="tab1" class="tabs__label text-center">Paylaşılan Listeler</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_MySharedListinProfilePartial", mySharedList)
+                    @Html.Partial("Partials/_PublicProfileCardPartial", mySharedList)
                 </div>
                 <input type="radio" class="tabs__radio" name="tabs-example" id="tab2">
                 <label for="tab2" class="tabs__label text-center">Kaydedilen Listeler</label>
                 <div class="tabs__content">
-                    @Html.Partial("Partials/_MySharedListinProfilePartial", mySavedList)
+                    @Html.Partial("Partials/_PublicProfileCardPartial", mySavedList)
                 </div>
             </div>
         </div>

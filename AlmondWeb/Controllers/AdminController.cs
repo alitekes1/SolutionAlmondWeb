@@ -8,29 +8,32 @@ namespace AlmondWeb.WebApp.Controllers
     [Authorize, Exc]
     public class AdminController : Controller
     {
-        private ContactManager cm = new ContactManager();
         private UserManager um = new UserManager();
         private DataManager dm = new DataManager();
         private SharedListManager slm = new SharedListManager();
         private SharedDataManager sdm = new SharedDataManager();
         public int result = 0;
-        [HttpGet]
+        [HttpGet, isAdmin]
         public ActionResult AllUser()
         {
             return View();
         }
+        [isAdmin]
         public ActionResult AllData()
         {
             return View();
         }
+        [isAdmin]
         public ActionResult AllList()
         {
             return View();
         }
+        [isAdmin]
         public ActionResult Admins()
         {
             return View();
         }
+        [isAdmin]
         public ActionResult AllMessages()
         {
             return View();
@@ -40,7 +43,7 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost, isAdmin]
         public int DeactiveAccount(int? id)
         {
             if (id != null)
@@ -55,7 +58,7 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-        [HttpPost]
+        [HttpPost, isAdmin]
         public int ActiveAccount(int? id)
         {
             if (id != null)
@@ -70,7 +73,7 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-        [HttpPost]
+        [HttpPost, isAdmin]
         public int AssignAdmin(int? id)
         {
             if (id != null)
@@ -85,7 +88,7 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-        [HttpPost]
+        [HttpPost, isAdmin]
         public int RemoveAdmin(int? id)
         {
             if (id != null)
@@ -100,7 +103,7 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-        [HttpPost]
+        [HttpPost, isAdmin]
         public int DeleteData(int? id)
         {
             if (id != null)
@@ -114,7 +117,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
-        [HttpPost]
+        [HttpPost, isAdmin]
         public int RemoveSharedList(int? id)
         {
             if (id != null)
@@ -129,22 +132,24 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
 
-        [HttpGet]
+        [HttpGet, isAdmin]
         public ActionResult RemoveNullDatainSharedDataTable()
         {
             return View(0);
         }
-        [HttpPost]
+        [HttpPost, isAdmin]
         public ActionResult RemoveNullDatainSharedDataTable(int? a)
         {
             var datalist = sdm.ListwithExpression(x => x.SharedList == null);
             int result = sdm.RemoveNullDatainSharedDataTable(datalist);
             return View(result);
         }
+        [isAdmin]
         public PartialViewResult AllUserTablePartial()
         {
             return PartialView("TablePartial/_AllUserTablePartial");
         }
+        [isAdmin]
         public PartialViewResult AdminTablePartial()
         {
             return PartialView("TablePartial/_AdminTablePartial");

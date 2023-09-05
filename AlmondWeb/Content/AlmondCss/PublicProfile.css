@@ -49,15 +49,17 @@
 }
 
 .profile .profile-header .profile-header-content .profile-header-img {
-    width: 12.5rem;
+    width: 10.5rem;
     height: 12.5rem;
     overflow: hidden;
     z-index: 10;
     margin-top: -8.75rem;
-    padding: 0.1875rem;
-    background: #fff;
+    /*background: #fff;*/
     -webkit-border-radius: 9px;
     border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 991.98px) {
@@ -72,7 +74,7 @@
     max-width: 100%;
     width: 100%;
     -webkit-border-radius: 6px;
-    border-radius: 6px;
+    /*border: 2px solid white;*/
 }
 
 

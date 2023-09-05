@@ -40,6 +40,11 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "Home", action = "AllData", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "error",
+                url: "Hata",
+                defaults: new { controller = "Home", action = "Error", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "login",
                 url: "Giris-Yap",
                 defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional }
@@ -113,6 +118,11 @@ namespace AlmondWeb.WebApp
                 name: "RemoveNullDatainSharedDataTable1",
                 url: "Temizle54",
                 defaults: new { controller = "Admin", action = "RemoveNullDatainSharedDataTable", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "noadminerror",
+                url: "YasakliBolge",
+                defaults: new { controller = "Admin", action = "NoAdminError", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "getque",

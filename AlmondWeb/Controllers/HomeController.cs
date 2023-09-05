@@ -24,7 +24,6 @@ namespace AlmondWeb.WebApp.Controllers
         private List<UserQueAnswListModel> dataJson = new List<UserQueAnswListModel>();
         private UserManager userManager = new UserManager();
 
-
         public ActionResult MainPage()
         {
             return View();
@@ -67,27 +66,33 @@ namespace AlmondWeb.WebApp.Controllers
         {
             List<AlmondDataTable> mydatalist = dataManager.ListwithExpression(x => x.List.Id == listId && !x.isDeleted && x.Owner.Id == currentUserId).OrderBy(x => x.puan).ToList();
             List<SharedDataTable> shareddatalist = sharedDataManager.ListwithExpression(x => x.SharedList.listId == listId && x.SharedList.profileId == currentUserId && !x.isDeleted);
-            if (shareddatalist.Count() == 0 && mydatalist.Count() == 0)
+            if (shareddatalist.Count() != 0)
             {
-                return dataJson;
+                for (int i = 0; i < shareddatalist.Count(); i++)
+                {
+                    UserQueAnswListModel data = new UserQueAnswListModel
+                    {
+                        question = shareddatalist[i].question,
+                        answer = shareddatalist[i].answer,
+                        update_Id = shareddatalist[i].Id,
+                        puan = shareddatalist[i].puan
+                    };
+                    dataJson.Add(data);
+                }
             }
-            for (int i = 0; i < mydatalist.Count(); i++)
+            if (mydatalist.Count() != 0)
             {
-                UserQueAnswListModel data = new UserQueAnswListModel();
-                data.question = mydatalist[i].question;
-                data.answer = mydatalist[i].answer;
-                data.update_Id = mydatalist[i].Id;
-                data.puan = mydatalist[i].puan;
-                dataJson.Add(data);
-            }
-            for (int i = mydatalist.Count(), j = 0; i < shareddatalist.Count() + 1; i++, j++)
-            {
-                UserQueAnswListModel data = new UserQueAnswListModel();
-                data.question = shareddatalist[j].question;
-                data.answer = shareddatalist[j].answer;
-                data.update_Id = shareddatalist[j].Id;
-                data.puan = shareddatalist[j].puan;
-                dataJson.Add(data);
+                for (int i = shareddatalist.Count(), j = 0; i < mydatalist.Count() + 1; i++, j++)
+                {
+                    UserQueAnswListModel data = new UserQueAnswListModel
+                    {
+                        question = mydatalist[j].question,
+                        answer = mydatalist[j].answer,
+                        update_Id = mydatalist[j].Id,
+                        puan = mydatalist[j].puan
+                    };
+                    dataJson.Add(data);
+                }
             }
             return dataJson;
         }
@@ -200,12 +205,14 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (!listNm.IsNullOrWhiteSpace())
             {
-                ListTable newList = new ListTable();
-                newList.listName = listNm;
-                newList.listDescription = listDesc;
-                newList.isDeleted = false;
-                newList.isPublic = listPub == "1" ? true : false;
-                newList.Owner = userManager.FindwithOwnerId(currentUserId);
+                ListTable newList = new ListTable
+                {
+                    listName = listNm,
+                    listDescription = listDesc,
+                    isDeleted = false,
+                    isPublic = listPub == "1",
+                    Owner = userManager.FindwithOwnerId(currentUserId)
+                };
                 int result = listManager.Insert(newList);
                 InsertToSharedListTable(newList.Id, newList.isPublic);
                 return result;
@@ -227,17 +234,16 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
         [HttpPost]
-        public int RemoveSavedList(int? listid)
+        public int RemoveSavedList(int? listid, int? profileId)
         {
-            if (listid != null)
+            if (listid != null && profileId != null)
             {
-                SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.Id == listid);
+                SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.Id == listid && x.profileId == profileId);//bu kod "yelkenler biçilecek" marşını dinlerken yazılmıştır.5/9/23 18.03
                 if (sharedlist != null)
                 {
                     int result = sharedListManager.DeleteList(sharedlist);
-                    var datalist = sharedDataManager.ListwithExpression(x => x.SharedList == null);
-                    sharedDataManager.RemoveNullDatainSharedDataTable(datalist);
-                    //kaldırılan listeden sonra ilgili listedeki veriler siliniyor.
+                    List<SharedDataTable> datalist = sharedDataManager.ListwithExpression(x => x.SharedList == null);
+                    sharedDataManager.RemoveNullDatainSharedDataTable(datalist);//kaldırılan listeden sonra ilgili listedeki veriler siliniyor.
                     return result;
                 }
             }
@@ -260,7 +266,7 @@ namespace AlmondWeb.WebApp.Controllers
                     isThereList.listName = listName;
                     isThereList.listDescription = listDesc;
 
-                    isThereList.isPublic = listPub == "1" ? true : false;
+                    isThereList.isPublic = listPub == "1";
 
                     updateSharedList.isPublic = isThereList.isPublic;
 
@@ -275,11 +281,13 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (listId != null)
             {
-                SharedListTable profileList = new SharedListTable();
-                profileList.profileId = currentUserId;
-                profileList.listId = listId.Value;
-                profileList.isPublic = ispublic;
-                profileList.Owner = listManager.FindwithExpression(x => x.Id == listId).Owner;//liste sahibini verdik
+                SharedListTable profileList = new SharedListTable
+                {
+                    profileId = currentUserId,
+                    listId = listId.Value,
+                    isPublic = ispublic,
+                    Owner = listManager.FindwithExpression(x => x.Id == listId).Owner//liste sahibini verdik
+                };
 
                 return sharedListManager.Insert(profileList);
             }
@@ -323,7 +331,7 @@ namespace AlmondWeb.WebApp.Controllers
         }
         public PartialViewResult FillTableForListOperations()
         {
-            return PartialView("TablePartial/_ListOperationsTablePartial");
+            return PartialView("TablePartial/_MyAllListTablePartial");
         }
         public PartialViewResult FillTableForAllData()
         {

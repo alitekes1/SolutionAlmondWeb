@@ -4,6 +4,7 @@ using AlmondWeb.Entities;
 using AlmondWeb.Filters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -124,7 +125,7 @@ namespace AlmondWeb.WebApp.Controllers
                     return View(searchingProfile);
                 }
             }
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("../Hata");
         }
         [HttpGet]
         public ActionResult ProfileUpdate()
@@ -145,7 +146,14 @@ namespace AlmondWeb.WebApp.Controllers
                     profil.linkedinUrl = profile.linkedinUrl;
                     profil.websiteUrl = profile.websiteUrl;
                     profil.job = profile.job;
-                    profil.profileImageUrl = profile.profileImageUrl;
+                    if (Request.Files.Count > 0)
+                    {
+                        string fileName = Path.GetFileName(Guid.NewGuid() + "_" + profil.Owner.Id);
+                        string fileExtension = Path.GetExtension(Request.Files[0].FileName);
+                        string imagePath = "~/Images/UserProfile/" + fileName + fileExtension;
+                        Request.Files[0].SaveAs(Server.MapPath(imagePath));
+                        profil.profileImageUrl = imagePath;
+                    }
                     int result = pm.Update(profil);
                     if (result > -1)
                     {
@@ -189,22 +197,22 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
-
         private bool isNotSavedList(int ownerId, int ListId)
         {//TODO: Buraya bi bak
             SharedListTable i = slm.FindwithExpression(x => x.profileId == currentUserID && x.listId == ListId && x.OwnerId == ownerId);
-            return i == null ? true : false;
+            return i == null;
         }
-
         private void SaveDatafromList(int listId, SharedListTable newlist)//listenin içindeki tüm verileri kaydediyoruz.
         {
             List<AlmondDataTable> list = slm.FindwithExpression(x => x.List.Owner.Id == x.profile.Id).List.Owner.DataTables;
             for (int i = 0; i < list.Count; i++)
             {
-                SharedDataTable data = new SharedDataTable();
-                data.question = list[i].question;
-                data.answer = list[i].answer;
-                data.SharedList = newlist;
+                SharedDataTable data = new SharedDataTable
+                {
+                    question = list[i].question,
+                    answer = list[i].answer,
+                    SharedList = newlist
+                };
                 data.SharedList.profileId = currentUserID;
                 sdm.Insert(data);
             }
@@ -228,7 +236,7 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-        public int DeleteSharedData(int? id)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        public int DeleteSharedData(int? id)//TODO: bi bak buraya
         {
             if (id != null)
             {
@@ -277,6 +285,11 @@ namespace AlmondWeb.WebApp.Controllers
         {
             List<ProfileTable> allProfileList = pm.List();
             return View(allProfileList);
+        }
+        [HttpGet]
+        public ActionResult FrequentlyAskedQuestion()
+        {
+            return View();
         }
         [HttpPost]
         public PartialViewResult SearchUserPartial(string username)

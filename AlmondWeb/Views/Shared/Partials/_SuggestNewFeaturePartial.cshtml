@@ -15,21 +15,21 @@
             {
                 <div class="modal-body">
                     <h6>
-                        AlmondWeb'de görmek istediğin yeni geliştirmelerin, fikirlerin varsa paylaş! Öneri konusunda ise tamamen özgürsün :)
+                        AlmondWeb'de görmek istediğin yeni geliştirmelerin, fikirlerin varsa bizle paylaş! Öneri konusunda ise tamamen özgürsün :)
                     </h6>
                     <div class="mb-3">
                         @Html.TextBoxFor(x => x.contactMail, new { @class = "form-control", placeholder = "Email", type = "email", required = "required", id = "email" })
                     </div>
 
                     <div class="input-group">
-                        @Html.TextAreaFor(x => x.message, new { @class = "form-control", id = "message", required = "required", maxlength = "600", rows = 10, cols = 30, style = "resize:none", placeholder = "Mesajınız minumum 10, maksimum 500 karakter olmalıdır." })
+                        @Html.TextAreaFor(x => x.message, new { @class = "form-control", id = "messageSuggestNewFeature", required = "required", maxlength = "1000", rows = 10, cols = 30, style = "resize:none", placeholder = "Mesajınız minumum 10, maksimum 1000 karakter olmalıdır." })
                     </div>
                     <input type="reset" style="display:none" id="resetButtonSuggest" />
                     <h6 class="small mt-2">Örnek Öneri: Oluşturulan listeleri uygulama kullanan diğer kişiler ile paylaşabilmek.</h6>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="btnclosesuggest" data-bs-dismiss="modal">Vazgeç</button>
-                    <button type="submit" class="btn btn-success">Gönder</button>
+                    <button type="submit" class="btn btn-success" id="btnsubmitSuggestNewFeature">Gönder</button>
                 </div>
             }
         </div>
@@ -47,4 +47,11 @@
         $("#resetButtonSuggest").click();
         toastr.warning('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.', 'İşlem Başarısız', { closeButton: true, timeOut: 1500 });
     }
+    $("#btnsubmitSuggestNewFeature").click(function (e) {
+        let message = $("#messageSuggestNewFeature").val();
+        if (message.length < 10) {
+            e.preventDefault();
+            toastr.info("Mesajınız en az 10 karakterden oluşmalı.", "Uyarı", { closeButton: true, timeOut: 2500 })
+        }
+    });
 </script>
