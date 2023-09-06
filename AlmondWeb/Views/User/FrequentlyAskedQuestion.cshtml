@@ -3,71 +3,116 @@
     ViewBag.Title = "FrequentlyAskedQuestion";
     Layout = "~/Views/Shared/BaseLayout.cshtml";
 }
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 offset-3">
-            <div class="questionImage justify-content-center d-flex">
-                <img src="~/Images/confusedImage.jpg" alt="imagenotupload" height="300px" />
-            </div>
+<div class="row">
+    <div class="col-sm-6 offset-lg-3 ">
+        <div class="questionImage justify-content-center d-flex">
+            <img src="~/Images/confusedImage.jpg" alt="imagenotupload" height="300px" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="faq">
-                <div class="row">
-                    <div class="col-4">
-                        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
-                            <nav class="nav nav-pills flex-column">
-                                <a class="nav-link" href="#item-1">Item 1</a>
-                                <nav class="nav nav-pills flex-column">
-                                    <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
-                                    <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
-                                </nav>
-                                <a class="nav-link" href="#item-2">Item 2</a>
-                                <a class="nav-link" href="#item-3">Item 3</a>
-                                <nav class="nav nav-pills flex-column">
-                                    <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
-                                    <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
-                                </nav>
-                            </nav>
-                        </nav>
+</div>
+<div class="row my-4">
+    <div class="col-sm-10 offset-lg-1">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Liste Paylaşmak hakkında
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Liste Oluşturma: Öncelikle kendi öğrenme listenizi oluşturun. Bu, projenizin merkezi bir parçasıdır ve size özelleştirilmiş bir öğrenme deneyimi sunar.
+                        <br />
+                        Paylaşma İşlemi: Liste oluştur kısmında yer alan Herkese Açık kutucuğunu seçtiğinizde listenizin başkaları tarafından görüntülenebilir ve kaydedilebilir olduğunu belirtir.
+                        <br />
+                        @*Herkese Açık İşaretleme: Burada listenizi "Herkese Açık" olarak işaretleyin. Bu seçenek, listenizin başkaları tarafından görüntülenebilir ve kaydedilebilir olduğunu belirtir.
+                            <br />*@
+                        Veri Erişimi: Paylaşılan bir liste, diğer kullanıcılar tarafından yalnızca "Soru" ve "Cevap" bilgileriyle erişilebilir. "Puan" verisi, sadece sizinle paylaşılır ve gizli tutulur.
+                        <br />
+                        Kullanıcı Erişimi: Paylaşılan listeniz, diğer kullanıcılar tarafından görüntülenebilir, liste üzerinde çalışabilirler ve içeriği inceleyebilirler.
+                        <br />
+                        Gizlilik Seçeneği: Unutmayın ki, listenin sahibi olarak istediğiniz zaman listenin durumunu "Gizli" olarak değiştirebilirsiniz. Bu, listenin herkese açık erişimini kapatır, ancak içeriği korunur ve siz veri kaybına uğramazsınız.
+                        <br />
+                        Paylaşma Sınırlaması: Son olarak, kaydedilen bir liste, kaydeden kişi tarafından tekrar herkese açık bir şekilde paylaşılamaz, hatta liste üzerine yeni veriler eklenmiş olsa bile. Bu, listenin gizliliğini korumanızı sağlar.
                     </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Liste Kaydetmek hakkında
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Liste Keşfetme: "Liste Keşfet" sayfasına giderek, diğer kullanıcıların paylaştığı listeleri bulabilirsiniz. Bu sayfada çeşitli öğrenme materyalleri ve konuları içeren listeleri görebilirsiniz.
+                        <br />
+                        Liste Kaydetme: Bir liste ilginizi çekerse, bu listeyi kaydetme seçeneğine sahipsiniz. Bu işlem sonucu, listenin içeriği tamamen sizin tarafınızdan yönetilebilir hale gelir.
+                        <br />
+                        Verilere Erişim: Kaydettiğiniz bir liste, içeriğine tam erişim sağlar. Listenin tüm verilerini görüntüleyebilir, puanlayabilir, güncelleyebilir, veya silebilirsiniz. Ancak, listenin adı ve içeriğindeki verileri değiştiremezsiniz.
+                        <br />
+                        Güncel Tutma: Eğer listenin en güncel haline erişmek isterseniz, liste kaldırma ve tekrar kaydetme işlemini yapabilirsiniz. Bu işlem sırasında, listenin geçmiş verileri silinir ve listenin güncel hali kaydedilir.
+                        <br />
+                        Liste Kaldırma: Listenin artık ihtiyacınız olmadığını düşünüyorsanız, listenin kaldırılması seçeneğine sahipsiniz. Ancak bu işlem sonrasında, listeyle ilişkilendirilen tüm veriler kalıcı olarak silinir.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Profiller hakkında
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Her kullanıcının sisteminizde bir kişisel profil sayfası bulunur. Kullanıcılar, bu sayfada kendilerine ait bazı bilgileri doldurabilirler. Bu profil sayfaları, kullanıcıların öğrenme deneyimini kişiselleştirmelerine yardımcı olur ve diğer kullanıcılarla etkileşimde bulunmalarını sağlar.<br />
 
-                    <div class="col-8">
-                        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
-                            <div id="item-1">
-                                <h4>Item 1</h4>
-                                <p>...</p>
-                            </div>
-                            <div id="item-1-1">
-                                <h5>Item 1-1</h5>
-                                <p>...</p>
-                            </div>
-                            <div id="item-1-2">
-                                <h5>Item 1-2</h5>
-                                <p>...</p>
-                            </div>
-                            <div id="item-2">
-                                <h4>Item 2</h4>
-                                <p>...</p>
-                            </div>
-                            <div id="item-3">
-                                <h4>Item 3</h4>
-                                <p>...</p>
-                            </div>
-                            <div id="item-3-1">
-                                <h5>Item 3-1</h5>
-                                <p>...</p>
-                            </div>
-                            <div id="item-3-2">
-                                <h5>Item 3-2</h5>
-                                <p>...</p>
-                            </div>
-                        </div>
+                        Paylaşılan ve Kaydedilen Listeler: Profil sayfalarında, kullanıcının herkese açık bir şekilde paylaştığı listeler ve kendi kaydettiği listeler bulunur. Bu, kullanıcıların öğrenme materyallerini paylaşma ve kişiselleştirme yeteneğini vurgular.<br>
+
+                        Toplam Veri Adedi ve Kaydedilme Sayısı: Profil sayfalarında, kullanıcının listelerinde bulunan toplam veri adedi ve bu listelerin kaç kez kaydedildiği bilgisi yer alır. Bu istatistikler, kullanıcının öğrenme materyallerini ne kadar etkili bir şekilde paylaştığını ve katkıda bulunduğunu gösterir.<br>
+
+                        Veri Erişimi: Listenin içeriği kaydedilmeden önce, kullanıcılar bu verilere erişemezler. Bu, listenin gizliliğini ve verilerin güvenliğini korur.<br>
+
+                        Diğer Kullanıcıların Profil ve Listelere Erişimi: Her kullanıcı, diğer kullanıcıların profillerini ve kaydettiği/paylaştığı listeleri görüntüleyebilir. İlgilenen kullanıcılar, istedikleri listeyi kaydedebilirler.<br>
+
+                        Profil Arama ve Erişim: Kullanıcıların diğer kullanıcıların profillerine erişmek için "Tüm Profiller" bağlantısını veya arama çubuğuna "almondweb.net/username" şeklinde ilgili kullanıcının adını girebilirler. Bu, kullanıcıların kolayca diğer profillere ulaşmasını sağlar.<br>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Proje Hakkında
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Kullanıcılar, platform üzerinde kayıt olduktan sonra kendi öğrenme materyallerini yönetebilirler. Özellikle bilgiyi ezberleme sürecine odaklanan projede, kullanıcılar bilgi kartları oluşturabilir. Her bir kart, kullanıcının hatırlama düzeyini değerlendirmek için 1 ila 5 arasında puanlanabilir. Bu sayede kullanıcılar hangi konuları daha fazla pekiştirmeleri gerektiğini belirleyebilirler.
+                        <br />
+                        Her kart; soru, cevap ve liste gibi içeriklerle zenginleştirilir. Bu yaklaşım, bilgilerin daha kümülatif bir şekilde öğrenilmesine katkı sağlar. Kullanıcılar aynı zamanda kendi özelleştirilmiş öğrenme listelerini oluşturabilir, bu listelere bilgi ekleyebilir, çıkarabilir, düzenleyebilirler. Bunun yanı sıra oluşturulan listeleri diğer kullanıcılarla paylaşarak farklı bakış açılarından öğrenmeyi teşvik edebilirler. Ayrıca diğer kullanıcıların listelerine erişerek bilgi öğrenme süreçlerini hızlandırabilirler.
+                        <br />Bu proje özellikle tıp öğrencileri, hukuk öğrencileri,yabancı dil öğrenme sürecindeki olanlar ve Üniversite sınavlarına hazırlanan öğrenciler gibi bilgi yoğunluğu yüksek olan grupları hedeflemektedir. Bu platform sayesinde kullanıcılar öğrenme süreçlerini daha etkili bir şekilde yönetebilir, öğrenilen bilgileri daha kalıcı hale getirebilir ve kişiselleştirilmiş öğrenme yöntemleriyle desteklenebilirler.
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        Proje Kod Yapısı hakkında
+                    </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        ASP.NET MVC tabanlı proje, .NET mimarisini ve Yabancı dil öğrenme sürecimi desteklemek amacıyla geliştirdiğim Open-Source projedir.
+                        Projede, Katmanlı Mimari kullanılarak hazırlanmıştır.Veritabanı olarak MSSQL , ORM aracı olarak Entity Framework kullnılmıştır.
+                        Bu sayede verilerin güvenli bir şekilde yönetimi sağlanmıştır.
+                        C# ve ASP.NET MVC ise projenin modüler yapısını ve kolay yönetimini desteklemiştir.
+                        HTML, CSS, JavaScript, Bootstrap gibi teknolojiler ise kullanıcı dostu bir arayüzün oluşturulmasına olanak tanımıştır.
+                        AJAX teknolojisi sayesinde sayfa yenilemeleri minimize edilerek daha akıcı bir kullanıcı deneyimi sunulmuştur.
+                        Ayrıca proje Open-Source bir proje olduğundan kullanıcılar tarafından geliştirmeye her daim açıktır.Bu konuda ve diğer merak ettiğiniz konulardan çekinmeden benimle iletişime geçebilirsiniz.
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
