@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using AlmondWeb.BusinessLayer;
+using System.Web.Mvc;
 
 namespace AlmondWeb.Filters
 {
@@ -7,13 +8,22 @@ namespace AlmondWeb.Filters
         public void OnException(ExceptionContext filterContext)
         {
             filterContext.ExceptionHandled = true;
-            filterContext.Result = new RedirectToRouteResult(
-                new System.Web.Routing.RouteValueDictionary(
-                    new
-                    {
-                        action = "Error",
-                        contraller = "Home"
-                    }));
+            int currentUserId = CacheHelper.CurrentUserID();
+            if (currentUserId == 0)
+            {
+                filterContext.Result = new RedirectResult("Hata");
+            }
+            else
+            {
+
+                filterContext.Result = new RedirectToRouteResult(
+                        new System.Web.Routing.RouteValueDictionary(
+                            new
+                            {
+                                action = "Error",
+                                contraller = "Home"
+                            }));
+            }
         }
     }
 }

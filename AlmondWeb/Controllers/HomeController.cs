@@ -82,7 +82,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             if (mydatalist.Count() != 0)
             {
-                for (int i = shareddatalist.Count(), j = 0; i < mydatalist.Count() + 1; i++, j++)
+                for (int i = shareddatalist.Count(), j = 0; i < mydatalist.Count(); i++, j++)
                 {
                     UserQueAnswListModel data = new UserQueAnswListModel
                     {

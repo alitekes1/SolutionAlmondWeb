@@ -9,90 +9,89 @@
     List<SharedDataTable> savedTableData = sdm.ListwithExpression(x => x.SharedList.profileId == currentUserID);
 
 }
-<div id="example">
-    <div id="table">
-        <div class="tbl-header">
-            <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
-                <thead class="bg-success bg-opacity-50">
-                    <tr>
-                        <th class="text-center" width="5%">#</th>
-                        <th class="text-center" width="30%">Soru</th>
-                        <th class="text-center" width="30%">Cevap</th>
-                        <th class="text-center" width="10%">Puan</th>
-                        <th class="text-center" width="15%">Liste</th>
-                        <th class="text-center" width="10%">Sil</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div style="width:100%;overflow:auto;  max-height:530px;">
-            <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive" id="mydataTable">
-                @if (tableData.Count() == 0)
-                {
-                    <tr>
-                        <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
-                    </tr>
-                }
-                else
-                {
-                    foreach (var item in tableData)
-                    {
-                        counter++;
-                        <tr id="dataTable1">
-                            <td class="text-center" width="5%">@counter</td>
-                            <td class="text-center" width="30%">@item.question</td>
-                            <td class="text-center" width="30%">@item.answer</td>
-                            <td class="text-center" width="10%">@item.puan</td>
-                            @if (item.List == null)
-                            {
-                                <td class="text-center" style="width:15%">NULL</td>
-                            }
-                            else
-                            {
-                                <td class="text-center" width="15%">@item.List.listName</td>
-                            }
-                            <td class="text-center" width="10%">
-                                <a class="btntableDelete" id="btndelete_@item.Id" data-ids="@item.Id" data-que="@item.question" data-ans="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModalsilliste">
-                                    <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
-                                        <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                }
-            </table>
-            <table style="width:100%;" id="shareddatatableindeletedata" class="text-center table table-hover table-bordered table-responsive table-secondary">
-                @if (savedTableData.Count() == 0)
-                {
-                    <tr>
-                        <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
-                    </tr>
-                }
-                else
-                {
-                    foreach (var item in savedTableData)
-                    {
-                        counter++;
-                        <tr>
-                            <td class="text-center" width="5%">@counter</td>
-                            <td class="text-center" width="30%">@item.question</td>
-                            <td class="text-center" width="30%">@item.answer</td>
-                            <td class="text-center" width="10%">@item.puan</td>
-                            <td class="text-center" width="15%">@item.SharedList.List.listName</td>
-                            <td class="text-center" width="10%">
-                                <a class="btntableSharedDataDelete" id="btnshareddatadelete_@item.Id" data-shareddataId='@item.Id' data-shareddataQue="@item.question" data-shareddataAns="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#modalConfirmSharedDataDelete">
-                                    <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
-                                        <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                }
-            </table>
-        </div>
+<div id="adminlayout">
+    <div class="tbl-header">
+        <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
+            <thead class="bg-success bg-opacity-50">
+                <tr>
+                    <th class="text-center" width="5%">#</th>
+                    <th class="text-center" width="30%">Soru</th>
+                    <th class="text-center" width="30%">Cevap</th>
+                    <th class="text-center" width="10%">Puan</th>
+                    <th class="text-center" width="15%">Liste</th>
+                    <th class="text-center" width="10%">Sil</th>
+                </tr>
+            </thead>
+        </table>
     </div>
+    <div style="width:100%;overflow:auto;  max-height:530px;">
+        <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive" id="mydataTable">
+            @if (tableData.Count() == 0)
+            {
+                <tr>
+                    <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in tableData)
+                {
+                    counter++;
+                    <tr id="dataTable1">
+                        <td class="text-center" width="5%">@counter</td>
+                        <td class="text-center" width="30%">@item.question</td>
+                        <td class="text-center" width="30%">@item.answer</td>
+                        <td class="text-center" width="10%">@item.puan</td>
+                        @if (item.List == null)
+                        {
+                            <td class="text-center" style="width:15%">NULL</td>
+                        }
+                        else
+                        {
+                            <td class="text-center" width="15%">@item.List.listName</td>
+                        }
+                        <td class="text-center" width="10%">
+                            <a class="btntableDelete" id="btndelete_@item.Id" data-ids="@item.Id" data-que="@item.question" data-ans="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModalsilliste">
+                                <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                    <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+        <table style="width:100%;" id="shareddatatableindeletedata" class="text-center table table-hover table-bordered table-responsive table-secondary">
+            @if (savedTableData.Count() == 0)
+            {
+                <tr>
+                    <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in savedTableData)
+                {
+                    counter++;
+                    <tr>
+                        <td class="text-center" width="5%">@counter</td>
+                        <td class="text-center" width="30%">@item.question</td>
+                        <td class="text-center" width="30%">@item.answer</td>
+                        <td class="text-center" width="10%">@item.puan</td>
+                        <td class="text-center" width="15%">@item.SharedList.List.listName</td>
+                        <td class="text-center" width="10%">
+                            <a class="btntableSharedDataDelete" id="btnshareddatadelete_@item.Id" data-shareddataId='@item.Id' data-shareddataQue="@item.question" data-shareddataAns="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#modalConfirmSharedDataDelete">
+                                <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                    <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
 </div>
 <!-- Kendi Veri silme işlemini onaylamak için modal pop-up-->
 <div class="modal fade" id=exampleModalsilliste tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,5 +133,4 @@
         </div>
     </div>
 </div>
-<link href="~/Content/toastr.min.css" rel="stylesheet" />
 <script src="~/Scripts/Jquery.ajax/DeleteDataAjax.js"></script>

@@ -7,13 +7,13 @@ namespace AlmondWeb.DataAccessLayer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class rebuildDatabase : IMigrationMetadata
+    public sealed partial class mig34 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(rebuildDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(mig34));
         
         string IMigrationMetadata.Id
         {
-            get { return "202309042013572_rebuildDatabase"; }
+            get { return "202309061531533_mig34"; }
         }
         
         string IMigrationMetadata.Source

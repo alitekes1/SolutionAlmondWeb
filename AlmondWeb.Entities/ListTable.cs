@@ -5,7 +5,7 @@ namespace AlmondWeb.Entities
 {
     public class ListTable : MyEntityBase
     {
-        [Required, StringLength(60)]
+        [Required, StringLength(30)]
         public string listName { get; set; }
         [StringLength(100)]
         public string listDescription { get; set; }

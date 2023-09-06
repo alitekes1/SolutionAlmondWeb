@@ -55,9 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Migrations\202309042013572_rebuildDatabase.cs" />
-    <Compile Include="Migrations\202309042013572_rebuildDatabase.designer.cs">
-      <DependentUpon>202309042013572_rebuildDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202309051752436_createDatabase.cs" />
+    <Compile Include="Migrations\202309051752436_createDatabase.designer.cs">
+      <DependentUpon>202309051752436_createDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309061531533_mig34.cs" />
+    <Compile Include="Migrations\202309061531533_mig34.designer.cs">
+      <DependentUpon>202309061531533_mig34.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,10 +76,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AlmondWeb.Common\AlmondWeb.Common.csproj">
-      <Project>{869c47f1-85d4-4c0a-9bd9-a0d40010b922}</Project>
-      <Name>AlmondWeb.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AlmondWeb.Core\AlmondWeb.Core.csproj">
       <Project>{3156b16d-2824-42c0-8289-7b1768b87f57}</Project>
       <Name>AlmondWeb.Core</Name>
@@ -86,8 +86,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202309042013572_rebuildDatabase.resx">
-      <DependentUpon>202309042013572_rebuildDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202309051752436_createDatabase.resx">
+      <DependentUpon>202309051752436_createDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309061531533_mig34.resx">
+      <DependentUpon>202309061531533_mig34.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

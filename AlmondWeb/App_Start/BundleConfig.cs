@@ -20,9 +20,17 @@ namespace AlmondWeb
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
+            bundles.Add(new ScriptBundle("~/allJavaScript").Include(
+                "~/Scripts/bootstrap.bundle.min.js",
+                "~/Scripts/jquery-3.7.1.min.js",
+                "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                "~/Scripts/toastr.min.js"
+                ));
+
             bundles.Add(new StyleBundle("~/BootstrapCss").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/bootsrap.min.css"
+                      "~/Content/bootsrap.min.css",
+                      "~/Content"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/profileCss").Include(
@@ -32,14 +40,6 @@ namespace AlmondWeb
                 "~/Content/AlmondCss/PrivateProfile.css"
                 ));
 
-            //bundles.Add(new StyleBundle("~/allCss").Include(
-            //    "~/Content/AlmondCss/index.css",
-            //    "~/Content/AlmondCss/navbar.css",
-            //    "~/Content/AlmondCss/footer.css",
-            //    "~/Content/AlmondCss/shortcuts.css",
-            //    "~/Content/AlmondCss/AllButtons.css",
-            //    "~/Content/AlmondCss/ListCheckbox.css"
-            //    ));
             bundles.Add(new StyleBundle("~/LayoutCss").Include(
                 "~/Content/AlmondCss/navbar.css",
                 "~/Content/AlmondCss/footer.css",
@@ -47,11 +47,7 @@ namespace AlmondWeb
                 "~/Content/AlmondCss/index.css"
                 ));
 
-            bundles.Add(new ScriptBundle("~/allJs").Include(
-                "~/Scripts/jquery-3.7.0.min.js",
-                "~/Scripts/toastr.js"
-                ));
-            BundleTable.EnableOptimizations = true;//yüklerken dosya optimazsyonu için         }
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

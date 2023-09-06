@@ -9,7 +9,7 @@
     string listType = string.Empty;
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<div class="col-sm-12 bloklar" id="savedListTable">
+<div class="col-sm-12 bloklar" id="adminlayout">
     <div class="tbl-header">
         <div class="cell-border  hover" style="text-align:center;width:100%;">
             <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
@@ -37,7 +37,7 @@
                             Kaydedilmiş listeniz bulunmamaktadır.
                         </label>
                         <label class="muted">
-                            <span href="#" data-bs-toggle="tooltip" data-bs-title="Liste İtşlemleri-->Liste Keşfet bölümünden liste kaydedebilirsiniz.">
+                            <span href="#" data-bs-toggle="tooltip" data-bs-title="Liste İşlemleri-->Liste Keşfet bölümünden liste kaydedebilirsiniz.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-square-fill" viewBox="0 0 16 16">
                                     <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                                 </svg>
@@ -79,7 +79,7 @@
                                                 *İlgili listenin içindeki veriler de dahil olmak üzere bu listedeye dahil herşey geri alınamayacak şekilde kaldırılacaktır.
                                             </p>
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                            <button type="button" class="btn btn-danger" onclick="RemoveSavedList('@item.Id')">Kaldır</button>
+                                            <button type="button" class="btn btn-danger" onclick="RemoveSavedList('@item.Id','@item.profileId')">Kaldır</button>
                                         </div>
                                     </div>
                                 </div>
@@ -92,41 +92,3 @@
     </div>
 </div>
 
-<script>
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-    function transfertoListName(listName) {
-        $("#removeSavedListName").text(listName);
-    }
-    function RemoveSavedList(listId) {
-        $.ajax({
-            method: "POST",
-            url: 'Home/RemoveSavedList',
-            data: { listid: listId },
-            success: function (result) {
-                if (result > 0) {
-                    toastr.success("İşlem başarılı", "Liste kaldırıldı.", { closeButton: true, timeOut: 1500 });
-                    ReLoadSavedListTable();
-                }
-                else {
-                    toastr.warning("İşlem başarısız", "Liste Kaldırılamadı.", { closeButton: true, timeOut: 1500 })
-                }
-            }, complete: function () {
-                $("#closebtn12").click();
-            }
-        });
-    }
-    function ReLoadSavedListTable() {
-        let table = $("#savedListTable");
-        $.ajax({
-            method: "GET",
-            url: '/Home/SavedListTablePartial',
-            success: function (tableData) {
-                table.empty(); // Tabloyu temizliyoruz
-
-                table.append(tableData);
-            }
-        });
-    }
-</script>

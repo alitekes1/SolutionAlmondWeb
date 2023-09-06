@@ -73,8 +73,8 @@
 .profile .profile-header .profile-header-content .profile-header-img img {
     max-width: 100%;
     width: 100%;
-    -webkit-border-radius: 6px;
-    /*border: 2px solid white;*/
+    -webkit-border-radius: 10px;
+    border: 2px solid white;
 }
 
 

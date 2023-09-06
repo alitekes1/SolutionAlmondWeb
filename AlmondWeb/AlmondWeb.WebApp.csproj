@@ -52,10 +52,24 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlExtensions, Version=2.1.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlExtensions.2.1.5\lib\net45\HtmlExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.2.12.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.2.12\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -140,7 +154,6 @@
   <ItemGroup>
     <Content Include="Content\AlmondCss\AllButtons.css" />
     <Content Include="Content\AlmondCss\AllProfile.css" />
-    <Content Include="Content\AlmondCss\deneme.css" />
     <Content Include="Content\AlmondCss\error.css" />
     <Content Include="Content\AlmondCss\errorpage2.css" />
     <Content Include="Content\AlmondCss\footer.css" />
@@ -154,7 +167,6 @@
     <Content Include="Content\AlmondCss\PublicProfile.css" />
     <Content Include="Content\AlmondCss\registerSuccess.css" />
     <Content Include="Content\AlmondCss\shortcuts.css" />
-    <Content Include="Content\AlmondCss\sliderBoyut.css" />
     <Content Include="Content\AlmondCss\veriekle.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -190,6 +202,8 @@
     <Content Include="Images\background\bg8.jpg" />
     <Content Include="Images\background\bg9.jpg" />
     <Content Include="Images\background\contactimg.jpg" />
+    <Content Include="Images\confusedImage.jpg" />
+    <Content Include="Images\defaultUserImage.jpg" />
     <Content Include="Images\favicon\favicon.ico" />
     <Content Include="Images\favicon\favicon2.ico" />
     <Content Include="Images\logo\almodLogo.png" />
@@ -198,14 +212,10 @@
     <Content Include="Images\logo\almondLogo1.png" />
     <Content Include="Images\logo\almondLogo1rmvbg.png" />
     <Content Include="Images\logo\logoalmond.png" />
-    <Content Include="Images\person-4.png" />
-    <Content Include="Images\register_success.png" />
-    <Content Include="Images\register_success2.png" />
-    <Content Include="Images\sea.jpg" />
-    <Content Include="Images\success3.png" />
-    <Content Include="Images\success4.jpg" />
     <Content Include="Scripts\AlmondJs\Error.js" />
     <Content Include="Scripts\AlmondJs\index.js" />
+    <Content Include="Scripts\AlmondJs\ProfileUpdate.js" />
+    <Content Include="Scripts\AlmondJs\RefreshTable_UserInfo.js" />
     <Content Include="Scripts\AlmondJs\tableInizilation.js" />
     <Content Include="Scripts\AlmondJs\tablePageing.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -280,7 +290,7 @@
     <Content Include="Views\Shared\TablePartial\_AddDataTablePartial.cshtml" />
     <Content Include="Views\Shared\TablePartial\_AllDataTable.cshtml" />
     <Content Include="Views\Shared\TablePartial\_DeleteDataTable.cshtml" />
-    <Content Include="Views\Shared\TablePartial\_ListOperationsTablePartial.cshtml" />
+    <Content Include="Views\Shared\TablePartial\_MyAllListTablePartial.cshtml" />
     <Content Include="Views\Shared\TablePartial\_UpdateTablePartial.cshtml" />
     <Content Include="Views\Shared\ModelPopUp\_SilModalPartial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
@@ -298,7 +308,7 @@
     <Content Include="Views\Admin\AllMessages.cshtml" />
     <Content Include="Views\Admin\AllUser.cshtml" />
     <Content Include="Views\Shared\Partials\_GetQuestionAnswerPartial.cshtml" />
-    <Content Include="Views\Shared\Partials\_MySharedListinProfilePartial.cshtml" />
+    <Content Include="Views\Shared\Partials\_PublicProfileCardPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_profileSocialMediaIconsPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_ShortcutsPartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SuggestNewFeaturePartial.cshtml" />
@@ -306,7 +316,6 @@
     <Content Include="Views\Shared\TablePartial\_AdminTablePartial.cshtml" />
     <Content Include="Views\Shared\TablePartial\_SavedListTablePartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SharedAllListwithCard.cshtml" />
-    <Content Include="Views\Shared\Partials\_MySavedListinProfilePartial.cshtml" />
     <Content Include="Views\Shared\Partials\_SearchList.cshtml" />
     <Content Include="Views\Admin\RemoveNullDatainSharedDataTable.cshtml" />
     <Content Include="Views\Admin\NoAdminError.cshtml" />
@@ -314,10 +323,13 @@
     <Content Include="Views\User\AllProfile.cshtml" />
     <Content Include="Views\Shared\Partials\_AllProfilePartial.cshtml" />
     <Content Include="Views\User\Deneme.cshtml" />
+    <Content Include="Views\User\FrequentlyAskedQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\UserProfile\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Shared\CardPartials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

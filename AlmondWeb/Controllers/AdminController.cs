@@ -12,6 +12,7 @@ namespace AlmondWeb.WebApp.Controllers
         private DataManager dm = new DataManager();
         private SharedListManager slm = new SharedListManager();
         private SharedDataManager sdm = new SharedDataManager();
+        private ContactManager cm = new ContactManager();
         public int result = 0;
         [HttpGet, isAdmin]
         public ActionResult AllUser()
@@ -131,7 +132,53 @@ namespace AlmondWeb.WebApp.Controllers
             }
             return -1;
         }
-
+        [HttpPost, isAdmin]
+        public int DeleteMessage(int? id)
+        {
+            if (id != null)
+            {
+                ContactTable message = cm.FindwithExpression(x => x.Id == id);
+                if (message != null)
+                {
+                    result = cm.DeleteList(message);
+                    return result;
+                }
+            }
+            return -1;
+        }
+        [HttpPost, isAdmin]
+        public int PermanentDeleteData(int? dataId)
+        {
+            if (dataId != null)
+            {
+                AlmondDataTable data = dm.FindwithOwnerId(dataId.Value);
+                if (data != null)
+                {
+                    int result = dm.DeleteList(data);
+                    return result;
+                }
+            }
+            return -1;
+        }
+        [HttpPost, isAdmin]
+        public int AddDatatoAliList(string question, string answer)
+        {
+            if (question != null && answer != null)
+            {
+                ListTable list = new ListManager().FindwithExpression(x => x.Id == 1 && x.Owner.Id == 1);
+                AlmondUserTable ali = um.FindwithOwnerId(1);
+                AlmondDataTable data = new AlmondDataTable
+                {
+                    question = question,
+                    answer = answer,
+                    List = list,
+                    Owner = ali
+                };
+                int result = dm.Insert(data);
+                return result;
+            }
+            return -1;
+        }
         [HttpGet, isAdmin]
         public ActionResult RemoveNullDatainSharedDataTable()
         {

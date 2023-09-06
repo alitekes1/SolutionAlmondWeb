@@ -124,8 +124,12 @@ namespace AlmondWeb.WebApp.Controllers
                 {
                     return View(searchingProfile);
                 }
+                else
+                {
+                    return RedirectToAction("../Hata");
+                }
             }
-            return RedirectToAction("../Hata");
+            return RedirectToAction("../Anasayfa");
         }
         [HttpGet]
         public ActionResult ProfileUpdate()
@@ -133,35 +137,48 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ProfileUpdate(ProfileModal profile)
+        public ActionResult ProfileUpdate(ProfileModal profilemodal)
         {
             if (ModelState.IsValid)
             {
-                ProfileTable profil = pm.FindwithOwnerId(profile.ownerId);
-                if (profil != null)
+                ProfileTable savedProfile = pm.FindwithOwnerId(profilemodal.ownerId);
+                if (savedProfile != null)
                 {
-                    profil.aboutmeText = profile.aboutmeText;
-                    profil.school = profile.school;
-                    profil.githubUrl = profile.githubUrl;
-                    profil.linkedinUrl = profile.linkedinUrl;
-                    profil.websiteUrl = profile.websiteUrl;
-                    profil.job = profile.job;
-                    if (Request.Files.Count > 0)
+                    savedProfile.aboutmeText = profilemodal.aboutmeText;
+                    savedProfile.school = profilemodal.school;
+                    savedProfile.githubUrl = profilemodal.githubUrl;
+                    savedProfile.linkedinUrl = profilemodal.linkedinUrl;
+                    savedProfile.websiteUrl = profilemodal.websiteUrl;
+                    savedProfile.job = profilemodal.job;
+                    if (profilemodal.profileImageUrl != null)//herhangi bir resim yüklenmediyse
                     {
-                        string fileName = Path.GetFileName(Guid.NewGuid() + "_" + profil.Owner.Id);
+                        string fileName = Path.GetFileName(Guid.NewGuid() + "_" + savedProfile.Owner.Id);
                         string fileExtension = Path.GetExtension(Request.Files[0].FileName);
                         string imagePath = "~/Images/UserProfile/" + fileName + fileExtension;
                         Request.Files[0].SaveAs(Server.MapPath(imagePath));
-                        profil.profileImageUrl = imagePath;
+                        savedProfile.profileImageUrl = imagePath;
                     }
-                    int result = pm.Update(profil);
+                    else
+                    {
+                        //savedProfile.profileImageUrl = savedProfile.profileImageUrl; //"~/Images/defaultUserImage.jpg";
+                        savedProfile.profileImageUrl = savedProfile.profileImageUrl; //"~/Images/defaultUserImage.jpg";
+                    }
+                    int result = pm.Update(savedProfile);
                     if (result > -1)
                     {
                         return View(nameof(PrivateProfile));
                     }
                 }
             }
-            return View(profile);
+            return View(profilemodal);
+        }
+        [HttpPost]
+        public int RemoveProfilImage()
+        {
+            ProfileTable profile = pm.FindwithOwnerId(currentUserID);
+            profile.profileImageUrl = "~/Images/defaultUserImage.jpg";
+            int result = pm.Update(profile);
+            return result;
         }
         [HttpGet]
         public ActionResult PublicAllList()//TODO: liste paylaşma hakkında SSS hazırlanacak. acordion şeklinde

@@ -73,14 +73,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Ad Soyad</h6>
-                            </div>
-                            <div class="col-sm-6 text-secondary">
-                                @user.Owner.Name @user.Owner.Surname
-                            </div>
-                            <div class="col-sm-3">
-                                @Html.ActionLink("Düzenle", "ProfileUpdate", "User", null, new { @class = "btn btn-outline-success float-end", type = "submit" })
+                            <div class="row">
+                                <div class="col-4 col-md-3">
+                                    <h6 class="mb-0">Ad Soyad</h6>
+                                </div>
+                                <div class="col-4 col-md-3 text-secondary">
+                                    @user.Owner.Name @user.Owner.Surname
+                                </div>
+                                <div class="col-4 col-md-6">
+                                    @Html.ActionLink("Düzenle", "ProfileUpdate", "User", null, new { @class = "btn btn-outline-success float-end", type = "submit" })
+                                </div>
                             </div>
                         </div>
                         <hr>
@@ -162,6 +164,5 @@
             passwordShowButton.textContent = "Gizle";
             passwordVisible = true;
         }
-
     }
 </script>
