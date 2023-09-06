@@ -57,11 +57,11 @@
     </div>
 </div>
 <script>
-    let message = $("#messageContact").val();
     $("#submitbtnContact").click(function (e) {
-        if (message.length < 9) {
+        let message = $("#messageContact").val();
+        if (message.length < 10) {
             e.preventDefault();
-            return toastr.info("Mesajınız en az 10 karakterden oluşmalı.", "Uyarı", { closeButton: true, timeOut: 2500 })
+            toastrInfo("Mesajınız en az 10 karakterden oluşmalı.")
         }
-    })
+    });
 </script>

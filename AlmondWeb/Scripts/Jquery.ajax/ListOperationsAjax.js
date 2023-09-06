@@ -1,5 +1,4 @@
-﻿var table = $("#example");
-$("#publicRadio").click(function () {
+﻿$("#publicRadio").click(function () {
     $("#publicRadio").val(1);
     $("#privateRadio").val(0);
 });
@@ -27,12 +26,8 @@ document.getElementById("confirmBtnCreateList").addEventListener("click", functi
         url: '/Home/CreateList',
         data: { listNm: listName, listDesc: listDescription, listPub: listPublic, listPriv: listPrivate },
         success: function (result) {
-            if (result > 0) {
-                ReLoadListData();
-                toastr.success(listName + " listesi başarıyla oluşturuldu.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
-            } else {
-                toastr.warning("Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.", "İşlem Başarısız", { closeButton: true, timeOut: 1500 });//TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
-            }
+            InfoUserwithToastr(result, "Home", "FillTableForListOperations", listName + " listesi başarıyla oluşturuldu.", "Hata meydana geldi. 3 saniye içerisinde sayfa yeniden yüklenecek.")
+            //TODO: sayfa 3 saniye içinde yenilenmesi gerekiyor.
         },
         complete: function () {
             $("#closeBtnCreateList").click();
@@ -49,13 +44,7 @@ function transfertoDeleteData(data, idM) {
             method: "POST",
             url: '/Home/DeleteList/' + idM,
             success: function (result) {
-                if (result > 0) {
-                    ReLoadListData();
-                    toastr.success(data + " listesi başarıyla silindi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
-                }
-                else {
-                    toastr.warning("Liste Silinemedi", "İşlem Başarısız", { closeButton: true, timeOut: 1500 });
-                }
+                InfoUserwithToastr(result, "Home", "FillTableForListOperations", data + " listesi başarıyla silindi.", "Liste silinemedi.")
             },
             complete: function () {
                 $("#closeBtnDeleteList").click();
@@ -78,13 +67,7 @@ function transfertoUpdateData(lstnm, idValue) {
             url: '/Home/UpdateList',
             data: { listName: listNme, id: idValue, listDesc: listDescription, listPub: listPublic, listPriv: listPrivate },//ilk veri contraller da alınancak olan veri ismidir. 2. veri ise verinin değerini tutan değişkendir.
             success: function (result) {
-                if (result > 0) {
-                    ReLoadListData();
-                    toastr.success(listNme + " listesi başarıyla güncellendi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
-                }
-                else {
-                    toastr.warning("Liste güncelleme sırasında bir hata meyda geldi.", "İşlem Başarısız", { closeButton: true, timeOut: 1500 });//TODO:sayfa otomatik olarak yenilenecek.
-                }
+                InfoUserwithToastr(result, "Home", "FillTableForListOperations", listNme + " listesi başarıyla güncellendi.", "Liste güncelleme sırasında bir hata meyda geldi.")
             }, complete: function () {
                 $("#closeBtnUpdate23").click();
             }
@@ -92,14 +75,23 @@ function transfertoUpdateData(lstnm, idValue) {
     });
 };
 
-function ReLoadListData() {
-    $.ajax({
-        method: "GET",
-        url: '/Home/FillTableForListOperations',
-        success: function (tableData) {
-            table.empty(); // Tabloyu temizliyoruz
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')//kayıtlı liste olmadığında çalışcak olan tooltip
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-            table.append(tableData);
+
+function transfertoListName(listName) {
+    $("#removeSavedListName").text(listName);
+}
+function RemoveSavedList(listId, profileID) {
+    $.ajax({
+        method: "POST",
+        url: 'Home/RemoveSavedList',
+        data: { listid: listId, profileId: profileID },
+        success: function (result) {
+            InfoUserwithToastr(result, "Home", "SavedListTablePartial", "Liste kaldırıldı", "Liste kaldırma sırasında bir hata meydana geldi.")
+        }, complete: function () {
+            $("#closebtn12").click();
         }
     });
 }
+

@@ -6,28 +6,45 @@
     ContactManager cm = new ContactManager();
     List<ContactTable> messages = cm.List();
 }
-
-<div class="container-fluid">
-    <table class="table table-striped table-bordered table-hover text-center table-responsive" id="dataTables-example">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Yazar Mail Adresi</th>
-                <th>Konu</th>
-                <th>Mesaj</th>
+<table class="table table-striped table-bordered table-hover text-center table-responsive" id="allMessageTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Yazar Mail Adresi</th>
+            <th>Konu</th>
+            <th>Mesaj</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in messages)
+        {
+            counter++;
+            <tr class="odd gradeX">
+                <td>@counter</td>
+                <td>@item.contactMail</td>
+                <td>@item.contactType</td>
+                <td>@item.message</td>
+                <td>
+                    <a href="#" onclick="DeleteMessage('@item.Id')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                        </svg>
+                    </a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in messages)
-            {
-                counter++;
-                <tr class="odd gradeX">
-                    <td>@counter</td>
-                    <td>@item.contactMail</td>
-                    <td>@item.contactType</td>
-                    <td>@item.message</td>
-                </tr>
+        }
+    </tbody>
+</table>
+<script>
+    function DeleteMessage(messageid) {
+        $.ajax({
+            method: "POST",
+            url: '/Admin/DeleteMessage',
+            data: { id: messageid },
+            success: function (result) {
+                InfoUserwithToastr(result, "Admin", "AllMessages", "Veri başarıyla silindi.", "Veri silinemedi.");
             }
-        </tbody>
-    </table>
-</div>
+        })
+    }
+</script>

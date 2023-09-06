@@ -19,13 +19,7 @@ document.getElementById("confirmbtnDelete").addEventListener("click", function (
         url: '/Home/DeleteData',
         data: { id: mydataId },
         success: function (result) {
-            if (result > 0) {
-                ReLoadDeleteData();
-                toastr.success("Veri başarıyla silindi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
-            }
-            else {
-                toastr.warning("Veri silinemedi.", "İşlem Başarısız", { closeButton: true, timeOut: 1500 })
-            }
+            InfoUserwithToastr(result, "Home", "FillTableForDelete", "Veri başarılı bir şekilde silindi.", "Veri silinemedi.");
         },
         complete: function () {
             $("#closeButton").click();
@@ -52,28 +46,10 @@ document.getElementById("confirmbtnDeleteSharedData").addEventListener("click", 
         url: '/User/DeleteSharedData',
         data: { id: shid },
         success: function (result) {
-            if (result > 0) {
-                ReLoadDeleteData();
-                toastr.success("Veri başarıyla silindi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
-            } else {
-                toastr.warning("Veri silinemedi.", "İşlem Başarısız", { closeButton: true, timeOut: 1500 })
-            }
+            InfoUserwithToastr(result, "Home", "FillTableForDelete", "Veri başarılı bir şekilde silindi.", "Veri silinemedi.");
         },
         complete: function () {
             $("#closeButtonsh").click();
         }
     });
 });
-
-function ReLoadDeleteData() {
-    let table = $("#table");
-    $.ajax({
-        method: "GET",
-        url: '/Home/FillTableForDelete',
-        success: function (tableData) {
-            table.empty(); // Tabloyu temizliyoruz
-
-            table.append(tableData);
-        }
-    });
-}

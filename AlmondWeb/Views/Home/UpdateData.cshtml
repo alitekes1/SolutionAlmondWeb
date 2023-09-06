@@ -19,7 +19,7 @@
                 @using (Ajax.BeginForm("UpdateData", "Home", new AjaxOptions
                 {
                     HttpMethod = "POST",
-                    UpdateTargetId = "example",
+                    UpdateTargetId = "adminlayout",
                     InsertionMode = InsertionMode.ReplaceWith,
                     OnSuccess = "onSuccess"//post işlemi başarı olduğunda çalışmasını istediğimiz js fonksiyonunun ismini buraya yazabiliriz.
                 }))
@@ -56,32 +56,4 @@
         @Html.Action("FillTableDataForUpdate")
     </div>
 </div>
-<script>
-    let submitbtnUpdate = $("#submitbtn");
-    let updateBtn = $(".btntableDelete");
-    function onSuccess() {
-        toastr.success("Veri başarıyla güncellendi.", "İşlem başarılı!", { closeButton: true, timeOut: 1500 });
-    }
-
-    submitbtnUpdate.click(function (e) {
-        if (updateBtn.hasClass("clicked")) {
-        }
-        else {
-            e.preventDefault();
-            toastr.warning("Güncellenecek veriyi seçiniz.", "Uyarı!", { closeButton: true, timeOut: 1500 });
-        }
-    })
-    updateBtn.click(function () {
-        if (updateBtn.hasClass("clicked")) {
-            //alert("Düğme daha önce tıklandı.");
-        } else {
-            //alert("Düğme ilk defa tıklandı.");
-            updateBtn.addClass("clicked");
-        }
-    });
-
-    let _list = document.getElementById("liste-dropdown");
-    _list.options[0].disabled = true;
-</script>
-<link href="~/Content/toastr.min.css" rel="stylesheet" />
 <script src="~/Scripts/Jquery.ajax/UpdateDataAjax.js"></script>

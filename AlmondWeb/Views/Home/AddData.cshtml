@@ -16,7 +16,7 @@
         <div class="col-sm-4 ">
             <div class="form-container" style="padding-top:11px">
                 <div class="col-sm-12 ">
-                    @using (Ajax.BeginForm("AddData", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "example", InsertionMode = InsertionMode.ReplaceWith, OnSuccess = "onSuccess" }))
+                    @using (Ajax.BeginForm("AddData", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "adminlayout", InsertionMode = InsertionMode.ReplaceWith, OnSuccess = "onSuccess" }))
                     {
                         <div class="row-sm-3 form-group shadow-textarea textareas">
                             @Html.TextAreaFor(x => x.question, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Soru", autofocus = "autofocus", title = "Soru", id = "exampleFormControlTextarea17", required = "required", maxlength = "250" })
@@ -56,12 +56,10 @@
     };
 
     function onSuccess() {
-        // Toastr mesajını göster
-        toastr.success('Veri başarıyla eklendi.', 'İşlem başarılı', { closeButton: true, timeOut: 1500 });
+        toastrSuccess("Veri başarıyla eklendi.");
         $("#exampleFormControlTextarea17").val("");
         $("#exampleFormControlTextarea16").val("");
     }
     let _list = document.getElementById("liste-dropdown");
     _list.options[0].disabled = true;
 </script>
-<link href="~/Content/toastr.min.css" rel="stylesheet" />
