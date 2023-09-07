@@ -190,16 +190,13 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\background\bg1.jpg" />
-    <Content Include="Images\background\bg10.jpg" />
     <Content Include="Images\background\bg11.jpg" />
     <Content Include="Images\background\bg12.jpg" />
     <Content Include="Images\background\bg13.jpg" />
-    <Content Include="Images\background\bg2.jpg" />
     <Content Include="Images\background\bg4.jpg" />
     <Content Include="Images\background\bg5.jpg" />
     <Content Include="Images\background\bg6.jpg" />
     <Content Include="Images\background\bg7.jpg" />
-    <Content Include="Images\background\bg8.jpg" />
     <Content Include="Images\background\bg9.jpg" />
     <Content Include="Images\background\contactimg.jpg" />
     <Content Include="Images\confusedImage.jpg" />
