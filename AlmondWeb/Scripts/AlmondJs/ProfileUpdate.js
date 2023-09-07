@@ -17,14 +17,10 @@ let imageRemovebtn = document.getElementById("btnimageRemove");
 let imagePath = document.getElementById("profileImageUrl");
 let profilImage2 = document.getElementById("userProfileImage");
 
-////imageRemovebtn.addEventListener('click', function (profilImageUrl) {
-////    imagePath.value = null;
-////    profilImage2.src = profilImageUrl////"/Images/defaultUserImage.jpg";
-////});
-function RemoveImage(profilImageUrl) {
+function RemoveImage() {
     imagePath.value = null;
     //alert(imagePath);
-    profilImage2.src = "/Images/defaultUserImage.jpg";
+    profilImage2.src = "https://i.imgur.com/iZhMGsd.jpg";
     $.ajax({
         method: "POST",
         url: '/User/RemoveProfilImage',

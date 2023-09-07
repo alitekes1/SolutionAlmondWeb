@@ -11,7 +11,7 @@ namespace AlmondWeb.Filters
             int currentUserId = CacheHelper.CurrentUserID();
             if (currentUserId == 0)
             {
-                filterContext.Result = new RedirectResult("Hata");
+                filterContext.Result = new RedirectResult("../Hata");
             }
             else
             {

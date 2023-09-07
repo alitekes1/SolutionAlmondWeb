@@ -27,6 +27,7 @@ let mainStage = $("#mainStage");
 let listDropdown = document.getElementById("liste-dropdown");
 $("#liste-dropdown").change(function () {
     listId = listDropdown.value;
+    que.text("");
     ans.text("");
     $.ajax({
         method: "GET",

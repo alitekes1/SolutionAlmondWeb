@@ -11,7 +11,6 @@ C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.dl
 C:\Users\palti\source\repos\AlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.pdb
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Core\bin\Debug\AlmondWeb.Core.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Core\bin\Debug\AlmondWeb.Core.pdb
-C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.csproj.AssemblyReference.cache
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.csproj.CoreCompileInputs.cache
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Core\obj\Debug\AlmondWeb.Core.pdb

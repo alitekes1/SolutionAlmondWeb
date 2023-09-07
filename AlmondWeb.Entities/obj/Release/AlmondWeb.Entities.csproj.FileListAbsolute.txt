@@ -14,3 +14,17 @@ C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Rele
 C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.csproj.CopyComplete
 C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.dll
 C:\Users\ALİ\Source\Repos\SolutionAlmondWebSolution\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.pdb
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\AlmondWeb.Entities.dll.config
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\AlmondWeb.Entities.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\AlmondWeb.Entities.pdb
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\AlmondWeb.Core.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\EntityFramework.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\AlmondWeb.Core.pdb
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\EntityFramework.xml
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.csproj.AssemblyReference.cache
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.csproj.CoreCompileInputs.cache
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.csproj.CopyComplete
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb.Entities\obj\Release\AlmondWeb.Entities.pdb

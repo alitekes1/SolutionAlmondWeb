@@ -104,15 +104,7 @@ namespace AlmondWeb.WebApp.Controllers
         }
         public ActionResult PrivateProfile()
         {
-            var ishaveprofil = pm.FindwithExpression(x => x.Id == currentUserID);
-            if (ishaveprofil != null)//profil varsa
-            {
-                return View();
-            }
-            else//profil yoksa
-            {
-                return RedirectToAction(nameof(CreateProfile), currentUserID);
-            }
+            return View();
         }
         [HttpGet]
         public ActionResult PublicProfile(string userName)
@@ -152,11 +144,7 @@ namespace AlmondWeb.WebApp.Controllers
                     savedProfile.job = profilemodal.job;
                     if (profilemodal.profileImageUrl != null)//herhangi bir resim yüklenmediyse
                     {
-                        string fileName = Path.GetFileName(Guid.NewGuid() + "_" + savedProfile.Owner.Id);
-                        string fileExtension = Path.GetExtension(Request.Files[0].FileName);
-                        string imagePath = "~/Images/UserProfile/" + fileName + fileExtension;
-                        Request.Files[0].SaveAs(Server.MapPath(imagePath));
-                        savedProfile.profileImageUrl = imagePath;
+                        savedProfile.profileImageUrl = profilemodal.profileImageUrl;
                     }
                     else
                     {
@@ -176,7 +164,7 @@ namespace AlmondWeb.WebApp.Controllers
         public int RemoveProfilImage()
         {
             ProfileTable profile = pm.FindwithOwnerId(currentUserID);
-            profile.profileImageUrl = "~/Images/defaultUserImage.jpg";
+            profile.profileImageUrl = "https://i.imgur.com/iZhMGsd.jpg";
             int result = pm.Update(profile);
             return result;
         }

@@ -22,7 +22,7 @@ namespace AlmondWeb.Entities
         public string websiteUrl { get; set; }
         [StringLength(maximumLength: 250, MinimumLength = 10), DisplayName("Hakkımda")]
         public string aboutmeText { get; set; }
-        public string profileImageUrl { get; set; } = "~/Images/defaultUserImage.jpg";
+        public string profileImageUrl { get; set; } = "https://i.imgur.com/iZhMGsd.jpg";
         public virtual AlmondUserTable Owner { get; set; }
         public virtual List<SharedListTable> Profil { get; set; }
     }
