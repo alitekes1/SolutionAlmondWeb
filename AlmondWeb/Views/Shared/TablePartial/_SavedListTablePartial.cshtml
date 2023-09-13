@@ -9,7 +9,7 @@
     string listType = string.Empty;
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<div class="col-sm-12 bloklar" id="adminlayout">
+<div class="col-sm-12 bloklar">
     <div class="tbl-header">
         <div class="cell-border  hover" style="text-align:center;width:100%;">
             <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
@@ -56,7 +56,7 @@
                         <td class="text-center" width="20%">@item.List.listName</td>
                         <td class="text-center" width="40%">@item.List.listDescription</td>
                         <td class="text-center" width="10%">@item.List.Owner.Username</td>
-                        <td class="text-center" width="15%">@item.List.DataTables.Count</td>
+                        <td class="text-center" width="15%">@item.SharedData.Count</td>
                         @* Sil Butonu *@
                         <td class="text-center" width="10%">
                             <button type="button" class="btntableDelete" onclick="transfertoListName('@item.List.listName')" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -79,7 +79,7 @@
                                                 *İlgili listenin içindeki veriler de dahil olmak üzere bu listedeye dahil herşey geri alınamayacak şekilde kaldırılacaktır.
                                             </p>
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                            <button type="button" class="btn btn-danger" onclick="RemoveSavedList('@item.Id','@item.profileId')">Kaldır</button>
+                                            <button type="button" class="btn btn-danger" onclick="RemoveSavedList('@item.List.Id','@item.profileId')">Kaldır</button>
                                         </div>
                                     </div>
                                 </div>

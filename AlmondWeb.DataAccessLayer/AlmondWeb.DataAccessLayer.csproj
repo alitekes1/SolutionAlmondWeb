@@ -55,13 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Migrations\202309051752436_createDatabase.cs" />
-    <Compile Include="Migrations\202309051752436_createDatabase.designer.cs">
-      <DependentUpon>202309051752436_createDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202309081239407_mig12.cs" />
+    <Compile Include="Migrations\202309081239407_mig12.designer.cs">
+      <DependentUpon>202309081239407_mig12.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202309061531533_mig34.cs" />
-    <Compile Include="Migrations\202309061531533_mig34.designer.cs">
-      <DependentUpon>202309061531533_mig34.cs</DependentUpon>
+    <Compile Include="Migrations\202309081952574_migupdate.cs" />
+    <Compile Include="Migrations\202309081952574_migupdate.designer.cs">
+      <DependentUpon>202309081952574_migupdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,11 +86,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202309051752436_createDatabase.resx">
-      <DependentUpon>202309051752436_createDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202309081239407_mig12.resx">
+      <DependentUpon>202309081239407_mig12.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202309061531533_mig34.resx">
-      <DependentUpon>202309061531533_mig34.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202309081952574_migupdate.resx">
+      <DependentUpon>202309081952574_migupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

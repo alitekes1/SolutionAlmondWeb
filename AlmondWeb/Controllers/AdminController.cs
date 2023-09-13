@@ -1,6 +1,7 @@
 ﻿using AlmondWeb.BusinessLayer;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace AlmondWeb.WebApp.Controllers
@@ -13,6 +14,7 @@ namespace AlmondWeb.WebApp.Controllers
         private SharedListManager slm = new SharedListManager();
         private SharedDataManager sdm = new SharedDataManager();
         private ContactManager cm = new ContactManager();
+        private ListManager lm = new ListManager();
         public int result = 0;
         [HttpGet, isAdmin]
         public ActionResult AllUser()
@@ -119,7 +121,7 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
         [HttpPost, isAdmin]
-        public int RemoveSharedList(int? id)
+        public int RemoveSharedList(int? id)//bu liste admin tarafından listeyi kaldırmak için
         {
             if (id != null)
             {
@@ -156,6 +158,26 @@ namespace AlmondWeb.WebApp.Controllers
                 {
                     int result = dm.DeleteList(data);
                     return result;
+                }
+            }
+            return -1;
+        }
+        [HttpPost, isAdmin]
+        public int PermanentDeleteList(int? id)
+        {
+            if (id != null)
+            {
+                List<AlmondDataTable> data = dm.ListwithExpression(x => x.List.Id == id);
+                //ListTable list = lm.FindwithOwnerId(id.Value);
+                SharedListTable slist = slm.FindwithOwnerId(id.Value);
+                if (slist != null && data != null)
+                {
+                    int res = dm.RemoveListRange(data);//ilgili dataları siliyoruz. 
+                    //slm.DeleteList(slist);//ilgili paylaşılan listeyi siliyoruz.
+                    int res2 = RemoveSharedList(id);
+                    //int result = lm.DeleteList(list);//ilgili listeyi siliyoruz.
+                    int res3 = slm.DeleteList(slist);
+                    return res > 0 && res2 > 0 && res3 > 0 ? 1 : 0;
                 }
             }
             return -1;

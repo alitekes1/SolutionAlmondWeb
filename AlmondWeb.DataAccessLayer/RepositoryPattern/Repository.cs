@@ -52,7 +52,7 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
 
         public int RemoveNullDatainSharedDataTable(List<SharedDataTable> datalist)
         {
-            database.Set<SharedDataTable>().RemoveRange(datalist);
+            database.Set<SharedDataTable>().RemoveRange(datalist);//liste deki entityleri siler.
             return Save();
         }
 
@@ -84,6 +84,11 @@ namespace AlmondWeb.DataAccessLayer.RepositoryPattern
         public int DeleteList(T dataset)
         {
             database.Set<T>().Remove(dataset);
+            return Save();
+        }
+        public int RemoveListRange(List<T> dataset)
+        {
+            database.Set<T>().RemoveRange(dataset);
             return Save();
         }
         public List<T> List()

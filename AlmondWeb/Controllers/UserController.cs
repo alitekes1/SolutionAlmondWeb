@@ -2,9 +2,7 @@
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -16,6 +14,7 @@ namespace AlmondWeb.WebApp.Controllers
         private ProfileManager pm = new ProfileManager();
         private SharedListManager slm = new SharedListManager();
         private SharedDataManager sdm = new SharedDataManager();
+        private DataManager dm = new DataManager();
         private ListManager lm = new ListManager();
         private UserManager um = new UserManager();
         private ContactManager cm = new ContactManager();
@@ -75,7 +74,7 @@ namespace AlmondWeb.WebApp.Controllers
                     FormsAuthentication.SetAuthCookie(errorresult.resultModel.Username, false);
                     HttpContext.Session.Add("userId", errorresult.resultModel.Id);
                     Session["user"] = modal;
-                    return RedirectToAction("../Anasayfa");
+                    return RedirectToAction("MainPage", "Home");
                 }
             }
             return View(modal);
@@ -118,10 +117,10 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("../Hata");
+                    return RedirectToAction("Error", "User");
                 }
             }
-            return RedirectToAction("../Anasayfa");
+            return RedirectToAction("MainPage", "Home");
         }
         [HttpGet]
         public ActionResult ProfileUpdate()
@@ -184,9 +183,9 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (listId != null)
             {
-                SharedListTable newlist = new SharedListTable();
                 var sharedlist = slm.FindwithExpression(x => x.listId == listId);//paylaşılan listenin aslını buluyoruz.
 
+                SharedListTable newlist = new SharedListTable();
                 newlist.profileId = currentUserID;
                 newlist.listId = sharedlist.List.Id;
                 newlist.OwnerId = sharedlist.Owner.Id;
@@ -209,7 +208,7 @@ namespace AlmondWeb.WebApp.Controllers
         }
         private void SaveDatafromList(int listId, SharedListTable newlist)//listenin içindeki tüm verileri kaydediyoruz.
         {
-            List<AlmondDataTable> list = slm.FindwithExpression(x => x.List.Owner.Id == x.profile.Id).List.Owner.DataTables;
+            List<AlmondDataTable> list = dm.ListwithExpression(x => x.Owner.Id == newlist.OwnerId && x.List.Id == listId);
             for (int i = 0; i < list.Count; i++)
             {
                 SharedDataTable data = new SharedDataTable

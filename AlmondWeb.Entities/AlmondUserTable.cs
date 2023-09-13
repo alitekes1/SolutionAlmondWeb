@@ -6,20 +6,20 @@ namespace AlmondWeb.Entities
 {
     public class AlmondUserTable : MyEntityBase
     {
-        [MaxLength(15), MinLength(8), Required]
+        [MaxLength(15, ErrorMessage = "{0} alanı en fazla {1} karakter olmalıdır."), MinLength(4, ErrorMessage = "{0} alanı en az {1} karakter olmalıdır."), Required(ErrorMessage = "{0} alanı zorunludur.")]
         public string Username { get; set; }
-        [StringLength(25), Required]
+        [MaxLength(25, ErrorMessage = "{0} alanı en fazla {1} karakter olmalıdır."), MinLength(2, ErrorMessage = "{0} alanı en az {1} karakter olmalıdır."), Required(ErrorMessage = "{0} alanı zorunludur.")]
         public string Name { get; set; }
-        [StringLength(25), Required]
+        [MaxLength(25, ErrorMessage = "{0} alanı en fazla {1} karakter olmalıdır."), MinLength(2, ErrorMessage = "{0} alanı en az {1} karakter olmalıdır."), Required(ErrorMessage = "{0} alanı zorunludur.")]
         public string Surname { get; set; }
-        [StringLength(50), Required]
+        [StringLength(50), Required(ErrorMessage = "{0} alanı zorunludur.")]
         public string Email { get; set; }
-        [MaxLength(16), MinLength(8), Required]
+        [MaxLength(16, ErrorMessage = "{0} alanı en fazla {1} karakter olmalıdır."), MinLength(8, ErrorMessage = "{0} alanı en az {1} karakter olmalıdır."), Required(ErrorMessage = "{0} alanı zorunludur.")]
         public string Password { get; set; }
-        [Required]
+        [Required(ErrorMessage = "{0} alanı zorunludur.")]
         public bool isActive { get; set; }
         public bool isAdmin { get; set; }
-        [Required]
+        [Required(ErrorMessage = "{0} alanı zorunludur.")]
         public Guid ActivateGuid { get; set; }
         public virtual List<AlmondDataTable> DataTables { get; set; }//bir user ın birden çok datası olacağı için list e şeklinde tanımlıyoruz ve bu liste virtual olmak zorunda.
         public virtual List<ListTable> ListTables { get; set; }//bir user ın birden fazla listesi olacağı için list şeklinde tanımlıyoruz ve bu liste virtual olmak zorunda.

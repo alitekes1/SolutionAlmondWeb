@@ -24,7 +24,7 @@ namespace AlmondWeb.Filters
             }
             else
             {
-                new RedirectResult("../Home/Login");
+                new RedirectResult("Hata");
             }
         }
     }

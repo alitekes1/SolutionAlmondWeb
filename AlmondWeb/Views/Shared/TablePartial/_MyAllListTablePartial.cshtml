@@ -2,13 +2,13 @@
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
 
-    SharedListManager lm = new SharedListManager();
-    var list = lm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id);
+    ListManager lmm = new ListManager();
+    var list = lmm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted);
 
-    var listCount = list.GroupBy(x => x.List.listName).ToList();
+    var listCount = list.GroupBy(x => x.listName).ToList();
     string listType = string.Empty;
 }
-<div class="col-sm-12 bloklar" id="adminlayout">
+<div class="col-sm-12 bloklar">
     <div class="tbl-header">
         <div class="cell-border  hover" style="text-align:center;width:100%;">
             <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
@@ -45,17 +45,17 @@
                     counter++;
                     <tr>
                         <td class="text-center" width="5%">@counter</td>
-                        <td class="text-center" width="20%">@item.List.listName</td>
+                        <td class="text-center" width="20%">@item.listName</td>
                         <td class="text-center" width="15%">
                             @{
                                 listType = item.isPublic ? "Herkese Açık" : "Gizli";
                             }
                             @listType
                         </td>
-                        <td class="text-center" width="35%">@item.List.listDescription</td>
+                        <td class="text-center" width="35%">@item.listDescription</td>
                         @* Güncelle Butonu *@
                         <td class="text-center" width="15%">
-                            <button type="button" class="btntableDelete" id="deletemylist_@item.Id" onclick="transfertoUpdateData('@item.List.listName','@item.listId')" data-bs-toggle="modal" data-bs-target="#exampleModalguncelleliste">
+                            <button type="button" class="btntableDelete" id="updatemylist_@item.Id" onclick="transfertoUpdateData('@item.listName','@item.Id','@item.listDescription')" data-bs-toggle="modal" data-bs-target="#exampleModalguncelleliste">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">
                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
                                 </svg>
@@ -77,23 +77,23 @@
                                                 </div>
                                                 <div class="row-sm-3 text-start">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="publicRadioUpdate" value="0">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Herkese Açık
                                                         </label>
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="publicRadioUpdate" value="0">
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" value="1" id="privateRadioUpdate" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                             Gizli
                                                         </label>
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" value="1" id="privateRadioUpdate" checked>
                                                     </div>
                                                 </div> <hr />
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" id="closeBtnUpdate23" data-bs-dismiss="modal">Vazgeç</button>
-                                            <button type="submit" class="btn btn-success" id="confirmBtnUpdateList">Güncelle</button>
+                                            <button type="submit" class="btn btn-success" id="confirmBtnUpdateList1">Güncelle</button>
                                         </div>
                                     </div>
                                 </div>
@@ -102,18 +102,32 @@
 
                         @* Sil Butonu *@
                         <td class="text-center" width="10%">
-                            <button type="button" class="btntableDelete" onclick="transfertoDeleteData('@item.List.listName','@item.listId')" data-bs-toggle="modal" id="list_delete_@item.Id" data-bs-target="#exampleModalsilliste">
+                            <button type="button" class="btntableDelete" onclick="transfertoDeleteData('@item.listName','@item.Id')" data-bs-toggle="modal" id="list_delete_@item.Id" data-bs-target="#exampleModalsilliste">
                                 <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
                                     <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
                                 </svg>
                             </button>
-                            @(Html.Partial("ModelPopUp/_SilModalPartial", new ViewDataDictionary
-                                                              {
-                                        {"modelHeader","Aşağıdaki liste silinecek.Emin misiniz?"},
-                                        {"not","*İlgili listenin içindeki veriler silinmez.Sileceğiniz listede bulunan verilerin artık bir listesi olmaz.Listeye sahip olmayan verilere puanlama işlemi yapılamaz."}
-                                      })
+                            <div class="modal fade" id=exampleModalsilliste tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class=" modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="153">Aşağıdaki liste silinecek.Emin misiniz? </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label id="_questionLabel"></label>
+                                        </div>
+                                        <hr />
+                                        <p class="fst-italic" style="font-size:13px">*İlgili listenin içindeki veriler  <span class="text-danger">silinmez</span>. Bu listedeki verilere ulaşmak için bu listeye ait verilerin listesini <span class="text-decoration-underline"> Veri Güncelle </span>sayfasından var olan bir liste ile değiştirmelisiniz.<br />Aksi halde bu verileri puanlayamazsınız.</p>
 
-                             )
+                                        <div class="modal-footer">
+                                            <p class="small fst-italic text-start"></p>
+                                            <button type="button" id="closeBtnDeleteList" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                            <button type="submit" id="confirmBtnDeleteList" class="btn btn-danger">Sil</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 }

@@ -45,9 +45,8 @@
                                     </label>
                                 </div>
                             </div> <hr />
-
+                            <p class="fst-italic" style="font-size:13px">*Oluşturmuş  olduğunuz listeye varolan verilerinizi aktarmak istiyorsanız Veri Güncelle sayfasından ilgili verinin listesini güncelleyebilirisiniz.</p>
                         </div>
-                        <p class="fst-italic " style="font-size:13px">*Oluşturmuş  olduğunuz listeye varolan verilerinizi aktarmak istiyorsanız Veri Güncelle sayfasından ilgili verinin listesini güncelleyebilirisiniz.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="reset" id="closeBtnCreateList" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
@@ -58,14 +57,15 @@
         </div>
     </div>
     <div class="row gx-2">
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="adminlayout">
             <!-- Listelerim Tablosu-->
-            @Html.Action("FillTableForListOperations", "Home")
+            @Html.Action("MyAllListTable", "Home")
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="savedlisttable">
             <!-- Kaydettiğim listelerim Tablosu-->
             @Html.Action("SavedListTablePartial", "Home")
         </div>
     </div>
 </div>
-<script src="~/Scripts/Jquery.ajax/ListOperationsAjax.js"></script>
+<script async src="~/Scripts/Jquery.ajax/ListOperationsAjax.js" defer></script>
+

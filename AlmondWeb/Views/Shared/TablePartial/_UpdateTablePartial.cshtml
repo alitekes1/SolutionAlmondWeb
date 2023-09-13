@@ -3,10 +3,10 @@
     int currentUserID = CacheHelper.CurrentUserID();
 
     DataManager dm = new DataManager();
-    List<AlmondDataTable> tableData = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id).ToList();//current user a ait dataları listeliyoruz.
+    List<AlmondDataTable> mydataTable = dm.ListwithExpression(x => x.Owner.Id == currentUserID && !x.isDeleted).OrderByDescending(x => x.Id).ToList();//current user a ait dataları listeliyoruz.
 
     SharedDataManager sdm = new SharedDataManager();
-    List<SharedDataTable> savedTableData = sdm.ListwithExpression(x => x.SharedList.profileId == currentUserID);
+    List<SharedDataTable> savedDataTable = sdm.ListwithExpression(x => x.SharedList.profileId == currentUserID);
 
 }
 <div id="adminlayout">
@@ -25,7 +25,7 @@
     </div>
     <div style="width:100%;overflow:auto;  max-height:525px;">
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
-            @if (tableData.Count() == 0)
+            @if (mydataTable.Count() == 0)
             {
                 <tr>
                     <td>Kayıtlı veriniz bulunmamaktadır. <a href="/Home/AddData" title="Veri Ekle sayfasına gider.">Veri Ekle</a>  sayfasından veri ekleyebilirsiniz.</td>
@@ -33,7 +33,7 @@
             }
             else
             {
-                foreach (var item in tableData)
+                foreach (var item in mydataTable)
                 {
                     counter++;
                     <tr id="dataTable1">
@@ -67,20 +67,27 @@
             }
         </table>
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive">
-            @if (savedTableData.Count() == 0)
+            @if (savedDataTable.Count() == 0)
             {
 
             }
             else
             {
-                foreach (var item in savedTableData)
+                foreach (var item in savedDataTable)
                 {
                     counter++;
                     <tr id="dataTable1" class="table-secondary">
                         <td class="text-center" width="5%">@counter</td>
                         <td class="text-center" width="35%">@item.question</td>
                         <td class="text-center" width="35%">@item.answer</td>
-                        <td class="text-center" width="15%">@item.SharedList.List.listName</td>
+                        @if (item.SharedList.isDeleted)
+                        {
+                            <td class="text-center table-danger" width="15%">@item.SharedList.List.listName</td>
+                        }
+                        else
+                        {
+                            <td class="text-center" width="15%">@item.SharedList.List.listName</td>
+                        }
                         <td class="text-center" width="15%">
                             <button class="btntableDelete" onclick="sharedListSelected('@item.question','@item.SharedList.listId','@item.answer','@item.Id','@item.SharedList.List.listName')" id="updateDatabutton">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">

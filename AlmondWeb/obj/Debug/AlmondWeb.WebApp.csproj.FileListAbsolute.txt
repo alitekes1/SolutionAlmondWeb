@@ -158,6 +158,8 @@ C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\EntityFr
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\EntityFramework.SqlServer.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\HtmlExtensions.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\Microsoft.Configuration.ConfigurationBuilders.Base.dll
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\Newtonsoft.Json.dll
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\System.Linq.Dynamic.Core.dll
@@ -178,6 +180,8 @@ C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\AlmondWe
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\AlmondWeb.Entities.dll.config
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\EntityFramework.xml
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\EntityFramework.SqlServer.xml
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\Microsoft.Configuration.ConfigurationBuilders.Base.xml
+C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\System.Linq.Dynamic.Core.pdb
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\System.Linq.Dynamic.Core.xml
 C:\Users\palti\OneDrive\Belgeler\GitHub\SolutionAlmondWeb\AlmondWeb\bin\System.ValueTuple.xml

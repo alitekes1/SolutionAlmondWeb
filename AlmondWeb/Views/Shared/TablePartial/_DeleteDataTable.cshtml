@@ -25,7 +25,7 @@
         </table>
     </div>
     <div style="width:100%;overflow:auto;  max-height:530px;">
-        <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive" id="mydataTable">
+        <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive m-0" id="mydataTable">
             @if (tableData.Count() == 0)
             {
                 <tr>
@@ -62,13 +62,7 @@
             }
         </table>
         <table style="width:100%;" id="shareddatatableindeletedata" class="text-center table table-hover table-bordered table-responsive table-secondary">
-            @if (savedTableData.Count() == 0)
-            {
-                <tr>
-                    <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
-                </tr>
-            }
-            else
+            @if (savedTableData.Count() != 0)
             {
                 foreach (var item in savedTableData)
                 {

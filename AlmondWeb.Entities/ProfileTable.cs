@@ -11,7 +11,7 @@ namespace AlmondWeb.Entities
         public int Id { get; set; }
         [StringLength(maximumLength: 50, MinimumLength = 3), DisplayName("Okul")]
         public string school { get; set; }
-        [MaxLength(23, ErrorMessage = "{0} alanı en fazla {1} karakterden oluşmalıdır."), MinLength(3), DisplayName("Meslek")]
+        [MaxLength(35, ErrorMessage = "{0} alanı en fazla {1} karakterden oluşmalıdır."), MinLength(3, ErrorMessage = "{0} alanı en az {1} karakterden oluşmalıdır."), DisplayName("Meslek"), Required(ErrorMessage = "{0} alanı gereklidir.")]
         public string job { get; set; }
         [StringLength(maximumLength: 50, MinimumLength = 10)]
         public string githubUrl { get; set; }

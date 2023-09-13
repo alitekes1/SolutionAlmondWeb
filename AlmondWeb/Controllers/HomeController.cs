@@ -220,59 +220,56 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
         [HttpPost]
-        public int DeleteList(int? id)
+        public int RemoveMyList(int? id)//kendi listemi kaldırırken kullanılır.
         {
             if (id.HasValue)
             {
-                SharedListTable list = sharedListManager.FindwithExpression(x => x.listId == id);//silinecek veriyi buluyoruz.
-                if (list != null)
+                ListTable list = listManager.FindwithExpression(x => x.Id == id);//silinecek veriyi buluyoruz.
+                SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.listId == id && x.OwnerId == currentUserId);//benim sahip olduğum listeyi buluyoruz.
+                if (list != null && sharedlist != null)
                 {
-                    int result = sharedListManager.Delete(list);
+                    int result = listManager.Delete(list);
+                    int result2 = sharedListManager.Delete(sharedlist);
                     return result;
                 }
             }
             return -1;
         }
         [HttpPost]
-        public int RemoveSavedList(int? listid, int? profileId)
+        public int RemoveSavedList(int? listid, int? profileId)//liste keşfet te kaydettiğim listeyi kaldırıken kullanılır.
         {
             if (listid != null && profileId != null)
             {
-                SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.Id == listid && x.profileId == profileId);//bu kod "yelkenler biçilecek" marşını dinlerken yazılmıştır.5/9/23 18.03
-                if (sharedlist != null)
+                List<SharedDataTable> deletedDataList = sharedDataManager.ListwithExpression(x => x.SharedList.listId == listid && x.SharedList.profileId == profileId);
+                if (deletedDataList != null)
                 {
+                    int result2 = sharedDataManager.RemoveNullDatainSharedDataTable(deletedDataList);//kaldırılan listeden sonra ilgili listedeki veriler siliniyor.
+                    SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.listId == listid && x.profileId == profileId);//bu kod "yelkenler biçilecek" marşını dinlerken yazılmıştır.5/9/23 18.03
                     int result = sharedListManager.DeleteList(sharedlist);
-                    List<SharedDataTable> datalist = sharedDataManager.ListwithExpression(x => x.SharedList == null);
-                    sharedDataManager.RemoveNullDatainSharedDataTable(datalist);//kaldırılan listeden sonra ilgili listedeki veriler siliniyor.
                     return result;
                 }
             }
             return -1;
         }
-        [HttpGet]
-        public ActionResult UpdateList()
-        {
-            return View();
-        }
         [HttpPost]
-        public int UpdateList(string listName, int? id, string listDesc, string listPub, string listPriv)
+        public int UpdateList(string listName, int? id, string listDesc, int? listPub)
         {
-            if (id != null && !listName.IsNullOrWhiteSpace())
+            if (id != null)
             {
-                ListTable isThereList = listManager.FindwithExpression(x => x.Owner.Id == currentUserId && x.Id == id);
-                SharedListTable updateSharedList = sharedListManager.FindwithExpression(x => x.listId == id && x.profileId == currentUserId);
-                if (isThereList != null || updateSharedList != null)//eğer böyle bir liste varsa
+                ListTable list = listManager.FindwithExpression(x => x.Id == id);
+                if (list != null)
                 {
-                    isThereList.listName = listName;
-                    isThereList.listDescription = listDesc;
-
-                    isThereList.isPublic = listPub == "1";
-
-                    updateSharedList.isPublic = isThereList.isPublic;
-
-                    int result = listManager.Update(isThereList);
-                    int result2 = sharedListManager.Update(updateSharedList);
-                    return result + result2;
+                    list.listName = listName;
+                    list.listDescription = listDesc;
+                    list.isPublic = listPub == 1;
+                    int result = listManager.Update(list);
+                    if (list.isPublic)
+                    {
+                        SharedListTable updateSharedList = sharedListManager.FindwithExpression(x => x.listId == id && x.profileId == currentUserId);
+                        updateSharedList.isPublic = true;
+                        sharedListManager.Update(updateSharedList);
+                    }
+                    return result;
                 }
             }
             return -1;
@@ -329,13 +326,13 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return PartialView("TablePartial/_DeleteDataTable");
         }
-        public PartialViewResult FillTableForListOperations()
-        {
-            return PartialView("TablePartial/_MyAllListTablePartial");
-        }
         public PartialViewResult FillTableForAllData()
         {
             return PartialView("TablePartial/_AllDataTable");
+        }
+        public PartialViewResult MyAllListTable()
+        {
+            return PartialView("TablePartial/_MyAllListTablePartial");
         }
         public PartialViewResult SavedListTablePartial()
         {

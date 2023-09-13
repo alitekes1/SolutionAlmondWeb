@@ -11,7 +11,8 @@ namespace AlmondWeb.BusinessLayer
             AlmondUserTable user = userManager.FindwithExpression(x => x.Id == ownerId);
             int result = Insert(new ProfileTable
             {
-                Id = ownerId.Value
+                Id = ownerId.Value,
+                job = "Veri Yok"
             });
             return result;
         }

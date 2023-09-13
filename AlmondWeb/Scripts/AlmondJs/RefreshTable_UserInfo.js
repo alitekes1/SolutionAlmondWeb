@@ -7,8 +7,8 @@ function toastrFail(context) {
 function toastrInfo(context) {
     toastr.info(context, "Uyarı!", { closeButton: true, timeOut: 1500 })
 }
-function ReLoadTable(controller, action) {
-    let table = $("#adminlayout");
+function ReLoadTable(controller, action, refreshdivID) {
+    let table = $("#" + refreshdivID);
     $.ajax({
         method: "GET",
         url: '/' + controller + '/' + action,
@@ -19,10 +19,14 @@ function ReLoadTable(controller, action) {
         }
     });
 }
-function InfoUserwithToastr(result, controllerforRefreshTable, actionforRefreshTable, successContext, failContext) {
+function InfoUserwithToastr(result, controllerforRefreshTable, actionforRefreshTable, successContext, failContext, refreshdivID = "adminlayout") {
     if (result > 0) {
-        ReLoadTable(controllerforRefreshTable, actionforRefreshTable);
+        ReLoadTable(controllerforRefreshTable, actionforRefreshTable, refreshdivID);
         toastrSuccess(successContext);
+    }
+    else if (result == 0) {
+        ReLoadTable(controllerforRefreshTable, actionforRefreshTable, refreshdivID);
+        toastrInfo("Herhangi bir değişlik yapılmadı.");
     }
     else {
         toastrFail(failContext);

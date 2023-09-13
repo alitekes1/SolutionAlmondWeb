@@ -9,7 +9,18 @@
                     <div class="img">
                         <img src="@Url.Content(item.profileImageUrl)" alt="imageNotUpload" width="150">
                     </div>
-                    <h2>@@@item.Owner.Username<br><span>@item.job</span></h2>
+                    <h2>
+                        @@@item.Owner.Username<br>
+
+                        @if (item.job.Length > 23)
+                        {
+                            <span style="font-size:10px">@item.job</span>
+                        }
+                        else
+                        {
+                            <span>@item.job</span>
+                        }
+                    </h2>
                     <p>
                         @item.aboutmeText
                     </p>

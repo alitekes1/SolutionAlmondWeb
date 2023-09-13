@@ -15,8 +15,6 @@
 
     SelectList selectList = new SelectList(list, "contactType");
 }
-<link href="~/Content/AlmondCss/sliderBoyut.css" rel="stylesheet" />
-
 <div class="row mb-5 ">
     <div class="col-sm-9 gx-0">
         <div class="carousel-inner">
@@ -61,7 +59,7 @@
         let message = $("#messageContact").val();
         if (message.length < 10) {
             e.preventDefault();
-            toastrInfo("Mesajınız en az 10 karakterden oluşmalı.")
+            toastrInfo("Mesajınız en az 10 karakterden oluşmalı.");
         }
     });
 </script>
