@@ -109,6 +109,15 @@ namespace AlmondWeb.WebApp.Controllers
                 alm.puan = 0;
                 alm.Owner = userManager.FindwithOwnerId(currentUserId);
                 alm.List = listManager.FindwithOwnerId(alm.List.Id);
+                //if (alm.List.isPublic)//kullanıcı veri eklediğinde kayıtlı kullanıcılarında değişmesi özelliği
+                //{
+                //    SharedDataTable sdata = new SharedDataTable();
+                //    SharedListTable slist = sharedListManager.FindwithExpression(x => x.listId == alm.List.Id);
+                //    sdata.question = alm.question;
+                //    sdata.answer = alm.answer;
+                //    sdata.SharedList = slist;
+                //    int result2 = sharedDataManager.Insert(sdata);
+                //}
                 dataManager.Insert(alm);
             }
             else
@@ -158,22 +167,6 @@ namespace AlmondWeb.WebApp.Controllers
             {
                 return RedirectToAction(nameof(Error)); // Hata durumu daha iyi işlenmeli
             }
-        }
-
-        private void UpdateSharedData()
-        {
-            throw new NotImplementedException();
-        }
-
-        public JavaScriptResult UpdateisSuccess()
-        {
-            string toastrSuccess = "toastr.success('Veri başarıyla güncellendi.', 'İşlem başarılı!', { closeButton: true, timeOut: 1500 })";
-            return JavaScript(toastrSuccess);
-        }
-        public JavaScriptResult UpdateisNotSuccess()
-        {
-            string toastrFail = "toastr.info('Herhangi bir değişiklik yapmadınız.', 'İşlem Başarısız!', { closeButton: true, timeOut: 1500 })";
-            return JavaScript(toastrFail);
         }
         [HttpGet]
         public ActionResult DeleteData()

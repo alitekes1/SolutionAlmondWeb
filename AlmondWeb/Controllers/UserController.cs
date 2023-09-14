@@ -2,6 +2,7 @@
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -90,6 +91,35 @@ namespace AlmondWeb.WebApp.Controllers
             return RedirectToAction(nameof(Login)); // Corrected this line
         }
 
+        [HttpGet, AllowAnonymous]
+        public ActionResult ForgetPassword()
+        {
+            Session.Clear();
+            Request.Cookies.Clear();
+            Response.Cookies.Clear();
+            return View();
+        }
+        [HttpPost, AllowAnonymous]
+        public ActionResult ForgetPassword(string mailadress)
+        {
+            return View();
+        }
+        [HttpGet, AllowAnonymous]
+        public ActionResult ResetPassword(Guid? guid)
+        {
+            return View(guid);
+        }
+        [HttpPost, AllowAnonymous]
+        public ActionResult ResetPassword(Guid? guid, string password)
+        {
+            AlmondUserTable user = um.FindwithExpression(x => x.ActivateGuid == guid);
+            if (user != null)
+            {
+                user.Password = password;
+                int result = um.Update(user);
+            }
+            return RedirectToAction("Error", "Home");
+        }
         public ActionResult CreateProfile()
         {
             if (pm.CreateProfil(currentUserID) > 0)
@@ -168,7 +198,7 @@ namespace AlmondWeb.WebApp.Controllers
             return result;
         }
         [HttpGet]
-        public ActionResult PublicAllList()//TODO: liste paylaşma hakkında SSS hazırlanacak. acordion şeklinde
+        public ActionResult PublicAllList()
         {
             List<SharedListTable> list = slm.SharedAllList(currentUserID);//paylaşılan tüm listeleri gönderiyor.
             return View(list);

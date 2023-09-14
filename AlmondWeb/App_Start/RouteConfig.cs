@@ -95,6 +95,11 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "User", action = "FrequentlyAskedQuestion", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "forgetpassword",
+                url: "Sifremi-Unuttum",
+                defaults: new { controller = "User", action = "ForgetPassword", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "adminpage",
                 url: "Admin54",
                 defaults: new { controller = "Admin", action = "AllData", id = UrlParameter.Optional }
