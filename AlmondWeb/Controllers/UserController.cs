@@ -20,7 +20,8 @@ namespace AlmondWeb.WebApp.Controllers
         private UserManager um = new UserManager();
         private ContactManager cm = new ContactManager();
         private int currentUserID = CacheHelper.CurrentUserID();
-
+        private Random random = new Random();
+        private int code = 0;
         [HttpGet, AllowAnonymous]
         public ActionResult Register()
         {
@@ -100,25 +101,19 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost, AllowAnonymous]
-        public ActionResult ForgetPassword(string mailadress)
+        public ActionResult ForgetPassword(string Email)
         {
-            return View();
-        }
-        [HttpGet, AllowAnonymous]
-        public ActionResult ResetPassword(Guid? guid)
-        {
-            return View(guid);
-        }
-        [HttpPost, AllowAnonymous]
-        public ActionResult ResetPassword(Guid? guid, string password)
-        {
-            AlmondUserTable user = um.FindwithExpression(x => x.ActivateGuid == guid);
+            AlmondUserTable user = um.FindwithExpression(x => x.Email == Email);
             if (user != null)
             {
-                user.Password = password;
-                int result = um.Update(user);
+                EmailHelper.SendEmail(Email, user);
+                return JavaScript("");//TODO: hesabın olamdığı uyarısı verilecek
+                //return View();
             }
-            return RedirectToAction("Error", "Home");
+            else
+            {
+                return JavaScript("");//TODO: hesabın olamdığı uyarısı verilecek
+            }
         }
         public ActionResult CreateProfile()
         {
