@@ -33,7 +33,7 @@ namespace AlmondWeb.BusinessLayer
                 registerUser.Surname = modal.surname;
                 registerUser.Username = modal.username;
                 registerUser.Password = modal.password;
-                registerUser.isActive = true;
+                registerUser.isActive = false;
                 registerUser.isAdmin = false;
                 registerUser.ActivateGuid = Guid.NewGuid();
 

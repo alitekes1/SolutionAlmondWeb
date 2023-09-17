@@ -7,14 +7,22 @@ namespace AlmondWeb.Filters
     {
         public void OnException(ExceptionContext filterContext)
         {
-            filterContext.ExceptionHandled = true;
-            filterContext.Result = new RedirectToRouteResult(
-                    new System.Web.Routing.RouteValueDictionary(
-                        new
-                        {
-                            action = "Error",
-                            contraller = "Home"
-                        }));
+            if (filterContext.Exception.Message == "Nesne başvurusu bir nesnenin örneğine ayarlanmadı.")
+            {
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = new RedirectResult("Giris-Yap");
+            }
+            else
+            {
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = new RedirectToRouteResult(
+                        new System.Web.Routing.RouteValueDictionary(
+                            new
+                            {
+                                action = "Error",
+                                contraller = "Home"
+                            }));
+            }
         }
     }
 }

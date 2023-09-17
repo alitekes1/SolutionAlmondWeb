@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Hesap Aktifleştirme";
+    Layout = "~/Views/Shared/BaseLayout.cshtml";
+}
+<script src="~/User/ActiveAccount"></script>
+
+<div class="row justify-content-center">
+    <div class="col-sm-4 mt-1">
+        <label class="small alert alert-success">Mail Adresine aktivasyon maili gönderdik.Hesabı aktifleştirmek için maildeki kodu girmen gerekiyor.</label>
+        <img src="~/Images/background/3675555.jpg" class="w-100 justify-content-center" alt="Alternate Text" />
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-sm-4 my-2">
+        @using (Ajax.BeginForm("ActiveAccount", "User", new AjaxOptions { HttpMethod = "POST" }))
+        {
+            <div class="input-group">
+                <input type="number" name="code" class="form-control" value="" placeholder="Kod" />
+                <input type="hidden" name="accountid" value=@ViewData["accountid"] />
+                <button type="submit" class="btn btn-success" id="submitbtnEmail">Gönder</button>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    function ActiveAccountSuccess() {
+        toastrSuccess("Hesap aktifleştirme işlemi başarılı bir şekilde gerçekleşmiştir.Giriş Yap sayfasına yönlediriliyorsunuz...");
+        setTimeout(function () {
+            // Bekleme süresi sona erdikten sonra yönlendirme işlemi
+            window.location.href = 'http://bit.ly/almondweb';
+        }, 2000);
+    }
+    function ActiveAccountFail() {
+        toastrFail("Hesap aktifleştirme işlemi başarısız olmuştur.Gönderilen kodu doğru girdiğinizden emin olunuz.");
+    }
+</script>

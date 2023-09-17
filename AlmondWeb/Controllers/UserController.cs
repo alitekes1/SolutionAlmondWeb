@@ -20,8 +20,8 @@ namespace AlmondWeb.WebApp.Controllers
         private UserManager um = new UserManager();
         private ContactManager cm = new ContactManager();
         private int currentUserID = CacheHelper.CurrentUserID();
-        private Random random = new Random();
-        private int code = 0;
+        public string emailBody;
+        public string emailSubject;
         [HttpGet, AllowAnonymous]
         public ActionResult Register()
         {
@@ -43,15 +43,41 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction(nameof(Login));
+                    //string id = "alitekes123@gmail.com";
+                    return RedirectToAction("ActiveAccount", "User", new { mail = model.email });//TODO: burayı not al
                 }
             }
             return View(model);
         }
-        [AllowAnonymous]
-        public ActionResult RegisterSuccess()
+        [HttpGet, AllowAnonymous]
+        public ActionResult ActiveAccount(string mail)
         {
-            return View();
+            if (mail != null)
+            {
+                AlmondUserTable account = um.FindwithExpression(x => x.Email == mail);
+                emailBody = "Hesap aktifleştirme kodunuz:" + (account.Id * 36 + 1154);
+                emailSubject = "AlmondWeb Hesap Aktifleştirme";
+                EmailHelper.SendEmail(account, emailBody, emailSubject);
+                ViewData["accountid"] = account.Id;
+                return View();
+            }
+            return RedirectToAction("Error", "Home");
+        }
+        [HttpPost, AllowAnonymous]
+        public ActionResult ActiveAccount(int? code, int? accountid)
+        {
+            AlmondUserTable user = um.FindwithOwnerId(accountid.Value);
+            if (code == (accountid * 36 + 1154))
+            {
+                user.isActive = true;
+                um.Update(user);
+                return JavaScript("ActiveAccountSuccess()");
+            }
+            else
+            {
+                ViewData["accountid"] = user.Id;
+                return JavaScript("ActiveAccountFail()");
+            }
         }
         [HttpGet, AllowAnonymous]
         public ActionResult Login()
@@ -91,13 +117,9 @@ namespace AlmondWeb.WebApp.Controllers
 
             return RedirectToAction(nameof(Login)); // Corrected this line
         }
-
         [HttpGet, AllowAnonymous]
         public ActionResult ForgetPassword()
         {
-            Session.Clear();
-            Request.Cookies.Clear();
-            Response.Cookies.Clear();
             return View();
         }
         [HttpPost, AllowAnonymous]
@@ -106,13 +128,14 @@ namespace AlmondWeb.WebApp.Controllers
             AlmondUserTable user = um.FindwithExpression(x => x.Email == Email);
             if (user != null)
             {
-                EmailHelper.SendEmail(Email, user);
-                return JavaScript("");//TODO: hesabın olamdığı uyarısı verilecek
-                //return View();
+                emailBody = "Hesap Şifreniz:" + user.Password;
+                emailSubject = "AlmondWeb Şifre Talebi";
+                EmailHelper.SendEmail(user, emailBody, emailSubject);
+                return JavaScript("PasswordisSend()");
             }
             else
             {
-                return JavaScript("");//TODO: hesabın olamdığı uyarısı verilecek
+                return JavaScript("EmailisNotRegister()");
             }
         }
         public ActionResult CreateProfile()
@@ -315,7 +338,7 @@ namespace AlmondWeb.WebApp.Controllers
             List<ProfileTable> allProfileList = pm.List();
             return View(allProfileList);
         }
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult FrequentlyAskedQuestion()
         {
             return View();

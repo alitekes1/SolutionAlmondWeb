@@ -43,3 +43,7 @@ form {
     margin: 10px;
     cursor: pointer;
 }
+
+main.container-fluid {
+    min-height: 630px !important;
+}

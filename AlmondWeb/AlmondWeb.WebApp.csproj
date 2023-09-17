@@ -330,6 +330,7 @@
     <Content Include="Views\User\Deneme.cshtml" />
     <Content Include="Views\User\FrequentlyAskedQuestion.cshtml" />
     <Content Include="Views\User\ForgetPassword.cshtml" />
+    <Content Include="Views\User\ActiveAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

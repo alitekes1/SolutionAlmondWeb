@@ -172,6 +172,7 @@
     <Compile Include="CacheHelper.cs" />
     <Compile Include="ContactManager.cs" />
     <Compile Include="DataManager.cs" />
+    <Compile Include="EmailHelper.cs" />
     <Compile Include="ErrorResult.cs" />
     <Compile Include="ListManager.cs" />
     <Compile Include="ProfileManager.cs" />
