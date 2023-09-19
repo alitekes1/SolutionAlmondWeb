@@ -59,7 +59,7 @@ namespace AlmondWeb.BusinessLayer
                     //kayıtlı kişiyi contraller a geri gönderiyoruz.
                     if (user.isActive == false)
                     {
-                        errorResult.errorList.Add("Hesap aktive edilmemiş.");//TODO:link veya kod ile doğrulamaya göre ifade değiştirilecek
+                        errorResult.errorList.Add("Hesap aktive edilmemiş.");
                         return errorResult;
                     }
                     else
