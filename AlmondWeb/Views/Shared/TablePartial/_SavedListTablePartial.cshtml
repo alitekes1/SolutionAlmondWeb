@@ -1,14 +1,16 @@
 ﻿@{
     int counter = 0;
     int currentUserID = CacheHelper.CurrentUserID();
-
+    DataManager dm = new DataManager();
     SharedListManager slm = new SharedListManager();
     List<SharedListTable> list = slm.MySavedShareList(currentUserID).OrderByDescending(x => x.Id).ToList();//sadece kullanıcın kaydettiği listeleri döner
 
     var listCount = list.GroupBy(x => x.List.listName).ToList();
     string listType = string.Empty;
 }
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
 <div class="col-sm-12 bloklar">
     <div class="tbl-header">
         <div class="cell-border  hover" style="text-align:center;width:100%;">
@@ -17,10 +19,10 @@
                     <tr>
                         <th class="text-center" style="width:5%">#</th>
                         <th class="text-center" style="width:20%">Liste</th>
-                        <th class="text-center" style="width:40%">Açıklama</th>
-                        <th class="text-center" style="width:10%">Sahibi</th>
+                        <th class="text-center" style="width:30%">Açıklama</th>
+                        <th class="text-center" style="width:15%">Sahibi</th>
                         <th class="text-center" style="width:15%">Top.Veri</th>
-                        <th class="text-center" style="width:10%">Kaldır</th>
+                        <th class="text-center" style="width:15%">Kaldır</th>
                     </tr>
                 </thead>
             </table>
@@ -50,15 +52,18 @@
             {
                 foreach (var item in list)
                 {
+                    int totalData = dm.ListwithExpression(x => x.Owner.Id == item.OwnerId && x.List.Id == item.listId).Count;
                     counter++;
                     <tr>
                         <td class="text-center" width="5%">@counter</td>
                         <td class="text-center" width="20%">@item.List.listName</td>
-                        <td class="text-center" width="40%">@item.List.listDescription</td>
-                        <td class="text-center" width="10%">@item.List.Owner.Username</td>
-                        <td class="text-center" width="15%">@item.SharedData.Count</td>
+                        <td class="text-center" width="30%">@item.List.listDescription</td>
+                        <td class="text-center" width="15%">
+                            <a href="/@item.List.Owner.Username" class="text-dark">@@@item.List.Owner.Username</a>
+                        </td>
+                        <td class="text-center" width="15%">@totalData</td>
                         @* Sil Butonu *@
-                        <td class="text-center" width="10%">
+                        <td class="text-center" width="15%">
                             <button type="button" class="btntableDelete" onclick="transfertoListName('@item.List.listName')" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
                                     <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
@@ -76,7 +81,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <p class="small fst-italic text-start">
-                                                *İlgili listenin içindeki veriler de dahil olmak üzere bu listedeye dahil herşey geri alınamayacak şekilde kaldırılacaktır.
+                                                *İlgili listenin içindeki veriler ve kendinizin sonradan bu listeye eklediği veriler de dahil olmak üzere bu listeye dahil herşey <span class="fw-bold">geri alınamayacak </span> şekilde kaldırılacaktır.
                                             </p>
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
                                             <button type="button" class="btn btn-danger" onclick="RemoveSavedList('@item.List.Id','@item.profileId')">Kaldır</button>

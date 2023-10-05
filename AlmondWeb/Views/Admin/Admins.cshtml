@@ -53,28 +53,30 @@
         }
     </tbody>
 </table>
-<script>
-    function transferIdforRemoveAdmin(id) {
-        if (id != 1) {
+@section Scripts{
+    <script>
+        function transferIdforRemoveAdmin(id) {
+            if (id != 1) {
+                $.ajax({
+                    method: "POST",
+                    url: '/Admin/RemoveAdmin/' + id,
+                    success: function (result) {
+                        InfoUserwithToastr(result, "Admin", "Admins", "Kullanıcı Admin olmaktan çıkarıldı.", "Kullanıcı zaten Admin değil.");
+                    }
+                });
+            }
+            else {
+                toastrFail("Ali Tekeş 'i admin olmaktan çıkaramazsınız.");
+            }
+        };
+        function transferIdforActiveAdmin(id) {
             $.ajax({
                 method: "POST",
-                url: '/Admin/RemoveAdmin/' + id,
+                url: '/Admin/AssignAdmin/' + id,
                 success: function (result) {
-                    InfoUserwithToastr(result, "Admin", "Admins", "Kullanıcı Admin olmaktan çıkarıldı.", "Kullanıcı zaten Admin değil.");
+                    InfoUserwithToastr(result, "Admin", "Admins", "Kullanıcı Admin haline getirildi. Hayırlı olsun.", "Kullanıcı zaten Admin olabilir.");
                 }
             });
-        }
-        else {
-            toastrFail("Ali Tekeş 'i admin olmaktan çıkaramazsınız.");
-        }
-    };
-    function transferIdforActiveAdmin(id) {
-        $.ajax({
-            method: "POST",
-            url: '/Admin/AssignAdmin/' + id,
-            success: function (result) {
-                InfoUserwithToastr(result, "Admin", "Admins", "Kullanıcı Admin haline getirildi. Hayırlı olsun.", "Kullanıcı zaten Admin olabilir.");
-            }
-        });
-    };
-</script>
+        };
+    </script>
+}

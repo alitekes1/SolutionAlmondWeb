@@ -5,9 +5,10 @@
 <div class="row my-4">
     @foreach (var item in Model)
     {
+        DataManager dm = new DataManager();
         SharedListManager slm = new SharedListManager();
         int totalSaved = slm.ListwithExpression(x => x.listId == item.listId && x.OwnerId == item.OwnerId).Count - 1;
-
+        int totalData = dm.ListwithExpression(x => x.Owner.Id == item.OwnerId && x.List.Id == item.listId).Count;
         <div class="col-sm-3 mb-5 d-flex justify-content-center">
             <div class="flip-card">
                 <div class="flip-card-inner">
@@ -32,9 +33,6 @@
                     </div>
                     <div class="flip-card-back ">
                         <label class="backListName mx-2 fs-5 text-center">@item.List.listName</label><hr />
-                        @{
-                            //int totalSaved = item.List - 1;
-                        }
                         <span class="backside text-dark text-start mx-2 my-1">
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 384 512"><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" /></svg>
                             <label class="text-dark">Toplam Kaydedilme : @totalSaved</label>
@@ -42,35 +40,37 @@
 
                         <span class="backside text-dark text-start mx-2 my-1">
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z" /></svg>
-                            <label class="text-dark">Toplam Veri Adedi : @item.List.DataTables.Count</label>
+                            <label class="text-dark">Toplam Veri Adedi : @totalData</label>
                         </span>
-                        @* Profildeki ilgili liste kartındaki listeyi kaydetme butonu *@
-                        <a href="#" title="Listeyi Kaydet" class="btn mx-5 my-2 " onclick="SaveListinProfile('@item.List.Id')" style="background: #5C8984">
+                        @* Profil sayfasındaki ilgili liste kartındaki listeyi kaydetme butonu *@
+                        <button class="btn mx-5 my-2" style=" background: #5C8984;" onclick="SaveListinProfile('@item.List.Id')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
                             </svg>
-                        </a>
+                            <span class="small text-light">Kaydet</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
-<script>
-
-    function SaveListinProfile(lstid) {
-        $.ajax({
-            method: "POST",
-            url: '/User/SaveList',
-            data: { listId: lstid },
-            success: function (result) {
-                if (result > 0) {
-                    toastrSuccess("Liste kaydedilmiştir.");
+@section Scripts{
+    <script>
+        function SaveListinProfile(lstid) {
+            $.ajax({
+                method: "POST",
+                url: '/User/SaveList',
+                data: { listId: lstid },
+                success: function (result) {
+                    if (result > 0) {
+                        toastrSuccess("Liste kaydedilmiştir.");
+                    }
+                    else
+                        toastrInfo("Liste zaten kayıtlı.");
                 }
-                else
-                    toastrInfo("Liste zaten kayıtlı.");
-            }
-        });
-    }
+            });
+        }
 
-</script>
+    </script>
+}

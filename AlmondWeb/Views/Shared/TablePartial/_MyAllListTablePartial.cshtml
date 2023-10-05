@@ -16,9 +16,9 @@
                     <tr>
                         <th class="text-center" style="width:5%">#</th>
                         <th class="text-center" style="width:20%">Liste</th>
-                        <th class="text-center" style="width:15%">Türü</th>
-                        <th class="text-center" style="width:35%">Açıklama</th>
-                        <th class="text-center" style="width:15%">Güncelle</th>
+                        <th class="text-center" style="width:18%">Türü</th>
+                        <th class="text-center" style="width:25%">Açıklama</th>
+                        <th class="text-center" style="width:23%">Güncelle</th>
                         <th class="text-center" style="width:10%">Sil</th>
                     </tr>
                 </thead>
@@ -46,15 +46,15 @@
                     <tr>
                         <td class="text-center" width="5%">@counter</td>
                         <td class="text-center" width="20%">@item.listName</td>
-                        <td class="text-center" width="15%">
+                        <td class="text-center" width="18%">
                             @{
                                 listType = item.isPublic ? "Herkese Açık" : "Gizli";
                             }
                             @listType
                         </td>
-                        <td class="text-center" width="35%">@item.listDescription</td>
+                        <td class="text-center" width="25%">@item.listDescription</td>
                         @* Güncelle Butonu *@
-                        <td class="text-center" width="15%">
+                        <td class="text-center" width="23%">
                             <button type="button" class="btntableDelete" id="updatemylist_@item.Id" onclick="transfertoUpdateData('@item.listName','@item.Id','@item.listDescription')" data-bs-toggle="modal" data-bs-target="#exampleModalguncelleliste">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">
                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
@@ -80,13 +80,13 @@
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Herkese Açık
                                                         </label>
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="publicRadioUpdate" value="0">
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="publicRadioUpdate">
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                             Gizli
                                                         </label>
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" value="1" id="privateRadioUpdate" checked>
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="privateRadioUpdate" checked>
                                                     </div>
                                                 </div> <hr />
                                             </div>
@@ -135,4 +135,15 @@
         </table>
     </div>
 </div>
-
+@section Scripts{
+    <script>
+        $("#publicRadioUpdate").click(function () {
+            $("#publicRadioUpdate").val("1");
+            $("#privateRadioUpdate").val("0");
+        });
+        $("#privateRadioUpdate").click(function () {
+            $("#privateRadioUpdate").val("1");
+            $("#publicRadioUpdate").val("0");
+        });
+    </script>
+}

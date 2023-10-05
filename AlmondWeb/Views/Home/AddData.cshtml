@@ -49,21 +49,23 @@
         </div>
     </div>
 </div>
-<script>
-    function setOwnerId(owner_id) {
-        let ownerHidden = document.getElementById("owner_hidden");
-        ownerHidden.setAttribute("value", owner_id);
-    };
+@section Scripts{
+    <script>
+        function setOwnerId(owner_id) {
+            let ownerHidden = document.getElementById("owner_hidden");
+            ownerHidden.setAttribute("value", owner_id);
+        };
 
-    function onSuccess() {
-        toastrSuccess("Veri başarıyla eklendi.");
-        let questionTextArea = $("#exampleFormControlTextarea17");
-        let answerTextArea = $("#exampleFormControlTextarea16");
-        questionTextArea.val("");
-        answerTextArea.val("");
-        questionTextArea.focus();
+        function onSuccess() {
+            toastrSuccess("Veri başarıyla eklendi.");
+            let questionTextArea = $("#exampleFormControlTextarea17");
+            let answerTextArea = $("#exampleFormControlTextarea16");
+            questionTextArea.val("");
+            answerTextArea.val("");
+            questionTextArea.focus();
 
-    }
-    let _list = document.getElementById("liste-dropdown");
-    _list.options[0].disabled = true;
-</script>
+        }
+        let _list = document.getElementById("liste-dropdown");
+        _list.options[0].disabled = true;
+    </script>
+}

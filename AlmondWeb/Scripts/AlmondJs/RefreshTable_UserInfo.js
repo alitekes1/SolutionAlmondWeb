@@ -5,7 +5,7 @@ function toastrFail(context) {
     toastr.warning(context, "İşlem Başarısız.", { closeButton: true, timeOut: 1500 });
 }
 function toastrInfo(context) {
-    toastr.info(context, "Uyarı!", { closeButton: true, timeOut: 1500 })
+    toastr.info(context, "Uyarı!", { closeButton: true, timeOut: 2000 })
 }
 function ReLoadTable(controller, action, refreshdivID) {
     let table = $("#" + refreshdivID);

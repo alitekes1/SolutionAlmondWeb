@@ -5,13 +5,14 @@ let _selectList = document.getElementById("liste-dropdown");
 let _dataId = document.getElementById("UpdateData_Id");
 let submitbtnUpdate = $("#submitbtn");
 let updateBtn = $(".btntableDelete");
-
+let changeBtn = document.getElementById("changeQueAnsw");
 let submitbtn = document.getElementById("submitbtn");
 
 function sharedListSelected(que, listID, ans, dataID, listName) {// kalem ikonuna tıklanıldığında çalışacak olan tüm fonksiyonlar
     transferdataTotextarea(que, listID, ans, dataID, listName);
     disabledList();
 }
+
 
 function selectListFunc(listId, listName) {
 
@@ -25,8 +26,7 @@ function selectListFunc(listId, listName) {
         }
     }
     else {
-        options[1].selected = true;
-        _selectList.selectedOptions[1].innerText = listName;
+        options[0].selected = true;
     }
 }
 
@@ -35,10 +35,11 @@ function transferdataTotextarea(question, listId, answer, dataId, listName) {
     _answerfortextarea.removeAttribute("disabled");
     _selectList.removeAttribute("disabled");
     submitbtn.removeAttribute("disabled");
-
+    changeBtn.removeAttribute("disabled");
 
     _questionfortextarea.value = question;
     _answerfortextarea.value = answer;
+
 
     selectListFunc(listId, listName);
     _dataId.setAttribute("value", dataId);
@@ -48,6 +49,13 @@ function disabledList() {
     toastrInfo("Kaydedilen listedeki verilerin listesi değiştirilemez.");
 }
 
+$("#changeQueAnsw").click(function () {
+    let c;
+    c = _questionfortextarea.value;
+    _questionfortextarea.value = _answerfortextarea.value;
+    _answerfortextarea.value = c;
+
+});
 function onSuccess() {
     toastrSuccess("Veri başarıyla güncellendi.");
 }

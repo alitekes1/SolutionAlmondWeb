@@ -7,7 +7,7 @@
 <div class="row justify-content-center">
     <div class="col-sm-4 mt-1">
         <label class="small alert alert-success">Mail Adresine aktivasyon maili gönderdik.Hesabı aktifleştirmek için maildeki kodu girmen gerekiyor.</label>
-        <img src="~/Images/background/3675555.jpg" class="w-100 justify-content-center" alt="Alternate Text" />
+        <img src="https://i.ibb.co/7vpRnqq/3675555.jpg" class="w-100 justify-content-center" alt="Check your Internet" />
     </div>
 </div>
 <div class="row justify-content-center">
@@ -22,15 +22,17 @@
         }
     </div>
 </div>
-<script>
-    function ActiveAccountSuccess() {
-        toastrSuccess("Hesap aktifleştirme işlemi başarılı bir şekilde gerçekleşmiştir.Giriş Yap sayfasına yönlediriliyorsunuz...");
-        setTimeout(function () {
-            // Bekleme süresi sona erdikten sonra yönlendirme işlemi
-            window.location.href = 'http://bit.ly/almondweb';
-        }, 2000);
-    }
-    function ActiveAccountFail() {
-        toastrFail("Hesap aktifleştirme işlemi başarısız olmuştur.Gönderilen kodu doğru girdiğinizden emin olunuz.");
-    }
-</script>
+@section Scripts{
+    <script>
+        function ActiveAccountSuccess() {
+            toastrSuccess("Hesap aktifleştirme işlemi başarılı bir şekilde gerçekleşmiştir.Giriş Yap sayfasına yönlediriliyorsunuz...");
+            setTimeout(function () {
+                // Bekleme süresi sona erdikten sonra yönlendirme işlemi
+                window.location.href = 'http://bit.ly/almondweb';
+            }, 2000);
+        }
+        function ActiveAccountFail() {
+            toastrFail("Hesap aktifleştirme işlemi başarısız olmuştur.Gönderilen kodu doğru girdiğinizden emin olunuz.");
+        }
+    </script>
+}

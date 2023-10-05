@@ -13,15 +13,6 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/toastr.min.js"></script>
     <script src="~/Scripts/AlmondJs/RefreshTable_UserInfo.js"></script>
-    @*@Scripts.Render("~/allJavaScript")*@
-
-    @*bundles.Add(new ScriptBundle("~/Scripts/allJavaScript").Include(
-        "~/Scripts/bootstrap.bundle.min.js",
-        "~/Scripts/jquery-3.7.1.min.js",
-        "~/Scripts/jquery.unobtrusive-ajax.min.js",
-        "~/Scripts/toastr.min.js",
-        "~/Scripts/AlmondJs/RefreshTable_UserInfo.js",
-        ));*@
 
 </head>
 <body>
@@ -68,6 +59,6 @@
             @RenderBody()
         </div>
     </div>
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

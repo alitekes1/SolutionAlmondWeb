@@ -19,7 +19,7 @@
                     <div class="card" id="adminlayout">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="@Url.Content(user.profileImageUrl)" alt="imageNotUpload" id="userProfileImage" class="rounded-circle" width="150">
+                                <img src="@Url.Content(user.profileImageUrl)" alt="Check your Internet" id="userProfileImage" class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>@@@user.Owner.Username</h4>
                                     @Html.Hidden("ownerId", currentUserID)
@@ -142,7 +142,8 @@
         </div>
     </div>
 }
-<script>
+@section Scripts{
+    <script>
     var httpimagePath;
     let profilPhoto = document.getElementById("userProfileImage");
     $(function () {
@@ -181,5 +182,6 @@
         });
     };
 
-</script>
-<script src="~/Scripts/AlmondJs/ProfileUpdate.js"></script>
+    </script>
+    <script src="~/Scripts/AlmondJs/ProfileUpdate.js"></script>
+}

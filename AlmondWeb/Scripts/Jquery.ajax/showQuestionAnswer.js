@@ -86,8 +86,8 @@ function endofList() {
     datalist = null;
     listDropdown.selectedIndex = 0;
     i = 0;
-    toastr.success("İlgili listedeki tüm verileri gözden geçirdiniz.", "Tebrikler", { timeOut: 2500, closeButton: true });//TODO:buraya bi bak
-    que.text("Listedeki bütün verileri gözden geçirdiniz.");
+    toastr.success("İlgili listedeki tüm verileri gözden geçirdiniz.", "Tebrikler", { timeOut: 2500, closeButton: true });
+    que.text("Tebrikler 🎉.Listedeki bütün verileri gözden geçirdiniz.");
     ans.text("Devam etmek için Liste Seçiniz.");
 }
 

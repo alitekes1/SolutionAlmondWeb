@@ -3,8 +3,9 @@
     ViewBag.Title = "Giriş Yap";
     Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
 }
-<script src="~/Scripts/AlmondJs/index.js"></script>
-
+@section Scripts{
+    <script src="~/Scripts/AlmondJs/index.js"></script>
+}
 @using (Html.BeginForm("Login", "User", "POST"))
 {
     <div class="col">
@@ -19,7 +20,7 @@
             </div>
         </div>
         <div>
-            @Html.ValidationSummary(true)
+            @Html.ValidationSummary(true, null, new { @class = "small pb-2" })
         </div>
         <br>
         <br>

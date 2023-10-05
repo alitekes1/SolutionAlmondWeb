@@ -11,21 +11,21 @@
 }
 <div id="adminlayout">
     <div class="tbl-header">
-        <table style="width: 100%; text-align: center; margin-bottom: 0;" class="table table-hover table-bordered table-responsive">
+        <table style="width: 100%; text-align: center; " class="table table-hover table-bordered table-responsive mb-0 mt-2 ">
             <thead class="bg-success bg-opacity-50">
                 <tr>
                     <th class="text-center" width="5%">#</th>
                     <th class="text-center" width="35%">Soru</th>
                     <th class="text-center" width="35%">Cevap</th>
                     <th class="text-center" width="15%">Liste</th>
-                    <th class="text-center" width="10%">Güncelle</th>
+                    <th class="text-center updatedatacell" width="15%">Güncelle</th>
                 </tr>
             </thead>
         </table>
     </div>
     <div style="width:100%;overflow:auto;  max-height:525px;">
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive m-0">
-            @if (mydataTable.Count() == 0)
+            @if (mydataTable.Count() == 0 && savedDataTable.Count() == 0)
             {
                 <tr>
                     <td>Kayıtlı veriniz bulunmamaktadır. <a href="/Home/AddData" title="Veri Ekle sayfasına gider.">Veri Ekle</a>  sayfasından veri ekleyebilirsiniz.</td>
@@ -42,7 +42,7 @@
                         <td class="text-center" width="35%">@item.answer</td>
                         @if (item.List.isDeleted)
                         {
-                            <td class="text-center fw-bold fst-italic bg-danger-subtle" style="width:15%">Listesiz</td>
+                            <td class="text-center fst-italic table-danger" style="width:15%">Listesiz</td>
                             <td class="text-center" width="15%">
                                 <button class="btntableDelete" onclick="transferdataTotextarea('@item.question',-1,'@item.answer','@item.Id')" id="updateDatabutton">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil icon" viewBox="0 0 16 16">

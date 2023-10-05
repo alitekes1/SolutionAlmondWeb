@@ -25,20 +25,21 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        document.getElementById("searchUserbtn").addEventListener("click", function () {//profille arama işlemi
+            var searchtext = $("#searchUsername").val();
+            var userData = $("#allProfile");
+            $.ajax({
+                method: "POST",
+                url: '/User/SearchUserPartial',
+                data: { username: searchtext },
+                success: function (result) {
+                    userData.empty();
 
-<script>
-    document.getElementById("searchUserbtn").addEventListener("click", function () {//profille arama işlemi
-        var searchtext = $("#searchUsername").val();
-        var userData = $("#allProfile");
-        $.ajax({
-            method: "POST",
-            url: '/User/SearchUserPartial',
-            data: { username: searchtext },
-            success: function (result) {
-                userData.empty();
-
-                userData.append(result);
-            }
+                    userData.append(result);
+                }
+            });
         });
-    });
-</script>
+    </script>
+}

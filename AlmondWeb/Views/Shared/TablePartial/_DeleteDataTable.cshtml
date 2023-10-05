@@ -15,10 +15,10 @@
             <thead class="bg-success bg-opacity-50">
                 <tr>
                     <th class="text-center" width="5%">#</th>
-                    <th class="text-center" width="30%">Soru</th>
-                    <th class="text-center" width="30%">Cevap</th>
-                    <th class="text-center" width="10%">Puan</th>
-                    <th class="text-center" width="15%">Liste</th>
+                    <th class="text-center" width="25%">Soru</th>
+                    <th class="text-center" width="25%">Cevap</th>
+                    <th class="text-center" width="15%">Puan</th>
+                    <th class="text-center" width="20%">Liste</th>
                     <th class="text-center" width="10%">Sil</th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
     </div>
     <div style="width:100%;overflow:auto;  max-height:530px;">
         <table style="width:100%;" class="text-center table table-hover table-bordered table-responsive m-0" id="mydataTable">
-            @if (tableData.Count() == 0)
+            @if (tableData.Count() == 0 && savedTableData.Count() == 0)
             {
                 <tr>
                     <td>Kayıtlı veriniz bulunmamaktadır. Veri ekleyebilirsiniz.</td>
@@ -39,16 +39,16 @@
                     counter++;
                     <tr id="dataTable1">
                         <td class="text-center" width="5%">@counter</td>
-                        <td class="text-center" width="30%">@item.question</td>
-                        <td class="text-center" width="30%">@item.answer</td>
-                        <td class="text-center" width="10%">@item.puan</td>
-                        @if (item.List == null)
+                        <td class="text-center" width="25%">@item.question</td>
+                        <td class="text-center" width="25%">@item.answer</td>
+                        <td class="text-center" width="15%">@item.puan</td>
+                        @if (item.List.isDeleted)
                         {
-                            <td class="text-center" style="width:15%">NULL</td>
+                            <td class="text-center fst-italic table-danger" style="width:20%">Listesiz</td>
                         }
                         else
                         {
-                            <td class="text-center" width="15%">@item.List.listName</td>
+                            <td class="text-center" width="20%">@item.List.listName</td>
                         }
                         <td class="text-center" width="10%">
                             <a class="btntableDelete" id="btndelete_@item.Id" data-ids="@item.Id" data-que="@item.question" data-ans="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModalsilliste">
@@ -69,10 +69,10 @@
                     counter++;
                     <tr>
                         <td class="text-center" width="5%">@counter</td>
-                        <td class="text-center" width="30%">@item.question</td>
-                        <td class="text-center" width="30%">@item.answer</td>
-                        <td class="text-center" width="10%">@item.puan</td>
-                        <td class="text-center" width="15%">@item.SharedList.List.listName</td>
+                        <td class="text-center" width="25%">@item.question</td>
+                        <td class="text-center" width="25%">@item.answer</td>
+                        <td class="text-center" width="15%">@item.puan</td>
+                        <td class="text-center" width="20%">@item.SharedList.List.listName</td>
                         <td class="text-center" width="10%">
                             <a class="btntableSharedDataDelete" id="btnshareddatadelete_@item.Id" data-shareddataId='@item.Id' data-shareddataQue="@item.question" data-shareddataAns="@item.answer" value="@item.Id" data-bs-toggle="modal" data-bs-target="#modalConfirmSharedDataDelete">
                                 <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
@@ -127,4 +127,7 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Jquery.ajax/DeleteDataAjax.js"></script>
+
+@section Scripts{
+    <script src="~/Scripts/Jquery.ajax/DeleteDataAjax.js"></script>
+}

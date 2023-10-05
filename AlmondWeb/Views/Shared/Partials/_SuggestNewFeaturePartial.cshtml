@@ -35,22 +35,23 @@
         </div>
     </div>
 </div>
-
-<script>
-    function clearTextBox() {
-        $("#btnclosesuggest").click();
-        $("#resetButtonSuggest").click();
-        toastrSuccess('Mesajınız bize ulaştı.Teşekkürler.');
-    } function failmessage() {
-        $("#btnclosesuggest").click();
-        $("#resetButtonSuggest").click();
-        toastrFail('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.');
-    }
-    $("#btnsubmitSuggestNewFeature").click(function (e) {
-        let message = $("#messageSuggestNewFeature").val();
-        if (message.length < 10) {
-            e.preventDefault();
-            toastrInfo("Mesajınız en az 10 karakterden oluşmalı.");
+@section Scripts{
+    <script>
+        function clearTextBox() {
+            $("#btnclosesuggest").click();
+            $("#resetButtonSuggest").click();
+            toastrSuccess('Mesajınız bize ulaştı.Teşekkürler.');
+        } function failmessage() {
+            $("#btnclosesuggest").click();
+            $("#resetButtonSuggest").click();
+            toastrFail('Mesaj gönderilemedi.Sayfayı yenileyip tekrar deneyiniz.');
         }
-    });
-</script>
+        $("#btnsubmitSuggestNewFeature").click(function (e) {
+            let message = $("#messageSuggestNewFeature").val();
+            if (message.length < 10) {
+                e.preventDefault();
+                toastrInfo("Mesajınız en az 10 karakterden oluşmalı.");
+            }
+        });
+    </script>
+}

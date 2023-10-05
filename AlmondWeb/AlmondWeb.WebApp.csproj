@@ -336,7 +336,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\UserProfile\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Shared\CardPartials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

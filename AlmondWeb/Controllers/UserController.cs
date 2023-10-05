@@ -2,8 +2,8 @@
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -96,6 +96,10 @@ namespace AlmondWeb.WebApp.Controllers
                     {
                         ModelState.AddModelError("", item);
                     }
+                    if (errorresult.errorList.Contains("Hesap aktive edilmemiş.Aktivasyon maili tekrardan gönderildi."))
+                    {
+                        return RedirectToAction("ActiveAccount", "User", new { mail = modal.email });
+                    }
                 }
                 else
                 {
@@ -128,6 +132,7 @@ namespace AlmondWeb.WebApp.Controllers
             AlmondUserTable user = um.FindwithExpression(x => x.Email == Email);
             if (user != null)
             {
+
                 emailBody = "Hesap Şifreniz:" + user.Password;
                 emailSubject = "AlmondWeb Şifre Talebi";
                 EmailHelper.SendEmail(user, emailBody, emailSubject);
@@ -165,7 +170,7 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Error", "User");
+                    return RedirectToAction("Error", "Home");
                 }
             }
             return RedirectToAction("MainPage", "Home");
@@ -250,7 +255,7 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
         private bool isNotSavedList(int ownerId, int ListId)
-        {//TODO: Buraya bi bak
+        {
             SharedListTable i = slm.FindwithExpression(x => x.profileId == currentUserID && x.listId == ListId && x.OwnerId == ownerId);
             return i == null;
         }
@@ -288,7 +293,7 @@ namespace AlmondWeb.WebApp.Controllers
                 return -1;
             }
         }
-        public int DeleteSharedData(int? id)//TODO: bi bak buraya
+        public int DeleteSharedData(int? id)
         {
             if (id != null)
             {
@@ -335,7 +340,7 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpGet]
         public ActionResult AllProfile()
         {
-            List<ProfileTable> allProfileList = pm.List();
+            List<ProfileTable> allProfileList = pm.ListwithExpression(x => x.Owner.isActive);
             return View(allProfileList);
         }
         [HttpGet, AllowAnonymous]
@@ -344,10 +349,19 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public PartialViewResult SearchUserPartial(string username)
+        public ActionResult SearchUserPartial(string username)
         {
-            List<ProfileTable> user = pm.ListwithExpression(x => x.Owner.Username == username);
+            List<ProfileTable> user = new List<ProfileTable>();
+            if (username == null)
+            {
+                user = pm.List();
+            }
+            else
+            {
+                user = pm.ListwithExpression(x => x.Owner.Username == username);
+            }
             return PartialView("Partials/_AllProfilePartial", user);
+
         }
         public PartialViewResult AllProfilePartial()
         {

@@ -52,29 +52,30 @@
         }
     </tbody>
 </table>
-
-<script>
-    function transferIdforDeActiveAccount(id) {
-        if (id != 1) {
+@section Scripts{
+    <script>
+        function transferIdforDeActiveAccount(id) {
+            if (id != 1) {
+                $.ajax({
+                    method: "POST",
+                    url: '/Admin/DeactiveAccount/' + id,
+                    success: function (result) {
+                        InfoUserwithToastr(result, "Admin", "AllUser", "Kullanıcı pasif hale getirildi.", "Kullanıcı zaten pasif olabilir.");
+                    }
+                });
+            }
+            else {
+                toastrInfo("Ali Tekeş'in aktifliği değiştirilemez.")
+            }
+        };
+        function transferIdforActiveAccount(id) {
             $.ajax({
                 method: "POST",
-                url: '/Admin/DeactiveAccount/' + id,
+                url: '/Admin/ActiveAccount/' + id,
                 success: function (result) {
-                    InfoUserwithToastr(result, "Admin", "AllUser", "Kullanıcı pasif hale getirildi.", "Kullanıcı zaten pasif olabilir.");
+                    InfoUserwithToastr(result, "Admin", "AllUser", "Kullanıcı aktif hale getirildi.", "Kullanıcı zaten aktif olabilir.");
                 }
             });
-        }
-        else {
-            toastrInfo("Ali Tekeş'in aktifliği değiştirilemez.")
-        }
-    };
-    function transferIdforActiveAccount(id) {
-        $.ajax({
-            method: "POST",
-            url: '/Admin/ActiveAccount/' + id,
-            success: function (result) {
-                InfoUserwithToastr(result, "Admin", "AllUser", "Kullanıcı aktif hale getirildi.", "Kullanıcı zaten aktif olabilir.");
-            }
-        });
-    };
-</script>
+        };
+    </script>
+}

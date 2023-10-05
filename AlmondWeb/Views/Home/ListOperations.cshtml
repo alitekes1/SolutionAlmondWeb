@@ -33,13 +33,13 @@
                             <!-- Liste Ekleme-->
                             <div class="row-sm-3 text-start">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="publicRadio" value="0">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="publicRadio">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Herkese Açık
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="1" id="privateRadio" checked>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="privateRadio" checked>
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Gizli
                                     </label>
@@ -67,5 +67,7 @@
         </div>
     </div>
 </div>
-<script async src="~/Scripts/Jquery.ajax/ListOperationsAjax.js" defer></script>
+@section Scripts{
+    <script async src="~/Scripts/Jquery.ajax/ListOperationsAjax.js" defer></script>
+}
 

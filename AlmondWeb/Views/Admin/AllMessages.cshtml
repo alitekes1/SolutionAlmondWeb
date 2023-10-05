@@ -36,15 +36,17 @@
         }
     </tbody>
 </table>
-<script>
-    function DeleteMessage(messageid) {
-        $.ajax({
-            method: "POST",
-            url: '/Admin/DeleteMessage',
-            data: { id: messageid },
-            success: function (result) {
-                InfoUserwithToastr(result, "Admin", "AllMessages", "Veri başarıyla silindi.", "Veri silinemedi.");
-            }
-        })
-    }
-</script>
+@section Scripts{
+    <script>
+        function DeleteMessage(messageid) {
+            $.ajax({
+                method: "POST",
+                url: '/Admin/DeleteMessage',
+                data: { id: messageid },
+                success: function (result) {
+                    InfoUserwithToastr(result, "Admin", "AllMessages", "Veri başarıyla silindi.", "Veri silinemedi.");
+                }
+            })
+        }
+    </script>
+}

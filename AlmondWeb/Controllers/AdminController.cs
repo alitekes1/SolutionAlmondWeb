@@ -125,10 +125,10 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (id != null)
             {
-                SharedListTable list = slm.FindwithExpression(x => x.Id == id);
+                SharedListTable list = slm.FindwithExpression(x => x.listId == id);
                 if (list != null)
                 {
-                    result = slm.Delete(list);
+                    result = slm.DeleteList(list);
                     return result;
                 }
             }
@@ -168,16 +168,15 @@ namespace AlmondWeb.WebApp.Controllers
             if (id != null)
             {
                 List<AlmondDataTable> data = dm.ListwithExpression(x => x.List.Id == id);
-                //ListTable list = lm.FindwithOwnerId(id.Value);
-                SharedListTable slist = slm.FindwithOwnerId(id.Value);
-                if (slist != null && data != null)
+                List<SharedDataTable> sdata = sdm.ListwithExpression(x => x.SharedList.Id == id);
+                ListTable list = lm.FindwithExpression(x => x.Id == id);
+                if (list != null && data != null)
                 {
-                    int res = dm.RemoveListRange(data);//ilgili dataları siliyoruz. 
-                    //slm.DeleteList(slist);//ilgili paylaşılan listeyi siliyoruz.
-                    int res2 = RemoveSharedList(id);
-                    //int result = lm.DeleteList(list);//ilgili listeyi siliyoruz.
-                    int res3 = slm.DeleteList(slist);
-                    return res > 0 && res2 > 0 && res3 > 0 ? 1 : 0;
+                    int res0 = sdm.RemoveListRange(sdata);//paylaşılan data table dan siliyoruz
+                    int res = dm.RemoveListRange(data);//almonddata dan siliyoruz
+                    int res2 = RemoveSharedList(id);//sharedlisttable dan siliyoruz
+                    int res3 = lm.DeleteList(list);//list table dan siliyoruz
+                    return res0 > 0 || res > 0 || res2 > 0 || res3 > 0 ? 1 : 0;
                 }
             }
             return -1;
@@ -187,8 +186,8 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (question != null && answer != null)
             {
-                ListTable list = new ListManager().FindwithExpression(x => x.Id == 1 && x.Owner.Id == 1);
-                AlmondUserTable ali = um.FindwithOwnerId(1);
+                ListTable list = lm.FindwithExpression(x => x.Owner.Username == "alitekes");
+                AlmondUserTable ali = um.FindwithExpression(x => x.Username == "alitekes");
                 AlmondDataTable data = new AlmondDataTable
                 {
                     question = question,

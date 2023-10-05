@@ -3,7 +3,6 @@ using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
 using Microsoft.Ajax.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -82,7 +81,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             if (mydatalist.Count() != 0)
             {
-                for (int i = shareddatalist.Count(), j = 0; i < mydatalist.Count(); i++, j++)
+                for (int i = shareddatalist.Count(), j = 0; j < mydatalist.Count(); i++, j++)
                 {
                     UserQueAnswListModel data = new UserQueAnswListModel
                     {
@@ -109,15 +108,6 @@ namespace AlmondWeb.WebApp.Controllers
                 alm.puan = 0;
                 alm.Owner = userManager.FindwithOwnerId(currentUserId);
                 alm.List = listManager.FindwithOwnerId(alm.List.Id);
-                //if (alm.List.isPublic)//kullanıcı veri eklediğinde kayıtlı kullanıcılarında değişmesi özelliği
-                //{
-                //    SharedDataTable sdata = new SharedDataTable();
-                //    SharedListTable slist = sharedListManager.FindwithExpression(x => x.listId == alm.List.Id);
-                //    sdata.question = alm.question;
-                //    sdata.answer = alm.answer;
-                //    sdata.SharedList = slist;
-                //    int result2 = sharedDataManager.Insert(sdata);
-                //}
                 dataManager.Insert(alm);
             }
             else
@@ -236,9 +226,11 @@ namespace AlmondWeb.WebApp.Controllers
                 List<SharedDataTable> deletedDataList = sharedDataManager.ListwithExpression(x => x.SharedList.listId == listid && x.SharedList.profileId == profileId);
                 if (deletedDataList != null)
                 {
+                    List<AlmondDataTable> data = dataManager.ListwithExpression(x => x.List.Id == listid && x.Owner.Id == profileId);
                     int result2 = sharedDataManager.RemoveNullDatainSharedDataTable(deletedDataList);//kaldırılan listeden sonra ilgili listedeki veriler siliniyor.
                     SharedListTable sharedlist = sharedListManager.FindwithExpression(x => x.listId == listid && x.profileId == profileId);//bu kod "yelkenler biçilecek" marşını dinlerken yazılmıştır.5/9/23 18.03
                     int result = sharedListManager.DeleteList(sharedlist);
+                    int result3 = dataManager.RemoveListRange(data);
                     return result;
                 }
             }
@@ -287,8 +279,6 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        //TODO:kullanıcıların listelerim sayfasında kaydettiği listeler bulunmayacak. diğer yerlerda bulunacak.
-        //TODO:soru cevap sayfası için bootstrap de Scrollspy kullan.
         public ActionResult ListOperations()
         {
             return View();

@@ -1,19 +1,12 @@
 ﻿$("#publicRadio").click(function () {
-    $("#publicRadio").val(1);
-    $("#privateRadio").val(0);
+    $("#publicRadio").val("1");
+    $("#privateRadio").val("0");
 });
 $("#privateRadio").click(function () {
-    $("#publicRadio").val(0);
-    $("#privateRadio").val(1);
+    $("#publicRadio").val("0");
+    $("#privateRadio").val("1");
 });
-$("#publicRadioUpdate").click(function () {
-    $("#publicRadioUpdate").val(1);
-    $("#privateRadioUpdate").val(0);
-});
-$("#privateRadioUpdate").click(function () {
-    $("#privateRadioUpdate").val(1);
-    $("#publicRadioUpdate").val(0);
-});
+
 
 
 let idValueforUpdateGlobal;
@@ -50,7 +43,6 @@ function transfertoUpdateData(lstnm, idValue, listdescription) {
     listContent.value = lstnm;
     listdescriptionupdate.value = listdescription;
     idValueforUpdateGlobal = idValue;
-
     document.getElementById("confirmBtnUpdateList1").addEventListener("click", function () {
         var listNme = $("#inputTextUpdateList").val();
         var listDescription = $("#ListdescriptionTextAreaUpdate").val();
