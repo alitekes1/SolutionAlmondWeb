@@ -1,4 +1,4 @@
-﻿using AlmondWeb.BusinessLayer;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace AlmondWeb.Filters
@@ -7,10 +7,10 @@ namespace AlmondWeb.Filters
     {
         public void OnException(ExceptionContext filterContext)
         {
-            if (filterContext.Exception.Message == "Nesne başvurusu bir nesnenin örneğine ayarlanmadı.")
+            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 filterContext.ExceptionHandled = true;
-                filterContext.Result = new RedirectResult("Giris-Yap");
+                filterContext.Result = new RedirectResult("https://almondweb.com.tr/Giris-Yap");
             }
             else
             {

@@ -25,11 +25,11 @@
 @section Scripts{
     <script>
         function ActiveAccountSuccess() {
-            toastrSuccess("Hesap aktifleştirme işlemi başarılı bir şekilde gerçekleşmiştir.Giriş Yap sayfasına yönlediriliyorsunuz...");
+            toastrSuccess("Hesap aktifleştirme işlemi başarılı bir şekilde gerçekleşmiştir.Yönlediriliyorsunuz...");
             setTimeout(function () {
                 // Bekleme süresi sona erdikten sonra yönlendirme işlemi
-                window.location.href = 'http://bit.ly/almondweb';
-            }, 2000);
+                window.location.href = 'http://almondweb.com.tr/Giris-Yap';
+            }, 1000);
         }
         function ActiveAccountFail() {
             toastrFail("Hesap aktifleştirme işlemi başarısız olmuştur.Gönderilen kodu doğru girdiğinizden emin olunuz.");

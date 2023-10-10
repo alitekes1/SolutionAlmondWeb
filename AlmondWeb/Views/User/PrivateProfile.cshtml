@@ -99,10 +99,7 @@
                                 <h6 class="mb-0">Şifre</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                @*<label>
-                                        <input type="password" id="inputPassword5" class="form-control" value="@user.Owner.Password" aria-describedby="passwordHelpBlock" disabled readonly>
-                                    </label>*@
-                                <button class="btn btn-success btn-sm" onclick="showPassword('@user.Owner.Email')" id="showpassword">Mail adresime gönder</button>
+                                <button class="btn btn-success btn-sm" onclick="sendmyPassword('@user.Owner.Email')" id="sendmypassword2">Mail adresime gönder</button>
                             </div>
                         </div>
                         <hr>
@@ -151,17 +148,32 @@
     <script>
         let passwordVisible = false;
         let passwordLabel = document.getElementById("inputPassword5");
-        let passwordShowButton = document.getElementById("showpassword");
+        let sendpasswordbutton = document.getElementById("sendmypassword2");
 
-        function showPassword(mail) {
-            $.ajax({
-                method: "POST",
-                url: 'User/ForgetPassword',
-                data: { Email: mail },
-                success: function () {
-                    toastrSuccess("Şifreniz " + mail + " adresine gönderilmiştir.")
-                }
-            });
+        function sendmyPassword(mail) {
+            const currentDate = new Date();
+            const lastClicked = localStorage.getItem('lastClickedDate');
+            const lastClickedDate = new Date(lastClicked);
+            let dateDif = (currentDate - lastClickedDate) / (1000 * 60 * 60 * 24);
+            if (!lastClickedDate || dateDif > 3) {
+                // Bugün daha önce tıklanmadıysa veya tarih farklıysa işlem yapabiliriz
+                // Burada tıklanacak işlevi yazabilirsiniz
+                $.ajax({
+                    method: "POST",
+                    url: 'User/ForgetPassword',
+                    data: { Email: mail },
+                    success: function () {
+                        toastrSuccess("Şifreniz " + mail + " adresine gönderilmiştir.")
+                    }
+                });
+                // Tıklamanın tarihini yerel depolamada saklıyoruz
+                localStorage.setItem('lastClickedDate', currentDate.toDateString());
+            } else {
+                // Bugün daha önce tıklandıysa, kullanıcıyı uyarıyoruz.
+                sendpasswordbutton.disabled = true;
+                toastrInfo('3 günde bir şifre isteğinde bulunabilirsiniz!');
+            }
+
         }
     </script>
 }

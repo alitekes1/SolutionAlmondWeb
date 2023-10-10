@@ -92,26 +92,37 @@ function endofList() {
 }
 
 $(document).ready(function () {
+    if (true) {
+
+    }
     $(document).keydown(mainpageShortcuts);
 });
+let isModalClose;
+$('#exampleModal').on('show.bs.modal', function () {
+    isModalClose = false;
+});
 
+// Modal kapatıldığında
+$('#exampleModal').on('hidden.bs.modal', function () {
+    isModalClose = true;
+});
 function mainpageShortcuts(event) {
-    if (event.key === '1') {
+    if (event.key === '1' && isModalClose) {
         $("#puan1").click();
     }
-    if (event.key === '2') {
+    if (event.key === '2' && isModalClose) {
         $("#puan2").click();
     }
-    if (event.key === '3') {
+    if (event.key === '3' && isModalClose) {
         $("#puan3").click();
     }
-    if (event.key === '4') {
+    if (event.key === '4' && isModalClose) {
         $("#puan4").click();
     }
-    if (event.key === '5') {
+    if (event.key === '5' && isModalClose) {
         $("#puan5").click();
     }
-    if (event.key === ' ') {
+    if (event.key === ' ' && isModalClose) {
         event.preventDefault();
         $("#showAnswer").click();
     }

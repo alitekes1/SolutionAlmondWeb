@@ -80,13 +80,13 @@
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Herkese Açık
                                                         </label>
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="publicRadioUpdate">
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="publicRadioUpdate" checked value="1">
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                             Gizli
                                                         </label>
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="privateRadioUpdate" checked>
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="privateRadioUpdate" value="0">
                                                     </div>
                                                 </div> <hr />
                                             </div>
@@ -117,10 +117,8 @@
                                         <div class="modal-body">
                                             <label id="_questionLabel"></label>
                                         </div>
-                                        <hr />
-                                        <p class="fst-italic" style="font-size:13px">*İlgili listenin içindeki veriler  <span class="text-danger">silinmez</span>. Bu listedeki verilere ulaşmak için bu listeye ait verilerin listesini <span class="text-decoration-underline"> Veri Güncelle </span>sayfasından var olan bir liste ile değiştirmelisiniz.<br />Aksi halde bu verileri puanlayamazsınız.</p>
-
                                         <div class="modal-footer">
+                                            <p class="fst-italic" style="font-size:13px">*İlgili listenin içindeki veriler  <span class="text-danger">silinmez</span>. Bu listedeki verilere ulaşmak için bu listeye ait verilerin listesini <span class="text-decoration-underline"> Veri Güncelle </span>sayfasından var olan bir liste ile değiştirmelisiniz.<br />Aksi halde bu verileri puanlayamazsınız.</p>
                                             <p class="small fst-italic text-start"></p>
                                             <button type="button" id="closeBtnDeleteList" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
                                             <button type="submit" id="confirmBtnDeleteList" class="btn btn-danger">Sil</button>

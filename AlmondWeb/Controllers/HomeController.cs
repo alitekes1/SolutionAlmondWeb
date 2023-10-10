@@ -11,7 +11,8 @@ using System.Web.UI.WebControls;
 namespace AlmondWeb.WebApp.Controllers
 {
     [Authorize, Exc]
-    public class HomeController : Controller
+    public class
+        HomeController : Controller
     {
         private DataManager dataManager = new DataManager();
         private ListManager listManager = new ListManager();
@@ -100,7 +101,7 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult AddData(AlmondDataTable alm)
         {
             if (alm.question != null && alm.answer != null && alm.List.Id > 0)//almamız gerekn bilgileri alıp almadığımızı kontrol ediyoruz.
@@ -122,18 +123,18 @@ namespace AlmondWeb.WebApp.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult UpdateData(UserQueAnswListModel data)
         {
             if (data.update_Id == null)
             {
-                return RedirectToAction(nameof(Error)); // Hata durumu daha iyi işlenmeli
+                return RedirectToAction(nameof(Error));
             }
 
             int result = 0;
 
-            AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id && !x.isDeleted);
-            SharedDataTable sharedUpdateData = sharedDataManager.FindwithExpression(x => x.Id == data.update_Id && x.SharedList.OwnerId != currentUserId);
+            AlmondDataTable updateData = dataManager.FindwithExpression(x => x.Id == data.update_Id && x.Owner.Id == currentUserId);
+            SharedDataTable sharedUpdateData = sharedDataManager.FindwithExpression(x => x.Id == data.update_Id && x.SharedList.profileId == currentUserId);
 
             if (updateData != null)
             {
@@ -155,7 +156,7 @@ namespace AlmondWeb.WebApp.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Error)); // Hata durumu daha iyi işlenmeli
+                return RedirectToAction(nameof(Error));
             }
         }
         [HttpGet]
@@ -184,7 +185,7 @@ namespace AlmondWeb.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public int CreateList(string listNm, string listDesc, string listPub, string listPriv)
+        public int CreateList(string listNm, string listDesc, int listTypeCreate)
         {
             if (!listNm.IsNullOrWhiteSpace())
             {
@@ -193,7 +194,7 @@ namespace AlmondWeb.WebApp.Controllers
                     listName = listNm,
                     listDescription = listDesc,
                     isDeleted = false,
-                    isPublic = listPub == "1",
+                    isPublic = listTypeCreate == 1,
                     Owner = userManager.FindwithOwnerId(currentUserId)
                 };
                 int result = listManager.Insert(newList);
@@ -237,7 +238,7 @@ namespace AlmondWeb.WebApp.Controllers
             return -1;
         }
         [HttpPost]
-        public int UpdateList(string listName, int? id, string listDesc, int? listPub)
+        public int UpdateList(string listName, int? id, string listDesc, int? listType)
         {
             if (id != null)
             {
@@ -246,7 +247,7 @@ namespace AlmondWeb.WebApp.Controllers
                 {
                     list.listName = listName;
                     list.listDescription = listDesc;
-                    list.isPublic = listPub == 1;
+                    list.isPublic = listType == 1;
                     int result = listManager.Update(list);
                     if (list.isPublic)
                     {
@@ -286,7 +287,7 @@ namespace AlmondWeb.WebApp.Controllers
         [AllowAnonymous]
         public ActionResult Error()
         {
-            ViewData["errorMessage"] = "Bakmış olduğunuz sayfa kaldırılmış veya ismi değiştirilmiş olabilir.Dolayısıyla geçici bir süre kullanım dışıdır.Anasayfaya geri dönebilirsiniz veya bizimle iletişime geçebilirsiniz.";
+            ViewData["errorMessage"] = "Bakmış olduğunuz sayfa kaldırılmış veya ismi değiştirilmiş olabilir.Dolayısıyla geçici bir süre kullanım dışıdır.Anasayfaya geri dönebilir,tekrardan giriş yapabilirsiniz veya bizimle iletişime geçebilirsiniz.";
             ViewData["errorTitle"] = "Sayfa bulunamadı!";
             ViewData["errorCode"] = "404";
             return View();

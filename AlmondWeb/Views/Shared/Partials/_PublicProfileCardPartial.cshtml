@@ -55,22 +55,20 @@
         </div>
     }
 </div>
-@section Scripts{
-    <script>
-        function SaveListinProfile(lstid) {
-            $.ajax({
-                method: "POST",
-                url: '/User/SaveList',
-                data: { listId: lstid },
-                success: function (result) {
-                    if (result > 0) {
-                        toastrSuccess("Liste kaydedilmiştir.");
-                    }
-                    else
-                        toastrInfo("Liste zaten kayıtlı.");
+<script>
+    function SaveListinProfile(lstid) {
+        $.ajax({
+            method: "POST",
+            url: '/User/SaveList',
+            data: { listId: lstid },
+            success: function (result) {
+                if (result > 0) {
+                    toastrSuccess("Liste kaydedilmiştir.");
                 }
-            });
-        }
+                else
+                    toastrInfo("Liste zaten kayıtlı.");
+            }
+        });
+    }
 
-    </script>
-}
+</script>

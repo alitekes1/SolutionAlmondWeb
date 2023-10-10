@@ -10,7 +10,6 @@
 <table class="table table-striped table-bordered table-hover text-center"
        id="dataTables-example">
     <thead>
-        @{counter++;}
         <tr>
             <th>#</th>
             <th>Soru</th>
@@ -25,6 +24,7 @@
     <tbody>
         @foreach (var item in dataList)
         {
+            counter++;
             <tr>
                 <td>@counter</td>
                 <td>@item.question</td>

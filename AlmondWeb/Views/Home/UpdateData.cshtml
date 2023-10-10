@@ -24,6 +24,8 @@
                     OnSuccess = "onSuccess"//post işlemi başarı olduğunda çalışmasını istediğimiz js fonksiyonunun ismini buraya yazabiliriz.
                 }))
                 {
+                    @Html.AntiForgeryToken()
+
                     <div class="row-sm-3 form-group shadow-textarea textareas">
                         @Html.TextAreaFor(x => x.question, new { @class = "form-control z-depth-1 border border-dark-subtle", placeholder = "Tablodan güncellemek istediğiniz veriyi kalem ikonuna tıklayarak seçiniz.", autofocus = "autofocus", title = "Soru", id = "exampleFormControlTextarea17", disabled = "disabled", required = "required" })
                         <br>

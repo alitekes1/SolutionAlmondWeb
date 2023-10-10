@@ -23,13 +23,15 @@
         <tbody>
             @foreach (var item in allList)
             {
+                DataManager dm = new DataManager();
+                int totalData = dm.ListwithExpression(x => x.Owner.Id == item.Owner.Id && x.List.Id == item.Id).Count;
                 counter++;
                 <tr>
                     <td>@counter</td>
                     <td>@item.Owner.Username</td>
                     <td>@item.listName</td>
                     <td>@item.isPublic</td>
-                    <td>@item.DataTables.Count()</td>
+                    <td>@totalData</td>
                     <td class="text-center">
                         <button class="text-dark text-center border-0" onclick="PermanentDeleteList('@item.Id')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon" viewBox="0 0 16 16">

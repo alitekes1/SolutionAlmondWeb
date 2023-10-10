@@ -5,6 +5,7 @@
 }
 @section Scripts{
     <script src="~/Scripts/AlmondJs/index.js"></script>
+
 }
 @using (Html.BeginForm("Login", "User", "POST"))
 {
@@ -20,7 +21,7 @@
             </div>
         </div>
         <div>
-            @Html.ValidationSummary(true, null, new { @class = "small pb-2" })
+            @Html.ValidationSummary(true, null)
         </div>
         <br>
         <br>
@@ -34,7 +35,7 @@
         <div class="form-floating row-sm-3 mt-2">
             <div class="col">
                 <div class="form-floating">
-                    @Html.TextBoxFor(x => x.password, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput", placeholder = "Şifre", type = "password" })
+                    @Html.TextBoxFor(x => x.password, new { @class = "form-control border border-secondary-subtle", id = "formGroupExampleInput2", placeholder = "Şifre", type = "password" })
                     <label for="floatingPassword">Şifre</label>
                     <p class="text-danger text-sm-start" style="font-size: 13px;">@Html.ValidationMessageFor(x => x.password)</p>
                 </div>

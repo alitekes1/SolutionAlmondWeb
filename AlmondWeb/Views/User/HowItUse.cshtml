@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Nasıl Kullanılır?";
+    Layout = "~/Views/Shared/BaseLayout.cshtml";
+}
+
+<div class="row mb-5">
+    <div class="col-sm-12 ">
+        <div class="col-sm-8 offset-sm-2">
+            <div class="row">
+                <div class="col-sm-6">
+                    @* text *@
+                    <h3 class="float-start font-monospace">Nasıl Kullanılır?</h3><br /><br />
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Veri - Liste ve Puanlama İşlemleri
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <ul style="list-style-type:square">
+                                        <li>
+                                            "Liste İşlemleri / Liste Yönetimi" sayfasına gidin ve yeni bir liste oluşturmak için "Liste Oluştur" butonuna tıklayın.
+                                        </li>
+                                        <li>
+                                            Oluşturmak istediğiniz listenin özelliklerini girin.
+                                        </li>
+                                        <li>
+                                            "Veri İşlemleri / Veri Ekle" sayfasından bu liste için veri ekleyin.
+                                        </li>
+                                        <li>
+                                            Anasayfada oluşturduğunuz listeyi seçiniz.Bu listedeki veriler sahip oldukları puan düşükten yükseğe doğru siz puan verdikçe bir sonraki bilgi otomatik olarak gelecektir.
+                                        </li>
+                                        <li>
+                                            Cevabı göstermek için klavyeden 'SPACE' tuşunu kullanabilirsiniz.
+                                        </li>
+                                        <li>
+                                            Puanlama için klavyeden 1-2-3-4-5 tuşlarını kullanabilirsiniz.
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Hesabım ve Profilim
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>
+                                            Hesabınıza ulaşmak için sağ üstte bulunan kullanıcı adınıza veya sağında detaylar butonuna tıklayınız.
+                                        </li>
+                                        <li>
+                                            Hesabım sayfasından kendinize ait bilgileri ve profil resmi ekleyebilirsiniz.
+                                        </li>
+                                        <li>Profilim sayfasında kendinizin paylaştığı listeleri ve kaydettiği listeleri bulabilirsiniz. </li>
+                                        <li>
+                                            Diğer kullanıcıların profil sayfalarını görmek için Tüm Profiller sayfasından ulaşabilir veya almondweb.com.tr/kullaniciadi şeklinde arama çubuğuna yazarak direkt ulaşbilirsiniz.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    İletişim - Yeni bir Özellik Öner? - SSS
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <ul style="list-style-type:square">
+                                        <li>
+                                            İletişim sayfasından direkt bizimle iletişime geçebilirsiniz.
+                                        </li>
+                                        <li>
+                                            Yeni bir Özellik Öner? sayfasından yenilikçi fikirlerinizle projemizin gelişmesine yardımcı olabilirsiniz.
+                                        </li>
+                                        <li>
+                                            Sık Sorulan Sorular sayfasından proje hakkında daha detaylı bilgi edinebilirsiniz.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed font-monospace" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Ben,Kendim
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <p>
+                                        <a href="http://alitekes.com.tr" target="_blank">alitekes.com.tr</a> ile Eğitim geçmişim - Yeteneklerim - Projelerim - Sertifikalarımın yer aldığı Portföy siteme ulaşabilirsiniz.
+                                    </p>
+                                    <p>
+                                        Proje hakkında daha detaylı bilgi almak için, beraber proje yapmak ve her türlü
+                                        işbirlikleri için çekinmeden benimle iletişime geçebilirsiniz.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    @* image *@
+                    <img src="https://i.ibb.co/BtMyhKz/5062542.png" alt="image no uploading" width="100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

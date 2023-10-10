@@ -60,6 +60,11 @@ namespace AlmondWeb.WebApp
                 defaults: new { controller = "User", action = "Contact", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "howituse",
+                url: "Nasil-Kullanilir",
+                defaults: new { controller = "User", action = "HowItUse", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "RegisterSuccess",
                 url: "Kayit-Basarili",
                 defaults: new { controller = "User", action = "RegisterSuccess", id = UrlParameter.Optional }

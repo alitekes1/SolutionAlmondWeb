@@ -2,8 +2,8 @@
 using AlmondWeb.BusinessLayer.ViewModels;
 using AlmondWeb.Entities;
 using AlmondWeb.Filters;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -43,7 +43,6 @@ namespace AlmondWeb.WebApp.Controllers
                 }
                 else
                 {
-                    //string id = "alitekes123@gmail.com";
                     return RedirectToAction("ActiveAccount", "User", new { mail = model.email });//TODO: burayı not al
                 }
             }
@@ -54,6 +53,8 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (mail != null)
             {
+                //Gizlilik içerdiği için gizlenmiştir.
+
                 AlmondUserTable account = um.FindwithExpression(x => x.Email == mail);
                 emailBody = "Hesap aktifleştirme kodunuz:" + (account.Id * 36 + 1154);
                 emailSubject = "AlmondWeb Hesap Aktifleştirme";
@@ -66,6 +67,8 @@ namespace AlmondWeb.WebApp.Controllers
         [HttpPost, AllowAnonymous]
         public ActionResult ActiveAccount(int? code, int? accountid)
         {
+            //Gizlilik içerdiği için gizlenmiştir.
+
             AlmondUserTable user = um.FindwithOwnerId(accountid.Value);
             if (code == (accountid * 36 + 1154))
             {
@@ -78,6 +81,7 @@ namespace AlmondWeb.WebApp.Controllers
                 ViewData["accountid"] = user.Id;
                 return JavaScript("ActiveAccountFail()");
             }
+            //return View();
         }
         [HttpGet, AllowAnonymous]
         public ActionResult Login()
@@ -132,7 +136,6 @@ namespace AlmondWeb.WebApp.Controllers
             AlmondUserTable user = um.FindwithExpression(x => x.Email == Email);
             if (user != null)
             {
-
                 emailBody = "Hesap Şifreniz:" + user.Password;
                 emailSubject = "AlmondWeb Şifre Talebi";
                 EmailHelper.SendEmail(user, emailBody, emailSubject);
@@ -147,7 +150,7 @@ namespace AlmondWeb.WebApp.Controllers
         {
             if (pm.CreateProfil(currentUserID) > 0)
             {
-                return RedirectToAction(nameof(ProfileUpdate), new { ownerId = currentUserID }); // Corrected this line
+                return RedirectToAction(nameof(ProfileUpdate), new { ownerId = currentUserID });
             }
             else
             {
@@ -366,6 +369,11 @@ namespace AlmondWeb.WebApp.Controllers
         public PartialViewResult AllProfilePartial()
         {
             return PartialView("Partials/_AllProfilePartial");
+        }
+        [HttpGet, AllowAnonymous]
+        public ActionResult HowItUse()
+        {
+            return View();
         }
     }
 }
